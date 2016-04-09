@@ -114,7 +114,7 @@
     <Compile Include="Models\Icon.cs" />
     <Compile Include="Models\Rule.cs" />
     <Compile Include="Models\TransactionModels\Transaction.cs" />
-    <Compile Include="Models\TransactionModels\TransactionFilter.cs" />
+    <Compile Include="Filters\TransactionFilter.cs" />
     <Compile Include="Models\TransactionModels\TransactionSource.cs" />
     <Compile Include="Models\Wallet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

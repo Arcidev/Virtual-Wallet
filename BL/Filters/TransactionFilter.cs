@@ -1,5 +1,5 @@
 ﻿
-namespace BL.Models.TransactionModels
+namespace BL.Filters
 {
     public class TransactionFilter
     {

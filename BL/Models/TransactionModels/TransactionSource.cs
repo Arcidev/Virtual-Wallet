@@ -8,6 +8,6 @@ namespace BL.Models.TransactionModels
 
         string Name { get; set; }
 
-        IList<Transaction> Transactions { get; set; }
+        IList<Transaction> StoredTransactions { get; set; }
     }
 }

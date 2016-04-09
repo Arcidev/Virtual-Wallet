@@ -11,8 +11,8 @@ namespace Tests.Banks
         {
             var token = "USE_YOUR_TOKEN";
 
-            var fio = new Fio(token);
-            var t = fio.Transactions;
+            var fio = new Fio() { Token = token };
+            var t = fio.StoredTransactions;
         }
     }
 }

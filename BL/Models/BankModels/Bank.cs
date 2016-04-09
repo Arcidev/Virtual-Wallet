@@ -1,31 +1,25 @@
-﻿using BL.Models.TransactionModels;
+﻿using BL.Filters;
+using BL.Models.TransactionModels;
+using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace BL.Models.BankModels
 {
     public abstract class Bank : ITransactionSource
     {
-        private IList<Transaction> transactions;
-
         public int Id { get; set; }
 
         public string Name { get; set; }
 
         public Icon Icon { get; set; }
 
-        public IList<Transaction> Transactions
-        {
-            get
-            {
-                if (transactions != null)
-                    return transactions;
+        public IList<Transaction> StoredTransactions { get; set; }
 
-                transactions = ReloadTransactions(new TransactionFilter() { Days = 30 });
-                return transactions;
-            }
-            set { transactions = value; }
-        }
+        public abstract Task SetLastDownloadDate(DateTime date);
 
-        public abstract IList<Transaction> ReloadTransactions(TransactionFilter filter);
+        public abstract Task<IList<Transaction>> GetNewTransactions();
+
+        public abstract Task<IList<Transaction>> GetTransactions(TransactionFilter filter);
     }
 }
