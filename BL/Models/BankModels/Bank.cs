@@ -16,10 +16,10 @@ namespace BL.Models.BankModels
 
         public IList<Transaction> StoredTransactions { get; set; }
 
-        public abstract Task SetLastDownloadDate(DateTime date);
+        public abstract Task SetLastDownloadDateAsync(DateTime date);
 
-        public abstract Task<IList<Transaction>> GetNewTransactions();
+        public abstract Task<IList<Transaction>> GetNewTransactionsAsync();
 
-        public abstract Task<IList<Transaction>> GetTransactions(TransactionFilter filter);
+        public abstract Task<IList<Transaction>> GetTransactionsAsync(TransactionFilter filter);
     }
 }

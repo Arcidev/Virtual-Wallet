@@ -12,35 +12,35 @@ namespace BL.Models.BankModels
     {
         public string Token { get; set; }
 
-        public override async Task<IList<Transaction>> GetNewTransactions()
+        public override async Task<IList<Transaction>> GetNewTransactionsAsync()
         {
             if (string.IsNullOrWhiteSpace(Token))
                 throw new InvalidOperationException("Fio bank token has not been set");
 
             ApiExplorer explorer = new ApiExplorer(Token);
-            var statement = await explorer.Last();
+            var statement = await explorer.LastAsync();
 
             return GetTransactions(statement.TransactionList);
         }
 
-        public override async Task<IList<Transaction>> GetTransactions(Filter filter)
+        public override async Task<IList<Transaction>> GetTransactionsAsync(Filter filter)
         {
             if (string.IsNullOrWhiteSpace(Token))
                 throw new InvalidOperationException("Fio bank token has not been set");
 
             ApiExplorer explorer = new ApiExplorer(Token);
-            var statement = await explorer.Periods(FioFilter.LastDays(filter.Days));
+            var statement = await explorer.PeriodsAsync(FioFilter.LastDays(filter.Days));
 
             return GetTransactions(statement.TransactionList);
         }
 
-        public override async Task SetLastDownloadDate(DateTime date)
+        public override async Task SetLastDownloadDateAsync(DateTime date)
         {
             if (string.IsNullOrWhiteSpace(Token))
                 throw new InvalidOperationException("Fio bank token has not been set");
 
             ApiExplorer explorer = new ApiExplorer(Token);
-            await explorer.SetLastDownloadDate(date);
+            await explorer.SetLastDownloadDateAsync(date);
         }
 
         private IList<Transaction> GetTransactions(FioSdkCsharp.Models.TransactionList transactionList)
