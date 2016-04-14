@@ -4,11 +4,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{65C7D44E-97AA-4A71-B4CA-8B2CF594E89F}</ProjectGuid>
+    <ProjectGuid>{5C9E92FF-FC31-4C00-95FB-2CB18098D48E}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>BL</RootNamespace>
-    <AssemblyName>BL</AssemblyName>
+    <RootNamespace>DAL</RootNamespace>
+    <AssemblyName>DAL</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
     <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
@@ -107,19 +107,28 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\BankModels\Bank.cs" />
-    <Compile Include="Models\BankModels\Fio.cs" />
-    <Compile Include="Models\CashPaynment.cs" />
-    <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Icon.cs" />
-    <Compile Include="Models\Rule.cs" />
-    <Compile Include="Models\TransactionModels\Transaction.cs" />
-    <Compile Include="Filters\TransactionFilter.cs" />
-    <Compile Include="Models\TransactionModels\ITransactionSource.cs" />
-    <Compile Include="Models\Wallet.cs" />
+    <Compile Include="Config\Database.cs" />
+    <Compile Include="Config\IDatabase.cs" />
+    <Compile Include="DataAccess\BaseDataAccess.cs" />
+    <Compile Include="DataAccess\Categories.cs" />
+    <Compile Include="DataAccess\ICategories.cs" />
+    <Compile Include="Data\Category.cs" />
+    <Compile Include="Data\Icon.cs" />
+    <Compile Include="Data\IData.cs" />
+    <Compile Include="Helpers\ConnectionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Properties\BL.rd.xml" />
+    <EmbeddedResource Include="Properties\DAL.rd.xml" />
   </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="Microsoft.VCLibs, Version=14.0">
+      <Name>Visual C++ 2015 Runtime for Universal Windows Platform Apps</Name>
+    </SDKReference>
+    <SDKReference Include="SQLite.UWP.2015, Version=3.12.1">
+      <Name>SQLite for Universal Windows Platform</Name>
+    </SDKReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="..\Shared\Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
