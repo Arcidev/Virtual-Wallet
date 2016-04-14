@@ -3,6 +3,7 @@ using DAL.Data;
 using DAL.DataAccess;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Shared.Filters;
+using Shared.Modifiers;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -13,16 +14,19 @@ namespace Tests.Database
     {
         private static readonly IDatabase database = new DAL.Config.Database();
         private static readonly ICategories categories = new Categories();
+        private static readonly IIcons icons = new Icons();
 
         [TestInitialize]
         public async Task InitTest()
         {
-            await database.InitDatabaseAsync();
+            await database.InitAsync();
         }
 
         [TestMethod]
-        public async Task CRUDTest()
+        public async Task CategoryCRUDTest()
         {
+            await categories.DeleteAll();
+
             Category cat1 = new Category() { Name = "Category 1" };
             Category cat2 = new Category() { Name = "Category 2" };
 
@@ -56,6 +60,31 @@ namespace Tests.Database
 
             await categories.DeleteAll();
             Assert.AreEqual(0, (await categories.GetAll()).Count);
+        }
+
+        [TestMethod]
+        public async Task CategoryModifierTest()
+        {
+            await categories.DeleteAll();
+            await icons.DeleteAll();
+
+            Icon icon = new Icon() { Id = 1, Name = "TestIcon", Path = "TestPath" };
+            await icons.Create(icon);
+
+            Category cat1 = new Category() { Name = "Category 1", IconId = 1 };
+            await categories.Create(cat1);
+
+            var modifier = new CategoryModifier() { IncludeIcon = true };
+            var category = (await categories.GetAll(modifier)).First();
+
+            Assert.IsNotNull(category.Icon);
+            Assert.AreEqual("TestIcon", category.Icon.Name);
+
+            await categories.DeleteAll();
+            await icons.DeleteAll();
+
+            Assert.AreEqual(0, (await categories.GetAll()).Count);
+            Assert.AreEqual(0, (await icons.GetAll()).Count);
         }
     }
 }

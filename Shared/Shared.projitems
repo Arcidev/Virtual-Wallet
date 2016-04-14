@@ -10,6 +10,8 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="$(MSBuildThisFileDirectory)Filters\BaseFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Filters\IconFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Filters\CategoryFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modifiers\CategoryModifier.cs" />
   </ItemGroup>
 </Project>

@@ -4,6 +4,6 @@ namespace DAL.Config
 {
     public interface IDatabase
     {
-        Task InitDatabaseAsync();
+        Task InitAsync();
     }
 }

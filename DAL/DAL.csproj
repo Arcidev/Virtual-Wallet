@@ -111,7 +111,10 @@
     <Compile Include="Config\IDatabase.cs" />
     <Compile Include="DataAccess\BaseDataAccess.cs" />
     <Compile Include="DataAccess\Categories.cs" />
-    <Compile Include="DataAccess\ICategories.cs" />
+    <Compile Include="DataAccess\Interface\ICategories.cs" />
+    <Compile Include="DataAccess\Icons.cs" />
+    <Compile Include="DataAccess\Interface\ICrud.cs" />
+    <Compile Include="DataAccess\Interface\IIcons.cs" />
     <Compile Include="Data\Category.cs" />
     <Compile Include="Data\Icon.cs" />
     <Compile Include="Data\IData.cs" />

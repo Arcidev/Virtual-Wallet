@@ -11,5 +11,8 @@ namespace DAL.Data
         public string Name { get; set; }
 
         public int IconId { get; set; }
+
+        [Ignore]
+        public Icon Icon { get; set; }
     }
 }

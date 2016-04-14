@@ -10,7 +10,7 @@ namespace DAL.Data
         [NotNull, MaxLength(20)]
         public string Name { get; set; }
 
-        [NotNull, MaxLength(20)]
+        [NotNull, MaxLength(50)]
         public string Path { get; set; }
     }
 }
