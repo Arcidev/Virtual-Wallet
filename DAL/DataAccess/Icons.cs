@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.DataAccess
 {
-    public class Icons : BaseDataAccess, IIcons
+    public class Icons : BaseDataAccess<Icon>, IIcons
     {
         public async Task<IList<Icon>> GetAll()
         {
@@ -25,36 +25,6 @@ namespace DAL.DataAccess
                 query = query.Where(x => x.Name.Contains(filter.Name));
 
             return await ApplyBaseFilters(query, filter).ToListAsync();
-        }
-
-        public async Task<Icon> Get(int id)
-        {
-            var connection = ConnectionHelper.GetDbAsyncConnection();
-            return await connection.Table<Icon>().Where(x => x.Id == id).FirstOrDefaultAsync();
-        }
-
-        public async Task Create(params Icon[] icons)
-        {
-            var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.InsertAllAsync(icons);
-        }
-
-        public async Task Update(params Icon[] icons)
-        {
-            var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.UpdateAllAsync(icons);
-        }
-
-        public async Task Delete(int id)
-        {
-            var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.DeleteAsync(new Icon() { Id = id });
-        }
-
-        public async Task DeleteAll()
-        {
-            var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.DeleteAllAsync<Icon>();
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DAL.DataAccess
 {
-    public class Categories : BaseDataAccess, ICategories
+    public class Categories : BaseDataAccess<Category>, ICategories
     {
         private static readonly IIcons icons = new Icons();
 
@@ -47,43 +47,13 @@ namespace DAL.DataAccess
             return categories;
         }
 
-        public async Task<Category> Get(int id)
-        {
-            return await Get(id, null);
-        }
-
         public async Task<Category> Get(int id, CategoryModifier modifier)
         {
-            var connection = ConnectionHelper.GetDbAsyncConnection();
-            var category = await connection.Table<Category>().Where(x => x.Id == id).FirstOrDefaultAsync();
+            var category = await Get(id);
             if (modifier != null && category != null)
                 await ApplyModifiers(category, modifier);
 
             return category;
-        }
-
-        public async Task Create(params Category[] categories)
-        {
-            var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.InsertAllAsync(categories);
-        }
-
-        public async Task Update(params Category[] categories)
-        {
-            var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.UpdateAllAsync(categories);
-        }
-
-        public async Task Delete(int id)
-        {
-            var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.DeleteAsync(new Category() { Id = id });
-        }
-
-        public async Task DeleteAll()
-        {
-            var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.DeleteAllAsync<Category>();
         }
 
         private async Task ApplyModifiers(Category category, CategoryModifier modifier)
