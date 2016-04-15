@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace BL.Service
 {
-    public interface IGet<T1, T2> where T1 : IDto where T2 : BaseFilter
+    public interface IGetService<T1, T2> where T1 : IDto where T2 : BaseFilter
     {
         Task<IList<T1>> GetAll();
 

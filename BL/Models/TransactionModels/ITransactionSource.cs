@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace BL.Models.TransactionModels
+namespace BL.Models
 {
     public interface ITransactionSource : IDto
     {

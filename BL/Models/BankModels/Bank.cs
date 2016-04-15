@@ -1,11 +1,10 @@
 ﻿using BL.Filters;
-using BL.Models.TransactionModels;
 using Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace BL.Models.BankModels
+namespace BL.Models
 {
     public abstract class Bank : ITransactionSource, IDto
     {
@@ -29,5 +28,10 @@ namespace BL.Models.BankModels
         public abstract Task<IList<Transaction>> GetNewTransactionsAsync();
 
         public abstract Task<IList<Transaction>> GetTransactionsAsync(TransactionFilter filter);
+
+        public static Bank Create(int bankId)
+        {
+            return Activator.CreateInstance(derrivedClasses[(BankId)bankId]) as Bank;
+        }
     }
 }

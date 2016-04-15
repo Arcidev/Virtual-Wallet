@@ -1,6 +1,4 @@
-﻿
-using BL.Models.TransactionModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BL.Models
 {

@@ -1,70 +1,30 @@
 ﻿using DAL.Data;
-using DAL.Helpers;
 using Shared.Filters;
 using Shared.Modifiers;
-using System.Collections.Generic;
 using System.Threading.Tasks;
+using SQLite.Net.Async;
 
 namespace DAL.DataAccess
 {
-    public class Banks : BaseDataAccess<Bank>, IBanks
+    public class Banks : BaseModifiableGetDataAccess<Bank, BankFilter, BankModifier>, IBanks
     {
         private static readonly IIcons icons = new Icons();
 
-        public async Task<IList<Bank>> GetAll(BankModifier modifier)
+        protected override AsyncTableQuery<Bank> ApplyFilters(AsyncTableQuery<Bank> query, BankFilter filter)
         {
-            var banks = await GetAll();
-            if (modifier != null)
-                await ApplyModifiers(banks, modifier);
-
-            return banks;
-        }
-
-        public async Task<IList<Bank>> Get(BankFilter filter = null)
-        {
-            return await Get(filter, null);
-        }
-
-        public async Task<IList<Bank>> Get(BankFilter filter, BankModifier modifier)
-        {
-            if (filter == null)
-                filter = new BankFilter();
-
-            var connection = ConnectionHelper.GetDbAsyncConnection();
-            var query = connection.Table<Bank>();
-
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(x => x.Name.Contains(filter.Name));
 
             if (filter.IconId.HasValue)
                 query = query.Where(x => x.IconId == filter.IconId.Value);
 
-            var banks = await ApplyBaseFilters(query, filter).ToListAsync();
-            if (modifier != null)
-                await ApplyModifiers(banks, modifier);
-
-            return banks;
+            return query;
         }
 
-        public async Task<Bank> Get(int id, BankModifier modifier)
+        protected override async Task ApplyModifiers(Bank bank, BankModifier modifier)
         {
-            var bank = await Get(id);
-            if (modifier != null && bank != null)
-                await ApplyModifiers(bank, modifier);
-
-            return bank;
-        }
-
-        private async Task ApplyModifiers(Bank banks, BankModifier modifier)
-        {
-            if (modifier.IncludeIcon && banks.IconId.HasValue)
-                banks.Icon = await icons.Get(banks.IconId.Value);
-        }
-
-        private async Task ApplyModifiers(IList<Bank> banks, BankModifier modifier)
-        {
-            foreach (var bank in banks)
-                await ApplyModifiers(bank, modifier);
+            if ((modifier.IncludeIcon || modifier.IncludeAll) && bank.IconId.HasValue)
+                bank.Icon = await icons.Get(bank.IconId.Value);
         }
     }
 }

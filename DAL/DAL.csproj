@@ -109,13 +109,21 @@
   <ItemGroup>
     <Compile Include="Config\Database.cs" />
     <Compile Include="Config\IDatabase.cs" />
-    <Compile Include="DataAccess\BaseDataAccess.cs" />
+    <Compile Include="DataAccess\BaseCrudDataAccess.cs" />
+    <Compile Include="DataAccess\BaseModifiableDataAccess.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BaseModifiableDataAccess.tt</DependentUpon>
+    </Compile>
+    <Compile Include="DataAccess\BaseGetDataAccess.cs" />
     <Compile Include="DataAccess\Banks.cs" />
     <Compile Include="DataAccess\Categories.cs" />
     <Compile Include="DataAccess\Interface\IBanks.cs" />
     <Compile Include="DataAccess\Interface\ICategories.cs" />
     <Compile Include="DataAccess\Icons.cs" />
     <Compile Include="DataAccess\Interface\ICrud.cs" />
+    <Compile Include="DataAccess\Interface\IModifiableCrud.cs" />
+    <Compile Include="DataAccess\Interface\IModifiableGet.cs" />
     <Compile Include="DataAccess\Interface\IGet.cs" />
     <Compile Include="DataAccess\Interface\IIcons.cs" />
     <Compile Include="Data\Bank.cs" />
@@ -134,7 +142,15 @@
       <Name>SQLite for Universal Windows Platform</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DataAccess\BaseModifiableDataAccess.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BaseModifiableDataAccess.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
   <Import Project="..\Shared\Shared.projitems" Label="Shared" />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

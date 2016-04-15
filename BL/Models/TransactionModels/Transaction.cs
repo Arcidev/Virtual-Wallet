@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BL.Models.TransactionModels
+namespace BL.Models
 {
     public class Transaction
     {

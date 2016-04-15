@@ -21,7 +21,7 @@ namespace DAL.Config
 
         private async Task InitData(SQLiteAsyncConnection connection)
         {
-            await connection.InsertAllAsync(new[] {
+            await connection.InsertOrIgnoreAllAsync(new[] {
                 new Bank() { Id = (int)BankId.Fio, Name = "Fio", IconId = null } });
         }
     }

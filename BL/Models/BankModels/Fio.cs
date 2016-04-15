@@ -1,12 +1,11 @@
-﻿using BL.Models.TransactionModels;
-using FioSdkCsharp;
+﻿using FioSdkCsharp;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Filter = BL.Filters.TransactionFilter;
 using FioFilter = FioSdkCsharp.TransactionFilter;
 
-namespace BL.Models.BankModels
+namespace BL.Models
 {
     public class Fio : Bank
     {

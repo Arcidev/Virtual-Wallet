@@ -1,17 +1,10 @@
-﻿using BL.Models.BankModels;
+﻿using BL.Models;
 using Shared.Filters;
 using Shared.Modifiers;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace BL.Service
 {
-    public interface IBankService : IGet<Bank, BankFilter>
+    public interface IBankService : IModifiableGetService<Bank, BankFilter, BankModifier>
     {
-        Task<IList<Bank>> GetAll(BankModifier modifier);
-
-        Task<IList<Bank>> Get(BankFilter filter, BankModifier modifier);
-
-        Task<Bank> Get(int id, BankModifier modifier);
     }
 }

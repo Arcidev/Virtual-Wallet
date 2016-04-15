@@ -1,4 +1,4 @@
-﻿using BL.Models.BankModels;
+﻿using BL.Models;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using System;
 using System.Threading.Tasks;

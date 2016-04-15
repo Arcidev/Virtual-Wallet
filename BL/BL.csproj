@@ -120,6 +120,11 @@
     <Compile Include="Models\TransactionModels\ITransactionSource.cs" />
     <Compile Include="Models\Wallet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Service\BaseModifiableService.cs">
+      <DependentUpon>BaseModifiableService.tt</DependentUpon>
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+    </Compile>
     <Compile Include="Service\CategoryService.cs" />
     <Compile Include="Service\BaseCrudService.cs" />
     <Compile Include="Service\BaseGetService.cs" />
@@ -127,9 +132,11 @@
     <Compile Include="Service\IconService.cs" />
     <Compile Include="Service\Interface\ICategoryService.cs" />
     <Compile Include="Service\Interface\IBankService.cs" />
-    <Compile Include="Service\Interface\ICrud.cs" />
-    <Compile Include="Service\Interface\IGet.cs" />
+    <Compile Include="Service\Interface\ICrudService.cs" />
+    <Compile Include="Service\Interface\IGetService.cs" />
     <Compile Include="Service\Interface\IIconService.cs" />
+    <Compile Include="Service\Interface\IModifiableCrudService.cs" />
+    <Compile Include="Service\Interface\IModifiableGetService.cs" />
     <EmbeddedResource Include="Properties\BL.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -137,6 +144,15 @@
       <Project>{5c9e92ff-fc31-4c00-95fb-2cb18098d48e}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Service\BaseModifiableService.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BaseModifiableService.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

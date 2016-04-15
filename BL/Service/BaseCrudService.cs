@@ -1,7 +1,7 @@
-﻿using System.Threading.Tasks;
-using Shared.Filters;
-using BL.Models;
+﻿using BL.Models;
 using BL.Mapping;
+using Shared.Filters;
+using System.Threading.Tasks;
 
 namespace BL.Service
 {

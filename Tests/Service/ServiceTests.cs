@@ -1,5 +1,4 @@
 ﻿using BL.Models;
-using BL.Models.BankModels;
 using BL.Service;
 using DAL.Config;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
@@ -19,8 +18,8 @@ namespace Tests.Service
         private static readonly ICategoryService _categories = new CategoryService();
         private static readonly IIconService _icons = new IconService();
 
-        [TestInitialize]
-        public async Task InitTest()
+        [ClassInitialize]
+        public static async Task InitTest(TestContext context)
         {
             await _database.InitAsync();
         }
@@ -75,15 +74,15 @@ namespace Tests.Service
         }
 
         [TestMethod]
-        public async Task CategoryModifierTest()
+        public async Task CategoryServiceModifierTest()
         {
             await _categories.DeleteAll();
             await _icons.DeleteAll();
 
-            Icon icon = new Icon() { Id = 1, Name = "TestIcon", Path = "TestPath" };
+            Icon icon = new Icon() { Name = "TestIcon", Path = "TestPath" };
             await _icons.Create(icon);
 
-            Category cat1 = new Category() { Name = "Category 1", IconId = 1 };
+            Category cat1 = new Category() { Name = "Category 1", IconId = (await _icons.GetAll()).Single().Id };
             await _categories.Create(cat1);
 
             var modifier = new CategoryModifier() { IncludeIcon = true };

@@ -16,8 +16,8 @@ namespace Tests.Database
         private static readonly ICategories categories = new Categories();
         private static readonly IIcons icons = new Icons();
 
-        [TestInitialize]
-        public async Task InitTest()
+        [ClassInitialize]
+        public static async Task InitTest(TestContext context)
         {
             await database.InitAsync();
         }
@@ -68,10 +68,10 @@ namespace Tests.Database
             await categories.DeleteAll();
             await icons.DeleteAll();
 
-            Icon icon = new Icon() { Id = 1, Name = "TestIcon", Path = "TestPath" };
+            Icon icon = new Icon() { Name = "TestIcon", Path = "TestPath" };
             await icons.Create(icon);
 
-            Category cat1 = new Category() { Name = "Category 1", IconId = 1 };
+            Category cat1 = new Category() { Name = "Category 1", IconId = (await icons.GetAll()).Single().Id };
             await categories.Create(cat1);
 
             var modifier = new CategoryModifier() { IncludeIcon = true };
