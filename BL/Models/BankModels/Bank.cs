@@ -17,6 +17,8 @@ namespace BL.Models
 
         public string Name { get; set; }
 
+        public int? IconId { get; set; }
+
         public Icon Icon { get; set; }
 
         public IList<Transaction> StoredTransactions { get; set; }

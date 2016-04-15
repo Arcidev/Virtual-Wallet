@@ -45,15 +45,15 @@ namespace Tests.Service
             var cats = await _categories.GetAll();
             Assert.AreEqual(2, cats.Count);
 
-            var category1Id = cats.Where(x => x.Name == "Category 1").First().Id;
-            var category2Id = cats.Where(x => x.Name == "Category 2").First().Id;
+            var category1Id = cats.Where(x => x.Name == "Category 1").Single().Id;
+            var category2Id = cats.Where(x => x.Name == "Category 2").Single().Id;
 
             var filter = new CategoryFilter() { Name = "Category 1" };
-            Assert.AreEqual("Category 1", (await _categories.Get(filter)).First().Name);
+            Assert.AreEqual("Category 1", (await _categories.Get(filter)).Single().Name);
             Assert.AreEqual("Category 1", (await _categories.Get(category1Id)).Name);
 
             filter.Name = "Category 2";
-            Assert.AreEqual("Category 2", (await _categories.Get(filter)).First().Name);
+            Assert.AreEqual("Category 2", (await _categories.Get(filter)).Single().Name);
             Assert.AreEqual("Category 2", (await _categories.Get(category2Id)).Name);
 
             filter.Name = "Category";
@@ -82,11 +82,20 @@ namespace Tests.Service
             Icon icon = new Icon() { Name = "TestIcon", Path = "TestPath" };
             await _icons.Create(icon);
 
-            Category cat1 = new Category() { Name = "Category 1", IconId = (await _icons.GetAll()).Single().Id };
-            await _categories.Create(cat1);
+            Category cat = new Category() { Name = "Category 1", IconId = (await _icons.GetAll()).Single().Id };
+            await _categories.Create(cat);
 
             var modifier = new CategoryModifier() { IncludeIcon = true };
-            var category = (await _categories.GetAll(modifier)).First();
+            var category = (await _categories.GetAll(modifier)).Single();
+
+            Assert.IsNotNull(category.Icon);
+            Assert.AreEqual("TestIcon", category.Icon.Name);
+
+            cat = new Category() { Name = "Category 2", Icon = (await _icons.GetAll()).Single() };
+            await _categories.Create(cat);
+
+            var filter = new CategoryFilter() { Name = "Category 2" };
+            category = (await _categories.Get(filter, modifier)).Single();
 
             Assert.IsNotNull(category.Icon);
             Assert.AreEqual("TestIcon", category.Icon.Name);

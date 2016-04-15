@@ -34,15 +34,15 @@ namespace Tests.Database
             var cats = await categories.GetAll();
             Assert.AreEqual(2, cats.Count);
 
-            var category1Id = cats.Where(x => x.Name == "Category 1").First().Id;
-            var category2Id = cats.Where(x => x.Name == "Category 2").First().Id;
+            var category1Id = cats.Where(x => x.Name == "Category 1").Single().Id;
+            var category2Id = cats.Where(x => x.Name == "Category 2").Single().Id;
 
             var filter = new CategoryFilter() { Name = "Category 1" };
-            Assert.AreEqual("Category 1", (await categories.Get(filter)).First().Name);
+            Assert.AreEqual("Category 1", (await categories.Get(filter)).Single().Name);
             Assert.AreEqual("Category 1", (await categories.Get(category1Id)).Name);
 
             filter.Name = "Category 2";
-            Assert.AreEqual("Category 2", (await categories.Get(filter)).First().Name);
+            Assert.AreEqual("Category 2", (await categories.Get(filter)).Single().Name);
             Assert.AreEqual("Category 2", (await categories.Get(category2Id)).Name);
 
             filter.Name = "Category";
@@ -75,7 +75,7 @@ namespace Tests.Database
             await categories.Create(cat1);
 
             var modifier = new CategoryModifier() { IncludeIcon = true };
-            var category = (await categories.GetAll(modifier)).First();
+            var category = (await categories.GetAll(modifier)).Single();
 
             Assert.IsNotNull(category.Icon);
             Assert.AreEqual("TestIcon", category.Icon.Name);
