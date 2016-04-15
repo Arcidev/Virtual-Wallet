@@ -11,14 +11,13 @@ namespace DAL.DataAccess
     {
         private static readonly IIcons icons = new Icons();
 
-        public async Task<IList<Category>> GetAll()
-        {
-            return await GetAll(null);
-        }
-
         public async Task<IList<Category>> GetAll(CategoryModifier modifier)
         {
-            return await Get(null, modifier);
+            var categories = await GetAll();
+            if (modifier != null)
+                await ApplyModifiers(categories, modifier);
+
+            return categories;
         }
 
         public async Task<IList<Category>> Get(CategoryFilter filter = null)
@@ -58,8 +57,8 @@ namespace DAL.DataAccess
 
         private async Task ApplyModifiers(Category category, CategoryModifier modifier)
         {
-            if (modifier.IncludeIcon && category.IconId != 0)
-                category.Icon = await icons.Get(category.IconId);
+            if (modifier.IncludeIcon && category.IconId.HasValue)
+                category.Icon = await icons.Get(category.IconId.Value);
         }
 
         private async Task ApplyModifiers(IList<Category> categories, CategoryModifier modifier)

@@ -9,9 +9,12 @@
     <Import_RootNamespace>Shared</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Enums\BankTypes.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Filters\BaseFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Filters\BankFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Filters\IconFilter.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Filters\CategoryFilter.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Modifiers\BankModifier.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Modifiers\CategoryModifier.cs" />
   </ItemGroup>
 </Project>

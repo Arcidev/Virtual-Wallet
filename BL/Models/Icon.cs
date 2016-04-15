@@ -1,7 +1,7 @@
 ﻿
 namespace BL.Models
 {
-    public class Icon
+    public class Icon : IDto
     {
         public int Id { get; set; }
 

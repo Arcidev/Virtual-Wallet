@@ -8,11 +8,6 @@ namespace DAL.DataAccess
 {
     public class Icons : BaseDataAccess<Icon>, IIcons
     {
-        public async Task<IList<Icon>> GetAll()
-        {
-            return await Get(null);
-        }
-
         public async Task<IList<Icon>> Get(IconFilter filter = null)
         {
             if (filter == null)

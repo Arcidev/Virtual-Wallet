@@ -1,7 +1,7 @@
 ﻿
 namespace DAL.Data
 {
-    public interface IData
+    public interface IDao
     {
         int Id { get; set; }
     }

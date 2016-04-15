@@ -2,12 +2,13 @@
 using DAL.Helpers;
 using Shared.Filters;
 using SQLite.Net.Async;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace DAL.DataAccess
 {
-    public abstract class BaseDataAccess<T> where T : class, IData, new()
+    public abstract class BaseDataAccess<T> where T : class, IDao, new()
     {
         protected AsyncTableQuery<T> ApplyBaseFilters(AsyncTableQuery<T> query, BaseFilter filter)
         {
@@ -21,6 +22,12 @@ namespace DAL.DataAccess
                 query = query.Take(filter.Take.Value);
 
             return query;
+        }
+
+        public async Task<IList<T>> GetAll()
+        {
+            var connection = ConnectionHelper.GetDbAsyncConnection();
+            return await connection.Table<T>().ToListAsync();
         }
 
         public async Task<T> Get(int id)

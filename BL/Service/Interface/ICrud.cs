@@ -1,10 +1,10 @@
-﻿using DAL.Data;
+﻿using BL.Models;
 using Shared.Filters;
 using System.Threading.Tasks;
 
-namespace DAL.DataAccess
+namespace BL.Service
 {
-    public interface ICrud<T1, T2> : IGet<T1, T2> where T1 : IDao where T2 : BaseFilter
+    public interface ICrud<T1, T2> : IGet<T1, T2> where T1 : IDto where T2 : BaseFilter
     {
         Task Create(params T1[] entities);
 

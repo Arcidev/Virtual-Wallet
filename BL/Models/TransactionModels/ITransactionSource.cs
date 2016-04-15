@@ -2,10 +2,8 @@
 
 namespace BL.Models.TransactionModels
 {
-    public interface ITransactionSource
+    public interface ITransactionSource : IDto
     {
-        int Id { get; set; }
-
         string Name { get; set; }
 
         IList<Transaction> StoredTransactions { get; set; }

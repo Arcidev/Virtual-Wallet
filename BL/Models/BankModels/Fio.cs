@@ -12,6 +12,8 @@ namespace BL.Models.BankModels
     {
         public string Token { get; set; }
 
+        public override bool HasCredentials { get { return !string.IsNullOrEmpty(Token); } }
+
         public override async Task<IList<Transaction>> GetNewTransactionsAsync()
         {
             if (string.IsNullOrWhiteSpace(Token))

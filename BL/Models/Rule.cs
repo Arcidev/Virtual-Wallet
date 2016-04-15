@@ -2,7 +2,7 @@
 
 namespace BL.Models
 {
-    public class Rule
+    public class Rule : IDto
     {
         public int Id { get; set; }
 

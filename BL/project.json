@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "AutoMapper": "4.2.1",
     "FioSdk": "1.0.0.6",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "Newtonsoft.Json": "8.0.3"

@@ -2,15 +2,17 @@
 
 namespace DAL.Data
 {
-    public class Icon : IDao
+    public class Bank : IDao
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey]
         public int Id { get; set; }
 
         [NotNull, MaxLength(20)]
         public string Name { get; set; }
 
-        [NotNull, MaxLength(50)]
-        public string Path { get; set; }
+        public int? IconId { get; set; }
+
+        [Ignore]
+        public Icon Icon { get; set; }
     }
 }
