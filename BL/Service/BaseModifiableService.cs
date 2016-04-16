@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BL.Service
 {
-    public abstract class BaseModifiableGetService<T1, T2, T3, T4, T5> : BaseGetService<T1, T2, T3, T4> where T1 : IDto where T2 : DAL.Data.IDao where T3 : class, DAL.DataAccess.IModifiableGet<T2, T4, T5>, new() where T4 : BaseFilter where T5 : BaseModifier
+    public abstract class BaseModifiableGetService<T1, T2, T3, T4, T5> : BaseGetService<T1, T2, T3, T4>, IModifiableGetService<T1, T4, T5> where T1 : IDto where T2 : DAL.Data.IDao where T3 : class, DAL.DataAccess.IModifiableGet<T2, T4, T5>, new() where T4 : BaseFilter where T5 : BaseModifier
     {
         public async Task<T1> Get(int id, T5 modifier)
         {
@@ -25,7 +25,7 @@ namespace BL.Service
         }
     }
 
-    public abstract class BaseModifiableCrudService<T1, T2, T3, T4, T5> : BaseCrudService<T1, T2, T3, T4> where T1 : IDto where T2 : DAL.Data.IDao where T3 : class, DAL.DataAccess.IModifiableCrud<T2, T4, T5>, new() where T4 : BaseFilter where T5 : BaseModifier
+    public abstract class BaseModifiableCrudService<T1, T2, T3, T4, T5> : BaseCrudService<T1, T2, T3, T4>, IModifiableCrudService<T1, T4, T5> where T1 : IDto where T2 : DAL.Data.IDao where T3 : class, DAL.DataAccess.IModifiableCrud<T2, T4, T5>, new() where T4 : BaseFilter where T5 : BaseModifier
     {
         public async Task<T1> Get(int id, T5 modifier)
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DAL.DataAccess
 {
-    public abstract class BaseModifiableGetDataAccess<T1, T2, T3> : BaseGetDataAccess<T1, T2> where T1 : class, IDao, new() where T2 : BaseFilter, new() where T3 : BaseModifier
+    public abstract class BaseModifiableGetDataAccess<T1, T2, T3> : BaseGetDataAccess<T1, T2>, IModifiableGet<T1, T2, T3> where T1 : class, IDao, new() where T2 : BaseFilter, new() where T3 : BaseModifier
     {
         public async Task<IList<T1>> GetAll(T3 modifier)
         {
@@ -44,7 +44,7 @@ namespace DAL.DataAccess
         }
     }
 
-    public abstract class BaseModifiableCrudDataAccess<T1, T2, T3> : BaseCrudDataAccess<T1, T2> where T1 : class, IDao, new() where T2 : BaseFilter, new() where T3 : BaseModifier
+    public abstract class BaseModifiableCrudDataAccess<T1, T2, T3> : BaseCrudDataAccess<T1, T2>, IModifiableCrud<T1, T2, T3> where T1 : class, IDao, new() where T2 : BaseFilter, new() where T3 : BaseModifier
     {
         public async Task<IList<T1>> GetAll(T3 modifier)
         {

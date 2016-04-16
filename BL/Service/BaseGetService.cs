@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BL.Service
 {
-    public class BaseGetService<T1, T2, T3, T4> where T1 : IDto where T2 : DAL.Data.IDao where T3 : class, DAL.DataAccess.IGet<T2, T4>, new() where T4 : BaseFilter
+    public class BaseGetService<T1, T2, T3, T4> : IGetService<T1, T4> where T1 : IDto where T2 : DAL.Data.IDao where T3 : class, DAL.DataAccess.IGet<T2, T4>, new() where T4 : BaseFilter
     {
         protected static readonly T3 _instance = new T3();
 

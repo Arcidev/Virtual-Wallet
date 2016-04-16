@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 namespace DAL.DataAccess
 {
 <# foreach (var type in types) { #>
-    public abstract class BaseModifiable<#= type #>DataAccess<T1, T2, T3> : Base<#= type #>DataAccess<T1, T2> where T1 : class, IDao, new() where T2 : BaseFilter, new() where T3 : BaseModifier
+    public abstract class BaseModifiable<#= type #>DataAccess<T1, T2, T3> : Base<#= type #>DataAccess<T1, T2>, IModifiable<#= type #><T1, T2, T3> where T1 : class, IDao, new() where T2 : BaseFilter, new() where T3 : BaseModifier
     {
         public async Task<IList<T1>> GetAll(T3 modifier)
         {

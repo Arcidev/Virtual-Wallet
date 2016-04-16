@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace DAL.DataAccess
 {
-    public abstract class BaseCrudDataAccess<T1, T2> : BaseGetDataAccess<T1, T2> where T1 : class, IDao, new() where T2 : BaseFilter, new()
+    public abstract class BaseCrudDataAccess<T1, T2> : BaseGetDataAccess<T1, T2>, ICrud<T1, T2> where T1 : class, IDao, new() where T2 : BaseFilter, new()
     {
         public async Task Create(params T1[] entities)
         {

@@ -1,6 +1,5 @@
 ﻿using BL.Models;
 using BL.Service;
-using DAL.Config;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
 using Shared.Enums;
 using Shared.Filters;
@@ -13,7 +12,7 @@ namespace Tests.Service
     [TestClass]
     public class ServiceTests
     {
-        private static readonly IDatabase _database = new DAL.Config.Database();
+        private static readonly IDatabaseService _database = new DatabaseService();
         private static readonly IBankService _banks = new BankService();
         private static readonly ICategoryService _categories = new CategoryService();
         private static readonly IIconService _icons = new IconService();

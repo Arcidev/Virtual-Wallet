@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace DAL.DataAccess
 {
-    public abstract class BaseGetDataAccess<T1, T2> where T1 : class, IDao, new() where T2 : BaseFilter, new()
+    public abstract class BaseGetDataAccess<T1, T2> : IGet<T1, T2> where T1 : class, IDao, new() where T2 : BaseFilter, new()
     {
         protected AsyncTableQuery<T1> ApplyBaseFilters(AsyncTableQuery<T1> query, BaseFilter filter)
         {
