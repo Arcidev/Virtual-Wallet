@@ -3,6 +3,7 @@ using Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.Security.Credentials;
 
 namespace BL.Models
 {
@@ -10,8 +11,10 @@ namespace BL.Models
     {
         private static readonly Dictionary<BankId, Type> derrivedClasses = new Dictionary<BankId, Type>()
         {
-            {BankId.Fio, typeof(Fio) }
+            { BankId.Fio, typeof(Fio) }
         };
+
+        protected PasswordVault PasswordVault { get { return new PasswordVault(); } }
 
         public int Id { get; set; }
 
@@ -21,9 +24,13 @@ namespace BL.Models
 
         public Icon Icon { get; set; }
 
+        public Uri IconUri { get { return Icon != null ? new Uri(Icon.Path) : null; } }
+
         public IList<Transaction> StoredTransactions { get; set; }
 
         public abstract bool HasCredentials { get; }
+
+        public abstract void SaveCredentials();
 
         public abstract Task SetLastDownloadDateAsync(DateTime date);
 

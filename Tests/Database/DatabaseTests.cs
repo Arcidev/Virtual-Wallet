@@ -2,6 +2,7 @@
 using DAL.Data;
 using DAL.DataAccess;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
+using Shared.Enums;
 using Shared.Filters;
 using Shared.Modifiers;
 using System.Linq;
@@ -66,25 +67,18 @@ namespace Tests.Database
         public async Task CategoryModifierTest()
         {
             await categories.DeleteAll();
-            await icons.DeleteAll();
 
-            Icon icon = new Icon() { Name = "TestIcon", Path = "TestPath" };
-            await icons.Create(icon);
-
-            Category cat1 = new Category() { Name = "Category 1", IconId = (await icons.GetAll()).Single().Id };
+            Category cat1 = new Category() { Name = "Category 1", IconId = (int)IconId.Fio };
             await categories.Create(cat1);
 
             var modifier = new CategoryModifier() { IncludeIcon = true };
             var category = (await categories.GetAll(modifier)).Single();
 
             Assert.IsNotNull(category.Icon);
-            Assert.AreEqual("TestIcon", category.Icon.Name);
+            Assert.AreEqual((int)IconId.Fio, category.Icon.Id);
 
             await categories.DeleteAll();
-            await icons.DeleteAll();
-
             Assert.AreEqual(0, (await categories.GetAll()).Count);
-            Assert.AreEqual(0, (await icons.GetAll()).Count);
         }
     }
 }

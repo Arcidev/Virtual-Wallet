@@ -76,19 +76,15 @@ namespace Tests.Service
         public async Task CategoryServiceModifierTest()
         {
             await _categories.DeleteAll();
-            await _icons.DeleteAll();
 
-            Icon icon = new Icon() { Name = "TestIcon", Path = "TestPath" };
-            await _icons.Create(icon);
-
-            Category cat = new Category() { Name = "Category 1", IconId = (await _icons.GetAll()).Single().Id };
+            Category cat = new Category() { Name = "Category 1", IconId = (int)IconId.Fio };
             await _categories.Create(cat);
 
             var modifier = new CategoryModifier() { IncludeIcon = true };
             var category = (await _categories.GetAll(modifier)).Single();
 
             Assert.IsNotNull(category.Icon);
-            Assert.AreEqual("TestIcon", category.Icon.Name);
+            Assert.AreEqual((int)IconId.Fio, category.Icon.Id);
 
             cat = new Category() { Name = "Category 2", Icon = (await _icons.GetAll()).Single() };
             await _categories.Create(cat);
@@ -97,13 +93,10 @@ namespace Tests.Service
             category = (await _categories.Get(filter, modifier)).Single();
 
             Assert.IsNotNull(category.Icon);
-            Assert.AreEqual("TestIcon", category.Icon.Name);
+            Assert.AreEqual((int)IconId.Fio, category.Icon.Id);
 
             await _categories.DeleteAll();
-            await _icons.DeleteAll();
-
             Assert.AreEqual(0, (await _categories.GetAll()).Count);
-            Assert.AreEqual(0, (await _icons.GetAll()).Count);
         }
     }
 }

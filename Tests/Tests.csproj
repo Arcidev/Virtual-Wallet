@@ -136,6 +136,10 @@
       <Project>{5c9e92ff-fc31-4c00-95fb-2cb18098d48e}</Project>
       <Name>DAL</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Shared\Shared.csproj">
+      <Project>{f671b299-bfcc-4a9d-8acf-622af0ddc829}</Project>
+      <Name>Shared</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

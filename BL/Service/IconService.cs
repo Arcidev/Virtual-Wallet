@@ -4,7 +4,7 @@ using Shared.Filters;
 
 namespace BL.Service
 {
-    public class IconService : BaseCrudService<Icon, DAL.Data.Icon, Icons, IconFilter>, IIconService
+    public class IconService : BaseGetService<Icon, DAL.Data.Icon, Icons, IconFilter>, IIconService
     {
     }
 }

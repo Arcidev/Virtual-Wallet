@@ -1,7 +1,9 @@
 ﻿using FioSdkCsharp;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using Windows.Security.Credentials;
 using Filter = BL.Filters.TransactionFilter;
 using FioFilter = FioSdkCsharp.TransactionFilter;
 
@@ -9,9 +11,17 @@ namespace BL.Models
 {
     public class Fio : Bank
     {
+        private const string fioResource = "FioBankToken";
+        private const string fioUser = "FioUser";
+
         public string Token { get; set; }
 
         public override bool HasCredentials { get { return !string.IsNullOrEmpty(Token); } }
+
+        public Fio()
+        {
+            GetCredentials();
+        }
 
         public override async Task<IList<Transaction>> GetNewTransactionsAsync()
         {
@@ -42,6 +52,22 @@ namespace BL.Models
 
             ApiExplorer explorer = new ApiExplorer(Token);
             await explorer.SetLastDownloadDateAsync(date);
+        }
+
+        public override void SaveCredentials()
+        {
+            if (string.IsNullOrEmpty(Token))
+                return;
+
+            var password = new PasswordCredential(fioResource, fioUser, Token);
+            PasswordVault.Add(password);
+        }
+
+        private void GetCredentials()
+        {
+            var credentials = PasswordVault.RetrieveAll().FirstOrDefault(x => x.Resource == fioResource && x.UserName == fioUser);
+            if (credentials != null)
+                Token = credentials.Password;
         }
 
         private IList<Transaction> GetTransactions(FioSdkCsharp.Models.TransactionList transactionList)

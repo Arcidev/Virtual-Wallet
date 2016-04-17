@@ -3,7 +3,7 @@ using Shared.Filters;
 
 namespace BL.Service
 {
-    public interface IIconService : ICrudService<Icon, IconFilter>
+    public interface IIconService : IGetService<Icon, IconFilter>
     {
     }
 }
