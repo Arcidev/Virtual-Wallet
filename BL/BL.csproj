@@ -140,6 +140,7 @@
     <Compile Include="Service\Interface\IImageService.cs" />
     <Compile Include="Service\Interface\IModifiableCrudService.cs" />
     <Compile Include="Service\Interface\IModifiableGetService.cs" />
+    <Compile Include="Service\WalletService.cs" />
     <EmbeddedResource Include="Properties\BL.rd.xml" />
   </ItemGroup>
   <ItemGroup>

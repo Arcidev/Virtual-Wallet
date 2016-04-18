@@ -11,7 +11,7 @@
     <AssemblyName>VirtualWallet</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformIdentifier>UAP</TargetPlatformIdentifier>
-    <TargetPlatformVersion>10.0.10240.0</TargetPlatformVersion>
+    <TargetPlatformVersion>10.0.10586.0</TargetPlatformVersion>
     <TargetPlatformMinVersion>10.0.10240.0</TargetPlatformMinVersion>
     <MinimumVisualStudioVersion>14</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -90,6 +90,7 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
+    <None Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource.xsd" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -105,6 +106,9 @@
       <DependentUpon>BanksPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CommandHandler.cs" />
+    <Compile Include="MenuUI\MenuPage.xaml.cs">
+      <DependentUpon>MenuPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -112,7 +116,11 @@
     <Compile Include="ViewModels\BankLoginPageViewModel.cs" />
     <Compile Include="ViewModels\BankPageViewModel.cs" />
     <Compile Include="ViewModels\BanksPageViewModel.cs" />
+    <Compile Include="ViewModels\MenuPageViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
+    <Compile Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource.xaml.cs">
+      <DependentUpon>WalletsSampleDataSource.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -129,6 +137,11 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource_Files\image01.png" />
+    <Content Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource_Files\image02.png" />
+    <Content Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource_Files\image03.png" />
+    <Content Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource_Files\image04.png" />
+    <Content Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource_Files\image05.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -150,6 +163,14 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MenuUI\MenuPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>
