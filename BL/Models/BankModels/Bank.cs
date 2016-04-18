@@ -32,7 +32,11 @@ namespace BL.Models
 
         public abstract bool HasCredentials { get; }
 
+        public abstract void SetCredentials(string token = null, string login = null, string password = null);
+
         public abstract void SaveCredentials();
+
+        public abstract void RemoveCredentials();
 
         public abstract Task SetLastDownloadDateAsync(DateTime date);
 

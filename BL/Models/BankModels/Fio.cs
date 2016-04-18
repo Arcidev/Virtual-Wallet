@@ -26,7 +26,12 @@ namespace BL.Models
 
         public Fio()
         {
-            GetCredentials();
+            var credentials = GetCredentials();
+            if (credentials != null)
+            {
+                credentials.RetrievePassword();
+                Token = credentials.Password;
+            }
         }
 
         public override async Task<IList<Transaction>> GetNewTransactionsAsync()
@@ -69,11 +74,9 @@ namespace BL.Models
             PasswordVault.Add(password);
         }
 
-        private void GetCredentials()
+        private PasswordCredential GetCredentials()
         {
-            var credentials = PasswordVault.RetrieveAll().FirstOrDefault(x => x.Resource == fioResource && x.UserName == fioUser);
-            if (credentials != null)
-                Token = credentials.Password;
+            return PasswordVault.RetrieveAll().FirstOrDefault(x => x.Resource == fioResource && x.UserName == fioUser);
         }
 
         private IList<Transaction> GetTransactions(FioSdkCsharp.Models.TransactionList transactionList)
@@ -93,6 +96,18 @@ namespace BL.Models
             }
 
             return transactions;
+        }
+
+        public override void SetCredentials(string token = null, string login = null, string password = null)
+        {
+            Token = token;
+        }
+
+        public override void RemoveCredentials()
+        {
+            var credentials = GetCredentials();
+            if (credentials != null)
+                PasswordVault.Remove(credentials);
         }
     }
 }

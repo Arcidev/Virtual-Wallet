@@ -14,20 +14,20 @@
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
             <Grid Grid.Row="0">
-                <Image Source="{Binding BankImageUri}"/>
+                <Image Source="{Binding Bank.ImageUri}"/>
             </Grid>
             <RelativePanel Grid.Row="1" HorizontalAlignment="Center" Margin="20 10">
                 <RelativePanel x:Name="CredentialsRelativePanel">
                     <TextBlock x:Name="TokenTextBlock" Text="Token:" />
-                    <TextBox Margin="5 0 0 0" RelativePanel.RightOf="TokenTextBlock" Text="{Binding Token}" MinWidth="150"/>
+                    <TextBox Margin="5 0 0 0" RelativePanel.RightOf="TokenTextBlock" Text="{Binding Token, Mode=TwoWay}" MinWidth="150" KeyUp="TokenTextBox_KeyUp"/>
                 </RelativePanel>
                 <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="True" x:Name="RememberMeRelativePanel" RelativePanel.Below="CredentialsRelativePanel">
-                    <CheckBox x:Name="RememberMeCheckbox" IsChecked="{Binding RememberCredentials}">
+                    <CheckBox x:Name="RememberMeCheckbox" IsChecked="{Binding RememberCredentials, Mode=TwoWay}">
                         <TextBlock Text="Remember?" />
                     </CheckBox>
                 </RelativePanel>
                 <Grid RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="RememberMeRelativePanel" >
-                    <Button>
+                    <Button Click="LoginButton_Click">
                         <TextBlock Text="Login"/>
                     </Button>
                 </Grid>

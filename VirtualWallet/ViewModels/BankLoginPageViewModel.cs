@@ -1,26 +1,12 @@
 ﻿using BL.Models;
-using System;
 
 namespace VirtualWallet.ViewModels
 {
     public class BankLoginPageViewModel : ViewModelBase
     {
-        private Uri bankImageUri;
+        private Bank bank;
         private string token;
-        private bool rememberCredentials = true;
-
-        public Uri BankImageUri
-        {
-            get { return bankImageUri; }
-            set
-            {
-                if (bankImageUri == value)
-                    return;
-
-                bankImageUri = value;
-                NotifyPropertyChanged();
-            }
-        }
+        private bool rememberCredentials;
 
         public string Token
         {
@@ -48,9 +34,36 @@ namespace VirtualWallet.ViewModels
             }
         }
 
+        public Bank Bank
+        {
+            get { return bank; }
+            private set
+            {
+                if (bank == value)
+                    return;
+
+                bank = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public bool IsValid { get { return !string.IsNullOrWhiteSpace(Token); } }
+
+        public BankLoginPageViewModel()
+        {
+            rememberCredentials = true;
+        }
+
         public void LoadData(Bank bank)
         {
-            BankImageUri = bank.ImageUri;
+            Bank = bank;
+        }
+
+        public void SetCredentials()
+        {
+            Bank.SetCredentials(Token);
+            if (RememberCredentials)
+                Bank.SaveCredentials();
         }
     }
 }

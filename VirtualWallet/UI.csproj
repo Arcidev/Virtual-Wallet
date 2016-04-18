@@ -104,6 +104,7 @@
     <Compile Include="BankUI\BanksPage.xaml.cs">
       <DependentUpon>BanksPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\CommandHandler.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

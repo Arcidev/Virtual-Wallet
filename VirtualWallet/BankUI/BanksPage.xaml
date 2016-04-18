@@ -8,13 +8,13 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <RelativePanel >
+        <RelativePanel>
             <ListView Margin="10" ItemsSource="{Binding Banks}" SelectedItem="{Binding SelectedBank}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <RelativePanel Height="100" Width="100" Tapped="RelativePanel_Tapped" HorizontalAlignment="Center" VerticalAlignment="Bottom">
-                            <Image x:Name="BankImage" Source="{Binding ImageUri}" MaxWidth="60" MaxHeight="60"/>
-                            <TextBlock Text="{Binding Name}" RelativePanel.Below="BankImage"/>
+                        <RelativePanel Height="100" Width="100" Tapped="RelativePanel_Tapped" VerticalAlignment="Bottom">
+                            <Image RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" x:Name="BankImage" Source="{Binding ImageUri}" MaxWidth="80" MaxHeight="80"/>
+                            <TextBlock RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Text="{Binding Name}" RelativePanel.Below="BankImage"/>
                         </RelativePanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>
