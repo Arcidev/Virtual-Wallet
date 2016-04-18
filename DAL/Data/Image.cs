@@ -2,7 +2,7 @@
 
 namespace DAL.Data
 {
-    public class Icon : IDao
+    public class Image : IDao
     {
         [PrimaryKey]
         public int Id { get; set; }

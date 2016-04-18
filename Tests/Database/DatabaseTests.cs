@@ -15,7 +15,7 @@ namespace Tests.Database
     {
         private static readonly IDatabase database = new DAL.Config.Database();
         private static readonly ICategories categories = new Categories();
-        private static readonly IIcons icons = new Icons();
+        private static readonly IImages images = new Images();
 
         [ClassInitialize]
         public static async Task InitTest(TestContext context)
@@ -68,14 +68,14 @@ namespace Tests.Database
         {
             await categories.DeleteAll();
 
-            Category cat1 = new Category() { Name = "Category 1", IconId = (int)IconId.Fio };
+            Category cat1 = new Category() { Name = "Category 1", ImageId = (int)ImageId.Fio };
             await categories.Create(cat1);
 
-            var modifier = new CategoryModifier() { IncludeIcon = true };
+            var modifier = new CategoryModifier() { IncludeImage = true };
             var category = (await categories.GetAll(modifier)).Single();
 
-            Assert.IsNotNull(category.Icon);
-            Assert.AreEqual((int)IconId.Fio, category.Icon.Id);
+            Assert.IsNotNull(category.Image);
+            Assert.AreEqual((int)ImageId.Fio, category.Image.Id);
 
             await categories.DeleteAll();
             Assert.AreEqual(0, (await categories.GetAll()).Count);

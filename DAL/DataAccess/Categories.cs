@@ -8,12 +8,12 @@ namespace DAL.DataAccess
 {
     public class Categories : BaseModifiableCrudDataAccess<Category, CategoryFilter, CategoryModifier>, ICategories
     {
-        private static readonly IIcons icons = new Icons();
+        private static readonly IImages images = new Images();
 
         protected async override Task ApplyModifiers(Category category, CategoryModifier modifier)
         {
-            if (modifier.IncludeIcon && category.IconId.HasValue)
-                category.Icon = await icons.Get(category.IconId.Value);
+            if ((modifier.IncludeImage || modifier.IncludeAll) && category.ImageId.HasValue)
+                category.Image = await images.Get(category.ImageId.Value);
         }
 
         protected override AsyncTableQuery<Category> ApplyFilters(AsyncTableQuery<Category> query, CategoryFilter filter)
@@ -21,8 +21,8 @@ namespace DAL.DataAccess
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(x => x.Name.Contains(filter.Name));
 
-            if (filter.IconId.HasValue)
-                query = query.Where(x => x.IconId == filter.IconId.Value);
+            if (filter.ImageId.HasValue)
+                query = query.Where(x => x.ImageId == filter.ImageId.Value);
 
             return query;
         }

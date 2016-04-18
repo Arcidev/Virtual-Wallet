@@ -2,7 +2,7 @@
 
 namespace Shared.Filters
 {
-    public abstract class BaseFilter
+    public class BaseFilter
     {
         public IEnumerable<int> Ids { get; set; }
 

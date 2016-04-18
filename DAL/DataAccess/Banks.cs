@@ -8,23 +8,23 @@ namespace DAL.DataAccess
 {
     public class Banks : BaseModifiableGetDataAccess<Bank, BankFilter, BankModifier>, IBanks
     {
-        private static readonly IIcons icons = new Icons();
+        private static readonly IImages images = new Images();
 
         protected override AsyncTableQuery<Bank> ApplyFilters(AsyncTableQuery<Bank> query, BankFilter filter)
         {
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(x => x.Name.Contains(filter.Name));
 
-            if (filter.IconId.HasValue)
-                query = query.Where(x => x.IconId == filter.IconId.Value);
+            if (filter.ImageId.HasValue)
+                query = query.Where(x => x.ImageId == filter.ImageId.Value);
 
             return query;
         }
 
         protected override async Task ApplyModifiers(Bank bank, BankModifier modifier)
         {
-            if ((modifier.IncludeIcon || modifier.IncludeAll) && bank.IconId.HasValue)
-                bank.Icon = await icons.Get(bank.IconId.Value);
+            if ((modifier.IncludeImage || modifier.IncludeAll) && bank.ImageId.HasValue)
+                bank.Image = await images.Get(bank.ImageId.Value);
         }
     }
 }

@@ -12,9 +12,9 @@
             <ListView Margin="10" ItemsSource="{Binding Banks}" SelectedItem="{Binding SelectedBank}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <RelativePanel Height="100" Width="100" Tapped="RelativePanel_Tapped">
-                            <Image x:Name="BankIcon" Source="{Binding IconUri}" MaxWidth="60" MaxHeight="60"/>
-                            <TextBlock Text="{Binding Name}" RelativePanel.Below="BankIcon" HorizontalAlignment="Center"/>
+                        <RelativePanel Height="100" Width="100" Tapped="RelativePanel_Tapped" HorizontalAlignment="Center" VerticalAlignment="Bottom">
+                            <Image x:Name="BankImage" Source="{Binding ImageUri}" MaxWidth="60" MaxHeight="60"/>
+                            <TextBlock Text="{Binding Name}" RelativePanel.Below="BankImage"/>
                         </RelativePanel>
                     </DataTemplate>
                 </ListView.ItemTemplate>

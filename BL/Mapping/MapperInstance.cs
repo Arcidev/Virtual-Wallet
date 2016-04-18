@@ -9,16 +9,16 @@ namespace BL.Mapping
         {
             cfg.CreateMap<DAL.Data.Bank, Bank>().ConstructUsing(r => Bank.Create(((DAL.Data.Bank)r.SourceValue).Id));
             cfg.CreateMap<Bank, DAL.Data.Bank>()
-            .ForMember(target => target.Icon, action => action.Ignore())
-            .ForMember(target => target.IconId, action => action.MapFrom(source => source.Icon != null ? source.Icon.Id : source.IconId));
+            .ForMember(target => target.Image, action => action.Ignore())
+            .ForMember(target => target.ImageId, action => action.MapFrom(source => source.Image != null ? source.Image.Id : source.ImageId));
 
-            cfg.CreateMap<DAL.Data.Icon, Icon>();
-            cfg.CreateMap<Icon, DAL.Data.Icon>();
+            cfg.CreateMap<DAL.Data.Image, Image>();
+            cfg.CreateMap<Image, DAL.Data.Image>();
 
             cfg.CreateMap<DAL.Data.Category, Category>();
             cfg.CreateMap<Category, DAL.Data.Category>()
-            .ForMember(target => target.Icon, action => action.Ignore())
-            .ForMember(target => target.IconId, action => action.MapFrom(source => source.Icon != null ? source.Icon.Id : source.IconId));
+            .ForMember(target => target.Image, action => action.Ignore())
+            .ForMember(target => target.ImageId, action => action.MapFrom(source => source.Image != null ? source.Image.Id : source.ImageId));
 
         }).CreateMapper();
 

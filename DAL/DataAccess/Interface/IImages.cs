@@ -3,7 +3,7 @@ using Shared.Filters;
 
 namespace DAL.DataAccess
 {
-    public interface IIcons : IGet<Icon, IconFilter>
+    public interface IImages : IGet<Image, BaseFilter>
     {
     }
 }

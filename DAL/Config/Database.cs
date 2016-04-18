@@ -9,18 +9,17 @@ namespace DAL.Config
 {
     public class Database : IDatabase
     {
-        private const string iconStorage = "ms-appx:///Assets/Icons/";
+        private const string imageStorage = "ms-appx:///Assets/Images/";
 
         private static readonly Type[] tables = new Type[] 
         {
             typeof(Category),
-            typeof(Icon),
-            typeof(Bank)
+            typeof(Bank),
+            typeof(Image)
         };
 
         public async Task InitAsync()
         {
-            // await Windows.Storage.ApplicationData.Current.ClearAsync();
             var connection = ConnectionHelper.GetDbAsyncConnection();
             await connection.CreateTablesAsync(tables);
 
@@ -29,9 +28,9 @@ namespace DAL.Config
 
         private async Task InitData(SQLiteAsyncConnection connection)
         {
-            await connection.InsertOrIgnoreAllAsync(new object[] {
-                new Icon() { Id = (int)IconId.Fio, Path = $"{iconStorage}FioIcon.jpg" },
-                new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", IconId = (int)IconId.Fio } });
+            await connection.InsertOrReplaceAllAsync(new object[] {
+                new Image() { Id = (int)ImageId.Fio, Path= $"{imageStorage}Fio.png" },
+                new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio } });
         }
     }
 }

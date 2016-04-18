@@ -6,6 +6,6 @@ namespace Shared.Filters
     {
         public string Name { get; set; }
 
-        public int? IconId { get; set; }
+        public int? ImageId { get; set; }
     }
 }

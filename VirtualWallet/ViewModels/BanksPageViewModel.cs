@@ -28,7 +28,7 @@ namespace VirtualWallet.ViewModels
 
         public async Task LoadData()
         {
-            var modifier = new BankModifier() { IncludeIcon = true };
+            var modifier = new BankModifier() { IncludeImage = true };
             Banks = new ObservableCollection<Bank>(await bankService.GetAll(modifier));
         }
     }

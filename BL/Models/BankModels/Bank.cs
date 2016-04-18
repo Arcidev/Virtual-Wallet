@@ -20,13 +20,15 @@ namespace BL.Models
 
         public string Name { get; set; }
 
-        public int? IconId { get; set; }
+        public int? ImageId { get; set; }
 
-        public Icon Icon { get; set; }
+        public Image Image { get; set; }
 
-        public Uri IconUri { get { return Icon != null ? new Uri(Icon.Path) : null; } }
+        public Uri ImageUri { get { return Image != null ? new Uri(Image.Path) : null; } }
 
         public IList<Transaction> StoredTransactions { get; set; }
+
+        public abstract CredentialType CredentialType { get; }
 
         public abstract bool HasCredentials { get; }
 

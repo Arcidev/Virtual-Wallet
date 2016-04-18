@@ -1,7 +1,7 @@
 ﻿
 namespace Shared.Enums
 {
-    public enum IconId
+    public enum ImageId
     {
         Fio = 1
     }

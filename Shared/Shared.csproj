@@ -108,11 +108,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\BankId.cs" />
-    <Compile Include="Enums\IconId.cs" />
+    <Compile Include="Enums\CredentialType.cs" />
+    <Compile Include="Enums\ImageId.cs" />
     <Compile Include="Filters\BankFilter.cs" />
     <Compile Include="Filters\BaseFilter.cs" />
     <Compile Include="Filters\CategoryFilter.cs" />
-    <Compile Include="Filters\IconFilter.cs" />
     <Compile Include="Modifiers\BankModifier.cs" />
     <Compile Include="Modifiers\BaseModifier.cs" />
     <Compile Include="Modifiers\CategoryModifier.cs" />

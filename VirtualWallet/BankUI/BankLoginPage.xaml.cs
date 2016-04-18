@@ -1,6 +1,7 @@
-﻿using BL.Service;
+﻿using BL.Models;
 using VirtualWallet.ViewModels;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace VirtualWallet
 {
@@ -11,8 +12,13 @@ namespace VirtualWallet
         public BankLoginPage()
         {
             this.InitializeComponent();
-            viewModel = new BankLoginPageViewModel(new BankService());
+            viewModel = new BankLoginPageViewModel();
             this.DataContext = viewModel;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            viewModel.Bank = (Bank)e.Parameter;
         }
     }
 }

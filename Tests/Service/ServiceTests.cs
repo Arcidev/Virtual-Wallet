@@ -15,7 +15,7 @@ namespace Tests.Service
         private static readonly IDatabaseService _database = new DatabaseService();
         private static readonly IBankService _banks = new BankService();
         private static readonly ICategoryService _categories = new CategoryService();
-        private static readonly IIconService _icons = new IconService();
+        private static readonly IImageService _images = new ImageService();
 
         [ClassInitialize]
         public static async Task InitTest(TestContext context)
@@ -77,23 +77,23 @@ namespace Tests.Service
         {
             await _categories.DeleteAll();
 
-            Category cat = new Category() { Name = "Category 1", IconId = (int)IconId.Fio };
+            Category cat = new Category() { Name = "Category 1", ImageId = (int)ImageId.Fio };
             await _categories.Create(cat);
 
-            var modifier = new CategoryModifier() { IncludeIcon = true };
+            var modifier = new CategoryModifier() { IncludeImage = true };
             var category = (await _categories.GetAll(modifier)).Single();
 
-            Assert.IsNotNull(category.Icon);
-            Assert.AreEqual((int)IconId.Fio, category.Icon.Id);
+            Assert.IsNotNull(category.Image);
+            Assert.AreEqual((int)ImageId.Fio, category.Image.Id);
 
-            cat = new Category() { Name = "Category 2", Icon = (await _icons.GetAll()).Single() };
+            cat = new Category() { Name = "Category 2", Image = (await _images.GetAll()).Single() };
             await _categories.Create(cat);
 
             var filter = new CategoryFilter() { Name = "Category 2" };
             category = (await _categories.Get(filter, modifier)).Single();
 
-            Assert.IsNotNull(category.Icon);
-            Assert.AreEqual((int)IconId.Fio, category.Icon.Id);
+            Assert.IsNotNull(category.Image);
+            Assert.AreEqual((int)ImageId.Fio, category.Image.Id);
 
             await _categories.DeleteAll();
             Assert.AreEqual(0, (await _categories.GetAll()).Count);

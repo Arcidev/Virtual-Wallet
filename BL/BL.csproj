@@ -107,14 +107,16 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Image.cs" />
     <Compile Include="Service\DatabaseService.cs" />
+    <Compile Include="Service\ImageService.cs" />
+    <Compile Include="Service\Interface\IBankService.cs" />
     <Compile Include="Service\Interface\IDatabaseService.cs" />
     <Compile Include="Mapping\MapperInstance.cs" />
     <Compile Include="Models\BankModels\Bank.cs" />
     <Compile Include="Models\BankModels\Fio.cs" />
     <Compile Include="Models\CashPaynment.cs" />
     <Compile Include="Models\Category.cs" />
-    <Compile Include="Models\Icon.cs" />
     <Compile Include="Models\Interface\IDto.cs" />
     <Compile Include="Models\Rule.cs" />
     <Compile Include="Models\TransactionModels\Transaction.cs" />
@@ -131,12 +133,10 @@
     <Compile Include="Service\BaseCrudService.cs" />
     <Compile Include="Service\BaseGetService.cs" />
     <Compile Include="Service\BankService.cs" />
-    <Compile Include="Service\IconService.cs" />
     <Compile Include="Service\Interface\ICategoryService.cs" />
-    <Compile Include="Service\Interface\IBankService.cs" />
     <Compile Include="Service\Interface\ICrudService.cs" />
     <Compile Include="Service\Interface\IGetService.cs" />
-    <Compile Include="Service\Interface\IIconService.cs" />
+    <Compile Include="Service\Interface\IImageService.cs" />
     <Compile Include="Service\Interface\IModifiableCrudService.cs" />
     <Compile Include="Service\Interface\IModifiableGetService.cs" />
     <EmbeddedResource Include="Properties\BL.rd.xml" />

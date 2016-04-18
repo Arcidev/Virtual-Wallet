@@ -10,9 +10,9 @@ namespace DAL.Data
         [NotNull, MaxLength(20)]
         public string Name { get; set; }
 
-        public int? IconId { get; set; }
+        public int? ImageId { get; set; }
 
         [Ignore]
-        public Icon Icon { get; set; }
+        public Image Image { get; set; }
     }
 }

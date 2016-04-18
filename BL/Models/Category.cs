@@ -8,9 +8,9 @@ namespace BL.Models
 
         public string Name { get; set; }
 
-        public int? IconId { get; set; }
+        public int? ImageId { get; set; }
 
-        public Icon Icon { get; set; }
+        public Image Image { get; set; }
 
         public IList<Rule> Rules { get; set; }
 

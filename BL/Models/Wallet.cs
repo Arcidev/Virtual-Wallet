@@ -8,7 +8,7 @@ namespace BL.Models
 
         public string Name { get; set; }
 
-        public Icon Icon { get; set; }
+        public Image Image { get; set; }
 
         public IList<Category> Categories { get; set; }
 
