@@ -95,8 +95,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BankUI\BankLoginPage.xaml.cs">
-      <DependentUpon>BankLoginPage.xaml</DependentUpon>
+    <Compile Include="BankUI\BankCredentialsPage.xaml.cs">
+      <DependentUpon>BankCredentialsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="BankUI\BankPage.xaml.cs">
       <DependentUpon>BankPage.xaml</DependentUpon>
@@ -135,7 +135,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="BankUI\BankLoginPage.xaml">
+    <Page Include="BankUI\BankCredentialsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -161,6 +161,11 @@
       <Project>{f671b299-bfcc-4a9d-8acf-622af0ddc829}</Project>
       <Name>Shared</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <SDKReference Include="WindowsMobile, Version=10.0.10586.0">
+      <Name>Windows Mobile Extensions for the UWP</Name>
+    </SDKReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>

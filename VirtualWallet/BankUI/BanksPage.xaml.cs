@@ -25,7 +25,7 @@ namespace VirtualWallet
         private void RelativePanel_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
         {
             var bank = (Bank)((RelativePanel)sender).DataContext;
-            Frame.Navigate(bank.HasCredentials ? typeof(BankPage) : typeof(BankLoginPage), bank);
+            Frame.Navigate(bank.HasCredentials ? typeof(BankPage) : typeof(BankCredentialsPage), bank);
         }
     }
 }

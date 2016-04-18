@@ -1,8 +1,9 @@
 ﻿using BL.Models;
+using System;
 
 namespace VirtualWallet.ViewModels
 {
-    public class BankLoginPageViewModel : ViewModelBase
+    public class BankCredentialsPageViewModel : ViewModelBase
     {
         private Bank bank;
         private string token;
@@ -37,7 +38,7 @@ namespace VirtualWallet.ViewModels
         public Bank Bank
         {
             get { return bank; }
-            private set
+            set
             {
                 if (bank == value)
                     return;
@@ -49,18 +50,16 @@ namespace VirtualWallet.ViewModels
 
         public bool IsValid { get { return !string.IsNullOrWhiteSpace(Token); } }
 
-        public BankLoginPageViewModel()
+        public BankCredentialsPageViewModel()
         {
             rememberCredentials = true;
         }
 
-        public void LoadData(Bank bank)
-        {
-            Bank = bank;
-        }
-
         public void SetCredentials()
         {
+            if (Bank == null)
+                throw new InvalidOperationException("Property Bank must be set");
+
             Bank.SetCredentials(Token);
             if (RememberCredentials)
                 Bank.SaveCredentials();

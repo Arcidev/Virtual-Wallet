@@ -8,23 +8,23 @@ using Windows.UI.Xaml.Navigation;
 
 namespace VirtualWallet
 {
-    public sealed partial class BankLoginPage : Page
+    public sealed partial class BankCredentialsPage : Page
     {
-        private BankLoginPageViewModel viewModel;
+        private BankCredentialsPageViewModel viewModel;
 
-        public BankLoginPage()
+        public BankCredentialsPage()
         {
             this.InitializeComponent();
-            viewModel = new BankLoginPageViewModel();
+            viewModel = new BankCredentialsPageViewModel();
             this.DataContext = viewModel;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            viewModel.LoadData((Bank)e.Parameter);
+            viewModel.Bank = (Bank)e.Parameter;
         }
 
-        private async void LoginButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void SubmitButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             if (!viewModel.IsValid)
             {

@@ -8,6 +8,40 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <Pivot>
+            <PivotItem Header="Overview">
+                
+            </PivotItem>
+            <PivotItem Header="Category">
 
+            </PivotItem>
+        </Pivot>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="720" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="BotomAppBar.ClosedDisplayMode" Value="Hidden" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="BotomAppBar.ClosedDisplayMode" Value="Compact" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
     </Grid>
+    <Page.BottomAppBar>
+        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact" HorizontalContentAlignment="Center">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="Sync" Icon="Sync" Command="{Binding SyncCommand}" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>

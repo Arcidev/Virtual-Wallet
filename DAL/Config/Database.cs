@@ -28,9 +28,11 @@ namespace DAL.Config
 
         private async Task InitData(SQLiteAsyncConnection connection)
         {
-            await connection.InsertOrReplaceAllAsync(new object[] {
+            await connection.InsertOrReplaceAllAsync(new object[]
+            {
                 new Image() { Id = (int)ImageId.Fio, Path= $"{imageStorage}Fio.png" },
-                new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio } });
+                new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio }
+            });
         }
     }
 }

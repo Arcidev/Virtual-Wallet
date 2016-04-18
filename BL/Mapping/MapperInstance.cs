@@ -20,6 +20,8 @@ namespace BL.Mapping
             .ForMember(target => target.Image, action => action.Ignore())
             .ForMember(target => target.ImageId, action => action.MapFrom(source => source.Image != null ? source.Image.Id : source.ImageId));
 
+            cfg.CreateMap<FioSdkCsharp.Models.Info, BankAccountInfo>();
+
         }).CreateMapper();
 
     }

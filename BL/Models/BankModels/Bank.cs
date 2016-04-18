@@ -28,6 +28,8 @@ namespace BL.Models
 
         public IList<Transaction> StoredTransactions { get; set; }
 
+        public abstract BankAccountInfo BankAccountInfo { get; }
+
         public abstract CredentialType CredentialType { get; }
 
         public abstract bool HasCredentials { get; }

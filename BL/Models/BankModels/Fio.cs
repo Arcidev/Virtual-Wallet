@@ -1,4 +1,5 @@
-﻿using FioSdkCsharp;
+﻿using BL.Mapping;
+using FioSdkCsharp;
 using Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -14,6 +15,7 @@ namespace BL.Models
     {
         private const string fioResource = "FioBankToken";
         private const string fioUser = "FioUser";
+        private BankAccountInfo bankAccountInfo;
 
         public string Token { get; set; }
 
@@ -23,6 +25,8 @@ namespace BL.Models
         {
             get { return CredentialType.Token; }
         }
+
+        public override BankAccountInfo BankAccountInfo { get { return bankAccountInfo; } }
 
         public Fio()
         {
@@ -42,7 +46,7 @@ namespace BL.Models
             ApiExplorer explorer = new ApiExplorer(Token);
             var statement = await explorer.LastAsync();
 
-            return GetTransactions(statement.TransactionList);
+            return GetTransactions(statement);
         }
 
         public override async Task<IList<Transaction>> GetTransactionsAsync(Filter filter)
@@ -53,7 +57,7 @@ namespace BL.Models
             ApiExplorer explorer = new ApiExplorer(Token);
             var statement = await explorer.PeriodsAsync(FioFilter.LastDays(filter.Days));
 
-            return GetTransactions(statement.TransactionList);
+            return GetTransactions(statement);
         }
 
         public override async Task SetLastDownloadDateAsync(DateTime date)
@@ -79,10 +83,12 @@ namespace BL.Models
             return PasswordVault.RetrieveAll().FirstOrDefault(x => x.Resource == fioResource && x.UserName == fioUser);
         }
 
-        private IList<Transaction> GetTransactions(FioSdkCsharp.Models.TransactionList transactionList)
+        private IList<Transaction> GetTransactions(FioSdkCsharp.Models.AccountStatement accountStatement)
         {
+            bankAccountInfo = MapperInstance.Mapper.Map<BankAccountInfo>(accountStatement.Info);
+
             var transactions = new List<Transaction>();
-            foreach (var transaction in transactionList.Transactions)
+            foreach (var transaction in accountStatement.TransactionList.Transactions)
             {
                 transactions.Add(new Transaction()
                 {
