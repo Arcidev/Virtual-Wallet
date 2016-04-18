@@ -18,7 +18,7 @@ namespace VirtualWallet
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            viewModel.Bank = (Bank)e.Parameter;
+            viewModel.LoadData((Bank)e.Parameter);
         }
     }
 }
