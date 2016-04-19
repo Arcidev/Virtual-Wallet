@@ -21,8 +21,16 @@ namespace VirtualWallet.ViewModels
             get { return bank; }
             set
             {
+                if (bank == value)
+                    return;
+
                 bank = value;
                 NotifyPropertyChanged();
+
+                if (bank == null)
+                    return;
+
+                BankAccountInfo = bank.BankAccountInfo ?? new BankAccountInfo();
             }
         }
 
