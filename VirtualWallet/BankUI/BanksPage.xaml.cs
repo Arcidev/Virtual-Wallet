@@ -22,9 +22,9 @@ namespace VirtualWallet
             await viewModel.LoadData();
         }
 
-        private void RelativePanel_Tapped(object sender, Windows.UI.Xaml.Input.TappedRoutedEventArgs e)
+        private void GridViewBanks_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var bank = (Bank)((RelativePanel)sender).DataContext;
+            var bank = (Bank)e.ClickedItem;
             Frame.Navigate(bank.HasCredentials ? typeof(BankPage) : typeof(BankCredentialsPage), bank);
         }
     }

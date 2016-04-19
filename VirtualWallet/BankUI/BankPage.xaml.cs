@@ -1,9 +1,6 @@
 ﻿using BL.Models;
 using BL.Service;
-using System;
 using VirtualWallet.ViewModels;
-using Windows.Foundation.Metadata;
-using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -20,16 +17,9 @@ namespace VirtualWallet
             this.DataContext = viewModel;
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             viewModel.Bank = (Bank)e.Parameter;
-
-            //Mobile customization
-            if (ApiInformation.IsTypePresent("Windows.UI.ViewManagement.StatusBar"))
-            {
-                var statusBar = StatusBar.GetForCurrentView();
-                await statusBar.ShowAsync();
-            }
         }
     }
 }

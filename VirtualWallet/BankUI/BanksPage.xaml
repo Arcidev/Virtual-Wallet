@@ -8,17 +8,15 @@
     mc:Ignorable="d">
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <RelativePanel>
-            <ListView Margin="10" ItemsSource="{Binding Banks}" SelectedItem="{Binding SelectedBank}">
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <RelativePanel Height="100" Width="100" Tapped="RelativePanel_Tapped" VerticalAlignment="Bottom">
-                            <Image RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" x:Name="BankImage" Source="{Binding ImageUri}" MaxWidth="80" MaxHeight="80"/>
-                            <TextBlock RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Text="{Binding Name}" RelativePanel.Below="BankImage"/>
-                        </RelativePanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
-        </RelativePanel>
+        <GridView Margin="10" ItemsSource="{Binding Banks}" IsSwipeEnabled="False" SelectionMode="None" IsItemClickEnabled="True" ItemClick="GridViewBanks_ItemClick">
+            <GridView.ItemTemplate>
+                <DataTemplate>
+                    <RelativePanel Height="100" Width="100">
+                        <Image RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" x:Name="BankImage" Source="{Binding ImageUri}" MaxWidth="80" MaxHeight="80"/>
+                        <TextBlock RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.AlignVerticalCenterWithPanel="True" Text="{Binding Name}" RelativePanel.Below="BankImage"/>
+                    </RelativePanel>
+                </DataTemplate>
+            </GridView.ItemTemplate>
+        </GridView>
     </Grid>
 </Page>
