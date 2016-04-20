@@ -18,12 +18,5 @@ namespace BL.Models
         public IList<Category> Categories { get; set; }
 
         public IList<ITransactionSource> TransactionSources { get; set; }
-
-        public static Wallet Create(int walletId)
-        {
-            var wallet = new Wallet();
-            wallet.Id = walletId;
-            return wallet;
-        }
     }
 }

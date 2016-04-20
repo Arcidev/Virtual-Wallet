@@ -3,6 +3,7 @@ using DAL.Helpers;
 using Shared.Enums;
 using SQLite.Net.Async;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DAL.Config
@@ -33,9 +34,23 @@ namespace DAL.Config
             {
                 new Image() { Id = (int)ImageId.Fio, Path= $"{imageStorage}Fio.png" },
                 new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio },
-                new Image() { Id = 2, Path= $"{imageStorage}wallet01.png" },
-                new Wallet() { Id = 1, Name = "Test wallet", ImageId = 2 }
+                new Image() { Id = (int)ImageId.Wallet, Path= $"{imageStorage}wallet01.png" }
             });
+
+            await InitTempData(connection);
+        }
+
+        // Just for testing
+        private async Task InitTempData(SQLiteAsyncConnection connection)
+        {
+            // Prevent this to multiply on every start of app
+            if (!(await connection.Table<Wallet>().ToListAsync()).Any())
+            {
+                await connection.InsertAllAsync(new object[]
+                {
+                    new Wallet() { Name = "Test wallet", ImageId = (int)ImageId.Wallet }
+                });
+            }
         }
     }
 }

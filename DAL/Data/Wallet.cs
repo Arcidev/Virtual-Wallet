@@ -9,7 +9,7 @@ namespace DAL.Data
 {
     public class Wallet : IDao
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
         [NotNull, MaxLength(20)]
