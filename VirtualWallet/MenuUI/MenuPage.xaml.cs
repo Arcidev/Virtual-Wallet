@@ -1,4 +1,5 @@
-﻿using BL.Service;
+﻿using BL.Models;
+using BL.Service;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,8 +38,8 @@ namespace VirtualWallet
 
         private void GridViewBanks_ItemClick(object sender, ItemClickEventArgs e)
         {
-            BankPageViewModel s = e.ClickedItem as BankPageViewModel;
-            this.Frame.Navigate(typeof(BankPage), s);
+            Bank bank = (Bank)e.ClickedItem;
+            this.Frame.Navigate(bank.HasCredentials ? typeof(BankPage) : typeof(BankCredentialsPage), bank);
         }
 
         private void GridViewCategories_ItemClick(object sender, ItemClickEventArgs e)

@@ -34,7 +34,7 @@ namespace DAL.Config
             {
                 new Image() { Id = (int)ImageId.Fio, Path= $"{imageStorage}Fio.png" },
                 new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio },
-                new Image() { Id = (int)ImageId.Wallet, Path= $"{imageStorage}wallet01.png" }
+                new Image() { Id = (int)ImageId.Wallet, Path= $"{imageStorage}/Wallets/wallet01.png" }
             });
 
             await InitTempData(connection);
