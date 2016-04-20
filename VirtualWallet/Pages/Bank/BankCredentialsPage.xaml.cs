@@ -6,7 +6,7 @@ using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace VirtualWallet
+namespace VirtualWallet.Pages
 {
     public sealed partial class BankCredentialsPage : Page
     {

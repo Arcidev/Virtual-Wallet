@@ -4,7 +4,7 @@ using VirtualWallet.ViewModels;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace VirtualWallet
+namespace VirtualWallet.Pages
 {
     public sealed partial class BanksPage : Page
     {

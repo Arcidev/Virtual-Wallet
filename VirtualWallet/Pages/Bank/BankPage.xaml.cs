@@ -4,7 +4,7 @@ using VirtualWallet.ViewModels;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace VirtualWallet
+namespace VirtualWallet.Pages
 {
     public sealed partial class BankPage : Page
     {
@@ -20,6 +20,16 @@ namespace VirtualWallet
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             viewModel.Bank = (Bank)e.Parameter;
+        }
+
+        private void EditAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(BankCredentialsPage), viewModel.Bank);
+        }
+
+        private void SettingsAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SettingsPage));
         }
     }
 }

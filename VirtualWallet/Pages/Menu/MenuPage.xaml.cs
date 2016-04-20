@@ -1,17 +1,10 @@
 ﻿using BL.Models;
 using BL.Service;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using VirtualWallet.CategoryUI;
-using VirtualWallet.RuleUI;
 using VirtualWallet.ViewModels;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
-namespace VirtualWallet
+namespace VirtualWallet.Pages
 {
     public sealed partial class MenuPage : Page
     {

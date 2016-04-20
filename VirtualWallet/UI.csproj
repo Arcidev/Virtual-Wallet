@@ -96,38 +96,42 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BankUI\BankCredentialsPage.xaml.cs">
+    <Compile Include="Pages\Bank\BankCredentialsPage.xaml.cs">
       <DependentUpon>BankCredentialsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BankUI\BankPage.xaml.cs">
+    <Compile Include="Pages\Bank\BankPage.xaml.cs">
       <DependentUpon>BankPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="BankUI\BanksPage.xaml.cs">
+    <Compile Include="Pages\Bank\BanksPage.xaml.cs">
       <DependentUpon>BanksPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CategoryUI\CategoriesPage.xaml.cs">
+    <Compile Include="Pages\Category\CategoriesPage.xaml.cs">
       <DependentUpon>CategoriesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="CategoryUI\CategoryPage.xaml.cs">
+    <Compile Include="Pages\Category\CategoryPage.xaml.cs">
       <DependentUpon>CategoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CommandHandler.cs" />
-    <Compile Include="MenuUI\MenuPage.xaml.cs">
+    <Compile Include="Pages\Menu\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Settings\SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RuleUI\RulePage.xaml.cs">
+    <Compile Include="Pages\Rule\RulePage.xaml.cs">
       <DependentUpon>RulePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RuleUI\RulesPage.xaml.cs">
+    <Compile Include="Pages\Rule\RulesPage.xaml.cs">
       <DependentUpon>RulesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\BankLoginPageViewModel.cs" />
+    <Compile Include="ViewModels\BankCredentialsPageViewModel.cs" />
     <Compile Include="ViewModels\BankPageViewModel.cs" />
     <Compile Include="ViewModels\BanksPageViewModel.cs" />
     <Compile Include="ViewModels\CategoriesPageViewModel.cs" />
     <Compile Include="ViewModels\CategoryPageViewModel.cs" />
     <Compile Include="ViewModels\MenuPageViewModel.cs" />
+    <Compile Include="ViewModels\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource.xaml.cs">
       <DependentUpon>WalletsSampleDataSource.xaml</DependentUpon>
@@ -160,31 +164,35 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="BankUI\BankCredentialsPage.xaml">
+    <Page Include="Pages\Bank\BankCredentialsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BankUI\BankPage.xaml">
+    <Page Include="Pages\Bank\BankPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="BankUI\BanksPage.xaml">
+    <Page Include="Pages\Bank\BanksPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CategoryUI\CategoriesPage.xaml">
+    <Page Include="Pages\Category\CategoriesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="CategoryUI\CategoryPage.xaml">
+    <Page Include="Pages\Category\CategoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RuleUI\RulePage.xaml">
+    <Page Include="Pages\Rule\RulePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RuleUI\RulesPage.xaml">
+    <Page Include="Pages\Rule\RulesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Settings\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -192,7 +200,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MenuUI\MenuPage.xaml">
+    <Page Include="Pages\Menu\MenuPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

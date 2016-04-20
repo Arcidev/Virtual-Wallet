@@ -1,8 +1,8 @@
 ﻿<Page
-    x:Class="VirtualWallet.BankPage"
+    x:Class="VirtualWallet.Pages.BankPage"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:VirtualWallet"
+    xmlns:local="using:VirtualWallet.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
@@ -51,9 +51,11 @@
         </VisualStateManager.VisualStateGroups>
     </Grid>
     <Page.BottomAppBar>
-        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact" HorizontalContentAlignment="Center">
+        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="Sync" Icon="Sync" Command="{Binding SyncCommand}" />
+                <AppBarButton Label="Edit" Icon="Edit" Click="EditAppBarButton_Click" />
+                <AppBarButton Label="Settings" Icon="Setting" Click="SettingsAppBarButton_Click" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

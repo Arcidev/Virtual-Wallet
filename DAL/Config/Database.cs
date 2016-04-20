@@ -1,9 +1,11 @@
 ﻿using DAL.Data;
+using DAL.DataAccess;
 using DAL.Helpers;
 using Shared.Enums;
 using SQLite.Net.Async;
 using System;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace DAL.Config
@@ -26,6 +28,13 @@ namespace DAL.Config
             await connection.CreateTablesAsync(tables);
 
             await InitData(connection);
+        }
+
+        public async Task RemoveAllDataAsync()
+        {
+            var connection = ConnectionHelper.GetDbAsyncConnection();
+            await connection.DeleteAllAsync<Category>();
+            await connection.DeleteAllAsync<Wallet>();
         }
 
         private async Task InitData(SQLiteAsyncConnection connection)
