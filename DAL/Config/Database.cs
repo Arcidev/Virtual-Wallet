@@ -15,7 +15,8 @@ namespace DAL.Config
         {
             typeof(Category),
             typeof(Bank),
-            typeof(Image)
+            typeof(Image),
+            typeof(Wallet)
         };
 
         public async Task InitAsync()
@@ -31,7 +32,9 @@ namespace DAL.Config
             await connection.InsertOrReplaceAllAsync(new object[]
             {
                 new Image() { Id = (int)ImageId.Fio, Path= $"{imageStorage}Fio.png" },
-                new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio }
+                new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio },
+                new Image() { Id = 2, Path= $"{imageStorage}wallet01.png" },
+                new Wallet() { Id = 1, Name = "Test wallet", ImageId = 2 }
             });
         }
     }

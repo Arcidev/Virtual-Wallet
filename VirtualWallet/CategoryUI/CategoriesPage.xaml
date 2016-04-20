@@ -1,0 +1,41 @@
+﻿<Page
+    x:Class="VirtualWallet.CategoryUI.CategoriesPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VirtualWallet.CategoryUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="CategoriesItemTemplate">
+            <RelativePanel Margin="10">
+                <Border x:Name="Icon" RelativePanel.AlignHorizontalCenterWithPanel="True" Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
+                    <Image Height="110" Width="110"/>
+                </Border>
+                <TextBlock x:Name="CategoryName" Text="{Binding Name}" Margin="0,10,0,0" Style="{StaticResource CaptionTextBlockStyle}" RelativePanel.Below="Icon" RelativePanel.AlignHorizontalCenterWith="Icon"/>
+            </RelativePanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
+        <RelativePanel DataContext="{Binding Source={StaticResource WalletsSampleDataSource}}" ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <TextBlock x:Name="PageTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Categories" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+            <Grid x:Name="CategoriesGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.Below="PageTitle" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0">
+                    <GridView x:Name="GridViewCategories" 
+                          ItemTemplate="{StaticResource CategoriesItemTemplate}" 
+                          ItemsSource="{Binding Categories}" 
+                          IsSwipeEnabled="False" 
+                          SelectionMode="None"
+                          IsItemClickEnabled="True"
+                          ItemClick="GridViewCategories_ItemClick">
+                    </GridView>
+                </Grid>
+            </Grid>
+        </RelativePanel>
+    </ScrollViewer>
+</Page>

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using VirtualWallet.CategoryUI;
+using VirtualWallet.RuleUI;
 using VirtualWallet.ViewModels;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -35,12 +37,19 @@ namespace VirtualWallet
 
         private void GridViewBanks_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            BankPageViewModel s = e.ClickedItem as BankPageViewModel;
+            this.Frame.Navigate(typeof(BankPage), s);
         }
 
         private void GridViewCategories_ItemClick(object sender, ItemClickEventArgs e)
         {
+            CategoryPageViewModel s = e.ClickedItem as CategoryPageViewModel;
+            this.Frame.Navigate(typeof(CategoryPage), s);
+        }
 
+        private void RulesButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(RulesPage));
         }
     }
 }

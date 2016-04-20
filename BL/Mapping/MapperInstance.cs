@@ -22,6 +22,11 @@ namespace BL.Mapping
 
             cfg.CreateMap<FioSdkCsharp.Models.Info, BankAccountInfo>();
 
+            cfg.CreateMap<DAL.Data.Wallet, Wallet>().ConstructUsing(r => Wallet.Create(((DAL.Data.Wallet)r.SourceValue).Id));
+            cfg.CreateMap<Wallet, DAL.Data.Wallet>()
+            .ForMember(target => target.Image, action => action.Ignore())
+            .ForMember(target => target.ImageId, action => action.MapFrom(source => source.Image != null ? source.Image.Id : source.ImageId));
+
         }).CreateMapper();
 
     }

@@ -1,12 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using BL.Models;
+using DAL.DataAccess;
+using Shared.Filters;
+using Shared.Modifiers;
 
 namespace BL.Service
 {
-    public class WalletService
+    public class WalletService : BaseModifiableGetService<Wallet, DAL.Data.Wallet, Wallets, WalletFilter, WalletModifier>, IWalletService
     {
     }
 }

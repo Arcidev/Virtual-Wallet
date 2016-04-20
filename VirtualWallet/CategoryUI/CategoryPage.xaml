@@ -1,0 +1,35 @@
+﻿<Page
+    x:Class="VirtualWallet.CategoryUI.CategoryPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VirtualWallet.CategoryUI"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
+        <RelativePanel x:Name="MainRelativePanel" DataContext="{Binding Source={StaticResource WalletsSampleDataSource}, Path=Categories[0]}" ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <TextBlock x:Name="PageTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Edit category" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+            <Grid x:Name="CategoriesGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.Below="PageTitle" HorizontalAlignment="Left" Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto" />
+                    <ColumnDefinition Width="2*" />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <TextBlock Grid.Row="0" Margin="10" >Name:</TextBlock>
+                <TextBox Grid.Row="0" Grid.Column="1" Margin="10" x:Name="CategoryName" Text="{Binding Name}" />
+                <TextBlock Grid.Row="1" Margin="10">Icon:</TextBlock>
+                <Button Grid.Row="1" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" >
+                    <TextBlock x:Name="CategoryIconName" Text="{Binding IconName}" />
+                </Button>
+                <Border x:Name="Icon" Grid.Row="0" Grid.Column="3" Grid.RowSpan="2" Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="10">
+                    <Image/>
+                </Border>
+            </Grid>
+        </RelativePanel>
+    </ScrollViewer>
+</Page>
