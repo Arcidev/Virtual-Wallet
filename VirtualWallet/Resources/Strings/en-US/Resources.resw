@@ -189,13 +189,25 @@
   <data name="Settings_RemoveDialog_Data" xml:space="preserve">
     <value>all data and credentials</value>
   </data>
-  <data name="Settings_RemoveDialog_No" xml:space="preserve">
+  <data name="Settings_Dialog_No" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="Settings_RemoveDialog_Yes" xml:space="preserve">
+  <data name="Settings_Dialog_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
   <data name="Settings_UserContent.Text" xml:space="preserve">
     <value>User content:</value>
+  </data>
+  <data name="Settings_CopyDbToRoaming.Content" xml:space="preserve">
+    <value>Copy stored data into roaming folder</value>
+  </data>
+  <data name="Settings_RetrieveDbFromRoaming.Content" xml:space="preserve">
+    <value>Retrieve data from roaming folder</value>
+  </data>
+  <data name="Settings_CopyDbDialog" xml:space="preserve">
+    <value>By performing this action you will overwrite application data stored in roaming folder. Are you sure you want to continue?</value>
+  </data>
+  <data name="Settings_RetrieveDbDialog" xml:space="preserve">
+    <value>By performing this action you will overwrite application data. Are you sure you want to continue?</value>
   </data>
 </root>

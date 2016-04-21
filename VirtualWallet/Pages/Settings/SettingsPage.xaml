@@ -10,10 +10,12 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <RelativePanel Margin="10">
-            <TextBlock x:Uid="Settings_Header" x:Name="SettingsTextBlock" FontSize="40" />
-            <TextBlock x:Uid="Settings_UserContent" x:Name="UserContentTextBlock" RelativePanel.Below="SettingsTextBlock" />
-            <Button x:Uid="Settings_RemoveCredentials" x:Name="RemoveCredentialsButton" RelativePanel.Below="UserContentTextBlock" Background="Transparent" Click="RemoveCredentialsButton_Click" />
-            <Button x:Uid="Settings_RemoveData" RelativePanel.Below="RemoveCredentialsButton" Background="Transparent" Click="RemoveAllDataButton_Click" />
+            <TextBlock x:Uid="Settings_Header" x:Name="SettingsTextBlock" FontSize="40" Text="Settings" />
+            <TextBlock x:Uid="Settings_UserContent" x:Name="UserContentTextBlock" RelativePanel.Below="SettingsTextBlock" Text="User content:" />
+            <Button x:Uid="Settings_RemoveCredentials" x:Name="RemoveCredentialsButton" RelativePanel.Below="UserContentTextBlock" Background="Transparent" Click="RemoveCredentialsButton_Click" Content="Remove credentials" />
+            <Button x:Uid="Settings_RemoveData" x:Name="RemoveDataButton" RelativePanel.Below="RemoveCredentialsButton" Background="Transparent" Click="RemoveAllDataButton_Click" Content="Remove data" />
+            <Button x:Uid="Settings_CopyDbToRoaming" x:Name="CopyDbToRoaming" RelativePanel.Below="RemoveDataButton" Background="Transparent" Click="CopyDbToRoamingButton_Click" Content="Copy stored data into roaming folder" />
+            <Button x:Uid="Settings_RetrieveDbFromRoaming" RelativePanel.Below="CopyDbToRoaming" Background="Transparent" Click="RetrieveDbFromRoaming_Click" Content="Retrieve data from roaming folder"/>
         </RelativePanel>
     </Grid>
 </Page>

@@ -177,10 +177,10 @@
   <data name="Settings_RemoveDialog_Data" xml:space="preserve">
     <value>dáta a prihlasovacie údaje</value>
   </data>
-  <data name="Settings_RemoveDialog_No" xml:space="preserve">
+  <data name="Settings_Dialog_No" xml:space="preserve">
     <value>Nie</value>
   </data>
-  <data name="Settings_RemoveDialog_Yes" xml:space="preserve">
+  <data name="Settings_Dialog_Yes" xml:space="preserve">
     <value>Áno</value>
   </data>
   <data name="Settings_UserContent.Text" xml:space="preserve">
@@ -197,5 +197,17 @@
   </data>
   <data name="Menu_Wallets.Text" xml:space="preserve">
     <value>Peňaženky</value>
+  </data>
+  <data name="Settings_CopyDbToRoaming.Content" xml:space="preserve">
+    <value>Kopírovať dáta do zdieľanej zložky</value>
+  </data>
+  <data name="Settings_RetrieveDbFromRoaming.Content" xml:space="preserve">
+    <value>Načítať dáta zo zdieľanej zložky</value>
+  </data>
+  <data name="Settings_CopyDbDialog" xml:space="preserve">
+    <value>Vykonaním tejto akcie prepíšete dáta aplikácie, uložené v zdieľanej zložke. Ste si istí, že chcete pokračovať?</value>
+  </data>
+  <data name="Settings_RetrieveDbDialog" xml:space="preserve">
+    <value>Vykonaním tejto akcie prepíšete dáta aplikácie. Ste si istí, že chcete pokračovať?</value>
   </data>
 </root>

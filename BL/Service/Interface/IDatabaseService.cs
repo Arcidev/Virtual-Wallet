@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Shared.Enums;
+using System.Threading.Tasks;
 
 namespace BL.Service
 {
@@ -7,5 +8,9 @@ namespace BL.Service
         Task InitAsync();
 
         Task RemoveAllDataAsync();
+
+        Task<CopyDatabaseResult> CopyToRoamingFolder();
+
+        Task<CopyDatabaseResult> RetrieveFromRoamingFolder();
     }
 }

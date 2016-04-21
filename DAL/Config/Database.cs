@@ -1,12 +1,12 @@
 ﻿using DAL.Data;
-using DAL.DataAccess;
 using DAL.Helpers;
 using Shared.Enums;
 using SQLite.Net.Async;
 using System;
+using System.IO;
 using System.Linq;
-using System.Reflection;
 using System.Threading.Tasks;
+using Windows.Storage;
 
 namespace DAL.Config
 {
@@ -35,6 +35,29 @@ namespace DAL.Config
             var connection = ConnectionHelper.GetDbAsyncConnection();
             await connection.DeleteAllAsync<Category>();
             await connection.DeleteAllAsync<Wallet>();
+        }
+
+        public async Task<CopyDatabaseResult> CopyToRoamingFolder()
+        {
+            if (!File.Exists(ConnectionHelper.DbFilePath))
+                return CopyDatabaseResult.FileNotFound;
+
+            var dbFile = await StorageFile.GetFileFromPathAsync(ConnectionHelper.DbFilePath);
+            await dbFile.CopyAsync(ApplicationData.Current.RoamingFolder, ConnectionHelper.DbFileName, NameCollisionOption.ReplaceExisting);
+
+            return CopyDatabaseResult.Success;
+        }
+
+        public async Task<CopyDatabaseResult> RetrieveFromRoamingFolder()
+        {
+            var file = Path.Combine(ApplicationData.Current.RoamingFolder.Path, ConnectionHelper.DbFileName);
+            if (!File.Exists(file))
+                return CopyDatabaseResult.FileNotFound;
+
+            var dbFile = await StorageFile.GetFileFromPathAsync(file);
+            await dbFile.CopyAsync(ApplicationData.Current.LocalFolder, ConnectionHelper.DbFileName, NameCollisionOption.ReplaceExisting);
+
+            return CopyDatabaseResult.Success;
         }
 
         private async Task InitData(SQLiteAsyncConnection connection)

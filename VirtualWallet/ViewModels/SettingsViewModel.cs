@@ -13,17 +13,23 @@ namespace VirtualWallet.ViewModels
 
         public ICommand RemoveAllCredentialsCommand { get; set; }
 
+        public ICommand CopyDatabaseToRoamingFolderCommand { get; set; }
+
+        public ICommand RetrieveDatabaseFromRoamingFolderCommand { get; set; }
+
         public SettingsViewModel(IDatabaseService databaseService, IBankService bankService)
         {
             this.databaseService = databaseService;
             this.bankService = bankService;
             RemoveAllDataCommand = new CommandHandler(RemoveAllDataExecute);
             RemoveAllCredentialsCommand = new CommandHandler(RemoveAllCredentialsExecute);
+            CopyDatabaseToRoamingFolderCommand = new CommandHandler(CopyDatabaseToRoamingFolderExecute);
+            RetrieveDatabaseFromRoamingFolderCommand = new CommandHandler(RetrieveDatabaseFromRoamingFolderExecute);
         }
 
-        private void RemoveAllDataExecute()
+        private async void RemoveAllDataExecute()
         {
-            databaseService.RemoveAllDataAsync();
+            await databaseService.RemoveAllDataAsync();
             RemoveAllCredentialsExecute();
         }
 
@@ -31,6 +37,16 @@ namespace VirtualWallet.ViewModels
         {
             foreach (var bank in await bankService.GetAll())
                 bank.RemoveCredentials();
+        }
+
+        private async void CopyDatabaseToRoamingFolderExecute()
+        {
+            await databaseService.CopyToRoamingFolder();
+        }
+
+        private async void RetrieveDatabaseFromRoamingFolderExecute()
+        {
+            await databaseService.RetrieveFromRoamingFolder();
         }
     }
 }

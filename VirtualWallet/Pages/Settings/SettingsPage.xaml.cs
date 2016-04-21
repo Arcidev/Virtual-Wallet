@@ -22,19 +22,29 @@ namespace VirtualWallet.Pages
 
         private void RemoveCredentialsButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            ShowRemoveDataDialog(resources.GetString("Settings_RemoveDialog_Credentials"), viewModel.RemoveAllCredentialsCommand.Execute);
+            ShowDialog(string.Format(resources.GetString("Settings_RemoveDialog"), resources.GetString("Settings_RemoveDialog_Credentials")), viewModel.RemoveAllCredentialsCommand.Execute);
         }
 
         private void RemoveAllDataButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            ShowRemoveDataDialog(resources.GetString("Settings_RemoveDialog_Data"), viewModel.RemoveAllDataCommand.Execute);
+            ShowDialog(string.Format(resources.GetString("Settings_RemoveDialog"), resources.GetString("Settings_RemoveDialog_Data")), viewModel.RemoveAllDataCommand.Execute);
         }
 
-        private async void ShowRemoveDataDialog(string dataToRemove, UICommandInvokedHandler yesHandler)
+        private void CopyDbToRoamingButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            var dialog = new MessageDialog(string.Format(resources.GetString("Settings_RemoveDialog"), dataToRemove));
-            dialog.Commands.Add(new UICommand(resources.GetString("Settings_RemoveDialog_Yes"), yesHandler));
-            dialog.Commands.Add(new UICommand(resources.GetString("Settings_RemoveDialog_No")));
+            ShowDialog(resources.GetString("Settings_CopyDbDialog"), viewModel.CopyDatabaseToRoamingFolderCommand.Execute);
+        }
+
+        private void RetrieveDbFromRoaming_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            ShowDialog(resources.GetString("Settings_RetrieveDbDialog"), viewModel.RetrieveDatabaseFromRoamingFolderCommand.Execute);
+        }
+
+        private async void ShowDialog(string message, UICommandInvokedHandler yesHandler)
+        {
+            var dialog = new MessageDialog(message);
+            dialog.Commands.Add(new UICommand(resources.GetString("Settings_Dialog_Yes"), yesHandler));
+            dialog.Commands.Add(new UICommand(resources.GetString("Settings_Dialog_No")));
 
             await dialog.ShowAsync();
         }

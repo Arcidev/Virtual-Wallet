@@ -127,7 +127,6 @@
     </Compile>
     <Compile Include="ViewModels\BankCredentialsPageViewModel.cs" />
     <Compile Include="ViewModels\BankPageViewModel.cs" />
-    <Compile Include="ViewModels\BanksPageViewModel.cs" />
     <Compile Include="ViewModels\CategoriesPageViewModel.cs" />
     <Compile Include="ViewModels\CategoryPageViewModel.cs" />
     <Compile Include="ViewModels\MenuPageViewModel.cs" />

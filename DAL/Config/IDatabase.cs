@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using Shared.Enums;
+using System.Threading.Tasks;
 
 namespace DAL.Config
 {
@@ -7,5 +8,9 @@ namespace DAL.Config
         Task InitAsync();
 
         Task RemoveAllDataAsync();
+
+        Task<CopyDatabaseResult> CopyToRoamingFolder();
+
+        Task<CopyDatabaseResult> RetrieveFromRoamingFolder();
     }
 }

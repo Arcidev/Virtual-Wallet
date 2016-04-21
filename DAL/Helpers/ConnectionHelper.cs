@@ -13,20 +13,20 @@ namespace DAL.Helpers
 
         public const string DbFileName = "VirtualWalletDB.sqlite";
 
+        public static string DbFilePath { get { return Path.Combine(DbPath, DbFileName); } }
+
         /// <summary>
         /// Gets db connection or creates new db if not exists
         /// </summary>
         /// <returns></returns>
         public static SQLiteAsyncConnection GetDbAsyncConnection()
         {
-            var dbFilePath = Path.Combine(DbPath, DbFileName);
-
             var connectionFactory =
                 new Func<SQLiteConnectionWithLock>(
                     () =>
                     new SQLiteConnectionWithLock(
                         new SQLitePlatformWinRT(),
-                        new SQLiteConnectionString(dbFilePath, storeDateTimeAsTicks: false)));
+                        new SQLiteConnectionString(DbFilePath, storeDateTimeAsTicks: false)));
 
             return new SQLiteAsyncConnection(connectionFactory);
         }
