@@ -186,4 +186,16 @@
   <data name="Settings_UserContent.Text" xml:space="preserve">
     <value>Uživateľský obsah:</value>
   </data>
+  <data name="Menu_Banks.Text" xml:space="preserve">
+    <value>Banky</value>
+  </data>
+  <data name="Menu_Categories.Text" xml:space="preserve">
+    <value>Kategórie</value>
+  </data>
+  <data name="Menu_Header.Text" xml:space="preserve">
+    <value>Virtual Wallet</value>
+  </data>
+  <data name="Menu_Wallets.Text" xml:space="preserve">
+    <value>Peňaženky</value>
+  </data>
 </root>

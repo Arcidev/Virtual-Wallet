@@ -32,18 +32,18 @@ namespace VirtualWallet.Pages
         private void GridViewBanks_ItemClick(object sender, ItemClickEventArgs e)
         {
             Bank bank = (Bank)e.ClickedItem;
-            this.Frame.Navigate(bank.HasCredentials ? typeof(BankPage) : typeof(BankCredentialsPage), bank);
+            Frame.Navigate(bank.HasCredentials ? typeof(BankPage) : typeof(BankCredentialsPage), bank);
         }
 
         private void GridViewCategories_ItemClick(object sender, ItemClickEventArgs e)
         {
             CategoryPageViewModel s = e.ClickedItem as CategoryPageViewModel;
-            this.Frame.Navigate(typeof(CategoryPage), s);
+            Frame.Navigate(typeof(CategoryPage), s);
         }
 
-        private void RulesButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void SettingsAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            this.Frame.Navigate(typeof(RulesPage));
+            Frame.Navigate(typeof(SettingsPage));
         }
     }
 }

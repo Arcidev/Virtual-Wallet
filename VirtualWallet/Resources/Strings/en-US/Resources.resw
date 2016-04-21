@@ -159,6 +159,18 @@
   <data name="CommandBar_Sync.Label" xml:space="preserve">
     <value>Sync</value>
   </data>
+  <data name="Menu_Banks.Text" xml:space="preserve">
+    <value>Banks</value>
+  </data>
+  <data name="Menu_Categories.Text" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Menu_Header.Text" xml:space="preserve">
+    <value>Virtual Wallet</value>
+  </data>
+  <data name="Menu_Wallets.Text" xml:space="preserve">
+    <value>Wallets</value>
+  </data>
   <data name="Settings_Header.Text" xml:space="preserve">
     <value>Settings</value>
   </data>
