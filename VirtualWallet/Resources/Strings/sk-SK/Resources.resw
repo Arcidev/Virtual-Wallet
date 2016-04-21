@@ -210,4 +210,10 @@
   <data name="Settings_RetrieveDbDialog" xml:space="preserve">
     <value>Vykonaním tejto akcie prepíšete dáta aplikácie. Ste si istí, že chcete pokračovať?</value>
   </data>
+  <data name="Settings_Application" xml:space="preserve">
+    <value>Aplikácia:</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Jazyk</value>
+  </data>
 </root>

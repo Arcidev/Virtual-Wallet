@@ -25,6 +25,7 @@ namespace VirtualWallet.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             viewModel.Bank = (Bank)e.Parameter;
+            base.OnNavigatedTo(e);
         }
 
         private async void SubmitButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -39,7 +40,8 @@ namespace VirtualWallet.Pages
             }
 
             viewModel.SetCredentials();
-            Frame.Navigate(typeof(BankPage), viewModel.Bank);
+            if (Frame.Navigate(typeof(BankPage), viewModel.Bank))
+                this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
         }
 
         private void TokenTextBox_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)

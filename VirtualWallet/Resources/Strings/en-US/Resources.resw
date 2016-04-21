@@ -210,4 +210,10 @@
   <data name="Settings_RetrieveDbDialog" xml:space="preserve">
     <value>By performing this action you will overwrite application data. Are you sure you want to continue?</value>
   </data>
+  <data name="Settings_Application" xml:space="preserve">
+    <value>Application:</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
 </root>

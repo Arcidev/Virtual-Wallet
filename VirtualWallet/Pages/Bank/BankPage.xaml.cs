@@ -20,6 +20,7 @@ namespace VirtualWallet.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             viewModel.Bank = (Bank)e.Parameter;
+            base.OnNavigatedTo(e);
         }
 
         private void EditAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)

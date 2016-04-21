@@ -1,8 +1,10 @@
 ﻿using BL.Service;
 using System;
+using System.Globalization;
 using VirtualWallet.Pages;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.Globalization;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -69,6 +71,8 @@ namespace VirtualWallet
                 SystemNavigationManager.GetForCurrentView().BackRequested += OnBackRequested;
                 SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                     rootFrame.CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+
+                ApplicationLanguages.PrimaryLanguageOverride = CultureInfo.CurrentUICulture.Name;
             }
 
             if (rootFrame.Content == null)

@@ -109,6 +109,7 @@
   <ItemGroup>
     <Compile Include="Models\BankModels\BankAccountInfo.cs" />
     <Compile Include="Models\Image.cs" />
+    <Compile Include="Models\LanguageInfo.cs" />
     <Compile Include="Service\DatabaseService.cs" />
     <Compile Include="Service\ImageService.cs" />
     <Compile Include="Service\Interface\IBankService.cs" />

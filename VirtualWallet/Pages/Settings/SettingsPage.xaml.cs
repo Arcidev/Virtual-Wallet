@@ -2,6 +2,7 @@
 using System;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
+using Windows.Globalization;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 
@@ -47,6 +48,17 @@ namespace VirtualWallet.Pages
             dialog.Commands.Add(new UICommand(resources.GetString("Settings_Dialog_No")));
 
             await dialog.ShowAsync();
+        }
+
+        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ApplicationLanguages.PrimaryLanguageOverride == viewModel.SelectedLanguageCode)
+                return;
+
+            ApplicationLanguages.PrimaryLanguageOverride = viewModel.SelectedLanguageCode;
+            
+            if (this.Frame.Navigate(GetType()))
+                this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
         }
     }
 }
