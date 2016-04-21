@@ -169,7 +169,7 @@
     <value>Odstranit data</value>
   </data>
   <data name="Settings_RemoveDialog" xml:space="preserve">
-    <value>Vykonaním tejto akcie zmažete {0} uložené touto aplikáciou. Ste si istí, že chcete pokračovať?</value>
+    <value>Provedením této akce smažete {0} uložené touto aplikací. Jste si jisti, že chcete pokračovat?</value>
   </data>
   <data name="Settings_RemoveDialog_Credentials" xml:space="preserve">
     <value>přihlašovací údaje</value>
