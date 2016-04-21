@@ -1,6 +1,7 @@
 ﻿using BL.Models;
 using System;
 using VirtualWallet.ViewModels;
+using Windows.ApplicationModel.Resources;
 using Windows.System;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
@@ -11,11 +12,13 @@ namespace VirtualWallet.Pages
     public sealed partial class BankCredentialsPage : Page
     {
         private BankCredentialsPageViewModel viewModel;
+        private ResourceLoader resources;
 
         public BankCredentialsPage()
         {
             this.InitializeComponent();
             viewModel = new BankCredentialsPageViewModel();
+            resources = new ResourceLoader();
             this.DataContext = viewModel;
         }
 
@@ -28,8 +31,8 @@ namespace VirtualWallet.Pages
         {
             if (!viewModel.IsValid)
             {
-                var dialog = new MessageDialog("You have to set a token");
-                dialog.Commands.Add(new UICommand("Close"));
+                var dialog = new MessageDialog(resources.GetString("BankCredentials_Dialog"));
+                dialog.Commands.Add(new UICommand(resources.GetString("BankCredentials_Dialog_Close")));
 
                 await dialog.ShowAsync();
                 return;

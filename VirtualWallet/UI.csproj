@@ -90,6 +90,9 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="project.json" />
+    <PRIResource Include="Resources\Strings\en-US\Resources.resw" />
+    <PRIResource Include="Resources\Strings\sk\Resources.resw" />
+    <PRIResource Include="Resources\Strings\cs\Resources.resw" />
     <None Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource.xsd" />
   </ItemGroup>
   <ItemGroup>
