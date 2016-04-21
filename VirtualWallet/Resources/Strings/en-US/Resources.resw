@@ -171,13 +171,13 @@
   <data name="Menu_Wallets.Text" xml:space="preserve">
     <value>Wallets</value>
   </data>
-  <data name="Settings_Header.Text" xml:space="preserve">
+  <data name="Settings_Header" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="Settings_RemoveCredentials.Content" xml:space="preserve">
+  <data name="Settings_RemoveCredentials" xml:space="preserve">
     <value>Remove all credentials</value>
   </data>
-  <data name="Settings_RemoveData.Content" xml:space="preserve">
+  <data name="Settings_RemoveData" xml:space="preserve">
     <value>Remove all data</value>
   </data>
   <data name="Settings_RemoveDialog" xml:space="preserve">
@@ -195,13 +195,13 @@
   <data name="Settings_Dialog_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
-  <data name="Settings_UserContent.Text" xml:space="preserve">
+  <data name="Settings_UserContent" xml:space="preserve">
     <value>User content:</value>
   </data>
-  <data name="Settings_CopyDbToRoaming.Content" xml:space="preserve">
+  <data name="Settings_CopyDbToRoaming" xml:space="preserve">
     <value>Copy stored data into roaming folder</value>
   </data>
-  <data name="Settings_RetrieveDbFromRoaming.Content" xml:space="preserve">
+  <data name="Settings_RetrieveDbFromRoaming" xml:space="preserve">
     <value>Retrieve data from roaming folder</value>
   </data>
   <data name="Settings_CopyDbDialog" xml:space="preserve">

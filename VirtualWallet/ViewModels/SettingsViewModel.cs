@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
 using VirtualWallet.Controls;
+using Windows.ApplicationModel.Resources;
 using Windows.Globalization;
 
 namespace VirtualWallet.ViewModels
@@ -14,6 +15,7 @@ namespace VirtualWallet.ViewModels
         private IDatabaseService databaseService;
         private IBankService bankService;
         private string selectedLanguageCode;
+        private ResourceLoader resources;
 
         public ICommand RemoveAllDataCommand { get; private set; }
 
@@ -24,6 +26,22 @@ namespace VirtualWallet.ViewModels
         public ICommand RetrieveDatabaseFromRoamingFolderCommand { get; private set; }
 
         public IList<LanguageInfo> AvailableLanguages { get; private set; }
+
+        public string Text_Application { get { return resources.GetString("Settings_Application"); } }
+
+        public string Text_Language { get { return resources.GetString("Settings_Language"); } }
+
+        public string Text_Header { get { return resources.GetString("Settings_Header"); } }
+
+        public string Text_UserContent { get { return resources.GetString("Settings_UserContent"); } }
+
+        public string Text_RemoveCredentials { get { return resources.GetString("Settings_RemoveCredentials"); } }
+
+        public string Text_RemoveData { get { return resources.GetString("Settings_RemoveData"); } }
+
+        public string Text_CopyDbToRoaming { get { return resources.GetString("Settings_CopyDbToRoaming"); } }
+
+        public string Text_RetrieveDbFromRoaming { get { return resources.GetString("Settings_RetrieveDbFromRoaming"); } }
 
         public string SelectedLanguageCode
         {
@@ -38,10 +56,11 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public SettingsViewModel(IDatabaseService databaseService, IBankService bankService)
+        public SettingsViewModel(IDatabaseService databaseService, IBankService bankService, ResourceLoader resources)
         {
             this.databaseService = databaseService;
             this.bankService = bankService;
+            this.resources = resources;
             RemoveAllDataCommand = new CommandHandler(RemoveAllDataExecute);
             RemoveAllCredentialsCommand = new CommandHandler(RemoveAllCredentialsExecute);
             CopyDatabaseToRoamingFolderCommand = new CommandHandler(CopyDatabaseToRoamingFolderExecute);

@@ -159,13 +159,13 @@
   <data name="CommandBar_Sync.Label" xml:space="preserve">
     <value>Synchronizovať</value>
   </data>
-  <data name="Settings_Header.Text" xml:space="preserve">
+  <data name="Settings_Header" xml:space="preserve">
     <value>Nastavenia</value>
   </data>
-  <data name="Settings_RemoveCredentials.Content" xml:space="preserve">
+  <data name="Settings_RemoveCredentials" xml:space="preserve">
     <value>Odstrániť prihlasovacie údaje</value>
   </data>
-  <data name="Settings_RemoveData.Content" xml:space="preserve">
+  <data name="Settings_RemoveData" xml:space="preserve">
     <value>Odstrániť dáta</value>
   </data>
   <data name="Settings_RemoveDialog" xml:space="preserve">
@@ -183,7 +183,7 @@
   <data name="Settings_Dialog_Yes" xml:space="preserve">
     <value>Áno</value>
   </data>
-  <data name="Settings_UserContent.Text" xml:space="preserve">
+  <data name="Settings_UserContent" xml:space="preserve">
     <value>Uživateľský obsah:</value>
   </data>
   <data name="Menu_Banks.Text" xml:space="preserve">
@@ -198,10 +198,10 @@
   <data name="Menu_Wallets.Text" xml:space="preserve">
     <value>Peňaženky</value>
   </data>
-  <data name="Settings_CopyDbToRoaming.Content" xml:space="preserve">
+  <data name="Settings_CopyDbToRoaming" xml:space="preserve">
     <value>Kopírovať dáta do zdieľanej zložky</value>
   </data>
-  <data name="Settings_RetrieveDbFromRoaming.Content" xml:space="preserve">
+  <data name="Settings_RetrieveDbFromRoaming" xml:space="preserve">
     <value>Načítať dáta zo zdieľanej zložky</value>
   </data>
   <data name="Settings_CopyDbDialog" xml:space="preserve">

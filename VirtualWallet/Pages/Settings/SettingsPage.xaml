@@ -10,19 +10,19 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <RelativePanel Margin="10">
-            <TextBlock x:Uid="Settings_Header" x:Name="SettingsTextBlock" FontSize="40" Text="Settings" />
+            <TextBlock x:Name="SettingsTextBlock" FontSize="40" Text="{Binding Text_Header}" />
             <RelativePanel x:Name="ApplicationSettings" RelativePanel.Below="SettingsTextBlock">
-                <TextBlock x:Uid="Settings_Application" x:Name="ApplicationTextBlock" Text="Application:" />
-                <TextBlock x:Uid="Settings_Language" x:Name="LanguageTextBlock" RelativePanel.Below="ApplicationTextBlock" Text="Language" />
+                <TextBlock x:Name="ApplicationTextBlock" Text="{Binding Text_Application}" />
+                <TextBlock x:Name="LanguageTextBlock" RelativePanel.Below="ApplicationTextBlock" Text="{Binding Text_Language}" />
                 <ComboBox RelativePanel.Below="LanguageTextBlock" ItemsSource="{Binding AvailableLanguages}" SelectionChanged="LanguageComboBox_SelectionChanged" DisplayMemberPath="DisplayName" SelectedValuePath="Code" SelectedValue="{Binding SelectedLanguageCode, Mode=TwoWay}" />
 
             </RelativePanel>
             <RelativePanel RelativePanel.Below="ApplicationSettings">
-                <TextBlock x:Uid="Settings_UserContent" x:Name="UserContentTextBlock" Text="User content:" />
-                <Button x:Uid="Settings_RemoveCredentials" x:Name="RemoveCredentialsButton" RelativePanel.Below="UserContentTextBlock" Background="Transparent" Click="RemoveCredentialsButton_Click" Content="Remove credentials" />
-                <Button x:Uid="Settings_RemoveData" x:Name="RemoveDataButton" RelativePanel.Below="RemoveCredentialsButton" Background="Transparent" Click="RemoveAllDataButton_Click" Content="Remove data" />
-                <Button x:Uid="Settings_CopyDbToRoaming" x:Name="CopyDbToRoaming" RelativePanel.Below="RemoveDataButton" Background="Transparent" Click="CopyDbToRoamingButton_Click" Content="Copy stored data into roaming folder" />
-                <Button x:Uid="Settings_RetrieveDbFromRoaming" RelativePanel.Below="CopyDbToRoaming" Background="Transparent" Click="RetrieveDbFromRoaming_Click" Content="Retrieve data from roaming folder"/>
+                <TextBlock x:Name="UserContentTextBlock" Text="{Binding Text_UserContent}" />
+                <Button x:Name="RemoveCredentialsButton" RelativePanel.Below="UserContentTextBlock" Background="Transparent" Click="RemoveCredentialsButton_Click" Content="{Binding Text_RemoveCredentials}" />
+                <Button x:Name="RemoveDataButton" RelativePanel.Below="RemoveCredentialsButton" Background="Transparent" Click="RemoveAllDataButton_Click" Content="{Binding Text_RemoveData}" />
+                <Button x:Name="CopyDbToRoaming" RelativePanel.Below="RemoveDataButton" Background="Transparent" Click="CopyDbToRoamingButton_Click" Content="{Binding Text_CopyDbToRoaming}" />
+                <Button RelativePanel.Below="CopyDbToRoaming" Background="Transparent" Click="RetrieveDbFromRoaming_Click" Content="{Binding Text_RetrieveDbFromRoaming}"/>
             </RelativePanel>
         </RelativePanel>
     </Grid>

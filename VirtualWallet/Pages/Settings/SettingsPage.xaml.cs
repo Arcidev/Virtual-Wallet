@@ -1,5 +1,6 @@
 ﻿using BL.Service;
 using System;
+using System.Globalization;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.Globalization;
@@ -16,9 +17,9 @@ namespace VirtualWallet.Pages
         public SettingsPage()
         {
             this.InitializeComponent();
-            viewModel = new SettingsViewModel(new DatabaseService(), new BankService());
-            this.DataContext = viewModel;
             resources = new ResourceLoader();
+            viewModel = new SettingsViewModel(new DatabaseService(), new BankService(), resources);
+            this.DataContext = viewModel;
         }
 
         private void RemoveCredentialsButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -56,7 +57,6 @@ namespace VirtualWallet.Pages
                 return;
 
             ApplicationLanguages.PrimaryLanguageOverride = viewModel.SelectedLanguageCode;
-            
             if (this.Frame.Navigate(GetType()))
                 this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
         }
