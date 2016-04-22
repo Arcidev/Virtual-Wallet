@@ -37,8 +37,8 @@ namespace VirtualWallet.Pages
 
         private void GridViewCategories_ItemClick(object sender, ItemClickEventArgs e)
         {
-            CategoryPageViewModel s = e.ClickedItem as CategoryPageViewModel;
-            Frame.Navigate(typeof(CategoryPage), s);
+            Category category = (Category)e.ClickedItem; ;
+            Frame.Navigate(typeof(CategoryPage), category);
         }
 
         private void SettingsAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)

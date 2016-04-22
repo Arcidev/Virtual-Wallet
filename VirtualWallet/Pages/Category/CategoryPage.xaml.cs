@@ -1,8 +1,11 @@
-﻿using System;
+﻿using BL.Models;
+using BL.Service;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using VirtualWallet.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,9 +25,19 @@ namespace VirtualWallet.Pages
     /// </summary>
     public sealed partial class CategoryPage : Page
     {
+        private CategoryPageViewModel viewModel;
+
         public CategoryPage()
         {
             this.InitializeComponent();
+            viewModel = new CategoryPageViewModel(new CategoryService(), new WalletService());
+            this.DataContext = viewModel;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            viewModel.Category = (Category)e.Parameter;
+            base.OnNavigatedTo(e);
         }
     }
 }

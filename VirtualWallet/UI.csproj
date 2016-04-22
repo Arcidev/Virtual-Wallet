@@ -142,6 +142,7 @@
     </AppxManifest>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Assets\Images\Categories\Transport\Transport1.png" />
     <Content Include="Assets\Images\Fio.png" />
     <Content Include="Assets\Images\Wallets\wallet01.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -210,7 +211,9 @@
       <Name>Shared</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Assets\Images\NewFolder1\" />
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
