@@ -66,7 +66,9 @@ namespace VirtualWallet.ViewModels
             CopyDatabaseToRoamingFolderCommand = new CommandHandler(CopyDatabaseToRoamingFolderExecute);
             RetrieveDatabaseFromRoamingFolderCommand = new CommandHandler(RetrieveDatabaseFromRoamingFolderExecute);
 
-            AvailableLanguages = ApplicationLanguages.ManifestLanguages.Select(x => new LanguageInfo() { DisplayName = new CultureInfo(x).DisplayName, Code = x }).ToList();
+            var languages = ApplicationLanguages.ManifestLanguages.Select(x => new LanguageInfo() { DisplayName = new CultureInfo(x).DisplayName, Code = x }).ToList();
+            languages.Insert(0, new LanguageInfo() { DisplayName = resources.GetString("Settings_Language_None"), Code = "" });
+            AvailableLanguages = languages;
             SelectedLanguageCode = ApplicationLanguages.PrimaryLanguageOverride;
         }
 

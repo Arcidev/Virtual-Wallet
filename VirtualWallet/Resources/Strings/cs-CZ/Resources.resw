@@ -214,6 +214,9 @@
     <value>Aplikace:</value>
   </data>
   <data name="Settings_Language" xml:space="preserve">
-    <value>Jazyk</value>
+    <value>Preferovaný jazyk</value>
+  </data>
+  <data name="Settings_Language_None" xml:space="preserve">
+    <value>Žádný</value>
   </data>
 </root>

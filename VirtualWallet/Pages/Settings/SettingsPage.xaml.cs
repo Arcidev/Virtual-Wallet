@@ -1,6 +1,7 @@
 ﻿using BL.Service;
 using System;
 using System.Globalization;
+using System.Threading.Tasks;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.Globalization;
@@ -22,27 +23,27 @@ namespace VirtualWallet.Pages
             this.DataContext = viewModel;
         }
 
-        private void RemoveCredentialsButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void RemoveCredentialsButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            ShowDialog(string.Format(resources.GetString("Settings_RemoveDialog"), resources.GetString("Settings_RemoveDialog_Credentials")), viewModel.RemoveAllCredentialsCommand.Execute);
+            await ShowDialog(string.Format(resources.GetString("Settings_RemoveDialog"), resources.GetString("Settings_RemoveDialog_Credentials")), viewModel.RemoveAllCredentialsCommand.Execute);
         }
 
-        private void RemoveAllDataButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void RemoveAllDataButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            ShowDialog(string.Format(resources.GetString("Settings_RemoveDialog"), resources.GetString("Settings_RemoveDialog_Data")), viewModel.RemoveAllDataCommand.Execute);
+            await ShowDialog(string.Format(resources.GetString("Settings_RemoveDialog"), resources.GetString("Settings_RemoveDialog_Data")), viewModel.RemoveAllDataCommand.Execute);
         }
 
-        private void CopyDbToRoamingButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void CopyDbToRoamingButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            ShowDialog(resources.GetString("Settings_CopyDbDialog"), viewModel.CopyDatabaseToRoamingFolderCommand.Execute);
+            await ShowDialog(resources.GetString("Settings_CopyDbDialog"), viewModel.CopyDatabaseToRoamingFolderCommand.Execute);
         }
 
-        private void RetrieveDbFromRoaming_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void RetrieveDbFromRoaming_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            ShowDialog(resources.GetString("Settings_RetrieveDbDialog"), viewModel.RetrieveDatabaseFromRoamingFolderCommand.Execute);
+            await ShowDialog(resources.GetString("Settings_RetrieveDbDialog"), viewModel.RetrieveDatabaseFromRoamingFolderCommand.Execute);
         }
 
-        private async void ShowDialog(string message, UICommandInvokedHandler yesHandler)
+        private async Task ShowDialog(string message, UICommandInvokedHandler yesHandler)
         {
             var dialog = new MessageDialog(message);
             dialog.Commands.Add(new UICommand(resources.GetString("Settings_Dialog_Yes"), yesHandler));

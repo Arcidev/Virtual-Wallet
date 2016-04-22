@@ -214,6 +214,9 @@
     <value>Application:</value>
   </data>
   <data name="Settings_Language" xml:space="preserve">
-    <value>Language</value>
+    <value>Prefered language</value>
+  </data>
+  <data name="Settings_Language_None" xml:space="preserve">
+    <value>None</value>
   </data>
 </root>
