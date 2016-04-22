@@ -2,10 +2,7 @@
 using BL.Service;
 using Shared.Modifiers;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace VirtualWallet.ViewModels
@@ -17,7 +14,6 @@ namespace VirtualWallet.ViewModels
         //private IRuleService ruleService;
 
         private Category category;
-        private Image image;
         private ObservableCollection<Wallet> wallets;
         private ObservableCollection<Rule> rules;
 
