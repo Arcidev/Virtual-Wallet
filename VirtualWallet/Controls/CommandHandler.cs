@@ -18,12 +18,12 @@ namespace VirtualWallet.Controls
 
         public bool CanExecute(object parameter)
         {
-            return canExecute == null || canExecute();
+            return canExecute == null || canExecute.Invoke();
         }
 
         public void Execute(object parameter)
         {
-            this.action();
+            this.action.Invoke();
         }
     }
 }

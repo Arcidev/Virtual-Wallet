@@ -1,6 +1,7 @@
 ﻿using BL.Filters;
 using BL.Models;
 using BL.Service;
+using System;
 using System.Collections.ObjectModel;
 using System.Windows.Input;
 using VirtualWallet.Controls;
@@ -13,8 +14,20 @@ namespace VirtualWallet.ViewModels
         private Bank bank;
         private ObservableCollection<Transaction> transactions;
         private BankAccountInfo bankAccountInfo;
+        private ICommand syncCommand;
 
-        public ICommand SyncCommand { get; set; }
+        public ICommand SyncCommand
+        {
+            get { return syncCommand; }
+            set
+            {
+                if (syncCommand == value)
+                    return;
+
+                syncCommand = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public Bank Bank
         {
@@ -27,10 +40,8 @@ namespace VirtualWallet.ViewModels
                 bank = value;
                 NotifyPropertyChanged();
 
-                if (bank == null)
-                    return;
-
-                BankAccountInfo = bank.BankAccountInfo ?? new BankAccountInfo();
+                BankAccountInfo = bank?.BankAccountInfo ?? new BankAccountInfo();
+                SyncCommand = new CommandHandler(SyncExecute, () => Bank?.NextPossibleSyncTime <= DateTime.Now);
             }
         }
 
@@ -63,7 +74,6 @@ namespace VirtualWallet.ViewModels
         public BankPageViewModel(IBankService bankService)
         {
             this.bankService = bankService;
-            SyncCommand = new CommandHandler(SyncExecute);
         }
 
         private async void SyncExecute()
@@ -71,6 +81,7 @@ namespace VirtualWallet.ViewModels
             var filter = new TransactionFilter() { Days = 30 };
             var Transactions = await Bank.GetTransactionsAsync(filter);
             BankAccountInfo = Bank.BankAccountInfo;
+            NotifyPropertyChanged(nameof(SyncCommand));
         }
     }
 }

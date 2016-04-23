@@ -34,6 +34,8 @@ namespace BL.Models
 
         public abstract bool HasCredentials { get; }
 
+        public abstract DateTime NextPossibleSyncTime { get; }
+
         public abstract void SetCredentials(string token = null, string login = null, string password = null);
 
         public abstract void SaveCredentials();

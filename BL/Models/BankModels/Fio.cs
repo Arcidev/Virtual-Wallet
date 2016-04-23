@@ -15,7 +15,9 @@ namespace BL.Models
     {
         private const string fioResource = "FioBankToken";
         private const string fioUser = "FioUser";
+        private const uint syncTimeOutinSec = 30;
         private BankAccountInfo bankAccountInfo;
+        private static DateTime nextPossibleSyncTime;
 
         public string Token { get; set; }
 
@@ -27,6 +29,8 @@ namespace BL.Models
         }
 
         public override BankAccountInfo BankAccountInfo { get { return bankAccountInfo; } }
+
+        public override DateTime NextPossibleSyncTime { get { return nextPossibleSyncTime; } }
 
         public Fio()
         {
@@ -45,6 +49,7 @@ namespace BL.Models
 
             ApiExplorer explorer = new ApiExplorer(Token);
             var statement = await explorer.LastAsync();
+            nextPossibleSyncTime = DateTime.Now.AddSeconds(syncTimeOutinSec);
 
             return GetTransactions(statement);
         }
@@ -56,6 +61,7 @@ namespace BL.Models
 
             ApiExplorer explorer = new ApiExplorer(Token);
             var statement = await explorer.PeriodsAsync(FioFilter.LastDays(filter.Days));
+            nextPossibleSyncTime = DateTime.Now.AddSeconds(syncTimeOutinSec);
 
             return GetTransactions(statement);
         }
@@ -76,6 +82,18 @@ namespace BL.Models
 
             var password = new PasswordCredential(fioResource, fioUser, Token);
             PasswordVault.Add(password);
+        }
+
+        public override void SetCredentials(string token = null, string login = null, string password = null)
+        {
+            Token = token;
+        }
+
+        public override void RemoveCredentials()
+        {
+            var credentials = GetCredentials();
+            if (credentials != null)
+                PasswordVault.Remove(credentials);
         }
 
         private PasswordCredential GetCredentials()
@@ -102,18 +120,6 @@ namespace BL.Models
             }
 
             return transactions;
-        }
-
-        public override void SetCredentials(string token = null, string login = null, string password = null)
-        {
-            Token = token;
-        }
-
-        public override void RemoveCredentials()
-        {
-            var credentials = GetCredentials();
-            if (credentials != null)
-                PasswordVault.Remove(credentials);
         }
     }
 }
