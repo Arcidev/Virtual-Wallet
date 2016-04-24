@@ -3,18 +3,21 @@ using BL.Models;
 using BL.Service;
 using System;
 using System.Collections.ObjectModel;
+using System.Threading;
 using System.Windows.Input;
 using VirtualWallet.Controls;
+using Windows.UI.Core;
 
 namespace VirtualWallet.ViewModels
 {
-    public class BankPageViewModel : ViewModelBase
+    public class BankPageViewModel : ViewModelBase, IDisposable
     {
         private IBankService bankService;
         private Bank bank;
         private ObservableCollection<Transaction> transactions;
         private BankAccountInfo bankAccountInfo;
         private ICommand syncCommand;
+        private Timer syncExecuteTimer;
 
         public ICommand SyncCommand
         {
@@ -42,6 +45,7 @@ namespace VirtualWallet.ViewModels
 
                 BankAccountInfo = bank?.BankAccountInfo ?? new BankAccountInfo();
                 SyncCommand = new CommandHandler(SyncExecute, () => Bank?.NextPossibleSyncTime <= DateTime.Now);
+                SetSyncExecuteTimer();
             }
         }
 
@@ -76,12 +80,28 @@ namespace VirtualWallet.ViewModels
             this.bankService = bankService;
         }
 
+        public void Dispose()
+        {
+            syncExecuteTimer.Dispose();
+        }
+
         private async void SyncExecute()
         {
             var filter = new TransactionFilter() { Days = 30 };
             var Transactions = await Bank.GetTransactionsAsync(filter);
             BankAccountInfo = Bank.BankAccountInfo;
             NotifyPropertyChanged(nameof(SyncCommand));
+            SetSyncExecuteTimer();
+        }
+
+        private void SetSyncExecuteTimer()
+        {
+            if (syncExecuteTimer != null)
+                syncExecuteTimer.Dispose();
+
+            var dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
+            if (!SyncCommand.CanExecute(null) && Bank != null)
+                syncExecuteTimer = new Timer(async (obj) => await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => NotifyPropertyChanged(nameof(SyncCommand))), null, (int)Math.Ceiling((Bank.NextPossibleSyncTime - DateTime.Now).TotalMilliseconds), Timeout.Infinite);
         }
     }
 }

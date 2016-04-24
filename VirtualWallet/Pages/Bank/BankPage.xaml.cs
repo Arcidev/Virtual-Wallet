@@ -23,6 +23,12 @@ namespace VirtualWallet.Pages
             base.OnNavigatedTo(e);
         }
 
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            viewModel.Dispose();
+            base.OnNavigatingFrom(e);
+        }
+
         private void EditAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Frame.Navigate(typeof(BankCredentialsPage), viewModel.Bank);
