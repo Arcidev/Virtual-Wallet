@@ -10,19 +10,19 @@ namespace BL.Service
     {
         protected static readonly T3 _instance = new T3();
 
-        public async Task<T1> Get(int id)
+        public async Task<T1> GetAsync(int id)
         {
-            return MapperInstance.Mapper.Map<T1>(await _instance.Get(id));
+            return MapperInstance.Mapper.Map<T1>(await _instance.GetAsync(id));
         }
 
-        public async Task<IList<T1>> Get(T4 filter = null)
+        public async Task<IList<T1>> GetAsync(T4 filter = null)
         {
-            return MapperInstance.Mapper.Map<IList<T1>>(await _instance.Get(filter));
+            return MapperInstance.Mapper.Map<IList<T1>>(await _instance.GetAsync(filter));
         }
 
-        public async Task<IList<T1>> GetAll()
+        public async Task<IList<T1>> GetAllAsync()
         {
-            return MapperInstance.Mapper.Map<IList<T1>>(await _instance.GetAll());
+            return MapperInstance.Mapper.Map<IList<T1>>(await _instance.GetAllAsync());
         }
     }
 }

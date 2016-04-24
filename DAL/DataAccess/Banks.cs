@@ -9,6 +9,7 @@ namespace DAL.DataAccess
     public class Banks : BaseModifiableGetDataAccess<Bank, BankFilter, BankModifier>, IBanks
     {
         private static readonly IImages images = new Images();
+        private static readonly IBankAccountInfoes bankAccountInfoes = new BankAccountInfoes();
 
         protected override AsyncTableQuery<Bank> ApplyFilters(AsyncTableQuery<Bank> query, BankFilter filter)
         {
@@ -21,10 +22,13 @@ namespace DAL.DataAccess
             return query;
         }
 
-        protected override async Task ApplyModifiers(Bank bank, BankModifier modifier)
+        protected override async Task ApplyModifiersAsync(Bank bank, BankModifier modifier)
         {
             if ((modifier.IncludeImage || modifier.IncludeAll) && bank.ImageId.HasValue)
-                bank.Image = await images.Get(bank.ImageId.Value);
+                bank.Image = await images.GetAsync(bank.ImageId.Value);
+
+            if ((modifier.IncludeBankAccountInfo || modifier.IncludeAll))
+                bank.BankAccountInfo = await bankAccountInfoes.GetAsync(bank.Id);
         }
     }
 }

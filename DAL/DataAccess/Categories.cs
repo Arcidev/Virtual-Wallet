@@ -10,10 +10,10 @@ namespace DAL.DataAccess
     {
         private static readonly IImages images = new Images();
 
-        protected async override Task ApplyModifiers(Category category, CategoryModifier modifier)
+        protected async override Task ApplyModifiersAsync(Category category, CategoryModifier modifier)
         {
             if ((modifier.IncludeImage || modifier.IncludeAll) && category.ImageId.HasValue)
-                category.Image = await images.Get(category.ImageId.Value);
+                category.Image = await images.GetAsync(category.ImageId.Value);
         }
 
         protected override AsyncTableQuery<Category> ApplyFilters(AsyncTableQuery<Category> query, CategoryFilter filter)

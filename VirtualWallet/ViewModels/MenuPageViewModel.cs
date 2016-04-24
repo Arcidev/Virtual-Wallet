@@ -27,16 +27,16 @@ namespace VirtualWallet.ViewModels
             this.categoryService = categoryService;
         }
 
-        public async Task LoadData()
+        public async Task LoadDataAsync()
         {
             var walletModifier = new WalletModifier() { IncludeImage = true };
-            Wallets = new ObservableCollection<Wallet>(await walletService.GetAll(walletModifier));
+            Wallets = new ObservableCollection<Wallet>(await walletService.GetAllAsync(walletModifier));
 
             var bankModifier = new BankModifier() { IncludeImage = true };
-            Banks = new ObservableCollection<Bank>(await bankService.GetAll(bankModifier));
+            Banks = new ObservableCollection<Bank>(await bankService.GetAllAsync(bankModifier));
 
             var categoryModifier = new CategoryModifier() { IncludeImage = true };
-            Categories = new ObservableCollection<Category>(await categoryService.GetAll(categoryModifier));
+            Categories = new ObservableCollection<Category>(await categoryService.GetAllAsync(categoryModifier));
         }
 
         public ObservableCollection<Wallet> Wallets

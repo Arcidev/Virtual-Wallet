@@ -89,10 +89,10 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public async Task LoadData()
+        public async Task LoadDataAsync()
         {
             var walletModifier = new WalletModifier() { IncludeImage = true };
-            Wallets = new ObservableCollection<Wallet>(await walletService.GetAll(walletModifier));
+            Wallets = new ObservableCollection<Wallet>(await walletService.GetAllAsync(walletModifier));
         }
 
 

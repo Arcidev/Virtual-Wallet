@@ -19,7 +19,7 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            await viewModel.LoadData();
+            await viewModel.LoadDataAsync();
             base.OnNavigatedTo(e);
         }
 

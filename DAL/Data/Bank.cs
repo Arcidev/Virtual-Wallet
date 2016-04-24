@@ -14,5 +14,8 @@ namespace DAL.Data
 
         [Ignore]
         public Image Image { get; set; }
+
+        [Ignore]
+        public BankAccountInfo BankAccountInfo { get; set; }
     }
 }

@@ -19,7 +19,8 @@ namespace DAL.Config
             typeof(Category),
             typeof(Bank),
             typeof(Image),
-            typeof(Wallet)
+            typeof(Wallet),
+            typeof(BankAccountInfo)
         };
 
         public async Task InitAsync()
@@ -35,6 +36,7 @@ namespace DAL.Config
             var connection = ConnectionHelper.GetDbAsyncConnection();
             await connection.DeleteAllAsync<Category>();
             await connection.DeleteAllAsync<Wallet>();
+            await connection.DeleteAllAsync<BankAccountInfo>();
         }
 
         public async Task<CopyDatabaseResult> CopyToRoamingFolder()

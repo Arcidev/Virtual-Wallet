@@ -4,6 +4,7 @@ using BL.Service;
 using System;
 using System.Collections.ObjectModel;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Input;
 using VirtualWallet.Controls;
 using Windows.UI.Core;
@@ -12,7 +13,7 @@ namespace VirtualWallet.ViewModels
 {
     public class BankPageViewModel : ViewModelBase, IDisposable
     {
-        private IBankService bankService;
+        private IBankAccountInfoService bankAccountInfoService;
         private Bank bank;
         private ObservableCollection<Transaction> transactions;
         private BankAccountInfo bankAccountInfo;
@@ -35,7 +36,7 @@ namespace VirtualWallet.ViewModels
         public Bank Bank
         {
             get { return bank; }
-            set
+            private set
             {
                 if (bank == value)
                     return;
@@ -43,7 +44,7 @@ namespace VirtualWallet.ViewModels
                 bank = value;
                 NotifyPropertyChanged();
 
-                BankAccountInfo = bank?.BankAccountInfo ?? new BankAccountInfo();
+                BankAccountInfo = Bank?.BankAccountInfo ?? new BankAccountInfo();
                 SyncCommand = new CommandHandler(SyncExecute, () => Bank?.NextPossibleSyncTime <= DateTime.Now);
                 SetSyncExecuteTimer();
             }
@@ -75,14 +76,22 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public BankPageViewModel(IBankService bankService)
+        public BankPageViewModel(IBankAccountInfoService bankAccountInfoService)
         {
-            this.bankService = bankService;
+            this.bankAccountInfoService = bankAccountInfoService;
+        }
+
+        public async Task LoadDataAsync(Bank bank)
+        {
+            if (bank != null)
+                bank.BankAccountInfo = await bankAccountInfoService.GetAsync(bank.Id);
+
+            Bank = bank;
         }
 
         public void Dispose()
         {
-            syncExecuteTimer.Dispose();
+            syncExecuteTimer?.Dispose();
         }
 
         private async void SyncExecute()
@@ -92,6 +101,8 @@ namespace VirtualWallet.ViewModels
             BankAccountInfo = Bank.BankAccountInfo;
             NotifyPropertyChanged(nameof(SyncCommand));
             SetSyncExecuteTimer();
+
+            await bankAccountInfoService.ReplaceAsync(BankAccountInfo);
         }
 
         private void SetSyncExecuteTimer()

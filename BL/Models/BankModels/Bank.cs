@@ -26,9 +26,9 @@ namespace BL.Models
 
         public Uri ImageUri { get { return Image != null ? new Uri(Image.Path) : null; } }
 
-        public IList<Transaction> StoredTransactions { get; set; }
+        public BankAccountInfo BankAccountInfo { get; set; }
 
-        public abstract BankAccountInfo BankAccountInfo { get; }
+        public IList<Transaction> StoredTransactions { get; set; }
 
         public abstract CredentialType CredentialType { get; }
 

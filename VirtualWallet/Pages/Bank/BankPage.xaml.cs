@@ -13,13 +13,13 @@ namespace VirtualWallet.Pages
         public BankPage()
         {
             this.InitializeComponent();
-            viewModel = new BankPageViewModel(new BankService());
+            viewModel = new BankPageViewModel(new BankAccountInfoService());
             this.DataContext = viewModel;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            viewModel.Bank = (Bank)e.Parameter;
+            await viewModel.LoadDataAsync((Bank)e.Parameter);
             base.OnNavigatedTo(e);
         }
 

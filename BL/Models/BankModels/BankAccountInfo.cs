@@ -2,8 +2,10 @@
 
 namespace BL.Models
 {
-    public class BankAccountInfo
+    public class BankAccountInfo : IDto
     {
+        public int Id { get; set; }
+
         public double ClosingBalance { get; set; }
 
         public string Currency { get; set; }

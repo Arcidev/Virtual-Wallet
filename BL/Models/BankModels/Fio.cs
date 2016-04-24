@@ -16,7 +16,6 @@ namespace BL.Models
         private const string fioResource = "FioBankToken";
         private const string fioUser = "FioUser";
         private const uint syncTimeOutinSec = 30;
-        private BankAccountInfo bankAccountInfo;
         private static DateTime nextPossibleSyncTime;
 
         public string Token { get; set; }
@@ -27,8 +26,6 @@ namespace BL.Models
         {
             get { return CredentialType.Token; }
         }
-
-        public override BankAccountInfo BankAccountInfo { get { return bankAccountInfo; } }
 
         public override DateTime NextPossibleSyncTime { get { return nextPossibleSyncTime; } }
 
@@ -103,7 +100,8 @@ namespace BL.Models
 
         private IList<Transaction> GetTransactions(FioSdkCsharp.Models.AccountStatement accountStatement)
         {
-            bankAccountInfo = MapperInstance.Mapper.Map<BankAccountInfo>(accountStatement.Info);
+            BankAccountInfo = MapperInstance.Mapper.Map<BankAccountInfo>(accountStatement.Info);
+            BankAccountInfo.Id = Id;
 
             var transactions = new List<Transaction>();
             foreach (var transaction in accountStatement.TransactionList.Transactions)

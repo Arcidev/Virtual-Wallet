@@ -117,9 +117,11 @@
     </Compile>
     <Compile Include="DataAccess\BaseGetDataAccess.cs" />
     <Compile Include="DataAccess\Banks.cs" />
+    <Compile Include="DataAccess\BankAccountInfoes.cs" />
     <Compile Include="DataAccess\Categories.cs" />
     <Compile Include="DataAccess\Images.cs" />
     <Compile Include="DataAccess\Interface\IBanks.cs" />
+    <Compile Include="DataAccess\Interface\IBankAccountInfoes.cs" />
     <Compile Include="DataAccess\Interface\ICategories.cs" />
     <Compile Include="DataAccess\Interface\ICrud.cs" />
     <Compile Include="DataAccess\Interface\IImages.cs" />
@@ -129,6 +131,7 @@
     <Compile Include="DataAccess\Interface\IWallets.cs" />
     <Compile Include="DataAccess\Interface\Wallets.cs" />
     <Compile Include="Data\Bank.cs" />
+    <Compile Include="Data\BankAccountInfo.cs" />
     <Compile Include="Data\Category.cs" />
     <Compile Include="Data\IDao.cs" />
     <Compile Include="Data\Image.cs" />

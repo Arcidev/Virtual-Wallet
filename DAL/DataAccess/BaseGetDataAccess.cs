@@ -24,7 +24,7 @@ namespace DAL.DataAccess
             return query;
         }
 
-        public async Task<IList<T1>> Get(T2 filter)
+        public async Task<IList<T1>> GetAsync(T2 filter)
         {
             if (filter == null)
                 filter = new T2();
@@ -33,13 +33,13 @@ namespace DAL.DataAccess
             return await ApplyFilters(connection.Table<T1>(), filter).ToListAsync();
         }
 
-        public async Task<IList<T1>> GetAll()
+        public async Task<IList<T1>> GetAllAsync()
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
             return await connection.Table<T1>().ToListAsync();
         }
 
-        public async Task<T1> Get(int id)
+        public async Task<T1> GetAsync(int id)
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
             return await connection.Table<T1>().Where(x => x.Id == id).FirstOrDefaultAsync();

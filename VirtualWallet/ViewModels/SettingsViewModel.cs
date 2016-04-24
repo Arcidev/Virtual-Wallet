@@ -80,18 +80,18 @@ namespace VirtualWallet.ViewModels
 
         private async void RemoveAllCredentialsExecute()
         {
-            foreach (var bank in await bankService.GetAll())
+            foreach (var bank in await bankService.GetAllAsync())
                 bank.RemoveCredentials();
         }
 
         private async void CopyDatabaseToRoamingFolderExecute()
         {
-            await databaseService.CopyToRoamingFolder();
+            await databaseService.CopyToRoamingFolderAsync();
         }
 
         private async void RetrieveDatabaseFromRoamingFolderExecute()
         {
-            await databaseService.RetrieveFromRoamingFolder();
+            await databaseService.RetrieveFromRoamingFolderAsync();
         }
     }
 }

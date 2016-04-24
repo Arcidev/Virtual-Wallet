@@ -25,10 +25,10 @@ namespace DAL.DataAccess
             return query;
         }
 
-        protected override async Task ApplyModifiers(Wallet wallet, WalletModifier modifier)
+        protected override async Task ApplyModifiersAsync(Wallet wallet, WalletModifier modifier)
         {
             if ((modifier.IncludeImage || modifier.IncludeAll) && wallet.ImageId.HasValue)
-                wallet.Image = await images.Get(wallet.ImageId.Value);
+                wallet.Image = await images.GetAsync(wallet.ImageId.Value);
         }
     }
 }

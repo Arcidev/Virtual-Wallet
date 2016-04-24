@@ -9,8 +9,8 @@ namespace BL.Service
 
         Task RemoveAllDataAsync();
 
-        Task<CopyDatabaseResult> CopyToRoamingFolder();
+        Task<CopyDatabaseResult> CopyToRoamingFolderAsync();
 
-        Task<CopyDatabaseResult> RetrieveFromRoamingFolder();
+        Task<CopyDatabaseResult> RetrieveFromRoamingFolderAsync();
     }
 }
