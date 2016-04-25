@@ -120,7 +120,7 @@
   <data name="BankCredentials_Dialog" xml:space="preserve">
     <value>Token nemôže byť prázdny</value>
   </data>
-  <data name="BankCredentials_Dialog_Close" xml:space="preserve">
+  <data name="Dialog_Close" xml:space="preserve">
     <value>Zatvoriť</value>
   </data>
   <data name="BankCredentials_Remember.Text" xml:space="preserve">
@@ -177,10 +177,10 @@
   <data name="Settings_RemoveDialog_Data" xml:space="preserve">
     <value>dáta a prihlasovacie údaje</value>
   </data>
-  <data name="Settings_Dialog_No" xml:space="preserve">
+  <data name="Dialog_No" xml:space="preserve">
     <value>Nie</value>
   </data>
-  <data name="Settings_Dialog_Yes" xml:space="preserve">
+  <data name="Dialog_Yes" xml:space="preserve">
     <value>Áno</value>
   </data>
   <data name="Settings_UserContent" xml:space="preserve">
@@ -218,5 +218,8 @@
   </data>
   <data name="Settings_Language_None" xml:space="preserve">
     <value>Žiaden</value>
+  </data>
+  <data name="Bank_ErrorDialog" xml:space="preserve">
+    <value>Och! Niečo sa pokazilo. Skontrolujte prosím pripojenie k internetu a platnosť tokenu.</value>
   </data>
 </root>

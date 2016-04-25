@@ -30,6 +30,8 @@ namespace BL.Models
 
         public IList<Transaction> StoredTransactions { get; set; }
 
+        public bool CanSyncExecute { get { return NextPossibleSyncTime <= DateTime.Now; } }
+
         public abstract CredentialType CredentialType { get; }
 
         public abstract bool HasCredentials { get; }

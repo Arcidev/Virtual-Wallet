@@ -33,7 +33,7 @@ namespace VirtualWallet.Pages
             if (!viewModel.IsValid)
             {
                 var dialog = new MessageDialog(resources.GetString("BankCredentials_Dialog"));
-                dialog.Commands.Add(new UICommand(resources.GetString("BankCredentials_Dialog_Close")));
+                dialog.Commands.Add(new UICommand(resources.GetString("Dialog_Close")));
 
                 await dialog.ShowAsync();
                 return;

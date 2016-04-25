@@ -120,7 +120,7 @@
   <data name="BankCredentials_Dialog" xml:space="preserve">
     <value>Token nemůže být prázdný</value>
   </data>
-  <data name="BankCredentials_Dialog_Close" xml:space="preserve">
+  <data name="Dialog_Close" xml:space="preserve">
     <value>Zavřít</value>
   </data>
   <data name="BankCredentials_Remember.Text" xml:space="preserve">
@@ -177,10 +177,10 @@
   <data name="Settings_RemoveDialog_Data" xml:space="preserve">
     <value>data a přihlašovací údaje</value>
   </data>
-  <data name="Settings_Dialog_No" xml:space="preserve">
+  <data name="Dialog_No" xml:space="preserve">
     <value>Ne</value>
   </data>
-  <data name="Settings_Dialog_Yes" xml:space="preserve">
+  <data name="Dialog_Yes" xml:space="preserve">
     <value>Ano</value>
   </data>
   <data name="Settings_UserContent" xml:space="preserve">
@@ -218,5 +218,8 @@
   </data>
   <data name="Settings_Language_None" xml:space="preserve">
     <value>Žádný</value>
+  </data>
+  <data name="Bank_ErrorDialog" xml:space="preserve">
+    <value>Jejda! Něco se pokazilo. Zkontrolujte prosím připojení k internetu a platnost tokenu.</value>
   </data>
 </root>

@@ -1,6 +1,7 @@
 ﻿using BL.Models;
 using BL.Service;
 using VirtualWallet.ViewModels;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -13,7 +14,7 @@ namespace VirtualWallet.Pages
         public BankPage()
         {
             this.InitializeComponent();
-            viewModel = new BankPageViewModel(new BankAccountInfoService());
+            viewModel = new BankPageViewModel(new BankAccountInfoService(), new ResourceLoader());
             this.DataContext = viewModel;
         }
 

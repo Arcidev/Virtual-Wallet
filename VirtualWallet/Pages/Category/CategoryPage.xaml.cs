@@ -34,11 +34,11 @@ namespace VirtualWallet.Pages
             this.DataContext = viewModel;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             var category = (Category)e.Parameter;
             viewModel.Category = category;
-            viewModel.LoadDataAsync();
+            await viewModel.LoadDataAsync();
             base.OnNavigatedTo(e);
         }
 

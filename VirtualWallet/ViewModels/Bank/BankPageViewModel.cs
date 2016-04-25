@@ -7,18 +7,22 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using VirtualWallet.Controls;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Core;
+using Windows.UI.Popups;
 
 namespace VirtualWallet.ViewModels
 {
     public class BankPageViewModel : ViewModelBase, IDisposable
     {
         private IBankAccountInfoService bankAccountInfoService;
+        private ResourceLoader resources;
         private Bank bank;
         private ObservableCollection<Transaction> transactions;
         private BankAccountInfo bankAccountInfo;
         private ICommand syncCommand;
         private Timer syncExecuteTimer;
+        private bool syncButtonForceDisabled;
 
         public ICommand SyncCommand
         {
@@ -45,7 +49,7 @@ namespace VirtualWallet.ViewModels
                 NotifyPropertyChanged();
 
                 BankAccountInfo = Bank?.BankAccountInfo ?? new BankAccountInfo();
-                SyncCommand = new CommandHandler(SyncExecute, () => Bank?.NextPossibleSyncTime <= DateTime.Now);
+                SyncCommand = new CommandHandler(SyncExecute, () => !syncButtonForceDisabled && (Bank?.CanSyncExecute ?? false));
                 SetSyncExecuteTimer();
             }
         }
@@ -76,9 +80,10 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public BankPageViewModel(IBankAccountInfoService bankAccountInfoService)
+        public BankPageViewModel(IBankAccountInfoService bankAccountInfoService, ResourceLoader resources)
         {
             this.bankAccountInfoService = bankAccountInfoService;
+            this.resources = resources;
         }
 
         public async Task LoadDataAsync(Bank bank)
@@ -96,13 +101,28 @@ namespace VirtualWallet.ViewModels
 
         private async void SyncExecute()
         {
+            // Disable button immediatly after invoking command
+            syncButtonForceDisabled = true;
+            NotifyPropertyChanged(nameof(SyncCommand));
+
             var filter = new TransactionFilter() { Days = 30 };
-            var Transactions = await Bank.GetTransactionsAsync(filter);
-            BankAccountInfo = Bank.BankAccountInfo;
+            try
+            {
+                var Transactions = await Bank.GetTransactionsAsync(filter);
+                BankAccountInfo = Bank.BankAccountInfo;
+                await bankAccountInfoService.ReplaceAsync(BankAccountInfo);
+            }
+            catch (Exception)
+            {
+                var dialog = new MessageDialog(resources.GetString("Bank_ErrorDialog"));
+                dialog.Commands.Add(new UICommand(resources.GetString("Dialog_Close")));
+
+                await dialog.ShowAsync();
+            }
+
+            syncButtonForceDisabled = false;
             NotifyPropertyChanged(nameof(SyncCommand));
             SetSyncExecuteTimer();
-
-            await bankAccountInfoService.ReplaceAsync(BankAccountInfo);
         }
 
         private void SetSyncExecuteTimer()
@@ -110,9 +130,11 @@ namespace VirtualWallet.ViewModels
             if (syncExecuteTimer != null)
                 syncExecuteTimer.Dispose();
 
-            var dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
-            if (!SyncCommand.CanExecute(null) && Bank != null)
+            if (!(Bank?.CanSyncExecute ?? true))
+            {
+                var dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
                 syncExecuteTimer = new Timer(async (obj) => await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => NotifyPropertyChanged(nameof(SyncCommand))), null, (int)Math.Ceiling((Bank.NextPossibleSyncTime - DateTime.Now).TotalMilliseconds), Timeout.Infinite);
+            }
         }
     }
 }

@@ -120,7 +120,7 @@
   <data name="BankCredentials_Dialog" xml:space="preserve">
     <value>You have to set a token</value>
   </data>
-  <data name="BankCredentials_Dialog_Close" xml:space="preserve">
+  <data name="Dialog_Close" xml:space="preserve">
     <value>Close</value>
   </data>
   <data name="BankCredentials_Remember.Text" xml:space="preserve">
@@ -189,10 +189,10 @@
   <data name="Settings_RemoveDialog_Data" xml:space="preserve">
     <value>all data and credentials</value>
   </data>
-  <data name="Settings_Dialog_No" xml:space="preserve">
+  <data name="Dialog_No" xml:space="preserve">
     <value>No</value>
   </data>
-  <data name="Settings_Dialog_Yes" xml:space="preserve">
+  <data name="Dialog_Yes" xml:space="preserve">
     <value>Yes</value>
   </data>
   <data name="Settings_UserContent" xml:space="preserve">
@@ -218,5 +218,8 @@
   </data>
   <data name="Settings_Language_None" xml:space="preserve">
     <value>None</value>
+  </data>
+  <data name="Bank_ErrorDialog" xml:space="preserve">
+    <value>Oops, something went wrong. Please check your internet connection and token validity.</value>
   </data>
 </root>

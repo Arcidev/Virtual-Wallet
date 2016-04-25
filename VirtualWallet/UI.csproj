@@ -125,8 +125,8 @@
     <Compile Include="Pages\Rule\RulesPage.xaml.cs">
       <DependentUpon>RulesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\BankCredentialsPageViewModel.cs" />
-    <Compile Include="ViewModels\BankPageViewModel.cs" />
+    <Compile Include="ViewModels\Bank\BankCredentialsPageViewModel.cs" />
+    <Compile Include="ViewModels\Bank\BankPageViewModel.cs" />
     <Compile Include="ViewModels\CategoriesPageViewModel.cs" />
     <Compile Include="ViewModels\CategoryPageViewModel.cs" />
     <Compile Include="ViewModels\MenuPageViewModel.cs" />

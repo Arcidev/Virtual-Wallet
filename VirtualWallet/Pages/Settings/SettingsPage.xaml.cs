@@ -45,8 +45,8 @@ namespace VirtualWallet.Pages
         private async Task ShowDialog(string message, UICommandInvokedHandler yesHandler)
         {
             var dialog = new MessageDialog(message);
-            dialog.Commands.Add(new UICommand(resources.GetString("Settings_Dialog_Yes"), yesHandler));
-            dialog.Commands.Add(new UICommand(resources.GetString("Settings_Dialog_No")));
+            dialog.Commands.Add(new UICommand(resources.GetString("Dialog_Yes"), yesHandler));
+            dialog.Commands.Add(new UICommand(resources.GetString("Dialog_No")));
 
             await dialog.ShowAsync();
         }
