@@ -20,6 +20,7 @@ namespace DAL.Config
             typeof(Bank),
             typeof(Image),
             typeof(Wallet),
+            typeof(WalletCategory),
             typeof(BankAccountInfo)
         };
 
@@ -34,6 +35,7 @@ namespace DAL.Config
         public async Task RemoveAllDataAsync()
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
+            await connection.DeleteAllAsync<WalletCategory>();
             await connection.DeleteAllAsync<Category>();
             await connection.DeleteAllAsync<Wallet>();
             await connection.DeleteAllAsync<BankAccountInfo>();
@@ -83,7 +85,7 @@ namespace DAL.Config
             {
                 await connection.InsertAllAsync(new object[]
                 {
-                    new Wallet() { Name = "Test wallet", ImageId = (int)ImageId.Wallet }
+                    new Wallet() { Id = 1,  Name = "Test wallet", ImageId = (int)ImageId.Wallet }
                 });
             }
 
@@ -91,7 +93,15 @@ namespace DAL.Config
             {
                 await connection.InsertAllAsync(new object[]
                 {
-                    new Category() { Name = "Test category", ImageId = (int)ImageId.Category }
+                    new Category() { Id = 1, Name = "Test category", ImageId = (int)ImageId.Category }
+                });
+            }
+
+            if (!(await connection.Table<WalletCategory>().ToListAsync()).Any())
+            {
+                await connection.InsertAllAsync(new object[]
+                {
+                    new WalletCategory() { WalletId = 1, CategoryId = 1 }
                 });
             }
         }

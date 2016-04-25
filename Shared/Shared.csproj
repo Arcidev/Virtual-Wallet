@@ -114,10 +114,12 @@
     <Compile Include="Filters\BankFilter.cs" />
     <Compile Include="Filters\BaseFilter.cs" />
     <Compile Include="Filters\CategoryFilter.cs" />
+    <Compile Include="Filters\WalletCategoryFilter.cs" />
     <Compile Include="Filters\WalletFilter.cs" />
     <Compile Include="Modifiers\BankModifier.cs" />
     <Compile Include="Modifiers\BaseModifier.cs" />
     <Compile Include="Modifiers\CategoryModifier.cs" />
+    <Compile Include="Modifiers\WalletCategoryModifier.cs" />
     <Compile Include="Modifiers\WalletModifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\Shared.rd.xml" />

@@ -1,7 +1,9 @@
 ﻿using BL.Models;
 using BL.Service;
+using Shared.Filters;
 using Shared.Modifiers;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
@@ -11,17 +13,21 @@ namespace VirtualWallet.ViewModels
     {
         private ICategoryService categoryService;
         private IWalletService walletService;
+        private IWalletCategoryService walletCategoryService;
         //private IRuleService ruleService;
 
         private Category category;
         private ObservableCollection<Wallet> wallets;
         private ObservableCollection<Rule> rules;
 
-        public CategoryPageViewModel(ICategoryService categoryService, IWalletService walletService)
+        public CategoryPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService)
         {
             this.categoryService = categoryService;
             this.walletService = walletService;
+            this.walletCategoryService = walletCategoryService;
             //this.ruleService = ruleService;
+
+            this.Category = new Category();
         }
 
         public Category Category
@@ -37,32 +43,6 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public String Name
-        {
-            get { return category.Name; }
-            set
-            {
-                if (category.Name == value)
-                    return;
-
-                category.Name = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public Image Image
-        {
-            get { return category.Image; }
-            set
-            {
-                if (category.Image == value)
-                    return;
-
-                category.Image = value;
-                NotifyPropertyChanged();
-            }
-        }
-
         public ObservableCollection<Wallet> Wallets
         {
             get { return wallets; }
@@ -72,6 +52,7 @@ namespace VirtualWallet.ViewModels
                     return;
 
                 wallets = value;
+                category.Wallets = value;
                 NotifyPropertyChanged();
             }
         }
@@ -85,16 +66,26 @@ namespace VirtualWallet.ViewModels
                     return;
 
                 rules = value;
+                category.Rules = value;
                 NotifyPropertyChanged();
             }
         }
 
         public async Task LoadDataAsync()
         {
-            var walletModifier = new WalletModifier() { IncludeImage = true };
-            Wallets = new ObservableCollection<Wallet>(await walletService.GetAllAsync(walletModifier));
+            var categoryId = Category.Id;
+            var filter = new WalletCategoryFilter() { CategoryId = categoryId };
+            var modifier = new WalletCategoryModifier() { IncludeWallet = true };
+            var walletsCategories = await walletCategoryService.GetAsync(filter, modifier);
+            var wallets = new List<Wallet>();
+
+            foreach (var walletCategory in walletsCategories)
+            {
+                if (walletCategory.Wallet != null)
+                    wallets.Add(walletCategory.Wallet);
+            }
+
+            Wallets = new ObservableCollection<Wallet>(wallets);
         }
-
-
     }
 }

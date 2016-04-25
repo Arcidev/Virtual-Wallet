@@ -110,6 +110,7 @@
     <Compile Include="Models\BankModels\BankAccountInfo.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\LanguageInfo.cs" />
+    <Compile Include="Models\WalletCategory.cs" />
     <Compile Include="Service\BankAccountInfoService.cs" />
     <Compile Include="Service\DatabaseService.cs" />
     <Compile Include="Service\ImageService.cs" />
@@ -144,6 +145,8 @@
     <Compile Include="Service\Interface\IModifiableCrudService.cs" />
     <Compile Include="Service\Interface\IModifiableGetService.cs" />
     <Compile Include="Service\Interface\IWalletService.cs" />
+    <Compile Include="Service\Interface\IWalletCategoryService.cs" />
+    <Compile Include="Service\WalletCategoryService.cs" />
     <Compile Include="Service\WalletService.cs" />
     <EmbeddedResource Include="Properties\BL.rd.xml" />
   </ItemGroup>

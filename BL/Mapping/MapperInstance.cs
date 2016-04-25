@@ -29,6 +29,12 @@ namespace BL.Mapping
             .ForMember(target => target.Image, action => action.Ignore())
             .ForMember(target => target.ImageId, action => action.MapFrom(source => source.Image != null ? source.Image.Id : source.ImageId));
 
+            cfg.CreateMap<DAL.Data.WalletCategory, WalletCategory>();
+            cfg.CreateMap<WalletCategory, DAL.Data.WalletCategory>()
+            .ForMember(target => target.Wallet, action => action.Ignore())
+            .ForMember(target => target.WalletId, action => action.MapFrom(source => source.Wallet != null ? source.Wallet.Id : source.WalletId))
+            .ForMember(target => target.Category, action => action.Ignore())
+            .ForMember(target => target.CategoryId, action => action.MapFrom(source => source.Category != null ? source.Category.Id : source.CategoryId));
         }).CreateMapper();
     }
 }

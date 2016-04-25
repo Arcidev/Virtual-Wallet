@@ -65,6 +65,25 @@ namespace Blend.SampleData.WalletsSampleDataSource
                 return this._Categories;
             }
         }
+
+        private Category _Category = new Category();
+
+        public Category Category
+        {
+            get
+            {
+                return this._Category;
+            }
+
+            set
+            {
+                if (this._Category != value)
+                {
+                    this._Category = value;
+                    this.OnPropertyChanged("Category");
+                }
+            }
+        }
     }
 
     public class Wallets : System.Collections.ObjectModel.ObservableCollection<WalletsItem>
@@ -408,6 +427,160 @@ namespace Blend.SampleData.WalletsSampleDataSource
                 }
             }
         }
+    }
+
+    public class Category : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private double _Id = 0;
+
+        public double Id
+        {
+            get
+            {
+                return this._Id;
+            }
+
+            set
+            {
+                if (this._Id != value)
+                {
+                    this._Id = value;
+                    this.OnPropertyChanged("Id");
+                }
+            }
+        }
+
+        private string _Name = string.Empty;
+
+        public string Name
+        {
+            get
+            {
+                return this._Name;
+            }
+
+            set
+            {
+                if (this._Name != value)
+                {
+                    this._Name = value;
+                    this.OnPropertyChanged("Name");
+                }
+            }
+        }
+
+        private string _ImageUri = string.Empty;
+
+        public string ImageUri
+        {
+            get
+            {
+                return this._ImageUri;
+            }
+
+            set
+            {
+                if (this._ImageUri != value)
+                {
+                    this._ImageUri = value;
+                    this.OnPropertyChanged("ImageUri");
+                }
+            }
+        }
+
+        private Wallets1 _Wallets = new Wallets1();
+
+        public Wallets1 Wallets
+        {
+            get
+            {
+                return this._Wallets;
+            }
+        }
+    }
+
+    public class WalletsItem1 : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private double _Id = 0;
+
+        public double Id
+        {
+            get
+            {
+                return this._Id;
+            }
+
+            set
+            {
+                if (this._Id != value)
+                {
+                    this._Id = value;
+                    this.OnPropertyChanged("Id");
+                }
+            }
+        }
+
+        private string _Name = string.Empty;
+
+        public string Name
+        {
+            get
+            {
+                return this._Name;
+            }
+
+            set
+            {
+                if (this._Name != value)
+                {
+                    this._Name = value;
+                    this.OnPropertyChanged("Name");
+                }
+            }
+        }
+
+        private string _ImageUri = string.Empty;
+
+        public string ImageUri
+        {
+            get
+            {
+                return this._ImageUri;
+            }
+
+            set
+            {
+                if (this._ImageUri != value)
+                {
+                    this._ImageUri = value;
+                    this.OnPropertyChanged("ImageUri");
+                }
+            }
+        }
+    }
+
+    public class Wallets1 : System.Collections.ObjectModel.ObservableCollection<WalletsItem1>
+    { 
     }
 #endif
 }

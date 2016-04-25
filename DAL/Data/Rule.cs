@@ -1,9 +1,13 @@
 ﻿using SQLite.Net.Attributes;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace DAL.Data
 {
-    public class Category : IDao
+    public class Rule : IDao
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -11,15 +15,11 @@ namespace DAL.Data
         [NotNull, MaxLength(20)]
         public string Name { get; set; }
 
-        public int? ImageId { get; set; }
+        public string Description { get; set; }
+
+        public string Pattern { get; set; }
 
         [Ignore]
-        public Image Image { get; set; }
-
-        [Ignore]
-        public IList<Wallet> Wallets { get; set; }
-
-        [Ignore]
-        public IList<Rule> Rules { get; set; }
+        public IList<Category> categories { get; set; }
     }
 }

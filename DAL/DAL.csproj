@@ -129,13 +129,17 @@
     <Compile Include="DataAccess\Interface\IModifiableGet.cs" />
     <Compile Include="DataAccess\Interface\IGet.cs" />
     <Compile Include="DataAccess\Interface\IWallets.cs" />
+    <Compile Include="DataAccess\Interface\IWalletsCategories.cs" />
     <Compile Include="DataAccess\Interface\Wallets.cs" />
+    <Compile Include="DataAccess\WalletsCategories.cs" />
     <Compile Include="Data\Bank.cs" />
     <Compile Include="Data\BankAccountInfo.cs" />
     <Compile Include="Data\Category.cs" />
     <Compile Include="Data\IDao.cs" />
     <Compile Include="Data\Image.cs" />
+    <Compile Include="Data\Rule.cs" />
     <Compile Include="Data\Wallet.cs" />
+    <Compile Include="Data\WalletCategory.cs" />
     <Compile Include="Helpers\ConnectionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\DAL.rd.xml" />

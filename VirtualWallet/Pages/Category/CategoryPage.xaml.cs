@@ -30,14 +30,26 @@ namespace VirtualWallet.Pages
         public CategoryPage()
         {
             this.InitializeComponent();
-            viewModel = new CategoryPageViewModel(new CategoryService(), new WalletService());
+            viewModel = new CategoryPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService());
             this.DataContext = viewModel;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            viewModel.Category = (Category)e.Parameter;
+            var category = (Category)e.Parameter;
+            viewModel.Category = category;
+            viewModel.LoadDataAsync();
             base.OnNavigatedTo(e);
+        }
+
+        private void GridViewCategories_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void GridViewWallets_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
         }
     }
 }

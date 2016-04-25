@@ -50,4 +50,20 @@
     <SampleData:CategoriesItem Id="9" Name="Wife" />
     <SampleData:CategoriesItem Id="10" Name="Add category..." />
   </SampleData:WalletsSampleDataSource.Categories>
+  <SampleData:WalletsSampleDataSource.Category>
+      <SampleData:Category Id="3" Name="Test Category." ImageUri="/Assets/Images//Categories/Transport/Transport1.png">
+      <SampleData:Category.Wallets>
+        <SampleData:WalletsItem1 Id="1" Name="Nam" ImageUri="/Assets/Images//Wallets/wallet01.png" />
+        <SampleData:WalletsItem1 Id="2" Name="Cras" ImageUri="/Assets/Images//Wallets/wallet01.png" />
+        <SampleData:WalletsItem1 Id="9" Name="Duis" ImageUri="Accumsan bibendum" />
+        <SampleData:WalletsItem1 Id="2" Name="Sed" ImageUri="Nam mauris" />
+        <SampleData:WalletsItem1 Id="5" Name="Maecenas" ImageUri="Integer cras" />
+        <SampleData:WalletsItem1 Id="1" Name="Nunc" ImageUri="Dictumst nullam duis" />
+        <SampleData:WalletsItem1 Id="3" Name="Dis" ImageUri="Eleifend aptent" />
+        <SampleData:WalletsItem1 Id="9" Name="Amet" ImageUri="Facilisi sed" />
+        <SampleData:WalletsItem1 Id="4" Name="Aliquam" ImageUri="Quisque donec" />
+        <SampleData:WalletsItem1 Id="4" Name="Class" ImageUri="Auctor etiam faucibus habitant" />
+      </SampleData:Category.Wallets>
+    </SampleData:Category>
+  </SampleData:WalletsSampleDataSource.Category>
 </SampleData:WalletsSampleDataSource>

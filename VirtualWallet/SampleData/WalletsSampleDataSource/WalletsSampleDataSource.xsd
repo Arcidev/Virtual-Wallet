@@ -11,6 +11,7 @@
       <xs:element name="Wallets" type="tns:Wallets" />
       <xs:element name="Banks" type="tns:Banks" />
       <xs:element name="Categories" type="tns:Categories" />
+      <xs:element name="Category" type="tns:Category" />
     </xs:sequence>
   </xs:complexType>
   <xs:complexType name="Wallets">
@@ -55,5 +56,23 @@
   <xs:complexType name="CategoriesItem">
     <xs:attribute blend:FormatParameters="1" name="Id" type="xs:double" />
     <xs:attribute name="Name" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Category">
+    <xs:sequence>
+      <xs:element name="Wallets" type="tns:Wallets1" />
+    </xs:sequence>
+    <xs:attribute blend:FormatParameters="1" name="Id" type="xs:double" />
+    <xs:attribute name="Name" type="xs:string" />
+    <xs:attribute name="ImageUri" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Wallets1">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="WalletsItem1" type="tns:WalletsItem1" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="WalletsItem1">
+    <xs:attribute blend:FormatParameters="1" name="Id" type="xs:double" />
+    <xs:attribute blend:FormatParameters="1,8" name="Name" type="xs:string" />
+    <xs:attribute name="ImageUri" type="xs:string" />
   </xs:complexType>
 </xs:schema>
