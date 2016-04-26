@@ -30,7 +30,7 @@ namespace VirtualWallet.Pages
         public CategoryPage()
         {
             this.InitializeComponent();
-            viewModel = new CategoryPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService());
+            viewModel = new CategoryPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService(), new CategoryRuleService());
             this.DataContext = viewModel;
         }
 
@@ -48,6 +48,11 @@ namespace VirtualWallet.Pages
         }
 
         private void GridViewWallets_ItemClick(object sender, ItemClickEventArgs e)
+        {
+
+        }
+
+        private void ListViewRules_ItemClick(object sender, ItemClickEventArgs e)
         {
 
         }

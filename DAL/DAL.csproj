@@ -118,10 +118,12 @@
     <Compile Include="DataAccess\BaseGetDataAccess.cs" />
     <Compile Include="DataAccess\Banks.cs" />
     <Compile Include="DataAccess\BankAccountInfoes.cs" />
+    <Compile Include="DataAccess\Rules.cs" />
     <Compile Include="DataAccess\Categories.cs" />
     <Compile Include="DataAccess\Images.cs" />
     <Compile Include="DataAccess\Interface\IBanks.cs" />
     <Compile Include="DataAccess\Interface\IBankAccountInfoes.cs" />
+    <Compile Include="DataAccess\Interface\IRules.cs" />
     <Compile Include="DataAccess\Interface\ICategories.cs" />
     <Compile Include="DataAccess\Interface\ICrud.cs" />
     <Compile Include="DataAccess\Interface\IImages.cs" />
@@ -129,8 +131,10 @@
     <Compile Include="DataAccess\Interface\IModifiableGet.cs" />
     <Compile Include="DataAccess\Interface\IGet.cs" />
     <Compile Include="DataAccess\Interface\IWallets.cs" />
+    <Compile Include="DataAccess\Interface\ICategoriesRules.cs" />
     <Compile Include="DataAccess\Interface\IWalletsCategories.cs" />
     <Compile Include="DataAccess\Interface\Wallets.cs" />
+    <Compile Include="DataAccess\CategoriesRules.cs" />
     <Compile Include="DataAccess\WalletsCategories.cs" />
     <Compile Include="Data\Bank.cs" />
     <Compile Include="Data\BankAccountInfo.cs" />
@@ -139,6 +143,7 @@
     <Compile Include="Data\Image.cs" />
     <Compile Include="Data\Rule.cs" />
     <Compile Include="Data\Wallet.cs" />
+    <Compile Include="Data\CategoryRule.cs" />
     <Compile Include="Data\WalletCategory.cs" />
     <Compile Include="Helpers\ConnectionHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

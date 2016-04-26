@@ -14,9 +14,11 @@ namespace DAL.Config
     {
         private const string imageStorage = "ms-appx:///Assets/Images/";
 
-        private static readonly Type[] tables = new Type[] 
+        private static readonly Type[] tables = new Type[]
         {
+            typeof(Rule),
             typeof(Category),
+            typeof(CategoryRule),
             typeof(Bank),
             typeof(Image),
             typeof(Wallet),
@@ -35,6 +37,8 @@ namespace DAL.Config
         public async Task RemoveAllDataAsync()
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
+            await connection.DeleteAllAsync<CategoryRule>();
+            await connection.DeleteAllAsync<Rule>();
             await connection.DeleteAllAsync<WalletCategory>();
             await connection.DeleteAllAsync<Category>();
             await connection.DeleteAllAsync<Wallet>();
@@ -102,6 +106,22 @@ namespace DAL.Config
                 await connection.InsertAllAsync(new object[]
                 {
                     new WalletCategory() { WalletId = 1, CategoryId = 1 }
+                });
+            }
+
+            if (!(await connection.Table<Rule>().ToListAsync()).Any())
+            {
+                await connection.InsertAllAsync(new object[]
+                {
+                    new Rule() { Id = 1, Name = "Test rule", Description = "This is test rule", Pattern = "*" }
+                });
+            }
+
+            if (!(await connection.Table<CategoryRule>().ToListAsync()).Any())
+            {
+                await connection.InsertAllAsync(new object[]
+                {
+                    new CategoryRule() { RuleId = 1, CategoryId = 1 }
                 });
             }
         }

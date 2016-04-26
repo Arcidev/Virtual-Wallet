@@ -14,17 +14,18 @@ namespace VirtualWallet.ViewModels
         private ICategoryService categoryService;
         private IWalletService walletService;
         private IWalletCategoryService walletCategoryService;
-        //private IRuleService ruleService;
+        private ICategoryRuleService categoryRuleService;
 
         private Category category;
         private ObservableCollection<Wallet> wallets;
         private ObservableCollection<Rule> rules;
 
-        public CategoryPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService)
+        public CategoryPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService, ICategoryRuleService categoryRuleService)
         {
             this.categoryService = categoryService;
             this.walletService = walletService;
             this.walletCategoryService = walletCategoryService;
+            this.categoryRuleService = categoryRuleService;
             //this.ruleService = ruleService;
 
             this.Category = new Category();
@@ -73,6 +74,12 @@ namespace VirtualWallet.ViewModels
 
         public async Task LoadDataAsync()
         {
+            await LoadWalletsAsync();
+            await LoadRulesAsync();
+        }
+
+        private async Task LoadWalletsAsync()
+        {
             var categoryId = Category.Id;
             var filter = new WalletCategoryFilter() { CategoryId = categoryId };
             var modifier = new WalletCategoryModifier() { IncludeWallet = true };
@@ -86,6 +93,23 @@ namespace VirtualWallet.ViewModels
             }
 
             Wallets = new ObservableCollection<Wallet>(wallets);
+        }
+
+        private async Task LoadRulesAsync()
+        {
+            var categoryId = Category.Id;
+            var filter = new CategoryRuleFilter() { CategoryId = categoryId };
+            var modifier = new CategoryRuleModifier() { IncludeRule = true };
+            var categoriesRules = await categoryRuleService.GetAsync(filter, modifier);
+            var rules = new List<Rule>();
+
+            foreach (var categoryRule in categoriesRules)
+            {
+                if (categoryRule.Rule != null)
+                    rules.Add(categoryRule.Rule);
+            }
+
+            Rules = new ObservableCollection<Rule>(rules);
         }
     }
 }

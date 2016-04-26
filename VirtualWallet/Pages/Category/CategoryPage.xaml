@@ -20,6 +20,14 @@
                 </Border>
             </Grid>
         </DataTemplate>
+        <DataTemplate x:Key="RulesItemTemplate">
+            <Grid Width="300">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Margin="10" Text="{Binding Name}"/>
+            </Grid>
+        </DataTemplate>
     </Page.Resources>
     
     <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
@@ -43,6 +51,7 @@
                     </Border>
                 </Button>
             </Grid>
+            <TextBlock x:Name="WalletsTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Wallets" RelativePanel.Below="CategoryFormGrid"/>
             <ListView x:Name="ListViewWallets" 
                           ItemTemplate="{StaticResource WalletsItemTemplate}" 
                           ItemsSource="{Binding Wallets}" 
@@ -50,7 +59,19 @@
                           SelectionMode="None"
                           IsItemClickEnabled="False"
                           ItemClick="GridViewWallets_ItemClick"
-                          RelativePanel.Below="CategoryFormGrid"
+                          RelativePanel.Below="WalletsTitle"
+                          HorizontalAlignment="Left" 
+                          Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">
+            </ListView>
+            <TextBlock x:Name="RulesTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Wallets" RelativePanel.Below="ListViewWallets"/>
+            <ListView x:Name="ListViewRules" 
+                          ItemTemplate="{StaticResource RulesItemTemplate}" 
+                          ItemsSource="{Binding Rules}" 
+                          IsSwipeEnabled="False" 
+                          SelectionMode="None"
+                          IsItemClickEnabled="False"
+                          ItemClick="ListViewRules_ItemClick"
+                          RelativePanel.Below="RulesTitle"
                           HorizontalAlignment="Left" 
                           Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">
             </ListView>
