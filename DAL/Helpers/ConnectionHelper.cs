@@ -18,7 +18,7 @@ namespace DAL.Helpers
         /// <summary>
         /// Gets db connection or creates new db if not exists
         /// </summary>
-        /// <returns></returns>
+        /// <returns>Db connection</returns>
         public static SQLiteAsyncConnection GetDbAsyncConnection()
         {
             var connectionFactory =
