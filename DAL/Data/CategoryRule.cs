@@ -4,7 +4,7 @@ namespace DAL.Data
 {
     public class CategoryRule : IDao
     {
-        [PrimaryKey]
+        [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
         
         public int RuleId { get; set; }
