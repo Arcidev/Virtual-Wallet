@@ -133,8 +133,8 @@
     <Compile Include="DataAccess\Interface\IWallets.cs" />
     <Compile Include="DataAccess\Interface\ICategoriesRules.cs" />
     <Compile Include="DataAccess\Interface\IWalletsCategories.cs" />
-    <Compile Include="DataAccess\Interface\Wallets.cs" />
     <Compile Include="DataAccess\CategoriesRules.cs" />
+    <Compile Include="DataAccess\Wallets.cs" />
     <Compile Include="DataAccess\WalletsCategories.cs" />
     <Compile Include="Data\Bank.cs" />
     <Compile Include="Data\BankAccountInfo.cs" />
