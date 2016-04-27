@@ -2,15 +2,11 @@
 using Shared.Filters;
 using Shared.Modifiers;
 using SQLite.Net.Async;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL.DataAccess
 {
-    public class Wallets : BaseModifiableGetDataAccess<Wallet, WalletFilter, WalletModifier>, IWallets
+    public class Wallets : BaseModifiableCrudDataAccess<Wallet, WalletFilter, WalletModifier>, IWallets
     {
         private static readonly IImages images = new Images();
 
@@ -29,6 +25,11 @@ namespace DAL.DataAccess
         {
             if ((modifier.IncludeImage || modifier.IncludeAll) && wallet.ImageId.HasValue)
                 wallet.Image = await images.GetAsync(wallet.ImageId.Value);
+        }
+
+        protected override async Task OnEntityDeletedAsync(SQLiteAsyncConnection connection, int id)
+        {
+            await connection.ExecuteAsync($"DELETE FROM {nameof(WalletCategory)} WHERE {nameof(WalletCategory.WalletId)} = {id}");
         }
     }
 }

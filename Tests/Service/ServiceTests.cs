@@ -86,7 +86,7 @@ namespace Tests.Service
             Assert.IsNotNull(category.Image);
             Assert.AreEqual((int)ImageId.Fio, category.Image.Id);
 
-            cat = new Category() { Name = "Category 2", Image = (await _images.GetAllAsync()).Single() };
+            cat = new Category() { Name = "Category 2", Image = (await _images.GetAsync((int)ImageId.Fio)) };
             await _categories.CreateAsync(cat);
 
             var filter = new CategoryFilter() { Name = "Category 2" };

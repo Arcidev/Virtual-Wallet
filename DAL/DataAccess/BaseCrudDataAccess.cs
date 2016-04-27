@@ -1,6 +1,7 @@
 ﻿using DAL.Data;
 using DAL.Helpers;
 using Shared.Filters;
+using SQLite.Net.Async;
 using System.Threading.Tasks;
 
 namespace DAL.DataAccess
@@ -29,12 +30,18 @@ namespace DAL.DataAccess
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
             await connection.DeleteAsync(new T1() { Id = id });
+            await OnEntityDeletedAsync(connection, id);
         }
 
         public async Task DeleteAllAsync()
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
             await connection.DeleteAllAsync<T1>();
+        }
+
+        protected virtual Task OnEntityDeletedAsync(SQLiteAsyncConnection connection, int id)
+        {
+            return Task.FromResult(true);
         }
     }
 }

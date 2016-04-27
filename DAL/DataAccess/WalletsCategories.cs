@@ -2,7 +2,6 @@
 using Shared.Filters;
 using Shared.Modifiers;
 using SQLite.Net.Async;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace DAL.DataAccess

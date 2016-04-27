@@ -37,5 +37,10 @@ namespace DAL.DataAccess
 
             return query;
         }
+
+        protected override async Task OnEntityDeletedAsync(SQLiteAsyncConnection connection, int id)
+        {
+            await connection.ExecuteAsync($"DELETE FROM {nameof(CategoryRule)} WHERE {nameof(CategoryRule.RuleId)} = {id}");
+        }
     }
 }

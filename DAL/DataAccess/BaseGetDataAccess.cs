@@ -45,6 +45,9 @@ namespace DAL.DataAccess
             return await connection.Table<T1>().Where(x => x.Id == id).FirstOrDefaultAsync();
         }
 
-        protected abstract AsyncTableQuery<T1> ApplyFilters(AsyncTableQuery<T1> query, T2 filter);
+        protected virtual AsyncTableQuery<T1> ApplyFilters(AsyncTableQuery<T1> query, T2 filter)
+        {
+            return query;
+        }
     }
 }

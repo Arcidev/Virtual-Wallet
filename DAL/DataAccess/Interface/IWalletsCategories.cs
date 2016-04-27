@@ -4,7 +4,7 @@ using Shared.Modifiers;
 
 namespace DAL.DataAccess
 {
-    public interface IWalletsCategories : IModifiableGet<WalletCategory, WalletCategoryFilter, WalletCategoryModifier>
+    public interface IWalletsCategories : IModifiableCrud<WalletCategory, WalletCategoryFilter, WalletCategoryModifier>
     {
     }
 }
