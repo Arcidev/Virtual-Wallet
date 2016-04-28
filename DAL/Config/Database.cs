@@ -12,8 +12,6 @@ namespace DAL.Config
 {
     public class Database : IDatabase
     {
-        private const string imageStorage = "ms-appx:///Assets/Images/";
-
         private static readonly Type[] tables = new Type[]
         {
             typeof(Rule),
@@ -70,60 +68,10 @@ namespace DAL.Config
 
         private async Task InitData(SQLiteAsyncConnection connection)
         {
-            await connection.InsertOrReplaceAllAsync(new object[]
-            {
-                new Image() { Id = (int)ImageId.Fio, Path= $"{imageStorage}Fio.png" },
-                new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio },
-                new Image() { Id = (int)ImageId.Wallet, Path= $"{imageStorage}/Wallets/Wallet1.png" },
-                new Image() { Id = (int)ImageId.Category, Path= $"{imageStorage}/Categories/Transport/transport-1.png" }               
-            });
-
-            await InitTempData(connection);
+            await InitialData.InitialData.InitData(connection);
+            await InitialData.InitialDataDev.InitTempData(connection);
         }
 
-        // Just for testing
-        private async Task InitTempData(SQLiteAsyncConnection connection)
-        {
-            // Prevent this to multiply on every start of app
-            if (!(await connection.Table<Wallet>().ToListAsync()).Any())
-            {
-                await connection.InsertAllAsync(new object[]
-                {
-                    new Wallet() { Id = 1,  Name = "Test wallet", ImageId = (int)ImageId.Wallet }
-                });
-            }
-
-            if (!(await connection.Table<Category>().ToListAsync()).Any())
-            {
-                await connection.InsertAllAsync(new object[]
-                {
-                    new Category() { Id = 1, Name = "Test category", ImageId = (int)ImageId.Category }
-                });
-            }
-
-            if (!(await connection.Table<WalletCategory>().ToListAsync()).Any())
-            {
-                await connection.InsertAllAsync(new object[]
-                {
-                    new WalletCategory() { WalletId = 1, CategoryId = 1 }
-                });
-            }
-
-            if (!(await connection.Table<Rule>().ToListAsync()).Any())
-            {
-                await connection.InsertAllAsync(new object[]
-                {
-                    new Rule() { Id = 1, Name = "Test rule", Description = "This is test rule", Pattern = "*" }
-                });
-            }
-
-            if (!(await connection.Table<CategoryRule>().ToListAsync()).Any())
-            {
-                await connection.InsertAllAsync(new object[]
-                {
-                    new CategoryRule() { RuleId = 1, CategoryId = 1 }
-                });
-            }
-        }
+        
     }
 }

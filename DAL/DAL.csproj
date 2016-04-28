@@ -146,6 +146,8 @@
     <Compile Include="Data\CategoryRule.cs" />
     <Compile Include="Data\WalletCategory.cs" />
     <Compile Include="Helpers\ConnectionHelper.cs" />
+    <Compile Include="InitialData\InitialData.cs" />
+    <Compile Include="InitialData\InitialDataDev.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\DAL.rd.xml" />
   </ItemGroup>
