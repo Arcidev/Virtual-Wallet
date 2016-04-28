@@ -5,6 +5,7 @@ using Shared.Modifiers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
 using System.Threading.Tasks;
 
 namespace VirtualWallet.ViewModels
@@ -19,6 +20,7 @@ namespace VirtualWallet.ViewModels
         private Category category;
         private ObservableCollection<Wallet> wallets;
         private ObservableCollection<Rule> rules;
+        private Boolean modified;
 
         public CategoryPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService, ICategoryRuleService categoryRuleService)
         {
@@ -26,7 +28,7 @@ namespace VirtualWallet.ViewModels
             this.walletService = walletService;
             this.walletCategoryService = walletCategoryService;
             this.categoryRuleService = categoryRuleService;
-            //this.ruleService = ruleService;
+            this.modified = false;
 
             this.Category = new Category();
         }
@@ -40,6 +42,39 @@ namespace VirtualWallet.ViewModels
                     return;
 
                 category = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Boolean Modified
+        {
+            get
+            {
+                return modified;
+            }
+            set
+            {
+                if (modified == value)
+                    return;
+
+                modified = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public String Name
+        {
+            get
+            { 
+                return Category == null ? string.Empty : Category.Name;
+            }
+            set
+            {
+                if (Category == null || Category.Name == value)
+                    return;
+
+                Category.Name = value;
+                Modified = true;
                 NotifyPropertyChanged();
             }
         }
@@ -110,6 +145,22 @@ namespace VirtualWallet.ViewModels
             }
 
             Rules = new ObservableCollection<Rule>(rules);
+        }
+
+        public async Task SaveCategoryAsync()
+        {
+            await categoryService.ReplaceAsync(Category);
+        }
+
+        public async Task DiscardChangesAsync()
+        {
+            var catModifier = new CategoryModifier() { IncludeImage = true };
+            var originalCategory = await categoryService.GetAsync(1, catModifier);
+            await this.LoadDataAsync();
+
+            Name = originalCategory.Name;
+
+            Modified = false;
         }
     }
 }

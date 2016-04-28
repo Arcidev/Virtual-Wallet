@@ -1,19 +1,7 @@
 ﻿using BL.Models;
 using BL.Service;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
 using VirtualWallet.ViewModels;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -55,6 +43,16 @@ namespace VirtualWallet.Pages
         private void ListViewRules_ItemClick(object sender, ItemClickEventArgs e)
         {
 
+        }
+
+        private async void SaveAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await viewModel.SaveCategoryAsync();
+        }
+
+        private async void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await viewModel.DiscardChangesAsync();
         }
     }
 }
