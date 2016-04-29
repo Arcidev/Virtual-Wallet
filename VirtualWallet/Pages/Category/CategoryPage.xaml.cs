@@ -24,9 +24,15 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            var category = (Category)e.Parameter;
-            viewModel.Category = category;
+            var pagePayload = (BL.Models.PagePayload)e.Parameter;
+            viewModel.Category = (Category)pagePayload.Dto;
             await viewModel.LoadDataAsync();
+
+            if (pagePayload.NewImage != null)
+            {
+                viewModel.Image = pagePayload.NewImage;
+            }
+            
             base.OnNavigatedTo(e);
         }
 
@@ -53,6 +59,11 @@ namespace VirtualWallet.Pages
         private async void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             await viewModel.DiscardChangesAsync();
+        }
+
+        private void IconButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(ImagesPage), viewModel.Image);
         }
     }
 }

@@ -79,6 +79,23 @@ namespace VirtualWallet.ViewModels
             }
         }
 
+        public Image Image
+        {
+            get
+            {
+                return Category == null ? null : Category.Image;
+            }
+            set
+            {
+                if (Category == null || Category.Image == value)
+                    return;
+
+                Category.Image = value;
+                Modified = true;
+                NotifyPropertyChanged();
+            }
+        }
+
         public ObservableCollection<Wallet> Wallets
         {
             get { return wallets; }
@@ -150,15 +167,17 @@ namespace VirtualWallet.ViewModels
         public async Task SaveCategoryAsync()
         {
             await categoryService.ReplaceAsync(Category);
+            Modified = false;
         }
 
         public async Task DiscardChangesAsync()
         {
             var catModifier = new CategoryModifier() { IncludeImage = true };
-            var originalCategory = await categoryService.GetAsync(1, catModifier);
+            var originalCategory = await categoryService.GetAsync(Category.Id, catModifier);
             await this.LoadDataAsync();
 
             Name = originalCategory.Name;
+            Image = originalCategory.Image;
 
             Modified = false;
         }
