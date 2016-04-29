@@ -112,6 +112,9 @@
       <DependentUpon>CategoryPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\CommandHandler.cs" />
+    <Compile Include="Pages\Image\ImagesPage.xaml.cs">
+      <DependentUpon>ImagesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Menu\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
@@ -127,6 +130,7 @@
     </Compile>
     <Compile Include="ViewModels\Bank\BankCredentialsPageViewModel.cs" />
     <Compile Include="ViewModels\Bank\BankPageViewModel.cs" />
+    <Compile Include="ViewModels\ImagesPageViewModel.cs" />
     <Compile Include="ViewModels\CategoriesPageViewModel.cs" />
     <Compile Include="ViewModels\CategoryPageViewModel.cs" />
     <Compile Include="ViewModels\MenuPageViewModel.cs" />
@@ -307,6 +311,10 @@
     <Page Include="Pages\Category\CategoryPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Image\ImagesPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Rule\RulePage.xaml">
       <SubType>Designer</SubType>
