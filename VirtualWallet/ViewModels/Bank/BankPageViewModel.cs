@@ -2,7 +2,9 @@
 using BL.Models;
 using BL.Service;
 using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -16,9 +18,10 @@ namespace VirtualWallet.ViewModels
     public class BankPageViewModel : ViewModelBase, IDisposable
     {
         private IBankAccountInfoService bankAccountInfoService;
+        private ITransactionService transactionService;
         private ResourceLoader resources;
         private Bank bank;
-        private ObservableCollection<Transaction> transactions;
+        private IList<Transaction> transactions;
         private BankAccountInfo bankAccountInfo;
         private ICommand syncCommand;
         private Timer syncExecuteTimer;
@@ -49,12 +52,13 @@ namespace VirtualWallet.ViewModels
                 NotifyPropertyChanged();
 
                 BankAccountInfo = Bank?.BankAccountInfo ?? new BankAccountInfo();
+                Transactions = Bank?.StoredTransactions;
                 SyncCommand = new CommandHandler(SyncExecute, () => !syncButtonForceDisabled && (Bank?.CanSyncExecute ?? false));
                 SetSyncExecuteTimer();
             }
         }
 
-        public ObservableCollection<Transaction> Transactions
+        public IList<Transaction> Transactions
         {
             get { return transactions; }
             set
@@ -80,16 +84,20 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public BankPageViewModel(IBankAccountInfoService bankAccountInfoService, ResourceLoader resources)
+        public BankPageViewModel(IBankAccountInfoService bankAccountInfoService, ITransactionService transactionService, ResourceLoader resources)
         {
             this.bankAccountInfoService = bankAccountInfoService;
+            this.transactionService = transactionService;
             this.resources = resources;
         }
 
         public async Task LoadDataAsync(Bank bank)
         {
             if (bank != null)
+            {
                 bank.BankAccountInfo = await bankAccountInfoService.GetAsync(bank.Id);
+                bank.StoredTransactions = await transactionService.GetByBankIdAsync(bank.Id);
+            }
 
             Bank = bank;
         }
@@ -105,12 +113,37 @@ namespace VirtualWallet.ViewModels
             syncButtonForceDisabled = true;
             NotifyPropertyChanged(nameof(SyncCommand));
 
-            var filter = new TransactionFilter() { Days = 30 };
+            var filter = new TransactionFilter();
+            filter.AddMonths(1);
+
             try
             {
-                var Transactions = await Bank.GetTransactionsAsync(filter);
+                var bankTransactions = await Bank.GetTransactionsAsync(filter);
                 BankAccountInfo = Bank.BankAccountInfo;
-                await bankAccountInfoService.ReplaceAsync(BankAccountInfo);
+
+                if (Bank.StoredTransactions != null && Bank.StoredTransactions.Any())
+                {
+                    var toStore = new List<Transaction>();
+                    foreach (var transaction in bankTransactions)
+                    {
+                        if (!Bank.StoredTransactions.Any(x => x.ExternalId == transaction.ExternalId))
+                        {
+                            Bank.StoredTransactions.Add(transaction);
+                            toStore.Add(transaction);
+                        }
+                    }
+
+                    await transactionService.InsertOrIgnoreAsync(toStore.ToArray());
+                }
+                else
+                {
+                    Bank.StoredTransactions = bankTransactions;
+                    await transactionService.InsertOrIgnoreAsync(bankTransactions.ToArray());
+                }
+
+                transactions = Bank.StoredTransactions;
+                NotifyPropertyChanged(nameof(Transactions));
+                await bankAccountInfoService.InsertOrReplaceAsync(BankAccountInfo);
             }
             catch (Exception)
             {

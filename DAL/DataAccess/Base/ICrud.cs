@@ -12,10 +12,16 @@ namespace DAL.DataAccess
     public interface ICrud<T1, T2> : IGet<T1, T2> where T1 : IDao where T2 : BaseFilter
     {
         /// <summary>
-        /// Stores entities into db
+        /// Inserts entities into database
         /// </summary>
         /// <param name="entities">Entities to store</param>
-        Task CreateAsync(params T1[] entities);
+        Task InsertAsync(params T1[] entities);
+
+        /// <summary>
+        /// Inserts or ignores entities in database
+        /// </summary>
+        /// <param name="entities">Entities to be stored or replaced</param>
+        Task InsertOrIgnoreAsync(params T1[] entities);
 
         /// <summary>
         /// Updates entities stored in db
@@ -27,7 +33,7 @@ namespace DAL.DataAccess
         /// Inserts or replaces entities stored in database
         /// </summary>
         /// <param name="entities">Entities to be stored or replaced</param>
-        Task ReplaceAsync(params T1[] entities);
+        Task InsertOrReplaceAsync(params T1[] entities);
 
         /// <summary>
         /// Deletes entity by id

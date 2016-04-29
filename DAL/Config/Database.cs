@@ -4,7 +4,6 @@ using Shared.Enums;
 using SQLite.Net.Async;
 using System;
 using System.IO;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.Storage;
 
@@ -21,7 +20,8 @@ namespace DAL.Config
             typeof(Image),
             typeof(Wallet),
             typeof(WalletCategory),
-            typeof(BankAccountInfo)
+            typeof(BankAccountInfo),
+            typeof(Transaction)
         };
 
         public async Task InitAsync()

@@ -9,6 +9,8 @@ namespace BL.Mapping
         {
             cfg.CreateMap<DAL.Data.Bank, Bank>().ConstructUsing(r => Bank.Create(((DAL.Data.Bank)r.SourceValue).Id));
             cfg.CreateMap<Bank, DAL.Data.Bank>()
+            .ForMember(target => target.StoredTransactions, action => action.Ignore())
+            .ForMember(target => target.BankAccountInfo, action => action.Ignore())
             .ForMember(target => target.Image, action => action.Ignore())
             .ForMember(target => target.ImageId, action => action.MapFrom(source => source.Image != null ? source.Image.Id : source.ImageId));
 
@@ -45,6 +47,9 @@ namespace BL.Mapping
             .ForMember(target => target.RuleId, action => action.MapFrom(source => source.Rule != null ? source.Rule.Id : source.RuleId))
             .ForMember(target => target.Category, action => action.Ignore())
             .ForMember(target => target.CategoryId, action => action.MapFrom(source => source.Category != null ? source.Category.Id : source.CategoryId));
+
+            cfg.CreateMap<DAL.Data.Transaction, Transaction>();
+            cfg.CreateMap<Transaction, DAL.Data.Transaction>();
         }).CreateMapper();
     }
 }

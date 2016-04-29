@@ -6,5 +6,7 @@ namespace Shared.Modifiers
         public bool IncludeImage { get; set; }
 
         public bool IncludeBankAccountInfo { get; set; }
+
+        public bool IncludeTransactions { get; set; }
     }
 }

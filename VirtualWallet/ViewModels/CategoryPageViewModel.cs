@@ -166,7 +166,7 @@ namespace VirtualWallet.ViewModels
 
         public async Task SaveCategoryAsync()
         {
-            await categoryService.ReplaceAsync(Category);
+            await categoryService.InsertOrReplaceAsync(Category);
             Modified = false;
         }
 

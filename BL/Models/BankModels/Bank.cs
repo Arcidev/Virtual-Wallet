@@ -38,7 +38,7 @@ namespace BL.Models
 
         public abstract DateTime NextPossibleSyncTime { get; }
 
-        public abstract void SetCredentials(string token = null, string login = null, string password = null);
+        public abstract void SetCredentials(string token);
 
         public abstract void SaveCredentials();
 

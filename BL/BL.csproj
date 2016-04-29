@@ -114,14 +114,14 @@
     <Compile Include="Models\CategoryRule.cs" />
     <Compile Include="Models\PagePayload.cs" />
     <Compile Include="Models\WalletCategory.cs" />
-    <Compile Include="Service\BankAccountInfoService.cs" />
-    <Compile Include="Service\RuleService.cs" />
-    <Compile Include="Service\DatabaseService.cs" />
-    <Compile Include="Service\ImageService.cs" />
-    <Compile Include="Service\Interface\IBankService.cs" />
-    <Compile Include="Service\Interface\IBankAccountInfoService.cs" />
-    <Compile Include="Service\Interface\IRuleService.cs" />
-    <Compile Include="Service\Interface\IDatabaseService.cs" />
+    <Compile Include="Service\Bank\BankAccountInfoService.cs" />
+    <Compile Include="Service\Rule\RuleService.cs" />
+    <Compile Include="Service\Database\DatabaseService.cs" />
+    <Compile Include="Service\Image\ImageService.cs" />
+    <Compile Include="Service\Bank\IBankService.cs" />
+    <Compile Include="Service\Bank\IBankAccountInfoService.cs" />
+    <Compile Include="Service\Rule\IRuleService.cs" />
+    <Compile Include="Service\Database\IDatabaseService.cs" />
     <Compile Include="Mapping\MapperInstance.cs" />
     <Compile Include="Models\BankModels\Bank.cs" />
     <Compile Include="Models\BankModels\Fio.cs" />
@@ -134,27 +134,29 @@
     <Compile Include="Models\TransactionModels\ITransactionSource.cs" />
     <Compile Include="Models\Wallet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Service\BaseModifiableService.cs">
+    <Compile Include="Service\Base\BaseModifiableService.cs">
       <DependentUpon>BaseModifiableService.tt</DependentUpon>
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
     </Compile>
-    <Compile Include="Service\CategoryService.cs" />
-    <Compile Include="Service\BaseCrudService.cs" />
-    <Compile Include="Service\BaseGetService.cs" />
-    <Compile Include="Service\BankService.cs" />
-    <Compile Include="Service\Interface\ICategoryService.cs" />
-    <Compile Include="Service\Interface\ICrudService.cs" />
-    <Compile Include="Service\Interface\IGetService.cs" />
-    <Compile Include="Service\Interface\IImageService.cs" />
-    <Compile Include="Service\Interface\IModifiableCrudService.cs" />
-    <Compile Include="Service\Interface\IModifiableGetService.cs" />
-    <Compile Include="Service\Interface\ICategoryRuleService.cs" />
-    <Compile Include="Service\Interface\IWalletService.cs" />
-    <Compile Include="Service\Interface\IWalletCategoryService.cs" />
-    <Compile Include="Service\CategoryRuleService.cs" />
-    <Compile Include="Service\WalletCategoryService.cs" />
-    <Compile Include="Service\WalletService.cs" />
+    <Compile Include="Service\Category\CategoryService.cs" />
+    <Compile Include="Service\Base\BaseCrudService.cs" />
+    <Compile Include="Service\Base\BaseGetService.cs" />
+    <Compile Include="Service\Bank\BankService.cs" />
+    <Compile Include="Service\Category\ICategoryService.cs" />
+    <Compile Include="Service\Base\ICrudService.cs" />
+    <Compile Include="Service\Base\IGetService.cs" />
+    <Compile Include="Service\Image\IImageService.cs" />
+    <Compile Include="Service\Base\IModifiableCrudService.cs" />
+    <Compile Include="Service\Base\IModifiableGetService.cs" />
+    <Compile Include="Service\Category\ICategoryRuleService.cs" />
+    <Compile Include="Service\Transaction\ITransactionService.cs" />
+    <Compile Include="Service\Transaction\TransactionService.cs" />
+    <Compile Include="Service\Wallet\IWalletService.cs" />
+    <Compile Include="Service\Wallet\IWalletCategoryService.cs" />
+    <Compile Include="Service\Category\CategoryRuleService.cs" />
+    <Compile Include="Service\Wallet\WalletCategoryService.cs" />
+    <Compile Include="Service\Wallet\WalletService.cs" />
     <EmbeddedResource Include="Properties\BL.rd.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +170,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Service\BaseModifiableService.tt">
+    <Content Include="Service\Base\BaseModifiableService.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BaseModifiableService.cs</LastGenOutput>
     </Content>

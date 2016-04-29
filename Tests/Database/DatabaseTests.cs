@@ -33,7 +33,7 @@ namespace Tests.Database
             Category cat1 = new Category() { Name = "Category 1" };
             Category cat2 = new Category() { Name = "Category 2" };
 
-            await categories.CreateAsync(cat1, cat2);
+            await categories.InsertAsync(cat1, cat2);
             var cats = await categories.GetAllAsync();
             Assert.AreEqual(2, cats.Count);
 
@@ -71,7 +71,7 @@ namespace Tests.Database
             await categories.DeleteAllAsync();
 
             Category cat1 = new Category() { Name = "Category 1", ImageId = (int)ImageId.Fio };
-            await categories.CreateAsync(cat1);
+            await categories.InsertAsync(cat1);
 
             var modifier = new CategoryModifier() { IncludeImage = true };
             var category = (await categories.GetAllAsync(modifier)).Single();
@@ -96,8 +96,8 @@ namespace Tests.Database
             Wallet wallet1 = new Wallet() { Name = "wallet test 1" };
             Wallet wallet2 = new Wallet() { Name = "wallet test 2" };
 
-            await categories.CreateAsync(cat1, cat2);
-            await wallets.CreateAsync(wallet1, wallet2);
+            await categories.InsertAsync(cat1, cat2);
+            await wallets.InsertAsync(wallet1, wallet2);
 
             var categoryFilter = new CategoryFilter() { Name = "category test 1" };
             cat1 = (await categories.GetAsync(categoryFilter)).First();
@@ -111,7 +111,7 @@ namespace Tests.Database
 
             var walletCategory1 = new WalletCategory() { CategoryId = cat1.Id, WalletId = wallet1.Id };
             var walletCategory2 = new WalletCategory() { CategoryId = cat2.Id, WalletId = wallet2.Id };
-            await walletsCategories.CreateAsync(walletCategory1, walletCategory2);
+            await walletsCategories.InsertAsync(walletCategory1, walletCategory2);
             Assert.AreEqual(2, (await walletsCategories.GetAllAsync()).Count);
 
             await categories.DeleteAsync(cat1.Id);

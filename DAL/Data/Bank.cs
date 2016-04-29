@@ -1,4 +1,5 @@
 ﻿using SQLite.Net.Attributes;
+using System.Collections.Generic;
 
 namespace DAL.Data
 {
@@ -17,5 +18,8 @@ namespace DAL.Data
 
         [Ignore]
         public BankAccountInfo BankAccountInfo { get; set; }
+
+        [Ignore]
+        public IList<Transaction> StoredTransactions { get; set; }
     }
 }

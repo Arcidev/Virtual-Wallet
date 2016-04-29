@@ -10,6 +10,7 @@ namespace DAL.DataAccess
     {
         private static readonly IImages images = new Images();
         private static readonly IBankAccountInfoes bankAccountInfoes = new BankAccountInfoes();
+        private static readonly ITransactions transactions = new Transactions();
 
         protected override AsyncTableQuery<Bank> ApplyFilters(AsyncTableQuery<Bank> query, BankFilter filter)
         {
@@ -27,8 +28,11 @@ namespace DAL.DataAccess
             if ((modifier.IncludeImage || modifier.IncludeAll) && bank.ImageId.HasValue)
                 bank.Image = await images.GetAsync(bank.ImageId.Value);
 
-            if ((modifier.IncludeBankAccountInfo || modifier.IncludeAll))
+            if (modifier.IncludeBankAccountInfo || modifier.IncludeAll)
                 bank.BankAccountInfo = await bankAccountInfoes.GetAsync(bank.Id);
+
+            if (modifier.IncludeTransactions || modifier.IncludeAll)
+                bank.StoredTransactions = await transactions.GetByBankIdAsync(bank.Id);
         }
     }
 }

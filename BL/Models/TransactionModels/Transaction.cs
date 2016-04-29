@@ -2,11 +2,13 @@
 
 namespace BL.Models
 {
-    public class Transaction
+    public class Transaction : IDto
     {
         public int Id { get; set; }
 
-        public ITransactionSource Source { get; set; }
+        public long? ExternalId { get; set; }
+
+        public int? BankId { get; set; }
 
         public DateTime Date { get; set; }
 

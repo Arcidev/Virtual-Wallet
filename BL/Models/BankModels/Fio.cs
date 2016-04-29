@@ -81,7 +81,7 @@ namespace BL.Models
             PasswordVault.Add(password);
         }
 
-        public override void SetCredentials(string token = null, string login = null, string password = null)
+        public override void SetCredentials(string token)
         {
             Token = token;
         }
@@ -108,9 +108,9 @@ namespace BL.Models
             {
                 transactions.Add(new Transaction()
                 {
-                    Id = (int)transaction.Id.Value,
+                    ExternalId = transaction.Id?.Value,
                     Amount = transaction.Amount?.Value ?? 0,
-                    Source = this,
+                    BankId = Id,
                     Description = transaction.Comment?.Value,
                     Date = transaction.Date?.Value ?? DateTime.Now,
                     Currency = transaction.Currency?.Value

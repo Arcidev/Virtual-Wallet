@@ -40,7 +40,7 @@ namespace Tests.Service
             Category cat1 = new Category() { Name = "Category 1" };
             Category cat2 = new Category() { Name = "Category 2" };
 
-            await _categories.CreateAsync(cat1, cat2);
+            await _categories.InsertAsync(cat1, cat2);
             var cats = await _categories.GetAllAsync();
             Assert.AreEqual(2, cats.Count);
 
@@ -78,7 +78,7 @@ namespace Tests.Service
             await _categories.DeleteAllAsync();
 
             Category cat = new Category() { Name = "Category 1", ImageId = (int)ImageId.Fio };
-            await _categories.CreateAsync(cat);
+            await _categories.InsertAsync(cat);
 
             var modifier = new CategoryModifier() { IncludeImage = true };
             var category = (await _categories.GetAllAsync(modifier)).Single();
@@ -87,7 +87,7 @@ namespace Tests.Service
             Assert.AreEqual((int)ImageId.Fio, category.Image.Id);
 
             cat = new Category() { Name = "Category 2", Image = (await _images.GetAsync((int)ImageId.Fio)) };
-            await _categories.CreateAsync(cat);
+            await _categories.InsertAsync(cat);
 
             var filter = new CategoryFilter() { Name = "Category 2" };
             category = (await _categories.GetAsync(filter, modifier)).Single();
