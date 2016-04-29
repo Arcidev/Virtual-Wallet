@@ -1,15 +1,11 @@
 ﻿using DAL.Data;
 using Shared.Enums;
 using SQLite.Net.Async;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL.InitialData
 {
-    class InitialData
+    internal class InitialData
     {
         private const string imageStorage = "ms-appx:///Assets/Images/";
 

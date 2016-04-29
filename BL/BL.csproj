@@ -108,11 +108,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\BankModels\BankAccountInfo.cs" />
-    <Compile Include="Models\PagePayload.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Interface\IPagePayload.cs" />
     <Compile Include="Models\LanguageInfo.cs" />
     <Compile Include="Models\CategoryRule.cs" />
+    <Compile Include="Models\PagePayload.cs" />
     <Compile Include="Models\WalletCategory.cs" />
     <Compile Include="Service\BankAccountInfoService.cs" />
     <Compile Include="Service\RuleService.cs" />

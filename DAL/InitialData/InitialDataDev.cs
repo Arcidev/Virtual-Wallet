@@ -1,14 +1,10 @@
 ﻿using DAL.Data;
 using SQLite.Net.Async;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace DAL.InitialData
 {
-    class InitialDataDev
+    internal class InitialDataDev
     {
         // Just for testing
         public static async Task InitTempData(SQLiteAsyncConnection connection)

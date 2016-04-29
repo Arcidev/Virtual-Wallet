@@ -46,14 +46,14 @@ namespace VirtualWallet.Pages
 
         }
 
-        private async void AcceptAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void AcceptAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             
             var lastPage = Frame.BackStack.Last();
 
             //dto.Image = viewModel.SelectedImage;
 
-            var pagePayload = (BL.Models.PagePayload) lastPage.Parameter;
+            var pagePayload = (PagePayload) lastPage.Parameter;
 
             pagePayload.NewImage = viewModel.SelectedImage;
 
@@ -61,15 +61,12 @@ namespace VirtualWallet.Pages
             //Frame.Navigate(lastPage, dto);
         }
 
-        private async void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Frame.GoBack();
             //var lastPage = Frame.BackStack.Last().SourcePageType;
             //dto.Image = viewModel.OriginalImage;
             //Frame.Navigate(lastPage, dto);
         }
-
-
-
     }
 }

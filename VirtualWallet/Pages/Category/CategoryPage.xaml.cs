@@ -24,7 +24,7 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            var pagePayload = (BL.Models.PagePayload)e.Parameter;
+            var pagePayload = (PagePayload)e.Parameter;
             viewModel.Category = (Category)pagePayload.Dto;
             await viewModel.LoadDataAsync();
 
