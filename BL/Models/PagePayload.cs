@@ -1,5 +1,4 @@
-﻿
-namespace BL.Models
+﻿namespace BL.Models
 {
     public class PagePayload : IPagePayload
     {

@@ -31,8 +31,7 @@
                           IsSwipeEnabled="False" 
                           SelectionMode="Single"
                           SelectedItem="{Binding SelectedImage, Mode=TwoWay}"
-                          IsItemClickEnabled="True"
-                          ItemClick="GridViewIcons_ItemClick">
+                          IsItemClickEnabled="True">
                     </GridView>
                 </Grid>
             </Grid>
