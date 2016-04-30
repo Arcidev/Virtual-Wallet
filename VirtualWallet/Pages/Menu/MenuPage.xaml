@@ -72,7 +72,14 @@
                           IsSwipeEnabled="False" 
                           SelectionMode="None"
                           IsItemClickEnabled="True"
-                          ItemClick="GridViewBanks_ItemClick">
+                          ItemClick="GridViewBanks_ItemClick"
+                          RightTapped="GridViewBanks_RightTapped">
+                        <FlyoutBase.AttachedFlyout>
+                            <MenuFlyout>
+                                <MenuFlyoutItem x:Uid="Flyout_Edit.Text" Text="Edit" Click="BanksFlyoutEditButton_Click"/>
+                                <MenuFlyoutItem x:Uid="Menu_RemoveCredentials.Text" Text="Remove credentials" Click="BanksFlyoutRemoveCredentialsButton_Click"/>
+                            </MenuFlyout>
+                        </FlyoutBase.AttachedFlyout>
                     </GridView>
                 </Grid>
             </Grid>

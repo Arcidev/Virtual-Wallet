@@ -126,9 +126,6 @@
   <data name="BankCredentials_Remember.Text" xml:space="preserve">
     <value>Zamapätať?</value>
   </data>
-  <data name="BankCredentials_Submit.Text" xml:space="preserve">
-    <value>Odoslať</value>
-  </data>
   <data name="BankCredentials_Token.Text" xml:space="preserve">
     <value>Token</value>
   </data>
@@ -159,67 +156,82 @@
   <data name="CommandBar_Sync.Label" xml:space="preserve">
     <value>Synchronizovať</value>
   </data>
-  <data name="Settings_Header" xml:space="preserve">
-    <value>Nastavenia</value>
-  </data>
-  <data name="Settings_RemoveCredentials" xml:space="preserve">
-    <value>Odstrániť prihlasovacie údaje</value>
-  </data>
-  <data name="Settings_RemoveData" xml:space="preserve">
-    <value>Odstrániť dáta</value>
-  </data>
-  <data name="Settings_RemoveDialog" xml:space="preserve">
-    <value>Vykonaním tejto akcie zmažete {0} uložené touto aplikáciou. Ste si istí, že chcete pokračovať?</value>
-  </data>
-  <data name="Settings_RemoveDialog_Credentials" xml:space="preserve">
-    <value>prihlasovacie údaje</value>
-  </data>
-  <data name="Settings_RemoveDialog_Data" xml:space="preserve">
-    <value>dáta a prihlasovacie údaje</value>
-  </data>
-  <data name="Dialog_No" xml:space="preserve">
-    <value>Nie</value>
-  </data>
-  <data name="Dialog_Yes" xml:space="preserve">
-    <value>Áno</value>
-  </data>
-  <data name="Settings_UserContent" xml:space="preserve">
-    <value>Uživateľský obsah:</value>
-  </data>
-  <data name="Menu_Banks.Text" xml:space="preserve">
-    <value>Banky</value>
-  </data>
   <data name="Menu_Categories.Text" xml:space="preserve">
     <value>Kategórie</value>
   </data>
-  <data name="Menu_Header.Text" xml:space="preserve">
-    <value>Virtual Wallet</value>
-  </data>
-  <data name="Menu_Wallets.Text" xml:space="preserve">
-    <value>Peňaženky</value>
-  </data>
-  <data name="Settings_CopyDbToRoaming" xml:space="preserve">
-    <value>Kopírovať dáta do zdieľanej zložky</value>
-  </data>
-  <data name="Settings_RetrieveDbFromRoaming" xml:space="preserve">
-    <value>Načítať dáta zo zdieľanej zložky</value>
-  </data>
-  <data name="Settings_CopyDbDialog" xml:space="preserve">
-    <value>Vykonaním tejto akcie prepíšete dáta aplikácie, uložené v zdieľanej zložke. Ste si istí, že chcete pokračovať?</value>
-  </data>
-  <data name="Settings_RetrieveDbDialog" xml:space="preserve">
-    <value>Vykonaním tejto akcie prepíšete dáta aplikácie. Ste si istí, že chcete pokračovať?</value>
-  </data>
-  <data name="Settings_Application" xml:space="preserve">
-    <value>Aplikácia:</value>
-  </data>
-  <data name="Settings_Language" xml:space="preserve">
-    <value>Preferovaný jazyk</value>
+  <data name="Bank_ErrorDialog" xml:space="preserve">
+    <value>Och! Niečo sa pokazilo. Skontrolujte prosím pripojenie k internetu a platnosť tokenu.</value>
   </data>
   <data name="Settings_Language_None" xml:space="preserve">
     <value>Žiaden</value>
   </data>
-  <data name="Bank_ErrorDialog" xml:space="preserve">
-    <value>Och! Niečo sa pokazilo. Skontrolujte prosím pripojenie k internetu a platnosť tokenu.</value>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Preferovaný jazyk</value>
+  </data>
+  <data name="Settings_Application" xml:space="preserve">
+    <value>Aplikácia:</value>
+  </data>
+  <data name="Settings_RetrieveDbDialog" xml:space="preserve">
+    <value>Vykonaním tejto akcie prepíšete dáta aplikácie. Ste si istí, že chcete pokračovať?</value>
+  </data>
+  <data name="Settings_CopyDbDialog" xml:space="preserve">
+    <value>Vykonaním tejto akcie prepíšete dáta aplikácie, uložené v zdieľanej zložke. Ste si istí, že chcete pokračovať?</value>
+  </data>
+  <data name="Settings_RetrieveDbFromRoaming" xml:space="preserve">
+    <value>Načítať dáta zo zdieľanej zložky</value>
+  </data>
+  <data name="Settings_CopyDbToRoaming" xml:space="preserve">
+    <value>Kopírovať dáta do zdieľanej zložky</value>
+  </data>
+  <data name="Menu_Wallets.Text" xml:space="preserve">
+    <value>Peňaženky</value>
+  </data>
+  <data name="Menu_Header.Text" xml:space="preserve">
+    <value>Virtual Wallet</value>
+  </data>
+  <data name="Menu_Banks.Text" xml:space="preserve">
+    <value>Banky</value>
+  </data>
+  <data name="Settings_UserContent" xml:space="preserve">
+    <value>Uživateľský obsah:</value>
+  </data>
+  <data name="Dialog_Yes" xml:space="preserve">
+    <value>Áno</value>
+  </data>
+  <data name="Dialog_No" xml:space="preserve">
+    <value>Nie</value>
+  </data>
+  <data name="Settings_RemoveDialog_Data" xml:space="preserve">
+    <value>dáta a prihlasovacie údaje</value>
+  </data>
+  <data name="Settings_RemoveDialog_Credentials" xml:space="preserve">
+    <value>prihlasovacie údaje</value>
+  </data>
+  <data name="Settings_RemoveDialog" xml:space="preserve">
+    <value>Vykonaním tejto akcie zmažete {0} uložené touto aplikáciou. Ste si istí, že chcete pokračovať?</value>
+  </data>
+  <data name="Settings_RemoveData" xml:space="preserve">
+    <value>Odstrániť dáta</value>
+  </data>
+  <data name="Settings_RemoveCredentials" xml:space="preserve">
+    <value>Odstrániť prihlasovacie údaje</value>
+  </data>
+  <data name="Settings_Header" xml:space="preserve">
+    <value>Nastavenia</value>
+  </data>
+  <data name="CommandBar_Accept.Label" xml:space="preserve">
+    <value>Prijať</value>
+  </data>
+  <data name="CommandBar_Cancel.Label" xml:space="preserve">
+    <value>Zrušiť</value>
+  </data>
+  <data name="Flyout_Edit.Text" xml:space="preserve">
+    <value>Upraviť</value>
+  </data>
+  <data name="Menu_RemoveCredentials" xml:space="preserve">
+    <value>Odstrániť prihlasovacie údaje</value>
+  </data>
+  <data name="Menu_BankRemoveDialog" xml:space="preserve">
+    <value>Vykonaním tejto akcie zmažete prihlasovacie údaje vybranej banky uložené touto aplikáciou. Ste si istí, že chcete pokračovať?</value>
   </data>
 </root>

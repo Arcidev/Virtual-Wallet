@@ -109,7 +109,6 @@
   <ItemGroup>
     <Compile Include="Enums\Results\CopyDatabaseResult.cs" />
     <Compile Include="Enums\BankId.cs" />
-    <Compile Include="Enums\CredentialType.cs" />
     <Compile Include="Enums\ImageId.cs" />
     <Compile Include="Filters\BankFilter.cs" />
     <Compile Include="Filters\BaseFilter.cs" />

@@ -32,8 +32,6 @@ namespace BL.Models
 
         public bool CanSyncExecute { get { return NextPossibleSyncTime <= DateTime.Now; } }
 
-        public abstract CredentialType CredentialType { get; }
-
         public abstract bool HasCredentials { get; }
 
         public abstract DateTime NextPossibleSyncTime { get; }

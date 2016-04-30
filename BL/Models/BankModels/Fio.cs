@@ -1,6 +1,5 @@
 ﻿using BL.Mapping;
 using FioSdkCsharp;
-using Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,11 +20,6 @@ namespace BL.Models
         public string Token { get; set; }
 
         public override bool HasCredentials { get { return !string.IsNullOrEmpty(Token); } }
-
-        public override CredentialType CredentialType
-        {
-            get { return CredentialType.Token; }
-        }
 
         public override DateTime NextPossibleSyncTime { get { return nextPossibleSyncTime; } }
 
@@ -91,6 +85,8 @@ namespace BL.Models
             var credentials = GetCredentials();
             if (credentials != null)
                 PasswordVault.Remove(credentials);
+
+            Token = null;
         }
 
         private PasswordCredential GetCredentials()

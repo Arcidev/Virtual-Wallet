@@ -28,7 +28,7 @@ namespace VirtualWallet.Pages
             base.OnNavigatedTo(e);
         }
 
-        private async void SubmitButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void AcceptAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             if (!viewModel.IsValid)
             {
@@ -42,6 +42,12 @@ namespace VirtualWallet.Pages
             viewModel.SetCredentials();
             if (Frame.Navigate(typeof(BankPage), viewModel.Bank))
                 this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
+        }
+
+        private void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+                Frame.GoBack();
         }
 
         private void TokenTextBox_KeyUp(object sender, Windows.UI.Xaml.Input.KeyRoutedEventArgs e)
