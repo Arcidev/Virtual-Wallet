@@ -93,6 +93,7 @@
     <PRIResource Include="Resources\Strings\en-US\Resources.resw" />
     <PRIResource Include="Resources\Strings\sk-SK\Resources.resw" />
     <PRIResource Include="Resources\Strings\cs-CZ\Resources.resw" />
+    <PRIResource Include="Resources\Strings\es-ES\Resources.resw" />
     <None Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource.xsd" />
   </ItemGroup>
   <ItemGroup>
@@ -130,11 +131,11 @@
     </Compile>
     <Compile Include="ViewModels\Bank\BankCredentialsPageViewModel.cs" />
     <Compile Include="ViewModels\Bank\BankPageViewModel.cs" />
-    <Compile Include="ViewModels\ImagesPageViewModel.cs" />
-    <Compile Include="ViewModels\CategoriesPageViewModel.cs" />
-    <Compile Include="ViewModels\CategoryPageViewModel.cs" />
-    <Compile Include="ViewModels\MenuPageViewModel.cs" />
-    <Compile Include="ViewModels\SettingsViewModel.cs" />
+    <Compile Include="ViewModels\Image\ImagesPageViewModel.cs" />
+    <Compile Include="ViewModels\Category\CategoriesPageViewModel.cs" />
+    <Compile Include="ViewModels\Category\CategoryPageViewModel.cs" />
+    <Compile Include="ViewModels\Menu\MenuPageViewModel.cs" />
+    <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource.xaml.cs">
       <DependentUpon>WalletsSampleDataSource.xaml</DependentUpon>

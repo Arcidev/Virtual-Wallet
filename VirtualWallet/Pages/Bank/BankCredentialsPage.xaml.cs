@@ -18,7 +18,7 @@ namespace VirtualWallet.Pages
         {
             this.InitializeComponent();
             viewModel = new BankCredentialsPageViewModel();
-            resources = new ResourceLoader();
+            resources = ResourceLoader.GetForCurrentView();
             this.DataContext = viewModel;
         }
 

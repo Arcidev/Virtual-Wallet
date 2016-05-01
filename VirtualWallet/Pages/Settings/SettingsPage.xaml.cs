@@ -17,7 +17,7 @@ namespace VirtualWallet.Pages
         public SettingsPage()
         {
             this.InitializeComponent();
-            resources = new ResourceLoader();
+            resources = ResourceLoader.GetForCurrentView();
             viewModel = new SettingsViewModel(new DatabaseService(), new BankService(), resources);
             this.DataContext = viewModel;
         }

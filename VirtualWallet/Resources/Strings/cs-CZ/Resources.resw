@@ -124,7 +124,7 @@
     <value>Zavřít</value>
   </data>
   <data name="BankCredentials_Remember.Text" xml:space="preserve">
-    <value>Zapamätať?</value>
+    <value>Zapamatovat?</value>
   </data>
   <data name="BankCredentials_Token.Text" xml:space="preserve">
     <value>Token</value>

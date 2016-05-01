@@ -124,7 +124,7 @@
     <value>Zatvoriť</value>
   </data>
   <data name="BankCredentials_Remember.Text" xml:space="preserve">
-    <value>Zamapätať?</value>
+    <value>Zapamätať?</value>
   </data>
   <data name="BankCredentials_Token.Text" xml:space="preserve">
     <value>Token</value>
@@ -193,7 +193,7 @@
     <value>Banky</value>
   </data>
   <data name="Settings_UserContent" xml:space="preserve">
-    <value>Uživateľský obsah:</value>
+    <value>Užívateľský obsah:</value>
   </data>
   <data name="Dialog_Yes" xml:space="preserve">
     <value>Áno</value>

@@ -19,7 +19,7 @@ namespace VirtualWallet.Pages
         public MenuPage()
         {
             this.InitializeComponent();
-            resources = new ResourceLoader();
+            resources = ResourceLoader.GetForCurrentView();
             viewModel = new MenuPageViewModel(new WalletService(), new BankService(), new CategoryService());
             this.DataContext = viewModel;
         }

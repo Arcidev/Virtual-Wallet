@@ -1,0 +1,159 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>1.3</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=2.0.3500.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BankCredentials_Dialog" xml:space="preserve">
+    <value>Usted tiene que fijar un token</value>
+  </data>
+  <data name="Dialog_Close" xml:space="preserve">
+    <value>Cerrar</value>
+  </data>
+  <data name="BankCredentials_Remember.Text" xml:space="preserve">
+    <value>¿Recuerda?</value>
+  </data>
+  <data name="BankCredentials_Token.Text" xml:space="preserve">
+    <value>Token</value>
+  </data>
+  <data name="Bank_Balance.Text" xml:space="preserve">
+    <value>Equilibrio:</value>
+  </data>
+  <data name="Bank_DateEnd.Text" xml:space="preserve">
+    <value>Sincronización última:</value>
+  </data>
+  <data name="Bank_DateStart.Text" xml:space="preserve">
+    <value>Fecha de apertura:</value>
+  </data>
+  <data name="Bank_OpeningBalance.Text" xml:space="preserve">
+    <value>Equilibrio de apertura:</value>
+  </data>
+  <data name="Bank_Pivot_Category.Header" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="Bank_Pivot_Overview.Header" xml:space="preserve">
+    <value>Resumén</value>
+  </data>
+  <data name="CommandBar_Edit.Label" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="CommandBar_Settings.Label" xml:space="preserve">
+    <value>Ajustes</value>
+  </data>
+  <data name="CommandBar_Sync.Label" xml:space="preserve">
+    <value>Sincronizar</value>
+  </data>
+  <data name="Menu_Categories.Text" xml:space="preserve">
+    <value>Categoría</value>
+  </data>
+  <data name="Bank_ErrorDialog" xml:space="preserve">
+    <value>Oops! Algo salió mal. Por favor, compruebe su conexión a internet y la validez del token.</value>
+  </data>
+  <data name="Settings_Language" xml:space="preserve">
+    <value>Idioma preferido</value>
+  </data>
+  <data name="Settings_Language_None" xml:space="preserve">
+    <value>Ningún</value>
+  </data>
+  <data name="Settings_Application" xml:space="preserve">
+    <value>Aplicación:</value>
+  </data>
+  <data name="Settings_RetrieveDbDialog" xml:space="preserve">
+    <value>La realización de esta acción se sobreponen a las aplicaciones de datos. ¿Seguro que desea continuar?</value>
+  </data>
+  <data name="Settings_CopyDbDialog" xml:space="preserve">
+    <value>La realización de esta acción se sobreponen a los datos de aplicación almacenados en una carpeta compartida. ¿Seguro que desea continuar?</value>
+  </data>
+  <data name="Settings_RetrieveDbFromRoaming" xml:space="preserve">
+    <value>Recuperar datos de una carpeta compartida</value>
+  </data>
+  <data name="Settings_CopyDbToRoaming" xml:space="preserve">
+    <value>Copiar datos a una carpeta compartida</value>
+  </data>
+  <data name="Menu_Wallets.Text" xml:space="preserve">
+    <value>Billeteras</value>
+  </data>
+  <data name="Menu_Header.Text" xml:space="preserve">
+    <value>Virtual Wallet</value>
+  </data>
+  <data name="Menu_Banks.Text" xml:space="preserve">
+    <value>Bancos</value>
+  </data>
+  <data name="Settings_UserContent" xml:space="preserve">
+    <value>Contenido del usuario:</value>
+  </data>
+  <data name="Dialog_Yes" xml:space="preserve">
+    <value>Sí</value>
+  </data>
+  <data name="Dialog_No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="Settings_RemoveDialog_Data" xml:space="preserve">
+    <value>los datos y las credenciales</value>
+  </data>
+  <data name="Settings_RemoveDialog_Credentials" xml:space="preserve">
+    <value>las credenciales</value>
+  </data>
+  <data name="Settings_RemoveDialog" xml:space="preserve">
+    <value>Realizar esta acción para eliminar {0} almacenadas por esta aplicación. ¿Seguro que desea continuar?</value>
+  </data>
+  <data name="Settings_RemoveData" xml:space="preserve">
+    <value>Eliminar los datos</value>
+  </data>
+  <data name="Settings_RemoveCredentials" xml:space="preserve">
+    <value>Eliminar las credenciales</value>
+  </data>
+  <data name="Settings_Header" xml:space="preserve">
+    <value>Ajustes</value>
+  </data>
+  <data name="CommandBar_Accept.Label" xml:space="preserve">
+    <value>Aceptar</value>
+  </data>
+  <data name="CommandBar_Cancel.Label" xml:space="preserve">
+    <value>Cancelar</value>
+  </data>
+  <data name="Flyout_Edit.Text" xml:space="preserve">
+    <value>Editar</value>
+  </data>
+  <data name="Menu_RemoveCredentials" xml:space="preserve">
+    <value>Eliminar las credenciales</value>
+  </data>
+  <data name="Menu_BankRemoveDialog" xml:space="preserve">
+    <value>Al realizar esta acción va a borrar las credenciales de banco seleccionado almacenado por esta aplicación. ¿Seguro que desea continuar?</value>
+  </data>
+</root>
