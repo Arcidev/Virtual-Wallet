@@ -82,7 +82,7 @@ namespace VirtualWallet.ViewModels
         {
             get
             {
-                return Category == null ? null : Category.Image;
+                return Category?.Image;
             }
             set
             {

@@ -31,7 +31,12 @@ namespace VirtualWallet.Pages
 
             pagePayload.NewImage = viewModel.SelectedImage;
 
-            Frame.GoBack();
+            if (Frame.Navigate(lastPage.SourcePageType, pagePayload))
+            {
+                this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
+                this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
+            }
+                
         }
 
         private void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
