@@ -3,9 +3,9 @@ using Shared.Enums;
 using SQLite.Net.Async;
 using System.Threading.Tasks;
 
-namespace DAL.InitialData
+namespace DAL.Helpers
 {
-    internal class InitialData
+    internal static class InitDataHelper
     {
         private const string imageStorage = "ms-appx:///Assets/Images/";
 

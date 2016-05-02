@@ -1,6 +1,6 @@
 ﻿using BL.Models;
 using BL.Service;
-using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Windows.Input;
@@ -16,6 +16,7 @@ namespace VirtualWallet.ViewModels
         private IBankService bankService;
         private string selectedLanguageCode;
         private ResourceLoader resources;
+        private ObservableCollection<LanguageInfo> availableLanguages;
 
         public ICommand RemoveAllDataCommand { get; private set; }
 
@@ -25,7 +26,18 @@ namespace VirtualWallet.ViewModels
 
         public ICommand RetrieveDatabaseFromRoamingFolderCommand { get; private set; }
 
-        public IList<LanguageInfo> AvailableLanguages { get; private set; }
+        public ObservableCollection<LanguageInfo> AvailableLanguages
+        {
+            get { return availableLanguages; }
+            private set
+            {
+                if (availableLanguages == value)
+                    return;
+
+                availableLanguages = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public string Text_Application { get { return resources.GetString("Settings_Application"); } }
 
@@ -48,7 +60,7 @@ namespace VirtualWallet.ViewModels
             get { return selectedLanguageCode; }
             set
             {
-                if (selectedLanguageCode == value)
+                if (value == null)
                     return;
 
                 selectedLanguageCode = value;
@@ -66,9 +78,29 @@ namespace VirtualWallet.ViewModels
             CopyDatabaseToRoamingFolderCommand = new CommandHandler(CopyDatabaseToRoamingFolderExecute);
             RetrieveDatabaseFromRoamingFolderCommand = new CommandHandler(RetrieveDatabaseFromRoamingFolderExecute);
 
-            var languages = ApplicationLanguages.ManifestLanguages.Select(x => new LanguageInfo() { DisplayName = new CultureInfo(x).DisplayName, Code = x }).ToList();
+            LoadAvailableLanguages();
+        }
+
+        public void ReloadTexts()
+        {
+            NotifyPropertyChanged(nameof(Text_Application));
+            NotifyPropertyChanged(nameof(Text_CopyDbToRoaming));
+            NotifyPropertyChanged(nameof(Text_Header));
+            NotifyPropertyChanged(nameof(Text_Language));
+            NotifyPropertyChanged(nameof(Text_RemoveCredentials));
+            NotifyPropertyChanged(nameof(Text_RemoveData));
+            NotifyPropertyChanged(nameof(Text_RetrieveDbFromRoaming));
+            NotifyPropertyChanged(nameof(Text_UserContent));
+
+            LoadAvailableLanguages();
+        }
+
+        private void LoadAvailableLanguages()
+        {
+            var languages = ApplicationLanguages.ManifestLanguages.Select(x => new LanguageInfo() { DisplayName = new CultureInfo(x).NativeName, Code = x }).ToList();
             languages.Insert(0, new LanguageInfo() { DisplayName = resources.GetString("Settings_Language_None"), Code = "" });
-            AvailableLanguages = languages;
+            AvailableLanguages = new ObservableCollection<LanguageInfo>(languages);
+
             SelectedLanguageCode = ApplicationLanguages.PrimaryLanguageOverride;
         }
 

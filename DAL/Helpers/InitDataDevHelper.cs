@@ -2,9 +2,9 @@
 using SQLite.Net.Async;
 using System.Threading.Tasks;
 
-namespace DAL.InitialData
+namespace DAL.Helpers
 {
-    internal class InitialDataDev
+    internal class InitDataDevHelper
     {
         // Just for testing
         public static async Task InitTempData(SQLiteAsyncConnection connection)

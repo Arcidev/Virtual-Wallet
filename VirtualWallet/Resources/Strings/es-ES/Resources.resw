@@ -244,10 +244,10 @@
     <value>Editar categoría</value>
   </data>
   <data name="Category_RulesTitle.Text" xml:space="preserve">
-    <value>Asociada reglas</value>
+    <value>Reglas asociadas</value>
   </data>
   <data name="Category_WalletsTitle.Text" xml:space="preserve">
-    <value>Asociada carteras</value>
+    <value>Billeteras asociadas</value>
   </data>
   <data name="CommandBar_Save.Label" xml:space="preserve">
     <value>Guardar</value>

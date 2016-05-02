@@ -2,7 +2,7 @@
 
 namespace BL.Models
 {
-    public class CashPaynment : ITransactionSource
+    public class CashPayment : ITransactionSource
     {
         public int Id { get; set; }
 

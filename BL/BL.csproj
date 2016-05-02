@@ -107,13 +107,13 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\BankModels\BankAccountInfo.cs" />
+    <Compile Include="Models\Bank\BankAccountInfo.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Interface\IPagePayload.cs" />
     <Compile Include="Models\LanguageInfo.cs" />
-    <Compile Include="Models\CategoryRule.cs" />
+    <Compile Include="Models\Category\CategoryRule.cs" />
     <Compile Include="Models\PagePayload.cs" />
-    <Compile Include="Models\WalletCategory.cs" />
+    <Compile Include="Models\Wallet\WalletCategory.cs" />
     <Compile Include="Service\Bank\BankAccountInfoService.cs" />
     <Compile Include="Service\Rule\RuleService.cs" />
     <Compile Include="Service\Database\DatabaseService.cs" />
@@ -123,16 +123,16 @@
     <Compile Include="Service\Rule\IRuleService.cs" />
     <Compile Include="Service\Database\IDatabaseService.cs" />
     <Compile Include="Mapping\MapperInstance.cs" />
-    <Compile Include="Models\BankModels\Bank.cs" />
-    <Compile Include="Models\BankModels\Fio.cs" />
-    <Compile Include="Models\CashPaynment.cs" />
-    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Bank\Bank.cs" />
+    <Compile Include="Models\Bank\Fio.cs" />
+    <Compile Include="Models\CashPayment.cs" />
+    <Compile Include="Models\Category\Category.cs" />
     <Compile Include="Models\Interface\IDto.cs" />
     <Compile Include="Models\Rule.cs" />
-    <Compile Include="Models\TransactionModels\Transaction.cs" />
+    <Compile Include="Models\Transaction\Transaction.cs" />
     <Compile Include="Filters\TransactionFilter.cs" />
-    <Compile Include="Models\TransactionModels\ITransactionSource.cs" />
-    <Compile Include="Models\Wallet.cs" />
+    <Compile Include="Models\Transaction\ITransactionSource.cs" />
+    <Compile Include="Models\Wallet\Wallet.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service\Base\BaseModifiableService.cs">
       <DependentUpon>BaseModifiableService.tt</DependentUpon>
