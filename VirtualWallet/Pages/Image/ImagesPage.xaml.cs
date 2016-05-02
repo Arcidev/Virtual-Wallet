@@ -1,4 +1,5 @@
-﻿using BL.Service;
+﻿using BL.Models;
+using BL.Service;
 using System.Linq;
 using VirtualWallet.ViewModels;
 using Windows.UI.Xaml.Controls;
