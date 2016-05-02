@@ -234,4 +234,28 @@
   <data name="Menu_BankRemoveDialog" xml:space="preserve">
     <value>By performing this action you will erase credentials of selected bank stored by this application. Are you sure you want to continue?</value>
   </data>
+  <data name="Category_Icon.Text" xml:space="preserve">
+    <value>Icon</value>
+  </data>
+  <data name="Category_Name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Category_PageTitle.Text" xml:space="preserve">
+    <value>Edit Category</value>
+  </data>
+  <data name="Category_RulesTitle.Text" xml:space="preserve">
+    <value>Associated Rules</value>
+  </data>
+  <data name="Category_WalletsTitle.Text" xml:space="preserve">
+    <value>Associated Wallets</value>
+  </data>
+  <data name="CommandBar_Save.Label" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="CommandBar_Undo.Label" xml:space="preserve">
+    <value>Undo</value>
+  </data>
+  <data name="Icons_PageTitle.Text" xml:space="preserve">
+    <value>Icons</value>
+  </data>
 </root>

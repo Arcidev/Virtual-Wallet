@@ -234,4 +234,28 @@
   <data name="Menu_BankRemoveDialog" xml:space="preserve">
     <value>Vykonaním tejto akcie zmažete prihlasovacie údaje vybranej banky uložené touto aplikáciou. Ste si istí, že chcete pokračovať?</value>
   </data>
+  <data name="Category_Icon.Text" xml:space="preserve">
+    <value>Ikona</value>
+  </data>
+  <data name="Category_Name.Text" xml:space="preserve">
+    <value>Meno</value>
+  </data>
+  <data name="Category_PageTitle.Text" xml:space="preserve">
+    <value>Upraviť kategóriu</value>
+  </data>
+  <data name="Category_RulesTitle.Text" xml:space="preserve">
+    <value>Priradené pravidlá</value>
+  </data>
+  <data name="Category_WalletsTitle.Text" xml:space="preserve">
+    <value>Priradené peňaženky</value>
+  </data>
+  <data name="CommandBar_Save.Label" xml:space="preserve">
+    <value>Uložiť</value>
+  </data>
+  <data name="CommandBar_Undo.Label" xml:space="preserve">
+    <value>Vrátiť zmeny</value>
+  </data>
+  <data name="Icons_PageTitle.Text" xml:space="preserve">
+    <value>Ikony</value>
+  </data>
 </root>
