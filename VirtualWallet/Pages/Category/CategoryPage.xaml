@@ -65,7 +65,10 @@
                           HorizontalAlignment="Left" 
                           Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">
             </ListView>
-            <TextBlock x:Name="RulesTitle" x:Uid="Category_RulesTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Wallets" RelativePanel.Below="ListViewWallets"/>
+            <TextBlock x:Name="RulesTitle" x:Uid="Category_RulesTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Rules" RelativePanel.Below="ListViewWallets"/>
+            <Button x:Uid="Category_AddRule" Click="AddRuleButton_Click" RelativePanel.RightOf="RulesTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="RulesTitle">
+                <Image Source="{StaticResource ButtonAdd}" Width="32" Height="32"/>
+            </Button>
             <ListView x:Name="ListViewRules" 
                           ItemTemplate="{StaticResource RulesItemTemplate}" 
                           ItemsSource="{Binding Rules}" 

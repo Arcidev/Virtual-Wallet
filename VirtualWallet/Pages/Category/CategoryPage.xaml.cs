@@ -27,7 +27,12 @@ namespace VirtualWallet.Pages
             {
                 viewModel.Image = pagePayload.NewImage;
             }
-            
+
+            if (pagePayload.NewRule != null)
+            {
+                viewModel.Rules.Add(pagePayload.NewRule);
+            }
+
             base.OnNavigatedTo(e);
         }
 
@@ -59,6 +64,11 @@ namespace VirtualWallet.Pages
         private void IconButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             Frame.Navigate(typeof(ImagesPage), viewModel.Image);
+        }
+
+        private void AddRuleButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(RulePage));
         }
     }
 }
