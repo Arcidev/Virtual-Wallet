@@ -15,6 +15,8 @@ namespace DAL.Data
 
         public string Pattern { get; set; }
 
+        public bool IsRegExp { get; set; }
+
         [Ignore]
         public IList<Category> categories { get; set; }
     }
