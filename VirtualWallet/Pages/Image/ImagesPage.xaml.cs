@@ -37,7 +37,6 @@ namespace VirtualWallet.Pages
                 this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
                 this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
             }
-                
         }
 
         private void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)

@@ -131,6 +131,8 @@
     </Compile>
     <Compile Include="ViewModels\Bank\BankCredentialsPageViewModel.cs" />
     <Compile Include="ViewModels\Bank\BankPageViewModel.cs" />
+    <Compile Include="ViewModels\Rule\RulesPageViewModel.cs" />
+    <Compile Include="ViewModels\Rule\RulePageViewModel.cs" />
     <Compile Include="ViewModels\Image\ImagesPageViewModel.cs" />
     <Compile Include="ViewModels\Category\CategoriesPageViewModel.cs" />
     <Compile Include="ViewModels\Category\CategoryPageViewModel.cs" />
@@ -263,6 +265,9 @@
     <Content Include="Assets\Images\Categories\Vacation\CategoryVacation4.png" />
     <Content Include="Assets\Images\Categories\Vacation\CategoryVacation5.png" />
     <Content Include="Assets\Images\Fio.png" />
+    <Content Include="Assets\Images\Misc\cancel-button.png" />
+    <Content Include="Assets\Images\Misc\plus-button.png" />
+    <Content Include="Assets\Images\Misc\rounded-remove-button.png" />
     <Content Include="Assets\Images\Wallets\Wallet1.png" />
     <Content Include="Assets\Images\Wallets\wallet10.png" />
     <Content Include="Assets\Images\Wallets\wallet11.png" />
