@@ -9,6 +9,9 @@
 
     <Application.Resources>
         <SampleData:WalletsSampleDataSource x:Key="WalletsSampleDataSource" d:IsDataSource="True"/>
+        <BitmapImage x:Key="ButtonAdd" UriSource="ms-appx:///Assets/Images/Misc/plus-button.png" />
+        <BitmapImage x:Key="ButtonRemove" UriSource="ms-appx:///Assets/Images/Misc/cancel-button.png" />
+        <BitmapImage x:Key="ButtonRoundedRemove" UriSource="ms-appx:///Assets/Images/Misc/rounded-remove-button.png" />
     </Application.Resources>
 
 
