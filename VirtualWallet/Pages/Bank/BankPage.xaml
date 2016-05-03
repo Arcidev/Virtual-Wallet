@@ -33,10 +33,23 @@
     <Page.BottomAppBar>
         <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Uid="CommandBar_Sync" Icon="Sync" Command="{Binding SyncCommand}" />
+                <AppBarButton x:Uid="CommandBar_Sync" Command="{Binding SyncCommand}">
+                    <AppBarButton.Icon>
+                        <SymbolIcon x:Name="SyncIcon"  Symbol="Sync" RenderTransformOrigin="0.5,0.5">
+                            <SymbolIcon.RenderTransform>
+                                <CompositeTransform/>
+                            </SymbolIcon.RenderTransform>
+                        </SymbolIcon>
+                    </AppBarButton.Icon>
+                </AppBarButton>
                 <AppBarButton x:Uid="CommandBar_Edit" Icon="Edit" Click="EditAppBarButton_Click" />
                 <AppBarButton x:Uid="CommandBar_Settings" Icon="Setting" Click="SettingsAppBarButton_Click" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>
+    <Page.Resources>
+        <Storyboard x:Name="IconRotation" AutoReverse="False" RepeatBehavior="Forever">
+            <DoubleAnimation Duration="0:0:1" To="360" Storyboard.TargetProperty="UIElement.RenderTransform.CompositeTransform.Rotation" Storyboard.TargetName="SyncIcon" />
+        </Storyboard>
+    </Page.Resources>
 </Page>

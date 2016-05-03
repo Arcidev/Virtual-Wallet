@@ -26,6 +26,10 @@ namespace VirtualWallet.ViewModels
         private Timer syncExecuteTimer;
         private bool syncButtonForceDisabled;
 
+        public Action BeforeSync { get; set; }
+
+        public Action AfterSync { get; set; }
+
         public ICommand SyncCommand
         {
             get { return syncCommand; }
@@ -108,6 +112,8 @@ namespace VirtualWallet.ViewModels
 
         private async void SyncExecute()
         {
+            BeforeSync?.Invoke();
+
             // Disable button immediatly after invoking command
             syncButtonForceDisabled = true;
             NotifyPropertyChanged(nameof(SyncCommand));
@@ -155,6 +161,8 @@ namespace VirtualWallet.ViewModels
             syncButtonForceDisabled = false;
             NotifyPropertyChanged(nameof(SyncCommand));
             SetSyncExecuteTimer();
+
+            AfterSync?.Invoke();
         }
 
         private void SetSyncExecuteTimer()
