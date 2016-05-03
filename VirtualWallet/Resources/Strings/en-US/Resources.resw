@@ -258,4 +258,7 @@
   <data name="Icons_PageTitle.Text" xml:space="preserve">
     <value>Icons</value>
   </data>
+  <data name="CommandBar_Delete.Label" xml:space="preserve">
+    <value>Delete</value>
+  </data>
 </root>
