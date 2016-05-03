@@ -10,7 +10,9 @@ namespace BL.Models
 
         public string Pattern { get; set; }
 
-        public string Desctiption { get; set; }
+        public bool IsRegExp { get; set; }
+
+        public string Description { get; set; }
 
         public Image Image { get; set; }
 

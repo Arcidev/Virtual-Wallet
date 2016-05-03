@@ -5,7 +5,7 @@ using Shared.Modifiers;
 
 namespace BL.Service
 {
-    public class CategoryRuleService : BaseModifiableGetService<CategoryRule, DAL.Data.CategoryRule, CategoriesRules, CategoryRuleFilter, CategoryRuleModifier>, ICategoryRuleService
+    public class CategoryRuleService : BaseModifiableCrudService<CategoryRule, DAL.Data.CategoryRule, CategoriesRules, CategoryRuleFilter, CategoryRuleModifier>, ICategoryRuleService
     {
     }
 }
