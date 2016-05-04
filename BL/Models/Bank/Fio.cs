@@ -17,7 +17,7 @@ namespace BL.Models
         private const uint syncTimeOutinSec = 30;
         private static DateTime nextPossibleSyncTime;
 
-        public string Token { get; set; }
+        public static string Token { get; set; }
 
         public override bool HasCredentials { get { return !string.IsNullOrEmpty(Token); } }
 
@@ -25,11 +25,14 @@ namespace BL.Models
 
         public Fio()
         {
-            var credentials = GetCredentials();
-            if (credentials != null)
+            if (Token == null)
             {
-                credentials.RetrievePassword();
-                Token = credentials.Password;
+                var credentials = GetCredentials();
+                if (credentials != null)
+                {
+                    credentials.RetrievePassword();
+                    Token = credentials.Password;
+                }
             }
         }
 
