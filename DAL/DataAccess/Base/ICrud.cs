@@ -12,28 +12,46 @@ namespace DAL.DataAccess
     public interface ICrud<T1, T2> : IGet<T1, T2> where T1 : IDao where T2 : BaseFilter
     {
         /// <summary>
+        /// Inserts entity into database
+        /// </summary>
+        /// <param name="entity">Entity to be stored</param>
+        Task InsertAsync(T1 entity);
+
+        /// <summary>
         /// Inserts entities into database
         /// </summary>
         /// <param name="entities">Entities to store</param>
         Task InsertAsync(params T1[] entities);
 
         /// <summary>
+        /// Inserts or ignores entity into database
+        /// </summary>
+        /// <param name="entity">Entity to be stored or ignored</param>
+        Task InsertOrIgnoreAsync(T1 entity);
+
+        /// <summary>
         /// Inserts or ignores entities in database
         /// </summary>
-        /// <param name="entities">Entities to be stored or replaced</param>
+        /// <param name="entities">Entities to be stored or ignored</param>
         Task InsertOrIgnoreAsync(params T1[] entities);
 
         /// <summary>
-        /// Updates entities stored in db
+        /// Inserts or replaces entity into database
         /// </summary>
-        /// <param name="entities">Entities to update</param>
-        Task UpdateAsync(params T1[] entities);
+        /// <param name="entity">Entity to be stored or replaced</param>
+        Task InsertOrReplaceAsync(T1 entity);
 
         /// <summary>
         /// Inserts or replaces entities stored in database
         /// </summary>
         /// <param name="entities">Entities to be stored or replaced</param>
         Task InsertOrReplaceAsync(params T1[] entities);
+
+        /// <summary>
+        /// Updates entities stored in db
+        /// </summary>
+        /// <param name="entities">Entities to update</param>
+        Task UpdateAsync(params T1[] entities);
 
         /// <summary>
         /// Deletes entity by id

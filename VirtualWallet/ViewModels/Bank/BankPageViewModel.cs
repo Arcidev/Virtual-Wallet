@@ -138,17 +138,17 @@ namespace VirtualWallet.ViewModels
                         }
                     }
 
-                    await transactionService.InsertOrIgnoreAsync(toStore.ToArray());
+                    await transactionService.InsertOrIgnoreAsync(false, toStore.ToArray());
                 }
                 else
                 {
                     Bank.StoredTransactions = bankTransactions;
-                    await transactionService.InsertOrIgnoreAsync(bankTransactions.ToArray());
+                    await transactionService.InsertOrIgnoreAsync(false, bankTransactions.ToArray());
                 }
 
                 transactions = Bank.StoredTransactions;
                 NotifyPropertyChanged(nameof(Transactions));
-                await bankAccountInfoService.InsertOrReplaceAsync(BankAccountInfo);
+                await bankAccountInfoService.InsertOrReplaceAsync(false, BankAccountInfo);
             }
             catch (Exception)
             {

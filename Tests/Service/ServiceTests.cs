@@ -40,32 +40,29 @@ namespace Tests.Service
             Category cat1 = new Category() { Name = "Category 1" };
             Category cat2 = new Category() { Name = "Category 2" };
 
-            await _categories.InsertAsync(cat1, cat2);
+            await _categories.InsertAsync(true, cat1, cat2);
             var cats = await _categories.GetAllAsync();
             Assert.AreEqual(2, cats.Count);
 
-            var category1Id = cats.Where(x => x.Name == "Category 1").Single().Id;
-            var category2Id = cats.Where(x => x.Name == "Category 2").Single().Id;
-
             var filter = new CategoryFilter() { Name = "Category 1" };
             Assert.AreEqual("Category 1", (await _categories.GetAsync(filter)).Single().Name);
-            Assert.AreEqual("Category 1", (await _categories.GetAsync(category1Id)).Name);
+            Assert.AreEqual("Category 1", (await _categories.GetAsync(cat1.Id)).Name);
 
             filter.Name = "Category 2";
             Assert.AreEqual("Category 2", (await _categories.GetAsync(filter)).Single().Name);
-            Assert.AreEqual("Category 2", (await _categories.GetAsync(category2Id)).Name);
+            Assert.AreEqual("Category 2", (await _categories.GetAsync(cat2.Id)).Name);
 
             filter.Name = "Category";
             Assert.AreEqual(2, (await _categories.GetAsync(filter)).Count);
 
-            await _categories.UpdateAsync(new Category() { Id = category1Id, Name = "Updated Category" });
+            await _categories.UpdateAsync(new Category() { Id = cat1.Id, Name = "Updated Category" });
             Assert.AreEqual(2, (await _categories.GetAllAsync()).Count);
 
             filter.Name = "Category 1";
             Assert.AreEqual(0, (await _categories.GetAsync(filter)).Count);
-            Assert.AreEqual("Updated Category", (await _categories.GetAsync(category1Id)).Name);
+            Assert.AreEqual("Updated Category", (await _categories.GetAsync(cat1.Id)).Name);
 
-            await _categories.DeleteAsync(category2Id);
+            await _categories.DeleteAsync(cat2.Id);
             Assert.AreEqual(1, (await _categories.GetAllAsync()).Count);
 
             await _categories.DeleteAllAsync();
@@ -78,7 +75,7 @@ namespace Tests.Service
             await _categories.DeleteAllAsync();
 
             Category cat = new Category() { Name = "Category 1", ImageId = (int)ImageId.Fio };
-            await _categories.InsertAsync(cat);
+            await _categories.InsertAsync(false, cat);
 
             var modifier = new CategoryModifier() { IncludeImage = true };
             var category = (await _categories.GetAllAsync(modifier)).Single();
@@ -87,7 +84,7 @@ namespace Tests.Service
             Assert.AreEqual((int)ImageId.Fio, category.Image.Id);
 
             cat = new Category() { Name = "Category 2", Image = (await _images.GetAsync((int)ImageId.Fio)) };
-            await _categories.InsertAsync(cat);
+            await _categories.InsertAsync(false, cat);
 
             var filter = new CategoryFilter() { Name = "Category 2" };
             category = (await _categories.GetAsync(filter, modifier)).Single();

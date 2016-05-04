@@ -171,7 +171,7 @@ namespace VirtualWallet.ViewModels
 
         public async Task SaveRuleAsync()
         {
-            await ruleService.InsertOrReplaceAsync(Rule);
+            await ruleService.InsertOrReplaceAsync(false, Rule);
             Modified = false;
         }
 
