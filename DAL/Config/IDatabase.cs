@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 
 namespace DAL.Config
 {
+    /// <summary>
+    /// Interface for direct db operations
+    /// </summary>
     public interface IDatabase
     {
         /// <summary>

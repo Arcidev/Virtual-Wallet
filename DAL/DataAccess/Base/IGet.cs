@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 namespace DAL.DataAccess
 {
     /// <summary>
-    /// Interface for get db operations oppon entity
+    /// Interface for get db operations upon entity
     /// </summary>
     /// <typeparam name="T1">Entity</typeparam>
     /// <typeparam name="T2">Filter</typeparam>
@@ -22,7 +22,7 @@ namespace DAL.DataAccess
         /// Gets filtered entities
         /// </summary>
         /// <param name="filter">Filter to apply</param>
-        /// <returns>List  of filtered entities</returns>
+        /// <returns>List of filtered entities</returns>
         Task<IList<T1>> GetAsync(T2 filter = null);
 
         /// <summary>

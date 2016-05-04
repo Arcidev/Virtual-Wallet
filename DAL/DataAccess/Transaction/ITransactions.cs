@@ -7,6 +7,11 @@ namespace DAL.DataAccess
 {
     public interface ITransactions : ICrud<Transaction, BaseFilter>
     {
+        /// <summary>
+        /// Gets transactions by bankId
+        /// </summary>
+        /// <param name="bankId">Id of bank</param>
+        /// <returns>List of all bank transactions</returns>
         Task<IList<Transaction>> GetByBankIdAsync(int? bankId);
     }
 }

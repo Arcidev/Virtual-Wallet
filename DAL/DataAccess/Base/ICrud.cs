@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 namespace DAL.DataAccess
 {
     /// <summary>
-    /// Interface for CRUD db operations oppon entity
+    /// Interface for CRUD db operations upon entity
     /// </summary>
     /// <typeparam name="T1">Entity</typeparam>
     /// <typeparam name="T2">Filter</typeparam>
@@ -20,7 +20,7 @@ namespace DAL.DataAccess
         /// <summary>
         /// Inserts entities into database
         /// </summary>
-        /// <param name="entities">Entities to store</param>
+        /// <param name="entities">Entities to be stored</param>
         Task InsertAsync(params T1[] entities);
 
         /// <summary>

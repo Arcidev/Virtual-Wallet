@@ -9,6 +9,10 @@ namespace DAL.Helpers
     {
         private const string imageStorage = "ms-appx:///Assets/Images/";
 
+        /// <summary>
+        /// Adds required data into database if not exists
+        /// </summary>
+        /// <param name="connection">SQLiteAsyncConnection that should be inicialized outside</param>
         public static async Task InitData(SQLiteAsyncConnection connection)
         {
             await connection.InsertOrReplaceAllAsync(new object[]
