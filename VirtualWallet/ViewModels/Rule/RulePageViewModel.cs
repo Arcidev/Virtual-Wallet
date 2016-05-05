@@ -2,6 +2,7 @@
 using BL.Service;
 using Shared.Filters;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace VirtualWallet.ViewModels
@@ -153,25 +154,54 @@ namespace VirtualWallet.ViewModels
             }
         }
 
+        public int? CategoryId { get; set; }
+
         public async Task LoadDataAsync()
         {
-            var ruleId = Rule.Id;
-            var rule = await ruleService.GetAsync(ruleId);
-            Rule = rule ?? new Rule();
-            if(rule != null)
+            var rule = await ruleService.GetAsync(Rule.Id);
+
+            if (rule == null)
             {
-                Name = rule.Name;
-                Description = Rule.Description;
-                Pattern = Rule.Pattern;
-                IsRegExp = Rule.IsRegExp;
+                rule = new Rule();
+                Persisted = false;
+            } else
+            {
                 Persisted = true;
             }
+
+            Id = rule.Id;
+            Name = rule.Name;
+            Description = rule.Description;
+            Pattern = rule.Pattern;
+            IsRegExp = rule.IsRegExp;
+            
             Modified = false;
         }
 
         public async Task SaveRuleAsync()
         {
-            await ruleService.InsertOrReplaceAsync(false, Rule);
+            if (Persisted)
+            {
+                await ruleService.UpdateAsync(Rule);
+            }
+            else
+            {
+                await ruleService.InsertAsync(true, Rule);
+            }
+
+
+            if (CategoryId != null )
+            {
+                var relationfilter = new CategoryRuleFilter() { CategoryId = CategoryId, RuleId = Rule.Id };
+                IList<CategoryRule> categoriesRules = await categoryRuleService.GetAsync(relationfilter);
+
+                if (categoriesRules.Count == 0)
+                {
+                    var newCategoryRule = new CategoryRule() { CategoryId = (int) CategoryId, RuleId = Rule.Id };
+                    await categoryRuleService.InsertAsync(false, newCategoryRule);
+                }
+            }
+            
             Modified = false;
         }
 
@@ -183,7 +213,7 @@ namespace VirtualWallet.ViewModels
         public async Task DeleteRuleAsync()
         {
             var filter = new CategoryRuleFilter(){ RuleId = Rule.Id};
-            var categoriesRules = await categoryRuleService.GetAsync();
+            var categoriesRules = await categoryRuleService.GetAsync(filter);
 
             foreach (CategoryRule catRul in categoriesRules)
             {

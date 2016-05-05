@@ -26,6 +26,9 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0" Margin="10" Text="{Binding Name}"/>
+                <Button x:Uid="Category_RemoveRule" Click="RemoveRuleButton_Click" RelativePanel.RightOf="RulesTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="RulesTitle">
+                    <Image Source="{StaticResource ButtonRemove}" Width="16" Height="16"/>
+                </Button>
             </Grid>
         </DataTemplate>
     </Page.Resources>
@@ -74,7 +77,7 @@
                           ItemsSource="{Binding Rules}" 
                           IsSwipeEnabled="False" 
                           SelectionMode="None"
-                          IsItemClickEnabled="False"
+                          IsItemClickEnabled="True"
                           ItemClick="ListViewRules_ItemClick"
                           RelativePanel.Below="RulesTitle"
                           HorizontalAlignment="Left" 

@@ -16,6 +16,7 @@ namespace VirtualWallet.Pages
     public sealed partial class RulePage : Page
     {
         private RulePageViewModel viewModel;
+        private PagePayload pagePayload;
 
         public RulePage()
         {
@@ -28,11 +29,16 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            var rule = (Rule)e.Parameter;
+            pagePayload = (PagePayload)e.Parameter;
+
+            var category = (Category)pagePayload?.Dto;
+            viewModel.CategoryId = category?.Id;
+
+            var rule = pagePayload?.Rule;
 
             if (rule != null)
             {
-                viewModel.Rule = rule;
+                viewModel.Rule.Id = rule.Id;
             }
             
             await viewModel.LoadDataAsync();
@@ -44,18 +50,9 @@ namespace VirtualWallet.Pages
         {
             await viewModel.SaveRuleAsync();
 
-            var lastPage = Frame.BackStack.Last();
-            var pagePayload = (PagePayload)lastPage.Parameter;
-
-            if (pagePayload != null)
+            if (Frame.CanGoBack)
             {
-                pagePayload.NewRule = viewModel.Rule;
-            }
-
-            if (Frame.Navigate(lastPage.SourcePageType, pagePayload))
-            {
-                this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
-                this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
+                Frame.GoBack();
             }
         }
 

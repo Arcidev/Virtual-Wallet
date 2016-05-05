@@ -4,6 +4,6 @@
     {
         public IDto Dto { get; set; }
         public Image NewImage { get; set; }
-        public Rule NewRule { get; set; }
+        public Rule Rule { get; set; }
     }
 }

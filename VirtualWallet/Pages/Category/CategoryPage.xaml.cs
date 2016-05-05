@@ -9,6 +9,7 @@ namespace VirtualWallet.Pages
     public sealed partial class CategoryPage : Page
     {
         private CategoryPageViewModel viewModel;
+        private PagePayload pagePayload;
 
         public CategoryPage()
         {
@@ -19,18 +20,13 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            var pagePayload = (PagePayload)e.Parameter;
+            pagePayload = (PagePayload)e.Parameter;
             viewModel.Category = (Category)pagePayload.Dto;
             await viewModel.LoadDataAsync();
 
             if (pagePayload.NewImage != null)
             {
                 viewModel.Image = pagePayload.NewImage;
-            }
-
-            if (pagePayload.NewRule != null)
-            {
-                viewModel.Rules.Add(pagePayload.NewRule);
             }
 
             base.OnNavigatedTo(e);
@@ -48,7 +44,9 @@ namespace VirtualWallet.Pages
 
         private void ListViewRules_ItemClick(object sender, ItemClickEventArgs e)
         {
-
+            var rule = (Rule)e.ClickedItem;
+            pagePayload.Rule = rule;
+            Frame.Navigate(typeof(RulePage), pagePayload);
         }
 
         private async void SaveAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -68,7 +66,13 @@ namespace VirtualWallet.Pages
 
         private void AddRuleButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(RulePage));
+            pagePayload.Rule = null;
+            Frame.Navigate(typeof(RulePage), pagePayload);
+        }
+
+        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+
         }
     }
 }
