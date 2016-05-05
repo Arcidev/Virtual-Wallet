@@ -5,6 +5,8 @@
     xmlns:local="using:VirtualWallet.Pages"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:StyleAlias="clr-namespace:Motion.VideoEffects"
     mc:Ignorable="d">
 
     <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
@@ -14,7 +16,7 @@
             <Grid x:Name="RuleGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.Below="RuleProperties" Margin="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
-                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" MinWidth="150" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -28,7 +30,7 @@
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Description,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock Grid.Row="2" x:Uid="Rule_Pattern" Margin="5" >Pattern:</TextBlock>
                 <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding Pattern,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <CheckBox Grid.Row="3" Grid.Column="1" Margin="5">is regular expression</CheckBox> 
+                <ComboBox Grid.Row="3" Grid.Column="1" x:Name="PatternTypeCombobox" Margin="5" SelectedItem="{Binding PatternType,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch"/>
             </Grid>
             <TextBlock x:Name="RuleTest" x:Uid="Rule_Properties" Margin="5" RelativePanel.Below="RuleGrid">Test rule</TextBlock>
             <TextBlock x:Name="Rule_TestTips" x:Uid="Rule_TestTips" Margin="10,5,10,5" TextWrapping="Wrap" RelativePanel.Below="RuleTest">Write transaction description to text field and try if rule match your transaction.</TextBlock>

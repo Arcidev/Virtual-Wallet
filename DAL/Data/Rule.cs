@@ -1,4 +1,5 @@
-﻿using SQLite.Net.Attributes;
+﻿using Shared.Enums;
+using SQLite.Net.Attributes;
 using System.Collections.Generic;
 
 namespace DAL.Data
@@ -15,7 +16,10 @@ namespace DAL.Data
 
         public string Pattern { get; set; }
 
-        public bool IsRegExp { get; set; }
+        public int PatternTypeId { get; set; }
+
+        [Ignore]
+        public PatternType PatternType { get; set; }
 
         [Ignore]
         public IList<Category> categories { get; set; }

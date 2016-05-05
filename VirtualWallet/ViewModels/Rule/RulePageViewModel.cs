@@ -1,6 +1,7 @@
 ﻿using BL.Models;
 using BL.Service;
 using Shared.Filters;
+using Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -137,18 +138,18 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public bool IsRegExp
+        public PatternType PatternType
         {
             get
             {
-                return Rule == null ? false : Rule.IsRegExp;
+                return Rule == null ? Shared.Enums.PatternType.Contains : Rule.PatternType;
             }
             set
             {
-                if (Rule == null || Rule.IsRegExp == value)
+                if (Rule == null || Rule.PatternType == value)
                     return;
 
-                Rule.IsRegExp = value;
+                Rule.PatternType = value;
                 Modified = true;
                 NotifyPropertyChanged();
             }
@@ -173,7 +174,7 @@ namespace VirtualWallet.ViewModels
             Name = rule.Name;
             Description = rule.Description;
             Pattern = rule.Pattern;
-            IsRegExp = rule.IsRegExp;
+            PatternType = rule.PatternType;
             
             Modified = false;
         }

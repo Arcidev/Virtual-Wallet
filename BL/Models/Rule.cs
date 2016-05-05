@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Shared.Enums;
+using System.Collections.Generic;
 
 namespace BL.Models
 {
@@ -10,11 +11,11 @@ namespace BL.Models
 
         public string Pattern { get; set; }
 
-        public bool IsRegExp { get; set; }
+        public int? PatternTypeId { get; set; }
+
+        public PatternType PatternType { get; set; }
 
         public string Description { get; set; }
-
-        public Image Image { get; set; }
 
         public IList<Category> Categories { get; set; }
     }

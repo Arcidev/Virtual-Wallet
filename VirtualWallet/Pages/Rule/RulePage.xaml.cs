@@ -1,5 +1,6 @@
 ﻿using BL.Models;
 using BL.Service;
+using Shared.Enums;
 using System.Linq;
 using VirtualWallet.ViewModels;
 using Windows.UI.Xaml;
@@ -25,8 +26,6 @@ namespace VirtualWallet.Pages
             this.DataContext = viewModel;
         }
 
-        
-
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             pagePayload = (PagePayload)e.Parameter;
@@ -42,7 +41,9 @@ namespace VirtualWallet.Pages
             }
             
             await viewModel.LoadDataAsync();
-            
+
+            PatternTypeCombobox.ItemsSource = PatternType.GetValues(typeof(PatternType)).Cast<PatternType>();
+
             base.OnNavigatedTo(e);
         }
 
