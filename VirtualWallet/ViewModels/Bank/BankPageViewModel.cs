@@ -59,7 +59,6 @@ namespace VirtualWallet.ViewModels
                 NotifyPropertyChanged();
 
                 BankAccountInfo = Bank?.BankAccountInfo ?? new BankAccountInfo();
-                Transactions = Bank?.StoredTransactions.Select(x => Tuple.Create(x.Date, (double)x.Amount)).ToList();
                 SyncCommand = new CommandHandler(SyncExecute, () => !syncButtonForceDisabled && (Bank?.CanSyncExecute ?? false));
                 SetSyncExecuteTimer();
             }
@@ -70,6 +69,9 @@ namespace VirtualWallet.ViewModels
             get { return expenses; }
             private set
             {
+                if (expenses == value)
+                    return;
+
                 expenses = value;
                 NotifyPropertyChanged();
             }
@@ -80,6 +82,9 @@ namespace VirtualWallet.ViewModels
             get { return incomes; }
             private set
             {
+                if (incomes == value)
+                    return;
+
                 incomes = value;
                 NotifyPropertyChanged();
             }
@@ -90,6 +95,9 @@ namespace VirtualWallet.ViewModels
             get { return transactions; }
             private set
             {
+                if (transactions == value)
+                    return;
+
                 transactions = value;
                 NotifyPropertyChanged();
             }
@@ -98,7 +106,7 @@ namespace VirtualWallet.ViewModels
         public BankAccountInfo BankAccountInfo
         {
             get { return bankAccountInfo; }
-            set
+            private set
             {
                 if (bankAccountInfo == value)
                     return;
@@ -122,13 +130,12 @@ namespace VirtualWallet.ViewModels
             if (bank != null)
             {
                 bank.BankAccountInfo = await bankAccountInfoService.GetAsync(bank.Id);
+                var filter = new Shared.Filters.TransactionFilter() { DateSince = DateTime.Now.AddMonths(-1) };
                 bank.StoredTransactions = await transactionService.GetByBankIdAsync(bank.Id);
-                var transactionCategories = await categoryService.GroupTransactions(bank.StoredTransactions);
-                Incomes = transactionCategories.Where(x => x.Item2 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item2)).ToList();
-                Expenses = transactionCategories.Where(x => x.Item3 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item3)).ToList();
             }
 
             Bank = bank;
+            await ReloadTransactions();
         }
 
         public void Dispose()
@@ -172,10 +179,8 @@ namespace VirtualWallet.ViewModels
                     await transactionService.InsertOrIgnoreAsync(false, bankTransactions.ToArray());
                 }
 
-                Transactions = Bank.StoredTransactions.Select(x => Tuple.Create(x.Date, (double)x.Amount)).ToList();
-                var transactionCategories = await categoryService.GroupTransactions(bank.StoredTransactions);
-                Incomes = transactionCategories.Where(x => x.Item2 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item2)).ToList();
-                Expenses = transactionCategories.Where(x => x.Item3 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item3)).ToList();
+                var amount = BankAccountInfo.ClosingBalance;
+                await ReloadTransactions();
 
                 await bankAccountInfoService.InsertOrReplaceAsync(false, BankAccountInfo);
             }
@@ -204,6 +209,34 @@ namespace VirtualWallet.ViewModels
                 var dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
                 syncExecuteTimer = new Timer(async (obj) => await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => NotifyPropertyChanged(nameof(SyncCommand))), null, (int)Math.Ceiling((Bank.NextPossibleSyncTime - DateTime.Now).TotalMilliseconds), Timeout.Infinite);
             }
+        }
+
+        private async Task ReloadTransactions()
+        {
+            if (Bank == null)
+            {
+                Transactions = null;
+                Incomes = null;
+                Expenses = null;
+                return;
+            }
+
+            var amount = BankAccountInfo.ClosingBalance;
+            var trans = Bank.StoredTransactions.GroupBy(x => x.Date).Select(x => Tuple.Create(x.Key, x.Sum(y => y.Amount))).OrderByDescending(x => x.Item1).Select(x =>
+            {
+                amount -= (double)x.Item2;
+                return Tuple.Create(x.Item1, amount);
+            }).ToList();
+
+            if (trans.FirstOrDefault()?.Item1.Date == DateTime.Now.Date)
+                trans.RemoveAt(0);
+
+            trans.Add(Tuple.Create(DateTime.Now, BankAccountInfo.ClosingBalance));
+            Transactions = trans;
+
+            var transactionCategories = await categoryService.GroupTransactions(Bank.StoredTransactions);
+            Incomes = transactionCategories.Where(x => x.Item2 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item2)).ToList();
+            Expenses = transactionCategories.Where(x => x.Item3 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item3)).ToList();
         }
     }
 }

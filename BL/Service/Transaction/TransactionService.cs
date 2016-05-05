@@ -7,11 +7,11 @@ using BL.Mapping;
 
 namespace BL.Service
 {
-    public class TransactionService : BaseCrudService<Transaction, DAL.Data.Transaction, Transactions, BaseFilter>, ITransactionService
+    public class TransactionService : BaseCrudService<Transaction, DAL.Data.Transaction, Transactions, TransactionFilter>, ITransactionService
     {
-        public async Task<IList<Transaction>> GetByBankIdAsync(int? bankId)
+        public async Task<IList<Transaction>> GetByBankIdAsync(int? bankId, TransactionFilter filter = null)
         {
-            return MapperInstance.Mapper.Map<IList<Transaction>>(await _instance.GetByBankIdAsync(bankId));
+            return MapperInstance.Mapper.Map<IList<Transaction>>(await _instance.GetByBankIdAsync(bankId, filter));
         }
     }
 }

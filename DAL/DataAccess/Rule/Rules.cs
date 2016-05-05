@@ -41,7 +41,7 @@ namespace DAL.DataAccess
             if (!string.IsNullOrEmpty(filter.Pattern))
                 query = query.Where(x => x.Pattern.Contains(filter.Pattern));
 
-            return query;
+            return base.ApplyFilters(query, filter);
         }
 
         protected override async Task OnEntityDeletedAsync(SQLiteAsyncConnection connection, int id)

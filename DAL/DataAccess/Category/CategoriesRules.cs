@@ -33,7 +33,7 @@ namespace DAL.DataAccess
             else if (filter.CategoryId.HasValue)
                 query = query.Where(x => x.CategoryId.Equals(filter.CategoryId));
 
-            return query;
+            return base.ApplyFilters(query, filter);
         }
     }
 }

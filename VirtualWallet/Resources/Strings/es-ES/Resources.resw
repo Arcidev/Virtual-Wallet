@@ -273,4 +273,7 @@
   <data name="Bank_ChartExpenses.Title" xml:space="preserve">
     <value>Expensas</value>
   </data>
+  <data name="Bank_LineSeriesBalance.Title" xml:space="preserve">
+    <value>Equilibrio</value>
+  </data>
 </root>

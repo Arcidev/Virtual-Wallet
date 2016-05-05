@@ -18,7 +18,7 @@ namespace DAL.DataAccess
             if (filter.ImageId.HasValue)
                 query = query.Where(x => x.ImageId == filter.ImageId.Value);
 
-            return query;
+            return base.ApplyFilters(query, filter);
         }
 
         protected override async Task ApplyModifiersAsync(Wallet wallet, WalletModifier modifier)

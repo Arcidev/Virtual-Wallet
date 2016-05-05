@@ -113,9 +113,11 @@
     <Compile Include="Enums\PatternType.cs" />
     <Compile Include="Filters\BankFilter.cs" />
     <Compile Include="Filters\BaseFilter.cs" />
+    <Compile Include="Filters\TransactionFilter.cs" />
     <Compile Include="Filters\RuleFilter.cs" />
     <Compile Include="Filters\CategoryFilter.cs" />
     <Compile Include="Filters\CategoryRuleFilter.cs" />
+    <Compile Include="Formatters\DateTimeFormatter.cs" />
     <Compile Include="Modifiers\RuleModifier.cs" />
     <Compile Include="Filters\WalletCategoryFilter.cs" />
     <Compile Include="Filters\WalletFilter.cs" />

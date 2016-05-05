@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Shared.Formatters;
+using System;
 
 namespace BL.Models
 {
@@ -31,7 +32,7 @@ namespace BL.Models
 
             DateTime result;
             var success = DateTime.TryParse(date, out result);
-            return success ? result.ToString("dd.MM.yyyy") : date;
+            return success ? DateTimeFormatter.ToShortDate(result) : date;
         }
     }
 }

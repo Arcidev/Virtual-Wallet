@@ -8,45 +8,55 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        <Pivot>
-            <PivotItem x:Uid="Bank_Pivot_Overview" Header="Overview">
-                <RelativePanel>
-                    <RelativePanel x:Name="BankInfo">
-                        <Image x:Name="BankImage" RelativePanel.AlignVerticalCenterWithPanel="True" MaxHeight="40" MaxWidth="60" Source="{Binding Bank.ImageUri}" />
-                        <TextBlock RelativePanel.RightOf="BankImage" FontSize="40" Text="{Binding Bank.Name}" />
-                    </RelativePanel>
-                    <TextBlock x:Uid="Bank_Balance" x:Name="Balance" RelativePanel.Below="BankInfo" Margin="5" Text="Balance:" />
-                    <TextBlock RelativePanel.Below="BankInfo" RelativePanel.RightOf="Balance" Margin="5" Text="{Binding BankAccountInfo.ClosingBalanceString}" />
-                    <TextBlock x:Uid="Bank_OpeningBalance" x:Name="OpeningBalance" RelativePanel.Below="Balance" Margin="5" Text="Opening balance:" />
-                    <TextBlock RelativePanel.Below="Balance" RelativePanel.RightOf="OpeningBalance" Margin="5" Text="{Binding BankAccountInfo.OpeningBalanceString}" />
-                    <TextBlock x:Uid="Bank_DateStart" x:Name="DateStart" RelativePanel.Below="OpeningBalance" Margin="5" Text="Opening date:" />
-                    <TextBlock RelativePanel.Below="OpeningBalance" RelativePanel.RightOf="DateStart" Margin="5" Text="{Binding BankAccountInfo.DateStartString}" />
-                    <TextBlock x:Uid="Bank_DateEnd" x:Name="DateEnd" RelativePanel.Below="DateStart" Margin="5" Text="Last sync date:" />
-                    <TextBlock RelativePanel.Below="DateStart" RelativePanel.RightOf="DateEnd" Margin="5" Text="{Binding BankAccountInfo.DateEndString}" />
+    <Pivot Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <PivotItem x:Uid="Bank_Pivot_Overview" Header="Overview">
+            <RelativePanel>
+                <RelativePanel x:Name="BankInfo">
+                    <Image x:Name="BankImage" RelativePanel.AlignVerticalCenterWithPanel="True" MaxHeight="40" MaxWidth="60" Source="{Binding Bank.ImageUri}" />
+                    <TextBlock RelativePanel.RightOf="BankImage" FontSize="40" Text="{Binding Bank.Name}" />
                 </RelativePanel>
-            </PivotItem>
-            <PivotItem x:Uid="Bank_Pivot_Category" Header="Category">
-                <RelativePanel HorizontalAlignment="Stretch">
+                <TextBlock x:Uid="Bank_Balance" x:Name="Balance" RelativePanel.Below="BankInfo" Margin="5" Text="Balance:" />
+                <TextBlock RelativePanel.Below="BankInfo" RelativePanel.RightOf="Balance" Margin="5" Text="{Binding BankAccountInfo.ClosingBalanceString}" />
+                <TextBlock x:Uid="Bank_OpeningBalance" x:Name="OpeningBalance" RelativePanel.Below="Balance" Margin="5" Text="Opening balance:" />
+                <TextBlock RelativePanel.Below="Balance" RelativePanel.RightOf="OpeningBalance" Margin="5" Text="{Binding BankAccountInfo.OpeningBalanceString}" />
+                <TextBlock x:Uid="Bank_DateStart" x:Name="DateStart" RelativePanel.Below="OpeningBalance" Margin="5" Text="Opening date:" />
+                <TextBlock RelativePanel.Below="OpeningBalance" RelativePanel.RightOf="DateStart" Margin="5" Text="{Binding BankAccountInfo.DateStartString}" />
+                <TextBlock x:Uid="Bank_DateEnd" x:Name="DateEnd" RelativePanel.Below="DateStart" Margin="5" Text="Last sync date:" />
+                <TextBlock RelativePanel.Below="DateStart" RelativePanel.RightOf="DateEnd" Margin="5" Text="{Binding BankAccountInfo.DateEndString}" />
+            </RelativePanel>
+        </PivotItem>
+        <PivotItem x:Uid="Bank_Pivot_Category" Header="Category">
+            <ScrollViewer>
+                <RelativePanel>
                     <charting:Chart x:Uid="Bank_ChartTransactions" x:Name="TransactionsLineChart" Title="Transactions" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Height="400" >
-                        <charting:LineSeries ItemsSource="{Binding Transactions}" IndependentValuePath="Item1" DependentValuePath="Item2" />
+                        <charting:LineSeries x:Uid="Bank_LineSeriesBalance" Title="Balance" ItemsSource="{Binding Transactions}" IndependentValuePath="Item1" DependentValuePath="Item2" />
                     </charting:Chart>
                     <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TransactionsLineChart">
                         <charting:Chart x:Uid="Bank_ChartIncomes" x:Name="IncomesPieChart" Title="Incomes" Width="330" Height="330">
                             <charting:PieSeries ItemsSource="{Binding Incomes}" IndependentValuePath="Item1" DependentValuePath="Item2" />
                         </charting:Chart>
-                        <charting:Chart x:Uid="Bank_ChartExpenses" Title="Expenses" RelativePanel.Below="IncomesPieChart" Width="330" Height="330">
+                        <charting:Chart x:Uid="Bank_ChartExpenses" x:Name="ExpensesPieChart" Title="Expenses" RelativePanel.Below="IncomesPieChart" Width="330" Height="330">
                             <charting:PieSeries ItemsSource="{Binding Expenses}" IndependentValuePath="Item1" DependentValuePath="Item2" />
                         </charting:Chart>
                     </RelativePanel>
                 </RelativePanel>
-            </PivotItem>
-        </Pivot>
+            </ScrollViewer>
+        </PivotItem>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="1080" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ExpensesPieChart.(RelativePanel.Below)" Value="" />
+                        <Setter Target="ExpensesPieChart.(RelativePanel.RightOf)" Value="IncomesPieChart" />
+                        <Setter Target="IncomesPieChart.Width" Value="450" />
+                        <Setter Target="IncomesPieChart.Height" Value="450" />
+                        <Setter Target="ExpensesPieChart.Width" Value="450" />
+                        <Setter Target="ExpensesPieChart.Height" Value="450" />
+                    </VisualState.Setters>
+                </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
                         <AdaptiveTrigger MinWindowWidth="720" />
@@ -58,16 +68,28 @@
                 </VisualState>
                 <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger />
+                        <AdaptiveTrigger MinWindowWidth="500" />
                     </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="IncomesPieChart.Width" Value="450" />
+                        <Setter Target="IncomesPieChart.Height" Value="450" />
+                        <Setter Target="ExpensesPieChart.Width" Value="450" />
+                        <Setter Target="ExpensesPieChart.Height" Value="450" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
                     <VisualState.Setters>
                         <Setter Target="ExpensesPieChart.(RelativePanel.Below)" Value="IncomesPieChart" />
                         <Setter Target="ExpensesPieChart.(RelativePanel.RightOf)" Value="" />
+                        <Setter Target="IncomesPieChart.Width" Value="330" />
+                        <Setter Target="IncomesPieChart.Height" Value="330" />
+                        <Setter Target="ExpensesPieChart.Width" Value="330" />
+                        <Setter Target="ExpensesPieChart.Height" Value="330" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-    </Grid>
+    </Pivot>
     <Page.BottomAppBar>
         <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
