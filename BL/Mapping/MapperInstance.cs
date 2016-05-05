@@ -40,10 +40,9 @@ namespace BL.Mapping
             .ForMember(target => target.CategoryId, action => action.MapFrom(source => source.Category != null ? source.Category.Id : source.CategoryId));
 
             cfg.CreateMap<DAL.Data.Rule, Rule>()
-            .ForMember(target => target.PatternType, action => action.MapFrom(source => (PatternType) source.PatternTypeId));
+            .ForMember(target => target.PatternType, action => action.MapFrom(source => (PatternType)source.PatternTypeId));
             cfg.CreateMap<Rule, DAL.Data.Rule>()
-            .ForMember(target => target.PatternType, action => action.Ignore())
-            .ForMember(target => target.PatternTypeId, action => action.MapFrom(source => (int) source.PatternType));
+            .ForMember(target => target.PatternTypeId, action => action.MapFrom(source => (int)source.PatternType));
 
             cfg.CreateMap<DAL.Data.CategoryRule, CategoryRule>();
             cfg.CreateMap<CategoryRule, DAL.Data.CategoryRule>()

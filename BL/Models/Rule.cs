@@ -11,8 +11,6 @@ namespace BL.Models
 
         public string Pattern { get; set; }
 
-        public int? PatternTypeId { get; set; }
-
         public PatternType PatternType { get; set; }
 
         public string Description { get; set; }

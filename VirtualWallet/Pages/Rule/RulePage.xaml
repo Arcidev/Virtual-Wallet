@@ -30,7 +30,7 @@
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Description,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock Grid.Row="2" x:Uid="Rule_Pattern" Margin="5" >Pattern:</TextBlock>
                 <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding Pattern,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                <ComboBox Grid.Row="3" Grid.Column="1" x:Name="PatternTypeCombobox" Margin="5" SelectedItem="{Binding PatternType,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" x:Name="PatternTypeCombobox" Margin="5" SelectedItem="{Binding PatternType, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Stretch"/>
             </Grid>
             <TextBlock x:Name="RuleTest" x:Uid="Rule_Properties" Margin="5" RelativePanel.Below="RuleGrid">Test rule</TextBlock>
             <TextBlock x:Name="Rule_TestTips" x:Uid="Rule_TestTips" Margin="10,5,10,5" TextWrapping="Wrap" RelativePanel.Below="RuleTest">Write transaction description to text field and try if rule match your transaction.</TextBlock>

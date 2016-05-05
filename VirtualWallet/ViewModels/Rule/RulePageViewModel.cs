@@ -142,7 +142,7 @@ namespace VirtualWallet.ViewModels
         {
             get
             {
-                return Rule == null ? Shared.Enums.PatternType.Contains : Rule.PatternType;
+                return Rule == null ? PatternType.Contains : Rule.PatternType;
             }
             set
             {
