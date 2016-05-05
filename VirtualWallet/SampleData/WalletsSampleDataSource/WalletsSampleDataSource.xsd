@@ -60,6 +60,8 @@
   <xs:complexType name="Category">
     <xs:sequence>
       <xs:element name="Wallets" type="tns:Wallets1" />
+      <xs:element name="Image" type="tns:Image" />
+      <xs:element name="Rules" type="tns:Rules" />
     </xs:sequence>
     <xs:attribute blend:FormatParameters="1" name="Id" type="xs:double" />
     <xs:attribute name="Name" type="xs:string" />
@@ -74,5 +76,19 @@
     <xs:attribute blend:FormatParameters="1" name="Id" type="xs:double" />
     <xs:attribute blend:FormatParameters="1,8" name="Name" type="xs:string" />
     <xs:attribute name="ImageUri" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Image">
+    <xs:attribute name="Path" type="xs:string" />
+  </xs:complexType>
+  <xs:complexType name="Rules">
+    <xs:sequence>
+      <xs:element maxOccurs="unbounded" name="RulesItem" type="tns:RulesItem" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:complexType name="RulesItem">
+    <xs:attribute blend:FormatParameters="2" name="Id" type="xs:double" />
+    <xs:attribute name="Name" type="xs:string" />
+    <xs:attribute name="Description" type="xs:string" />
+    <xs:attribute name="Pattern" type="xs:string" />
   </xs:complexType>
 </xs:schema>

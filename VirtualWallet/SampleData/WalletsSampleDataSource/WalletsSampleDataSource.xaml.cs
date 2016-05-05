@@ -441,6 +441,16 @@ namespace Blend.SampleData.WalletsSampleDataSource
             }
         }
 
+        private Wallets1 _Wallets = new Wallets1();
+
+        public Wallets1 Wallets
+        {
+            get
+            {
+                return this._Wallets;
+            }
+        }
+
         private double _Id = 0;
 
         public double Id
@@ -498,15 +508,38 @@ namespace Blend.SampleData.WalletsSampleDataSource
             }
         }
 
-        private Wallets1 _Wallets = new Wallets1();
+        private Image _Image = new Image();
 
-        public Wallets1 Wallets
+        public Image Image
         {
             get
             {
-                return this._Wallets;
+                return this._Image;
+            }
+
+            set
+            {
+                if (this._Image != value)
+                {
+                    this._Image = value;
+                    this.OnPropertyChanged("Image");
+                }
             }
         }
+
+        private Rules _Rules = new Rules();
+
+        public Rules Rules
+        {
+            get
+            {
+                return this._Rules;
+            }
+        }
+    }
+
+    public class Wallets1 : System.Collections.ObjectModel.ObservableCollection<WalletsItem1>
+    { 
     }
 
     public class WalletsItem1 : INotifyPropertyChanged
@@ -579,7 +612,128 @@ namespace Blend.SampleData.WalletsSampleDataSource
         }
     }
 
-    public class Wallets1 : System.Collections.ObjectModel.ObservableCollection<WalletsItem1>
+    public class Image : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private string _Path = string.Empty;
+
+        public string Path
+        {
+            get
+            {
+                return this._Path;
+            }
+
+            set
+            {
+                if (this._Path != value)
+                {
+                    this._Path = value;
+                    this.OnPropertyChanged("Path");
+                }
+            }
+        }
+    }
+
+    public class RulesItem : INotifyPropertyChanged
+    {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected virtual void OnPropertyChanged(string propertyName)
+        {
+            if (this.PropertyChanged != null)
+            {
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        private double _Id = 0;
+
+        public double Id
+        {
+            get
+            {
+                return this._Id;
+            }
+
+            set
+            {
+                if (this._Id != value)
+                {
+                    this._Id = value;
+                    this.OnPropertyChanged("Id");
+                }
+            }
+        }
+
+        private string _Name = string.Empty;
+
+        public string Name
+        {
+            get
+            {
+                return this._Name;
+            }
+
+            set
+            {
+                if (this._Name != value)
+                {
+                    this._Name = value;
+                    this.OnPropertyChanged("Name");
+                }
+            }
+        }
+
+        private string _Description = string.Empty;
+
+        public string Description
+        {
+            get
+            {
+                return this._Description;
+            }
+
+            set
+            {
+                if (this._Description != value)
+                {
+                    this._Description = value;
+                    this.OnPropertyChanged("Description");
+                }
+            }
+        }
+
+        private string _Pattern = string.Empty;
+
+        public string Pattern
+        {
+            get
+            {
+                return this._Pattern;
+            }
+
+            set
+            {
+                if (this._Pattern != value)
+                {
+                    this._Pattern = value;
+                    this.OnPropertyChanged("Pattern");
+                }
+            }
+        }
+    }
+
+    public class Rules : System.Collections.ObjectModel.ObservableCollection<RulesItem>
     { 
     }
 #endif

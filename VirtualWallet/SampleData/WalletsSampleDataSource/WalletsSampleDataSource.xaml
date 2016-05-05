@@ -4,66 +4,73 @@
       changes to this file can cause errors.
 -->
 <SampleData:WalletsSampleDataSource xmlns:SampleData="using:Blend.SampleData.WalletsSampleDataSource" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation">
-  <SampleData:WalletsSampleDataSource.Wallets>
-    <SampleData:WalletsItem Id="1" Name="Personal">
-      <SampleData:WalletsItem.Icon>
-        <SampleData:Icon Id="1" Name="WalletIcon1" Path="path/to/file" />
-      </SampleData:WalletsItem.Icon>
-    </SampleData:WalletsItem>
-    <SampleData:WalletsItem Id="2" Name="Company Wallet">
-      <SampleData:WalletsItem.Icon>
-        <SampleData:Icon Id="2" Name="WalletIcon2" Path="path/to/file" />
-      </SampleData:WalletsItem.Icon>
-    </SampleData:WalletsItem>
-    <SampleData:WalletsItem Id="3" Name="Family Wallet">
-      <SampleData:WalletsItem.Icon>
-        <SampleData:Icon Id="3" Name="WalletIcon3" Path="path/to/file" />
-      </SampleData:WalletsItem.Icon>
-    </SampleData:WalletsItem>
-  </SampleData:WalletsSampleDataSource.Wallets>
-  <SampleData:WalletsSampleDataSource.Banks>
-    <SampleData:BanksItem Id="4" Name="FIO - personal">
-      <SampleData:BanksItem.Icon>
-        <SampleData:Icon1 Id="48" Name="Class curae nam" Path="Sed donec dis" />
-      </SampleData:BanksItem.Icon>
-    </SampleData:BanksItem>
-    <SampleData:BanksItem Id="5" Name="FIO - company">
-      <SampleData:BanksItem.Icon>
-        <SampleData:Icon1 Id="57" Name="Aenean maecenas praesent" Path="Integer fusce cras accumsan" />
-      </SampleData:BanksItem.Icon>
-    </SampleData:BanksItem>
-    <SampleData:BanksItem Id="7" Name="Add bank...">
-      <SampleData:BanksItem.Icon>
-        <SampleData:Icon1 Id="75" Name="Morbi mauris nulla" Path="Nullam aptent quisque duis" />
-      </SampleData:BanksItem.Icon>
-    </SampleData:BanksItem>
-  </SampleData:WalletsSampleDataSource.Banks>
-  <SampleData:WalletsSampleDataSource.Categories>
-    <SampleData:CategoriesItem Id="1" Name="Foot" />
-    <SampleData:CategoriesItem Id="2" Name="Cloths" />
-    <SampleData:CategoriesItem Id="3" Name="Travel to work" />
-    <SampleData:CategoriesItem Id="4" Name="Alcohol" />
-    <SampleData:CategoriesItem Id="5" Name="Cigarettes" />
-    <SampleData:CategoriesItem Id="6" Name="Sport" />
-    <SampleData:CategoriesItem Id="7" Name="Holidays" />
-    <SampleData:CategoriesItem Id="8" Name="Gifts" />
-    <SampleData:CategoriesItem Id="9" Name="Wife" />
-    <SampleData:CategoriesItem Id="10" Name="Add category..." />
-  </SampleData:WalletsSampleDataSource.Categories>
-  <SampleData:WalletsSampleDataSource.Category>
-      <SampleData:Category Id="3" Name="Test Category." ImageUri="/Assets/Images//Categories/Transport/Transport1.png">
-      <SampleData:Category.Wallets>
-        <SampleData:WalletsItem1 Id="1" Name="Nam" ImageUri="/Assets/Images//Wallets/wallet01.png" />
-        <SampleData:WalletsItem1 Id="2" Name="Cras" ImageUri="/Assets/Images//Wallets/wallet01.png" />
-        <SampleData:WalletsItem1 Id="9" Name="Duis" ImageUri="Accumsan bibendum" />
-        <SampleData:WalletsItem1 Id="2" Name="Sed" ImageUri="Nam mauris" />
-        <SampleData:WalletsItem1 Id="5" Name="Maecenas" ImageUri="Integer cras" />
-        <SampleData:WalletsItem1 Id="1" Name="Nunc" ImageUri="Dictumst nullam duis" />
-        <SampleData:WalletsItem1 Id="3" Name="Dis" ImageUri="Eleifend aptent" />
-        <SampleData:WalletsItem1 Id="9" Name="Amet" ImageUri="Facilisi sed" />
-        <SampleData:WalletsItem1 Id="4" Name="Aliquam" ImageUri="Quisque donec" />
-        <SampleData:WalletsItem1 Id="4" Name="Class" ImageUri="Auctor etiam faucibus habitant" />
-      </SampleData:Category.Wallets>
-    </SampleData:Category>
-  </SampleData:WalletsSampleDataSource.Category>
+    <SampleData:WalletsSampleDataSource.Wallets>
+        <SampleData:WalletsItem Id="1" Name="Personal">
+            <SampleData:WalletsItem.Icon>
+                <SampleData:Icon Id="1" Name="WalletIcon1" Path="/Assets/Images/Wallets/Wallet1.png" />
+            </SampleData:WalletsItem.Icon>
+        </SampleData:WalletsItem>
+        <SampleData:WalletsItem Id="2" Name="Company Wallet">
+            <SampleData:WalletsItem.Icon>
+                <SampleData:Icon Id="2" Name="WalletIcon2" Path="/Assets/Images/Wallets/Wallet2.png" />
+            </SampleData:WalletsItem.Icon>
+        </SampleData:WalletsItem>
+        <SampleData:WalletsItem Id="3" Name="Family Wallet">
+            <SampleData:WalletsItem.Icon>
+                <SampleData:Icon Id="3" Name="WalletIcon3" Path="/Assets/Images/Wallets/Wallet3.png" />
+            </SampleData:WalletsItem.Icon>
+        </SampleData:WalletsItem>
+    </SampleData:WalletsSampleDataSource.Wallets>
+    <SampleData:WalletsSampleDataSource.Banks>
+        <SampleData:BanksItem Id="4" Name="FIO - personal">
+            <SampleData:BanksItem.Icon>
+                <SampleData:Icon1 Id="48" Name="Class curae nam" Path="Sed donec dis" />
+            </SampleData:BanksItem.Icon>
+        </SampleData:BanksItem>
+        <SampleData:BanksItem Id="5" Name="FIO - company">
+            <SampleData:BanksItem.Icon>
+                <SampleData:Icon1 Id="57" Name="Aenean maecenas praesent" Path="Integer fusce cras accumsan" />
+            </SampleData:BanksItem.Icon>
+        </SampleData:BanksItem>
+        <SampleData:BanksItem Id="7" Name="Add bank...">
+            <SampleData:BanksItem.Icon>
+                <SampleData:Icon1 Id="75" Name="Morbi mauris nulla" Path="Nullam aptent quisque duis" />
+            </SampleData:BanksItem.Icon>
+        </SampleData:BanksItem>
+    </SampleData:WalletsSampleDataSource.Banks>
+    <SampleData:WalletsSampleDataSource.Categories>
+        <SampleData:CategoriesItem Id="1" Name="Foot" />
+        <SampleData:CategoriesItem Id="2" Name="Cloths" />
+        <SampleData:CategoriesItem Id="3" Name="Travel to work" />
+        <SampleData:CategoriesItem Id="4" Name="Alcohol" />
+        <SampleData:CategoriesItem Id="5" Name="Cigarettes" />
+        <SampleData:CategoriesItem Id="6" Name="Sport" />
+        <SampleData:CategoriesItem Id="7" Name="Holidays" />
+        <SampleData:CategoriesItem Id="8" Name="Gifts" />
+        <SampleData:CategoriesItem Id="9" Name="Wife" />
+        <SampleData:CategoriesItem Id="10" Name="Add category..." />
+    </SampleData:WalletsSampleDataSource.Categories>
+    <SampleData:WalletsSampleDataSource.Category>
+        <SampleData:Category Id="3" Name="Test Category." ImageUri="/Assets/Images/Categories/Transport/CategoryTransport1.png">
+            <SampleData:Category.Wallets>
+                <SampleData:WalletsItem1 Id="1" Name="Nam" ImageUri="/Assets/Images/Wallets/Wallet1.png" />
+                <SampleData:WalletsItem1 Id="2" Name="Cras" ImageUri="/Assets/Images/Wallets/Wallet2.png" />
+            </SampleData:Category.Wallets>
+            <SampleData:Category.Image>
+                <SampleData:Image Path="/Assets/Images/Categories/Transport/CategoryTransport1.png" />
+            </SampleData:Category.Image>
+            <SampleData:Category.Rules>
+                <SampleData:RulesItem Id="85" Name="Etiam fusce" Description="Lacinia luctus habitant" Pattern="Magnis quam" />
+                <SampleData:RulesItem Id="93" Name="Quis lorem mattis" Description="Mauris urna" Pattern="Laoreet morbi sed" />
+                <SampleData:RulesItem Id="14" Name="Cras nulla" Description="Duis proin augue mollis" Pattern="Natoque sem dolor sit" />
+                <SampleData:RulesItem Id="20" Name="Fames vel felis ipsum" Description="Justo montes nostra posuere" Pattern="Inceptos ornare" />
+                <SampleData:RulesItem Id="33" Name="Nam sed dis" Description="Nunc potenti amet platea" Pattern="Ante arcu interdum pretium" />
+                <SampleData:RulesItem Id="11" Name="Lobortis est rhoncus lacus" Description="Diam nascetur" Pattern="Eget elit" />
+                <SampleData:RulesItem Id="88" Name="Pharetra sodales enim" Description="Erat primis" Pattern="Lorem rutrum viverra" />
+                <SampleData:RulesItem Id="96" Name="Aliquam hac placerat" Description="Leo sapien integer pulvinar" Pattern="Mus eros" />
+                <SampleData:RulesItem Id="16" Name="Magna nec semper" Description="Non sagittis massa" Pattern="Senectus metus nibh" />
+                <SampleData:RulesItem Id="19" Name="Sociis per quisque sed" Description="Sem taciti nisi" Pattern="Morbi sit vivamus" />
+            </SampleData:Category.Rules>
+        </SampleData:Category>
+    </SampleData:WalletsSampleDataSource.Category>
 </SampleData:WalletsSampleDataSource>
