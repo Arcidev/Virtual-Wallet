@@ -180,5 +180,18 @@ namespace VirtualWallet.ViewModels
 
             Modified = false;
         }
+
+        public async Task DetachRuleAsync(Rule rule)
+        {
+            var filter = new CategoryRuleFilter() { CategoryId = Category.Id, RuleId = rule.Id };
+            var categoriesRules = await categoryRuleService.GetAsync(filter);
+
+            foreach (CategoryRule catRul in categoriesRules)
+            {
+                await categoryRuleService.DeleteAsync(catRul.Id);
+            }
+
+            await LoadRulesAsync();
+        }
     }
 }

@@ -61,15 +61,8 @@
             </SampleData:Category.Image>
             <SampleData:Category.Rules>
                 <SampleData:RulesItem Id="85" Name="Etiam fusce" Description="Lacinia luctus habitant" Pattern="Magnis quam" />
-                <SampleData:RulesItem Id="93" Name="Quis lorem mattis" Description="Mauris urna" Pattern="Laoreet morbi sed" />
-                <SampleData:RulesItem Id="14" Name="Cras nulla" Description="Duis proin augue mollis" Pattern="Natoque sem dolor sit" />
-                <SampleData:RulesItem Id="20" Name="Fames vel felis ipsum" Description="Justo montes nostra posuere" Pattern="Inceptos ornare" />
-                <SampleData:RulesItem Id="33" Name="Nam sed dis" Description="Nunc potenti amet platea" Pattern="Ante arcu interdum pretium" />
-                <SampleData:RulesItem Id="11" Name="Lobortis est rhoncus lacus" Description="Diam nascetur" Pattern="Eget elit" />
-                <SampleData:RulesItem Id="88" Name="Pharetra sodales enim" Description="Erat primis" Pattern="Lorem rutrum viverra" />
-                <SampleData:RulesItem Id="96" Name="Aliquam hac placerat" Description="Leo sapien integer pulvinar" Pattern="Mus eros" />
-                <SampleData:RulesItem Id="16" Name="Magna nec semper" Description="Non sagittis massa" Pattern="Senectus metus nibh" />
-                <SampleData:RulesItem Id="19" Name="Sociis per quisque sed" Description="Sem taciti nisi" Pattern="Morbi sit vivamus" />
+                <SampleData:RulesItem Id="93" Name="Quis lorem mattis" Description="" Pattern="Laoreet morbi sed" />
+                <SampleData:RulesItem Id="14" Name="Cras nulla" Description="Duis proin augue mollis blabolus blbol" Pattern="Natoque sem dolor sit" />
             </SampleData:Category.Rules>
         </SampleData:Category>
     </SampleData:WalletsSampleDataSource.Category>

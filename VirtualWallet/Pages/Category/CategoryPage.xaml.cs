@@ -70,9 +70,11 @@ namespace VirtualWallet.Pages
             Frame.Navigate(typeof(RulePage), pagePayload);
         }
 
-        private void Button_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void RemoveRuleButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-
+            var button = sender as Button;
+            var rule = button.DataContext as Rule;
+            await viewModel.DetachRuleAsync(rule);
         }
     }
 }
