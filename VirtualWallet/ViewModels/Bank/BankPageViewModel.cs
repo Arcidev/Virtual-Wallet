@@ -18,13 +18,17 @@ namespace VirtualWallet.ViewModels
     {
         private IBankAccountInfoService bankAccountInfoService;
         private ITransactionService transactionService;
+        private ICategoryService categoryService;
         private ResourceLoader resources;
         private Bank bank;
-        private IList<Transaction> transactions;
+        private IList<Tuple<string, double>> expenses;
+        private IList<Tuple<string, double>> incomes;
+        private IList<Tuple<DateTime, double>> transactions;
         private BankAccountInfo bankAccountInfo;
         private ICommand syncCommand;
         private Timer syncExecuteTimer;
         private bool syncButtonForceDisabled;
+        private string categoryOther;
 
         public Action BeforeSync { get; set; }
 
@@ -55,20 +59,37 @@ namespace VirtualWallet.ViewModels
                 NotifyPropertyChanged();
 
                 BankAccountInfo = Bank?.BankAccountInfo ?? new BankAccountInfo();
-                Transactions = Bank?.StoredTransactions;
+                Transactions = Bank?.StoredTransactions.Select(x => Tuple.Create(x.Date, (double)x.Amount)).ToList();
                 SyncCommand = new CommandHandler(SyncExecute, () => !syncButtonForceDisabled && (Bank?.CanSyncExecute ?? false));
                 SetSyncExecuteTimer();
             }
         }
 
-        public IList<Transaction> Transactions
+        public IList<Tuple<string, double>> Expenses
+        {
+            get { return expenses; }
+            private set
+            {
+                expenses = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public IList<Tuple<string, double>> Incomes
+        {
+            get { return incomes; }
+            private set
+            {
+                incomes = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public IList<Tuple<DateTime, double>> Transactions
         {
             get { return transactions; }
-            set
+            private set
             {
-                if (transactions == value)
-                    return;
-
                 transactions = value;
                 NotifyPropertyChanged();
             }
@@ -87,11 +108,13 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public BankPageViewModel(IBankAccountInfoService bankAccountInfoService, ITransactionService transactionService, ResourceLoader resources)
+        public BankPageViewModel(IBankAccountInfoService bankAccountInfoService, ITransactionService transactionService, ICategoryService categoryService, ResourceLoader resources)
         {
             this.bankAccountInfoService = bankAccountInfoService;
             this.transactionService = transactionService;
+            this.categoryService = categoryService;
             this.resources = resources;
+            categoryOther = resources.GetString("Category_Other");
         }
 
         public async Task LoadDataAsync(Bank bank)
@@ -100,6 +123,9 @@ namespace VirtualWallet.ViewModels
             {
                 bank.BankAccountInfo = await bankAccountInfoService.GetAsync(bank.Id);
                 bank.StoredTransactions = await transactionService.GetByBankIdAsync(bank.Id);
+                var transactionCategories = await categoryService.GroupTransactions(bank.StoredTransactions);
+                Incomes = transactionCategories.Where(x => x.Item2 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item2)).ToList();
+                Expenses = transactionCategories.Where(x => x.Item3 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item3)).ToList();
             }
 
             Bank = bank;
@@ -146,8 +172,11 @@ namespace VirtualWallet.ViewModels
                     await transactionService.InsertOrIgnoreAsync(false, bankTransactions.ToArray());
                 }
 
-                transactions = Bank.StoredTransactions;
-                NotifyPropertyChanged(nameof(Transactions));
+                Transactions = Bank.StoredTransactions.Select(x => Tuple.Create(x.Date, (double)x.Amount)).ToList();
+                var transactionCategories = await categoryService.GroupTransactions(bank.StoredTransactions);
+                Incomes = transactionCategories.Where(x => x.Item2 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item2)).ToList();
+                Expenses = transactionCategories.Where(x => x.Item3 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item3)).ToList();
+
                 await bankAccountInfoService.InsertOrReplaceAsync(false, BankAccountInfo);
             }
             catch (Exception)

@@ -261,4 +261,16 @@
   <data name="CommandBar_Delete.Label" xml:space="preserve">
     <value>Delete</value>
   </data>
+  <data name="Category_Other" xml:space="preserve">
+    <value>Other</value>
+  </data>
+  <data name="Bank_ChartTransactions.Title" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="Bank_ChartIncomes.Title" xml:space="preserve">
+    <value>Incomes</value>
+  </data>
+  <data name="Bank_ChartExpenses.Title" xml:space="preserve">
+    <value>Expenses</value>
+  </data>
 </root>

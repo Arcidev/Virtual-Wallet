@@ -14,7 +14,7 @@ namespace VirtualWallet.Pages
         public BankPage()
         {
             this.InitializeComponent();
-            viewModel = new BankPageViewModel(new BankAccountInfoService(), new TransactionService(), ResourceLoader.GetForCurrentView());
+            viewModel = new BankPageViewModel(new BankAccountInfoService(), new TransactionService(), new CategoryService(), ResourceLoader.GetForCurrentView());
             viewModel.BeforeSync = () => IconRotation.Begin();
             viewModel.AfterSync = () => IconRotation.Stop();
             this.DataContext = viewModel;

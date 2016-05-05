@@ -4,6 +4,7 @@ using Shared.Modifiers;
 using System.Threading.Tasks;
 using SQLite.Net.Async;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace DAL.DataAccess
 {
@@ -11,6 +12,7 @@ namespace DAL.DataAccess
     {
         private static readonly IImages images = new Images();
         private static readonly IWalletsCategories walletsCategories = new WalletsCategories();
+        private static readonly ICategoriesRules categoriesRules = new CategoriesRules();
 
         protected async override Task ApplyModifiersAsync(Category category, CategoryModifier modifier)
         {
@@ -22,15 +24,16 @@ namespace DAL.DataAccess
                 var walletCategoryModifier = new WalletCategoryModifier() { IncludeWallet = true };
                 var filter = new WalletCategoryFilter() { CategoryId = category.Id };
                 var wallCats = await walletsCategories.GetAsync(filter, walletCategoryModifier);
-                category.Wallets = new List<Wallet>();
-
-                foreach (var walletCategory in wallCats)
-                {
-                    if (walletCategory.Wallet != null)
-                        category.Wallets.Add(walletCategory.Wallet);
-                }
+                category.Wallets = wallCats.Where(x => x.Wallet != null).Select(x => x.Wallet).ToList();
             }
-                
+             
+            if (modifier.IncludeRules || modifier.IncludeAll)
+            {
+                var categoryRuleModifier = new CategoryRuleModifier() { IncludeRule = true };
+                var filter = new CategoryRuleFilter() { CategoryId = category.Id };
+                var catsRules = await categoriesRules.GetAsync(filter, categoryRuleModifier);
+                category.Rules = catsRules.Where(x => x.Rule != null).Select(x => x.Rule).ToList();
+            }   
         }
 
         protected override AsyncTableQuery<Category> ApplyFilters(AsyncTableQuery<Category> query, CategoryFilter filter)

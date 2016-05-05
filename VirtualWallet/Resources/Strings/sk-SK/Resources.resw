@@ -261,4 +261,16 @@
   <data name="CommandBar_Delete.Label" xml:space="preserve">
     <value>Vymazať</value>
   </data>
+  <data name="Category_Other" xml:space="preserve">
+    <value>Ostatné</value>
+  </data>
+  <data name="Bank_ChartTransactions.Title" xml:space="preserve">
+    <value>Transakcie</value>
+  </data>
+  <data name="Bank_ChartIncomes.Title" xml:space="preserve">
+    <value>Príjmy</value>
+  </data>
+  <data name="Bank_ChartExpenses.Title" xml:space="preserve">
+    <value>Výdaje</value>
+  </data>
 </root>

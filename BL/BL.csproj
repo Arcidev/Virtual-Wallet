@@ -107,6 +107,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Data\TransactionData.cs" />
     <Compile Include="Models\Bank\BankAccountInfo.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Interface\IPagePayload.cs" />
