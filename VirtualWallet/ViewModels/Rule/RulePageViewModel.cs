@@ -2,7 +2,6 @@
 using BL.Service;
 using Shared.Enums;
 using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace VirtualWallet.ViewModels
@@ -223,7 +222,6 @@ namespace VirtualWallet.ViewModels
             }
             else
             {
-                
                 await ruleService.InsertAsync(true, Rule);
             }
             Modified = false;
@@ -250,7 +248,6 @@ namespace VirtualWallet.ViewModels
             {
                 PatternValid = false;
             }
-            
         }
     }
 }

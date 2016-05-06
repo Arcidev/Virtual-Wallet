@@ -1,5 +1,6 @@
 ﻿using DAL.Data;
 using SQLite.Net.Async;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace DAL.Helpers
@@ -9,29 +10,28 @@ namespace DAL.Helpers
         // Just for testing
         public static async Task InitTempData(SQLiteAsyncConnection connection)
         {
-            await connection.DeleteAllAsync<Rule>();
             await connection.DeleteAllAsync<WalletCategory>();
-            await connection.DeleteAllAsync<Category>();
             await connection.DeleteAllAsync<Wallet>();
 
+            var wallet = new Wallet() { Name = "Test wallet", ImageId = 15 };
             await connection.InsertAllAsync(new object[]
             {
-                    new Wallet() { Id = 1,  Name = "Test wallet", ImageId = 15 }
+                    wallet
             });
+
+            Category category = (await connection.Table<Category>().ToListAsync()).FirstOrDefault();
+            if (category == null)
+            {
+                category = new Category() { Name = "Test category", ImageId = 139 };
+                await connection.InsertAllAsync(new object[]
+                {
+                    category
+                });
+            }
 
             await connection.InsertAllAsync(new object[]
             {
-                    new Category() { Id = 1, Name = "Test category", ImageId = 139 }
-            });
-
-            await connection.InsertAllAsync(new object[]
-            {
-                    new WalletCategory() { WalletId = 1, CategoryId = 1 }
-            });
-
-            await connection.InsertAllAsync(new object[]
-            {
-                    new Rule() { Id = 1, Name = "Test rule", Description = "This is test rule", Pattern = "*", CategoryId = 1 }
+                    new WalletCategory() { WalletId = wallet.Id, CategoryId = category.Id }
             });
         }
     }
