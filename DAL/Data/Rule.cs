@@ -1,5 +1,4 @@
 ﻿using SQLite.Net.Attributes;
-using System.Collections.Generic;
 
 namespace DAL.Data
 {
@@ -17,7 +16,9 @@ namespace DAL.Data
 
         public int PatternTypeId { get; set; }
 
+        public int CategoryId { get; set; }
+
         [Ignore]
-        public IList<Category> categories { get; set; }
+        public Category Category { get; set; }
     }
 }

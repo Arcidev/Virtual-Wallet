@@ -5,6 +5,7 @@ using Shared.Modifiers;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace VirtualWallet.ViewModels
@@ -14,19 +15,19 @@ namespace VirtualWallet.ViewModels
         private ICategoryService categoryService;
         private IWalletService walletService;
         private IWalletCategoryService walletCategoryService;
-        private ICategoryRuleService categoryRuleService;
+        private IRuleService ruleService;
 
         private Category category;
         private ObservableCollection<Wallet> wallets;
         private ObservableCollection<Rule> rules;
         private Boolean modified;
 
-        public CategoryPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService, ICategoryRuleService categoryRuleService)
+        public CategoryPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService, IRuleService ruleService)
         {
             this.categoryService = categoryService;
             this.walletService = walletService;
             this.walletCategoryService = walletCategoryService;
-            this.categoryRuleService = categoryRuleService;
+            this.ruleService = ruleService;
             this.modified = false;
 
             this.Category = new Category();
@@ -149,18 +150,8 @@ namespace VirtualWallet.ViewModels
         private async Task LoadRulesAsync()
         {
             var categoryId = Category.Id;
-            var filter = new CategoryRuleFilter() { CategoryId = categoryId };
-            var modifier = new CategoryRuleModifier() { IncludeRule = true };
-            var categoriesRules = await categoryRuleService.GetAsync(filter, modifier);
-            var rules = new List<Rule>();
-
-            foreach (var categoryRule in categoriesRules)
-            {
-                if (categoryRule.Rule != null)
-                    rules.Add(categoryRule.Rule);
-            }
-
-            Rules = new ObservableCollection<Rule>(rules);
+            var filter = new RuleFilter() { CategoryId = categoryId };
+            Rules = new ObservableCollection<Rule>(await ruleService.GetAsync(filter));
         }
 
         public async Task SaveCategoryAsync()
@@ -183,15 +174,8 @@ namespace VirtualWallet.ViewModels
 
         public async Task DetachRuleAsync(Rule rule)
         {
-            var filter = new CategoryRuleFilter() { CategoryId = Category.Id, RuleId = rule.Id };
-            var categoriesRules = await categoryRuleService.GetAsync(filter);
-
-            foreach (CategoryRule catRul in categoriesRules)
-            {
-                await categoryRuleService.DeleteAsync(catRul.Id);
-            }
-
-            await LoadRulesAsync();
+            Rules.Remove(Rules.First(x => x.Id == rule.Id));
+            await ruleService.DeleteAsync(rule.Id);
         }
     }
 }

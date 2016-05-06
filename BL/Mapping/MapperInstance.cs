@@ -21,7 +21,9 @@ namespace BL.Mapping
             cfg.CreateMap<DAL.Data.Category, Category>();
             cfg.CreateMap<Category, DAL.Data.Category>()
             .ForMember(target => target.Image, action => action.Ignore())
-            .ForMember(target => target.ImageId, action => action.MapFrom(source => source.Image != null ? source.Image.Id : source.ImageId));
+            .ForMember(target => target.ImageId, action => action.MapFrom(source => source.Image != null ? source.Image.Id : source.ImageId))
+            .ForMember(target => target.Wallets, action => action.Ignore())
+            .ForMember(target => target.Rules, action => action.Ignore());
 
             cfg.CreateMap<FioSdkCsharp.Models.Info, BankAccountInfo>();
             cfg.CreateMap<DAL.Data.BankAccountInfo, BankAccountInfo>();
@@ -42,12 +44,7 @@ namespace BL.Mapping
             cfg.CreateMap<DAL.Data.Rule, Rule>()
             .ForMember(target => target.PatternType, action => action.MapFrom(source => (PatternType)source.PatternTypeId));
             cfg.CreateMap<Rule, DAL.Data.Rule>()
-            .ForMember(target => target.PatternTypeId, action => action.MapFrom(source => (int)source.PatternType));
-
-            cfg.CreateMap<DAL.Data.CategoryRule, CategoryRule>();
-            cfg.CreateMap<CategoryRule, DAL.Data.CategoryRule>()
-            .ForMember(target => target.Rule, action => action.Ignore())
-            .ForMember(target => target.RuleId, action => action.MapFrom(source => source.Rule != null ? source.Rule.Id : source.RuleId))
+            .ForMember(target => target.PatternTypeId, action => action.MapFrom(source => (int)source.PatternType))
             .ForMember(target => target.Category, action => action.Ignore())
             .ForMember(target => target.CategoryId, action => action.MapFrom(source => source.Category != null ? source.Category.Id : source.CategoryId));
 

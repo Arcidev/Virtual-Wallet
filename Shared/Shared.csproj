@@ -116,7 +116,6 @@
     <Compile Include="Filters\TransactionFilter.cs" />
     <Compile Include="Filters\RuleFilter.cs" />
     <Compile Include="Filters\CategoryFilter.cs" />
-    <Compile Include="Filters\CategoryRuleFilter.cs" />
     <Compile Include="Formatters\CurrencyFormatter.cs" />
     <Compile Include="Formatters\DateTimeFormatter.cs" />
     <Compile Include="Modifiers\RuleModifier.cs" />
@@ -125,7 +124,6 @@
     <Compile Include="Modifiers\BankModifier.cs" />
     <Compile Include="Modifiers\BaseModifier.cs" />
     <Compile Include="Modifiers\CategoryModifier.cs" />
-    <Compile Include="Modifiers\CategoryRuleModifier.cs" />
     <Compile Include="Modifiers\WalletCategoryModifier.cs" />
     <Compile Include="Modifiers\WalletModifier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

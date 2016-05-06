@@ -3,7 +3,6 @@ using Shared.Filters;
 using Shared.Modifiers;
 using System.Threading.Tasks;
 using SQLite.Net.Async;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace DAL.DataAccess
@@ -12,7 +11,7 @@ namespace DAL.DataAccess
     {
         private static readonly IImages images = new Images();
         private static readonly IWalletsCategories walletsCategories = new WalletsCategories();
-        private static readonly ICategoriesRules categoriesRules = new CategoriesRules();
+        private static readonly IRules rules = new Rules();
 
         protected async override Task ApplyModifiersAsync(Category category, CategoryModifier modifier)
         {
@@ -29,10 +28,8 @@ namespace DAL.DataAccess
              
             if (modifier.IncludeRules || modifier.IncludeAll)
             {
-                var categoryRuleModifier = new CategoryRuleModifier() { IncludeRule = true };
-                var filter = new CategoryRuleFilter() { CategoryId = category.Id };
-                var catsRules = await categoriesRules.GetAsync(filter, categoryRuleModifier);
-                category.Rules = catsRules.Where(x => x.Rule != null).Select(x => x.Rule).ToList();
+                var filter = new RuleFilter() { CategoryId = category.Id };
+                category.Rules = await rules.GetAsync(filter);
             }   
         }
 
@@ -50,7 +47,7 @@ namespace DAL.DataAccess
         protected override async Task OnEntityDeletedAsync(SQLiteAsyncConnection connection, int id)
         {
             await connection.ExecuteAsync($"DELETE FROM {nameof(WalletCategory)} WHERE {nameof(WalletCategory.CategoryId)} = {id}");
-            await connection.ExecuteAsync($"DELETE FROM {nameof(CategoryRule)} WHERE {nameof(CategoryRule.CategoryId)} = {id}");
+            await connection.ExecuteAsync($"DELETE FROM {nameof(Rule)} WHERE {nameof(Rule.CategoryId)} = {id}");
         }
     }
 }

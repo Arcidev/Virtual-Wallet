@@ -3,31 +3,18 @@ using Shared.Filters;
 using Shared.Modifiers;
 using System.Threading.Tasks;
 using SQLite.Net.Async;
-using System.Collections.Generic;
 
 namespace DAL.DataAccess
 {
     public class Rules : BaseModifiableCrudDataAccess<Rule, RuleFilter, RuleModifier>, IRules
     {
         private static readonly IImages images = new Images();
-        private static readonly ICategoriesRules categoriesRules = new CategoriesRules();
+        private static readonly ICategories categories = new Categories();
 
         protected async override Task ApplyModifiersAsync(Rule rule, RuleModifier modifier)
         {
             if (modifier.IncludeCategory || modifier.IncludeAll)
-            {
-                var categoryRuleModifier = new CategoryRuleModifier() { IncludeCategory = true };
-                var filter = new CategoryRuleFilter() { RuleId = rule.Id };
-                var catsRules = await categoriesRules.GetAsync(filter, categoryRuleModifier);
-                rule.categories = new List<Category>();
-
-                foreach (var categoryRule in catsRules)
-                {
-                    if (categoryRule.Category != null)
-                        rule.categories.Add(categoryRule.Category);
-                }
-            }
-                
+                rule.Category = await categories.GetAsync(rule.CategoryId);
         }
 
         protected override AsyncTableQuery<Rule> ApplyFilters(AsyncTableQuery<Rule> query, RuleFilter filter)
@@ -41,12 +28,10 @@ namespace DAL.DataAccess
             if (!string.IsNullOrEmpty(filter.Pattern))
                 query = query.Where(x => x.Pattern.Contains(filter.Pattern));
 
-            return base.ApplyFilters(query, filter);
-        }
+            if (filter.CategoryId.HasValue)
+                query = query.Where(x => x.CategoryId == filter.CategoryId.Value);
 
-        protected override async Task OnEntityDeletedAsync(SQLiteAsyncConnection connection, int id)
-        {
-            await connection.ExecuteAsync($"DELETE FROM {nameof(CategoryRule)} WHERE {nameof(CategoryRule.RuleId)} = {id}");
+            return base.ApplyFilters(query, filter);
         }
     }
 }

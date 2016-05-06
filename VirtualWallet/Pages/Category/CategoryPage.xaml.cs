@@ -14,7 +14,7 @@ namespace VirtualWallet.Pages
         public CategoryPage()
         {
             this.InitializeComponent();
-            viewModel = new CategoryPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService(), new CategoryRuleService());
+            viewModel = new CategoryPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService(), new RuleService());
             this.DataContext = viewModel;
         }
 

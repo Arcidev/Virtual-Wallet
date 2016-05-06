@@ -1,6 +1,5 @@
 ﻿using BL.Models;
 using BL.Service;
-using Shared.Filters;
 using Shared.Enums;
 using System;
 using System.Collections.Generic;
@@ -11,7 +10,6 @@ namespace VirtualWallet.ViewModels
     class RulePageViewModel : ViewModelBase
     {
         private IRuleService ruleService;
-        private ICategoryRuleService categoryRuleService;
 
         private Rule rule;
         private Boolean modified;
@@ -20,10 +18,9 @@ namespace VirtualWallet.ViewModels
         private Boolean patternValid;
         private String testText;
 
-        public RulePageViewModel(IRuleService ruleService, ICategoryRuleService categoryRuleService)
+        public RulePageViewModel(IRuleService ruleService)
         {
             this.ruleService = ruleService;
-            this.categoryRuleService = categoryRuleService;
             Rule = new Rule();
             this.modified = false;
             this.patternValid = true;
@@ -70,23 +67,6 @@ namespace VirtualWallet.ViewModels
                     return;
 
                 persisted = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public int Id
-        {
-            get
-            {
-                return Rule == null ? -1 : Rule.Id;
-            }
-            set
-            {
-                if (Rule == null || Rule.Id == value)
-                    return;
-
-                Rule.Id = value;
-                Modified = true;
                 NotifyPropertyChanged();
             }
         }
@@ -210,7 +190,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public int? CategoryId { get; set; }
+        public int CategoryId { get; set; }
 
         public async Task LoadDataAsync()
         {
@@ -219,6 +199,7 @@ namespace VirtualWallet.ViewModels
             if (rule == null)
             {
                 rule = new Rule();
+                rule.CategoryId = CategoryId;
                 rule.PatternType = PatternType.Contains;
                 Persisted = false;
             } else
@@ -226,12 +207,11 @@ namespace VirtualWallet.ViewModels
                 Persisted = true;
             }
 
-            Id = rule.Id;
-            Name = rule.Name;
-            Description = rule.Description;
-            Pattern = rule.Pattern;
-            PatternType = rule.PatternType;
-            
+            this.rule = rule;
+            NotifyPropertyChanged(nameof(Name));
+            NotifyPropertyChanged(nameof(Description));
+            NotifyPropertyChanged(nameof(Pattern));
+            NotifyPropertyChanged(nameof(PatternType));
             Modified = false;
         }
 
@@ -243,22 +223,9 @@ namespace VirtualWallet.ViewModels
             }
             else
             {
+                
                 await ruleService.InsertAsync(true, Rule);
             }
-
-
-            if (CategoryId != null )
-            {
-                var relationfilter = new CategoryRuleFilter() { CategoryId = CategoryId, RuleId = Rule.Id };
-                IList<CategoryRule> categoriesRules = await categoryRuleService.GetAsync(relationfilter);
-
-                if (categoriesRules.Count == 0)
-                {
-                    var newCategoryRule = new CategoryRule() { CategoryId = (int) CategoryId, RuleId = Rule.Id };
-                    await categoryRuleService.InsertAsync(false, newCategoryRule);
-                }
-            }
-            
             Modified = false;
         }
 
@@ -269,14 +236,6 @@ namespace VirtualWallet.ViewModels
 
         public async Task DeleteRuleAsync()
         {
-            var filter = new CategoryRuleFilter(){ RuleId = Rule.Id};
-            var categoriesRules = await categoryRuleService.GetAsync(filter);
-
-            foreach (CategoryRule catRul in categoriesRules)
-            {
-                await categoryRuleService.DeleteAsync(catRul.Id);
-            }
-
             await ruleService.DeleteAsync(Rule.Id);
         }
 
@@ -287,7 +246,7 @@ namespace VirtualWallet.ViewModels
                 PatternMatch = Rule.Fits(TestText);
                 PatternValid = true;
             }
-            catch (ArgumentException e)
+            catch (ArgumentException)
             {
                 PatternValid = false;
             }

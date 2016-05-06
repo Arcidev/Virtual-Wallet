@@ -15,7 +15,6 @@ namespace DAL.Config
         {
             typeof(Rule),
             typeof(Category),
-            typeof(CategoryRule),
             typeof(Bank),
             typeof(Image),
             typeof(Wallet),
@@ -35,7 +34,6 @@ namespace DAL.Config
         public async Task RemoveAllDataAsync()
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.DeleteAllAsync<CategoryRule>();
             await connection.DeleteAllAsync<Rule>();
             await connection.DeleteAllAsync<WalletCategory>();
             await connection.DeleteAllAsync<Category>();
@@ -71,7 +69,5 @@ namespace DAL.Config
             await InitDataHelper.InitData(connection);
             await InitDataDevHelper.InitTempData(connection);
         }
-
-        
     }
 }

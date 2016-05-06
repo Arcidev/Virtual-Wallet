@@ -1,5 +1,4 @@
 ﻿using Shared.Enums;
-using System.Collections.Generic;
 using System.Text.RegularExpressions;
 
 namespace BL.Models
@@ -16,7 +15,9 @@ namespace BL.Models
 
         public string Description { get; set; }
 
-        public IList<Category> Categories { get; set; }
+        public int CategoryId { get; set; }
+
+        public Category Category { get; set; }
 
         public bool Fits(string val)
         {

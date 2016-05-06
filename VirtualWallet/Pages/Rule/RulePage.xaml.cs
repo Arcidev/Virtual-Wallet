@@ -18,21 +18,23 @@ namespace VirtualWallet.Pages
     public sealed partial class RulePage : Page
     {
         private RulePageViewModel viewModel;
-        private PagePayload pagePayload;
 
         public RulePage()
         {
             this.InitializeComponent();
-            viewModel = new RulePageViewModel(new RuleService(), new CategoryRuleService());
+            viewModel = new RulePageViewModel(new RuleService());
             this.DataContext = viewModel;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            pagePayload = (PagePayload)e.Parameter;
-
+            var pagePayload = (PagePayload)e.Parameter;
             var category = (Category)pagePayload?.Dto;
-            viewModel.CategoryId = category?.Id;
+
+            if (category != null)
+            {
+                viewModel.CategoryId = category.Id;
+            }
 
             var rule = pagePayload?.Rule;
 
