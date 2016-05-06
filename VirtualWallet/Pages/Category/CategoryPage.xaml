@@ -9,7 +9,7 @@
 
     <Page.Resources>
         <DataTemplate x:Key="WalletsItemTemplate">
-            <RelativePanel Width="300">
+            <RelativePanel HorizontalAlignment="Stretch">
                 <TextBlock x:Name="WalletName" Margin="5" Text="{Binding Name}" Width="235"/>
                 <Border RelativePanel.RightOf="WalletName" RelativePanel.AlignVerticalCenterWith="WalletName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <Image MaxHeight="32" MaxWidth="32" Source="{Binding ImageUri}"/>
@@ -17,7 +17,7 @@
             </RelativePanel>
         </DataTemplate>
         <DataTemplate x:Key="RulesItemTemplateNarrow">
-            <RelativePanel Width="300">
+            <RelativePanel HorizontalAlignment="Stretch">
                 <TextBlock x:Name="RuleName" Margin="5" Text="{Binding Name}" Width="235"/>
                 <Button Click="RemoveRuleButton_Click" RelativePanel.RightOf="RuleName" RelativePanel.AlignVerticalCenterWith="RuleName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <Image Source="{StaticResource ButtonRemove}" Width="16" Height="16"/>
@@ -25,7 +25,7 @@
             </RelativePanel>
         </DataTemplate>
         <DataTemplate x:Key="RulesItemTemplateWide">
-            <RelativePanel Width="600">
+            <RelativePanel HorizontalAlignment="Stretch">
                 <TextBlock x:Name="RuleName" Margin="5" Text="{Binding Name}" Width="200"/>
                 <TextBlock x:Name="RuleDescription" Margin="5" Text="{Binding Description}" RelativePanel.RightOf="RuleName" Width="200" />
                 <Button Click="RemoveRuleButton_Click" RelativePanel.RightOf="RuleDescription" RelativePanel.AlignVerticalCenterWith="RuleName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
@@ -102,7 +102,6 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="ListViewRules.Width" Value="500" />
                         <Setter Target="ListViewRules.ItemTemplate" Value="{StaticResource RulesItemTemplateNarrow}" />
                     </VisualState.Setters>
                 </VisualState>

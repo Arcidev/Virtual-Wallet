@@ -17,6 +17,7 @@
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="auto" />
                     <ColumnDefinition Width="*" MinWidth="150" />
+                    <ColumnDefinition Width="auto"/>
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -29,14 +30,15 @@
                 <TextBlock Grid.Row="1" x:Uid="Rule_Description" Margin="5" >Description:</TextBlock>
                 <TextBox Grid.Row="1" Grid.Column="1" Margin="5" Text="{Binding Description,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <TextBlock Grid.Row="2" x:Uid="Rule_Pattern" Margin="5" >Pattern:</TextBlock>
+                <TextBlock Grid.Row="2" Grid.Column="2" x:Uid="Rule_PatternInvalid" Margin="5" Foreground="Red" Visibility="{Binding PatternValid, Converter={StaticResource InvertedBoolToVisibilityConverter}}" >Invalid pattern</TextBlock>
                 <TextBox Grid.Row="2" Grid.Column="1" Margin="5" Text="{Binding Pattern,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                 <ComboBox Grid.Row="3" Grid.Column="1" x:Name="PatternTypeCombobox" Margin="5" SelectedItem="{Binding PatternType, Mode=TwoWay}" HorizontalAlignment="Stretch"/>
             </Grid>
             <TextBlock x:Name="RuleTest" x:Uid="Rule_Properties" Margin="5" RelativePanel.Below="RuleGrid">Test rule</TextBlock>
             <TextBlock x:Name="Rule_TestTips" x:Uid="Rule_TestTips" Margin="10,5,10,5" TextWrapping="Wrap" RelativePanel.Below="RuleTest">Write transaction description to text field and try if rule match your transaction.</TextBlock>
-            <TextBox x:Name="Rule_TestBox" x:Uid="Rule_TestBox" Margin="10,5,10,5" RelativePanel.Below="Rule_TestTips" Text="{Binding Test,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="300"/>
-            <TextBlock x:Name="Rule_TestResultYes" x:Uid="Rule_TestResult" Margin="10,5,10,5" Foreground="Green" RelativePanel.Below="Rule_TestBox">Rule match</TextBlock>
-            <TextBlock x:Name="Rule_TestResultNo" x:Uid="Rule_TestResult" Margin="10,5,10,5" Foreground="Red" RelativePanel.Below="Rule_TestBox">Rule doesn't match</TextBlock>
+            <TextBox x:Name="Rule_TestBox" x:Uid="Rule_TestBox" Margin="10,5,10,5" RelativePanel.Below="Rule_TestTips" Text="{Binding TestText,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="300"/>
+            <TextBlock x:Name="Rule_TestResultYes" x:Uid="Rule_TestResult" Margin="10,5,10,5" Foreground="Green" RelativePanel.Below="Rule_TestBox" Visibility="{Binding PatternMatch, Converter={StaticResource BoolToVisibilityConverter}}" >Rule match</TextBlock>
+            <TextBlock x:Name="Rule_TestResultNo" x:Uid="Rule_TestResult" Margin="10,5,10,5" Foreground="Red" RelativePanel.Below="Rule_TestBox" Visibility="{Binding PatternMatch, Converter={StaticResource InvertedBoolToVisibilityConverter}}">Rule doesn't match</TextBlock>
         </RelativePanel>
     </ScrollViewer>
     <Page.BottomAppBar>

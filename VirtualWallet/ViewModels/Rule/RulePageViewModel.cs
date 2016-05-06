@@ -16,6 +16,9 @@ namespace VirtualWallet.ViewModels
         private Rule rule;
         private Boolean modified;
         private Boolean persisted;
+        private Boolean patternMatch;
+        private Boolean patternValid;
+        private String testText;
 
         public RulePageViewModel(IRuleService ruleService, ICategoryRuleService categoryRuleService)
         {
@@ -23,6 +26,7 @@ namespace VirtualWallet.ViewModels
             this.categoryRuleService = categoryRuleService;
             Rule = new Rule();
             this.modified = false;
+            this.patternValid = true;
         }
 
         public Rule Rule
@@ -134,6 +138,7 @@ namespace VirtualWallet.ViewModels
 
                 Rule.Pattern = value;
                 Modified = true;
+                TestPattern();
                 NotifyPropertyChanged();
             }
         }
@@ -151,6 +156,56 @@ namespace VirtualWallet.ViewModels
 
                 Rule.PatternType = value;
                 Modified = true;
+                TestPattern();
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Boolean PatternMatch
+        {
+            get
+            {
+                return patternMatch;
+            }
+            set
+            {
+                if (patternMatch == value)
+                    return;
+
+                patternMatch = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Boolean PatternValid
+        {
+            get
+            {
+                return patternValid;
+            }
+            set
+            {
+                if (patternValid == value)
+                    return;
+
+                patternValid = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public String TestText
+        {
+            get
+            {
+                return testText;
+            }
+            set
+            {
+                if (testText == value)
+                    return;
+
+                testText = value;
+                TestPattern();
                 NotifyPropertyChanged();
             }
         }
@@ -222,6 +277,20 @@ namespace VirtualWallet.ViewModels
             }
 
             await ruleService.DeleteAsync(Rule.Id);
+        }
+
+        private void TestPattern()
+        {
+            try
+            {
+                PatternMatch = Rule.Fits(TestText);
+                PatternValid = true;
+            }
+            catch (ArgumentException e)
+            {
+                PatternValid = false;
+            }
+            
         }
     }
 }
