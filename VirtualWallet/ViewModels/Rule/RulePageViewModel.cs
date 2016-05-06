@@ -219,6 +219,7 @@ namespace VirtualWallet.ViewModels
             if (rule == null)
             {
                 rule = new Rule();
+                rule.PatternType = PatternType.Contains;
                 Persisted = false;
             } else
             {
