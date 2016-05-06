@@ -1,6 +1,7 @@
 ﻿using BL.Models;
 using BL.Service;
 using Shared.Enums;
+using System;
 using System.Linq;
 using VirtualWallet.ViewModels;
 using Windows.UI.Xaml;
@@ -40,10 +41,9 @@ namespace VirtualWallet.Pages
                 viewModel.Rule.Id = rule.Id;
             }
             
+            PatternTypeCombobox.ItemsSource = Enum.GetValues(typeof(PatternType)).Cast<PatternType>();
+
             await viewModel.LoadDataAsync();
-
-            PatternTypeCombobox.ItemsSource = PatternType.GetValues(typeof(PatternType)).Cast<PatternType>();
-
             base.OnNavigatedTo(e);
         }
 
