@@ -30,7 +30,7 @@
             <ScrollViewer>
                 <RelativePanel>
                     <charting:Chart x:Uid="Bank_ChartTransactions" x:Name="TransactionsLineChart" Title="Transactions" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Height="400" >
-                        <charting:LineSeries x:Uid="Bank_LineSeriesBalance" x:Name="TransactionsLineSeries" Title="Balance" ItemsSource="{Binding Transactions}" IndependentValuePath="Item1" DependentValuePath="Item2" DataContextChanged="TransactionsLineSeries_DataContextChanged" />
+                        <charting:LineSeries x:Uid="Bank_LineSeriesBalance" x:Name="TransactionsLineSeries" Title="Balance" ItemsSource="{Binding Balances}" IndependentValuePath="Item1" DependentValuePath="Item2" DataContextChanged="TransactionsLineSeries_DataContextChanged" />
                         <charting:Chart.Axes>
                             <charting:LinearAxis Orientation="Y" ShowGridLines="True" Title="{Binding LinearAxisInfo}" />
                         </charting:Chart.Axes>
@@ -45,6 +45,49 @@
                     </RelativePanel>
                 </RelativePanel>
             </ScrollViewer>
+        </PivotItem>
+        <PivotItem x:Uid="Bank_Pivot_Transactions" Header="Transactions">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Grid Grid.Row="0" HorizontalAlignment="Stretch">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="120" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="150" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <TextBlock x:Uid="Bank_TransactionHeader_Date" Grid.Column="0" Text="Date" Margin="10 0 0 0" />
+                    <TextBlock x:Uid="Bank_TransactionHeader_Description" Grid.Column="1" Text="Description" Margin="10 0 0 0" />
+                    <TextBlock x:Uid="Bank_TransactionHeader_Amount" Grid.Column="2" Text="Amount" Margin="-10 0 0 0"/>
+                </Grid>
+                <ListView x:Name="TransactionsTable" ItemsSource="{Binding Transactions}" Grid.Row="1" HorizontalAlignment="Stretch">
+                    <ListView.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="120" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="150" />
+                                </Grid.ColumnDefinitions>
+
+                                <TextBlock Grid.Column="0" TextWrapping="Wrap" Text="{Binding DateString}" />
+                                <TextBlock Grid.Column="1" TextWrapping="Wrap" Text="{Binding Description}" />
+                                <TextBlock Grid.Column="2" TextWrapping="Wrap" Text="{Binding AmountString}" />
+                            </Grid>
+                        </DataTemplate>
+                    </ListView.ItemTemplate>
+                    <ListView.ItemContainerStyle>
+                        <Style TargetType="ListViewItem">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                            <Setter Property="BorderBrush" Value="Gray" />
+                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                        </Style>
+                    </ListView.ItemContainerStyle>
+                </ListView>
+            </Grid>
         </PivotItem>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>

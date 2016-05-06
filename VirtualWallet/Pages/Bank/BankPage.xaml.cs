@@ -69,14 +69,14 @@ namespace VirtualWallet.Pages
 
         private void RecalculateLineGraphInterval()
         {
-            if (viewModel.Transactions?.Count > 0)
+            if (viewModel.Balances?.Count > 0)
             {
                 var size = screenWidth / 200 - 1;
                 TransactionsLineSeries.IndependentAxis = new DateTimeAxis()
                 {
                     Orientation = AxisOrientation.X,
                     IntervalType = DateTimeIntervalType.Days,
-                    Interval = viewModel.Transactions.Count / size
+                    Interval = viewModel.Balances.Count / size
                 };
             }
         }

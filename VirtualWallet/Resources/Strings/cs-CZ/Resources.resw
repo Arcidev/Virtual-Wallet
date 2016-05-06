@@ -309,4 +309,16 @@
   <data name="Bank_LinearAxisBalanceInfo" xml:space="preserve">
     <value>Zůstatek ({0})</value>
   </data>
+  <data name="Bank_Pivot_Transactions.Header" xml:space="preserve">
+    <value>Transakce</value>
+  </data>
+  <data name="Bank_TransactionHeader_Date.Text" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="Bank_TransactionHeader_Description.Text" xml:space="preserve">
+    <value>Popis</value>
+  </data>
+  <data name="Bank_TransactionHeader_Amount.Text" xml:space="preserve">
+    <value>Částka</value>
+  </data>
 </root>

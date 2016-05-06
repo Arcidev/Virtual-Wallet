@@ -12,5 +12,10 @@ namespace Shared.Formatters
         {
             return string.Format(GetFormatter(currency), value);
         }
+
+        public static string Format(decimal value, string currency)
+        {
+            return string.Format(GetFormatter(currency), value);
+        }
     }
 }
