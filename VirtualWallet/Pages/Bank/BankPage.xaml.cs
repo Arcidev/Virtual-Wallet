@@ -1,7 +1,9 @@
 ﻿using BL.Models;
 using BL.Service;
+using Shared.Formatters;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 using WinRTXamlToolkit.Controls.DataVisualization.Charting;
@@ -56,13 +58,20 @@ namespace VirtualWallet.Pages
         private void TransactionsLineSeries_DataContextChanged(Windows.UI.Xaml.FrameworkElement sender, Windows.UI.Xaml.DataContextChangedEventArgs args)
         {
             RecalculateLineGraphInterval();
+
+            if (string.IsNullOrWhiteSpace(viewModel.BankAccountInfo.Currency))
+                return;
+
+            Style datapointStyle = new Style(typeof(DataPoint));
+            datapointStyle.Setters.Add(new Setter(DataPoint.DependentValueStringFormatProperty, CurrencyFormatter.GetFormatter(viewModel.BankAccountInfo.Currency)));
+            TransactionsLineSeries.DataPointStyle = datapointStyle;
         }
 
         private void RecalculateLineGraphInterval()
         {
             if (viewModel.Transactions?.Count > 0)
             {
-                var size = screenWidth / 200;
+                var size = screenWidth / 200 - 1;
                 TransactionsLineSeries.IndependentAxis = new DateTimeAxis()
                 {
                     Orientation = AxisOrientation.X,

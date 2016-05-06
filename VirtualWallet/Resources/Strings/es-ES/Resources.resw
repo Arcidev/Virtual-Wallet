@@ -286,10 +286,10 @@
     <value>Editar regla</value>
   </data>
   <data name="Rule_Pattern.Text" xml:space="preserve">
-    <value>Término de búsqueda</value>
+    <value>Patrón</value>
   </data>
   <data name="Rule_PatternInvalid.Text" xml:space="preserve">
-    <value>Inválida patrón</value>
+    <value>Patrón no válido</value>
   </data>
   <data name="Rule_Properties.Text" xml:space="preserve">
     <value>Propiedades de la regla</value>
@@ -298,12 +298,15 @@
     <value>Prueba de regla</value>
   </data>
   <data name="Rule_TestResultNo.Text" xml:space="preserve">
-    <value>La regla no coincide</value>
+    <value>Regla no coincide</value>
   </data>
   <data name="Rule_TestResultYes.Text" xml:space="preserve">
-    <value>La regla coincide</value>
+    <value>Regla coincide</value>
   </data>
   <data name="Rule_TestTips.Text" xml:space="preserve">
     <value>Puede probar la regla. En el texto del cuadro de abajo, introduzca una descripción de la operación por la regla de buscar.</value>
+  </data>
+  <data name="Bank_LinearAxisBalanceInfo" xml:space="preserve">
+    <value>Equilibrio ({0})</value>
   </data>
 </root>

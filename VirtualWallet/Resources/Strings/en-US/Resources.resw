@@ -289,7 +289,7 @@
     <value>Pattern</value>
   </data>
   <data name="Rule_PatternInvalid.Text" xml:space="preserve">
-    <value>Pattern invalid</value>
+    <value>Invalid pattern</value>
   </data>
   <data name="Rule_Properties.Text" xml:space="preserve">
     <value>Rule properties</value>
@@ -305,5 +305,8 @@
   </data>
   <data name="Rule_TestTips.Text" xml:space="preserve">
     <value>You can test the rule here. Insert transaction description which rule should match into the text field below.</value>
+  </data>
+  <data name="Bank_LinearAxisBalanceInfo" xml:space="preserve">
+    <value>Balance ({0})</value>
   </data>
 </root>

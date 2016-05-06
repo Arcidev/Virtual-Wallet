@@ -17,9 +17,9 @@ namespace BL.Models
 
         public string DateEnd { get; set; }
 
-        public string ClosingBalanceString { get { return $"{ClosingBalance} {Currency}"; } }
+        public string ClosingBalanceString { get { return CurrencyFormatter.Format(ClosingBalance, Currency); } }
 
-        public string OpeningBalanceString { get { return $"{OpeningBalance} {Currency}"; } }
+        public string OpeningBalanceString { get { return CurrencyFormatter.Format(OpeningBalance, Currency); } }
 
         public string DateStartString { get { return ParseDate(DateStart); } }
 

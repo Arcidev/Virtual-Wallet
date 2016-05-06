@@ -31,6 +31,9 @@
                 <RelativePanel>
                     <charting:Chart x:Uid="Bank_ChartTransactions" x:Name="TransactionsLineChart" Title="Transactions" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Height="400" >
                         <charting:LineSeries x:Uid="Bank_LineSeriesBalance" x:Name="TransactionsLineSeries" Title="Balance" ItemsSource="{Binding Transactions}" IndependentValuePath="Item1" DependentValuePath="Item2" DataContextChanged="TransactionsLineSeries_DataContextChanged" />
+                        <charting:Chart.Axes>
+                            <charting:LinearAxis Orientation="Y" ShowGridLines="True" Title="{Binding LinearAxisInfo}" />
+                        </charting:Chart.Axes>
                     </charting:Chart>
                     <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TransactionsLineChart">
                         <charting:Chart x:Uid="Bank_ChartIncomes" x:Name="IncomesPieChart" Title="Incomes" Width="330" Height="330">

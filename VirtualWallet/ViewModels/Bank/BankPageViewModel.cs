@@ -29,10 +29,24 @@ namespace VirtualWallet.ViewModels
         private Timer syncExecuteTimer;
         private bool syncButtonForceDisabled;
         private string categoryOther;
+        private string linearAxisInfo;
 
         public Action BeforeSync { get; set; }
 
         public Action AfterSync { get; set; }
+
+        public string LinearAxisInfo
+        {
+            get { return linearAxisInfo; }
+            private set
+            {
+                if (linearAxisInfo == value)
+                    return;
+
+                linearAxisInfo = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public ICommand SyncCommand
         {
@@ -112,6 +126,7 @@ namespace VirtualWallet.ViewModels
                     return;
 
                 bankAccountInfo = value;
+                linearAxisInfo = string.Format(resources.GetString("Bank_LinearAxisBalanceInfo"), bankAccountInfo?.Currency);
                 NotifyPropertyChanged();
             }
         }

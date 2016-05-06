@@ -306,4 +306,7 @@
   <data name="Rule_TestTips.Text" xml:space="preserve">
     <value>Tu môžete pravidlo otestovať. Do textového poľa nižšie vložte popis transakcie ktorú má pravidlo vyhľadať.</value>
   </data>
+  <data name="Bank_LinearAxisBalanceInfo" xml:space="preserve">
+    <value>Zostatok ({0})</value>
+  </data>
 </root>
