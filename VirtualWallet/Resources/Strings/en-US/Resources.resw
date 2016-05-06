@@ -276,4 +276,34 @@
   <data name="Bank_LineSeriesBalance.Title" xml:space="preserve">
     <value>Balance</value>
   </data>
+  <data name="Rule_Description.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="Rule_Name.Text" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="Rule_PageTitle.Text" xml:space="preserve">
+    <value>Edit Rule</value>
+  </data>
+  <data name="Rule_Pattern.Text" xml:space="preserve">
+    <value>Pattern</value>
+  </data>
+  <data name="Rule_PatternInvalid.Text" xml:space="preserve">
+    <value>Pattern invalid</value>
+  </data>
+  <data name="Rule_Properties.Text" xml:space="preserve">
+    <value>Rule properties</value>
+  </data>
+  <data name="Rule_TestHeader.Text" xml:space="preserve">
+    <value>Rule test</value>
+  </data>
+  <data name="Rule_TestResultNo.Text" xml:space="preserve">
+    <value>Rule doesn't match</value>
+  </data>
+  <data name="Rule_TestResultYes.Text" xml:space="preserve">
+    <value>Rule match</value>
+  </data>
+  <data name="Rule_TestTips.Text" xml:space="preserve">
+    <value>You can test the rule here. Insert transaction description which rule should match into the text field below.</value>
+  </data>
 </root>

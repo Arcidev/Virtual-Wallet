@@ -276,4 +276,34 @@
   <data name="Bank_LineSeriesBalance.Title" xml:space="preserve">
     <value>Zůstatek</value>
   </data>
+  <data name="Rule_Description.Text" xml:space="preserve">
+    <value>Popis</value>
+  </data>
+  <data name="Rule_Name.Text" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="Rule_PageTitle.Text" xml:space="preserve">
+    <value>Upravit pravidlo</value>
+  </data>
+  <data name="Rule_Pattern.Text" xml:space="preserve">
+    <value>Hledaný výraz</value>
+  </data>
+  <data name="Rule_PatternInvalid.Text" xml:space="preserve">
+    <value>Výraz je nevalidní</value>
+  </data>
+  <data name="Rule_Properties.Text" xml:space="preserve">
+    <value>Vlastnosti pravidla</value>
+  </data>
+  <data name="Rule_TestHeader.Text" xml:space="preserve">
+    <value>Test pravidla</value>
+  </data>
+  <data name="Rule_TestResultNo.Text" xml:space="preserve">
+    <value>Neodpovídá</value>
+  </data>
+  <data name="Rule_TestResultYes.Text" xml:space="preserve">
+    <value>Odpovídá</value>
+  </data>
+  <data name="Rule_TestTips.Text" xml:space="preserve">
+    <value>Zde můžete pravidlo otestovat. Do textového pole níže vložte popis transakce kterou má pravidlo vyhledat.</value>
+  </data>
 </root>

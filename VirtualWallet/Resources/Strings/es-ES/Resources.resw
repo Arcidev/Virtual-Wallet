@@ -276,4 +276,34 @@
   <data name="Bank_LineSeriesBalance.Title" xml:space="preserve">
     <value>Equilibrio</value>
   </data>
+  <data name="Rule_Description.Text" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="Rule_Name.Text" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="Rule_PageTitle.Text" xml:space="preserve">
+    <value>Editar regla</value>
+  </data>
+  <data name="Rule_Pattern.Text" xml:space="preserve">
+    <value>Término de búsqueda</value>
+  </data>
+  <data name="Rule_PatternInvalid.Text" xml:space="preserve">
+    <value>Inválida patrón</value>
+  </data>
+  <data name="Rule_Properties.Text" xml:space="preserve">
+    <value>Propiedades de la regla</value>
+  </data>
+  <data name="Rule_TestHeader.Text" xml:space="preserve">
+    <value>Prueba de regla</value>
+  </data>
+  <data name="Rule_TestResultNo.Text" xml:space="preserve">
+    <value>La regla no coincide</value>
+  </data>
+  <data name="Rule_TestResultYes.Text" xml:space="preserve">
+    <value>La regla coincide</value>
+  </data>
+  <data name="Rule_TestTips.Text" xml:space="preserve">
+    <value>Puede probar la regla. En el texto del cuadro de abajo, introduzca una descripción de la operación por la regla de buscar.</value>
+  </data>
 </root>
