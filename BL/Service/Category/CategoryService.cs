@@ -15,7 +15,7 @@ namespace BL.Service
         public async Task<IList<Tuple<Category, decimal, decimal>>> GroupTransactions(IList<Transaction> transactions)
         {
             var output = new List<Tuple<Category, decimal, decimal>>();
-            var innerTransactions = transactions.Select(x => new TransactionData{ Description = x.Description, Amount = x.Amount });
+            var innerTransactions = transactions.Select(x => new TransactionData{ Description = x.Description, Amount = x.Amount }).ToList();
 
             var modifier = new CategoryModifier() { IncludeRules = true };
             var categories = await GetAllAsync(modifier);
