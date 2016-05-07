@@ -9,8 +9,10 @@ using System.Threading.Tasks;
 using System.Windows.Input;
 using VirtualWallet.Controls;
 using Windows.ApplicationModel.Resources;
+using Windows.UI;
 using Windows.UI.Core;
 using Windows.UI.Popups;
+using Windows.UI.Xaml.Media;
 
 namespace VirtualWallet.ViewModels
 {
@@ -30,6 +32,9 @@ namespace VirtualWallet.ViewModels
         private bool syncButtonForceDisabled;
         private string categoryOther;
         private string linearAxisInfo;
+        private List<SolidColorBrush> brushes;
+
+        public List<SolidColorBrush> Brushes { get { return brushes; } }
 
         public Action BeforeSync { get; set; }
 
@@ -140,6 +145,7 @@ namespace VirtualWallet.ViewModels
             this.categoryService = categoryService;
             this.resources = resources;
             categoryOther = resources.GetString("Category_Other");
+            brushes = new List<SolidColorBrush> { new SolidColorBrush(Colors.Black), new SolidColorBrush(Colors.DarkSlateGray) };
         }
 
         public async Task LoadDataAsync(Bank bank)
