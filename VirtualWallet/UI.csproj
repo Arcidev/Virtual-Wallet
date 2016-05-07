@@ -129,12 +129,8 @@
     <Compile Include="Pages\Rule\RulePage.xaml.cs">
       <DependentUpon>RulePage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Rule\RulesPage.xaml.cs">
-      <DependentUpon>RulesPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\Bank\BankCredentialsPageViewModel.cs" />
     <Compile Include="ViewModels\Bank\BankPageViewModel.cs" />
-    <Compile Include="ViewModels\Rule\RulesPageViewModel.cs" />
     <Compile Include="ViewModels\Rule\RulePageViewModel.cs" />
     <Compile Include="ViewModels\Image\ImagesPageViewModel.cs" />
     <Compile Include="ViewModels\Category\CategoriesPageViewModel.cs" />
@@ -326,10 +322,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Rule\RulePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\Rule\RulesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
