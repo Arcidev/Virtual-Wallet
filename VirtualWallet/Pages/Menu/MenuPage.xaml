@@ -88,10 +88,17 @@
                     <RowDefinition Height="48"/>
                     <RowDefinition />
                 </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 <Grid Grid.Row="0">
                     <TextBlock x:Uid="Menu_Categories" x:Name="CategoriesTitle" Style="{ThemeResource SubheaderTextBlockStyle}" Text="Categories"/>
                 </Grid>
-                <Grid Grid.Row="1">
+                <Button Grid.Row="0" Grid.Column="1" Click="AddCategoryButton_Click" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <Image Source="{StaticResource ButtonAdd}" Width="32" Height="32"/>
+                </Button>
+                <Grid Grid.Row="1" Grid.ColumnSpan="2">
                     <GridView x:Name="GridViewCategories" 
                           ItemTemplate="{StaticResource CategoriesItemTemplate}" 
                           ItemsSource="{Binding Categories}" 

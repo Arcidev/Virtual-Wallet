@@ -20,7 +20,7 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            viewModel.OriginalImage = (BL.Models.Image)e.Parameter; ;
+            viewModel.OriginalImage = (BL.Models.Image)e.Parameter;
             await viewModel.LoadDataAsync();
             base.OnNavigatedTo(e);
         }

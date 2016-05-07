@@ -63,7 +63,7 @@ namespace VirtualWallet.ViewModels
 
             foreach (Image image in Images)
             {
-                if (image.Id == OriginalImage.Id)
+                if (image.Id == OriginalImage?.Id)
                 {
                     SelectedImage = image;
                 }

@@ -96,5 +96,11 @@ namespace VirtualWallet.Pages
             flyoutBase.ShowAt((FrameworkElement)e.OriginalSource);
             e.Handled = true;
         }
+
+        private void AddCategoryButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var pagePayload = new PagePayload() { Dto = new Category() };
+            Frame.Navigate(typeof(CategoryPage), pagePayload);
+        }
     }
 }
