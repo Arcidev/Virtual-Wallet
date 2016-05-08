@@ -321,4 +321,10 @@
   <data name="Bank_TransactionHeader_Amount.Text" xml:space="preserve">
     <value>Amount</value>
   </data>
+  <data name="Category_CategoryDefaultName" xml:space="preserve">
+    <value>New Category</value>
+  </data>
+  <data name="Category_DeleteCategoryDialog" xml:space="preserve">
+    <value>Are you sure you want to delete this category?</value>
+  </data>
 </root>

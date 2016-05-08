@@ -321,4 +321,10 @@
   <data name="Bank_TransactionHeader_Amount.Text" xml:space="preserve">
     <value>Částka</value>
   </data>
+  <data name="Category_CategoryDefaultName" xml:space="preserve">
+    <value>Nová kategorie</value>
+  </data>
+  <data name="Category_DeleteCategoryDialog" xml:space="preserve">
+    <value>Opravdu chcete vymazat tuto kategorii?</value>
+  </data>
 </root>
