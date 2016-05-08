@@ -325,6 +325,6 @@
     <value>Nueva categoría</value>
   </data>
   <data name="Category_DeleteCategoryDialog" xml:space="preserve">
-    <value>Está seguro de que quiere borrar esta categoría?</value>
+    <value>¿Seguro que desea eliminar esta categoría?</value>
   </data>
 </root>
