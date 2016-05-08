@@ -113,6 +113,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton x:Uid="CommandBar_Save" Icon="Save" Click="SaveAppBarButton_Click" IsEnabled="{Binding Modified}"/>
                 <AppBarButton x:Uid="CommandBar_Undo" Icon="Undo" Click="CancelAppBarButton_Click" IsEnabled="{Binding Modified}"/>
+                <AppBarButton x:Uid="CommandBar_Delete" Icon="Delete" Click="DeleteAppBarButton_Click" IsEnabled="{Binding Persisted}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

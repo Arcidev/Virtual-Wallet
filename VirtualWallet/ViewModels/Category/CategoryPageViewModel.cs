@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
+using VirtualWallet.Controls;
+using Windows.ApplicationModel.Resources;
 
 namespace VirtualWallet.ViewModels
 {
@@ -21,6 +24,9 @@ namespace VirtualWallet.ViewModels
         private ObservableCollection<Wallet> wallets;
         private ObservableCollection<Rule> rules;
         private Boolean modified;
+        private Boolean persisted;
+
+        public ICommand DeleCategoryCommand { get; private set; }
 
         public CategoryPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService, IRuleService ruleService)
         {
@@ -30,7 +36,9 @@ namespace VirtualWallet.ViewModels
             this.ruleService = ruleService;
             this.modified = false;
 
-            this.Category = new Category();
+            DeleCategoryCommand = new CommandHandler(DeleteCategory);
+
+            this.Category = new Category();       
         }
 
         public Category Category
@@ -42,7 +50,10 @@ namespace VirtualWallet.ViewModels
                     return;
 
                 category = value;
+                
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(Name));
+                NotifyPropertyChanged(nameof(Image));
             }
         }
 
@@ -58,6 +69,22 @@ namespace VirtualWallet.ViewModels
                     return;
 
                 modified = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public Boolean Persisted
+        {
+            get
+            {
+                return persisted;
+            }
+            set
+            {
+                if (persisted == value)
+                    return;
+
+                persisted = value;
                 NotifyPropertyChanged();
             }
         }
@@ -87,7 +114,7 @@ namespace VirtualWallet.ViewModels
             }
             set
             {
-                if (Category == null || Category.Image == value)
+                if (Category == null || value == null || value.Equals(Category.Image))
                     return;
 
                 Category.Image = value;
@@ -126,8 +153,27 @@ namespace VirtualWallet.ViewModels
 
         public async Task LoadDataAsync()
         {
+            await LoadCategoryAsync();
             await LoadWalletsAsync();
             await LoadRulesAsync();
+        }
+
+        private async Task LoadCategoryAsync()
+        {
+            var modifier = new CategoryModifier() { IncludeImage = true };
+            var category = await categoryService.GetAsync(Category.Id, modifier);
+
+            if (category == null)
+            {
+                Persisted = false;
+                Modified = true; //User can save new category.
+            }
+            else
+            {
+                Category = category;
+                Persisted = true;
+                Modified = false;
+            }
         }
 
         private async Task LoadWalletsAsync()
@@ -156,20 +202,31 @@ namespace VirtualWallet.ViewModels
 
         public async Task SaveCategoryAsync()
         {
-            await categoryService.InsertOrReplaceAsync(false, Category);
+            if (Persisted)
+            {
+                await categoryService.UpdateAsync(Category);
+            }
+            else
+            {
+                await categoryService.InsertAsync(true, Category);
+            }
             Modified = false;
         }
 
         public async Task DiscardChangesAsync()
         {
-            var catModifier = new CategoryModifier() { IncludeImage = true };
-            var originalCategory = await categoryService.GetAsync(Category.Id, catModifier);
-            await this.LoadDataAsync();
+            await LoadCategoryAsync();
+        }
 
-            Name = originalCategory.Name;
-            Image = originalCategory.Image;
+        public void DeleteCategory()
+        {
+            foreach (Rule rule in Rules)
+            {
+                ruleService.DeleteAsync(rule.Id);
+            }
 
-            Modified = false;
+            categoryService.DeleteAsync(Category.Id);
+            Category = null;
         }
 
         public async Task DetachRuleAsync(Rule rule)

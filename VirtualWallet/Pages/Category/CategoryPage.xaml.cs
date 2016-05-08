@@ -1,6 +1,10 @@
 ﻿using BL.Models;
 using BL.Service;
+using System;
+using System.Threading.Tasks;
 using VirtualWallet.ViewModels;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -10,10 +14,12 @@ namespace VirtualWallet.Pages
     {
         private CategoryPageViewModel viewModel;
         private PagePayload pagePayload;
+        private ResourceLoader resources;
 
         public CategoryPage()
         {
             this.InitializeComponent();
+            resources = ResourceLoader.GetForCurrentView();
             viewModel = new CategoryPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService(), new RuleService());
             this.DataContext = viewModel;
         }
@@ -32,6 +38,23 @@ namespace VirtualWallet.Pages
             base.OnNavigatedTo(e);
         }
 
+        protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            if (viewModel.Modified)
+            {
+                await viewModel.SaveCategoryAsync();
+            }
+        }
+
+        private async Task ShowDialog(string message, UICommandInvokedHandler yesHandler)
+        {
+            var dialog = new MessageDialog(message);
+            dialog.Commands.Add(new UICommand(resources.GetString("Dialog_Yes"), yesHandler));
+            dialog.Commands.Add(new UICommand(resources.GetString("Dialog_No")));
+
+            await dialog.ShowAsync();
+        }
+
         private void GridViewCategories_ItemClick(object sender, ItemClickEventArgs e)
         {
 
@@ -45,18 +68,33 @@ namespace VirtualWallet.Pages
         private void ListViewRules_ItemClick(object sender, ItemClickEventArgs e)
         {
             var rule = (Rule)e.ClickedItem;
-            pagePayload.Rule = rule;
+            var pagePayload = new PagePayload() { Dto = viewModel.Category, Rule = rule };
             Frame.Navigate(typeof(RulePage), pagePayload);
         }
 
         private async void SaveAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             await viewModel.SaveCategoryAsync();
+
+            if (Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
         }
 
         private async void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             await viewModel.DiscardChangesAsync();
+        }
+
+        private async void DeleteAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await ShowDialog(resources.GetString("Category_DeleteCategoryDialog"), viewModel.DeleCategoryCommand.Execute);
+
+            if ( viewModel.Category == null && Frame.CanGoBack)
+            {
+                Frame.GoBack();
+            }
         }
 
         private void IconButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -66,7 +104,8 @@ namespace VirtualWallet.Pages
 
         private void AddRuleButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            pagePayload.Rule = null;
+            //pagePayload.Dto = viewModel.Category;
+            var pagePayload = new PagePayload() { Dto = viewModel.Category };
             Frame.Navigate(typeof(RulePage), pagePayload);
         }
 

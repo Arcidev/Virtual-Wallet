@@ -99,7 +99,7 @@ namespace VirtualWallet.Pages
 
         private void AddCategoryButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            var pagePayload = new PagePayload() { Dto = new Category() };
+            var pagePayload = new PagePayload() {  Dto = new Category() { Name = resources.GetString("Category_CategoryDefaultName") } };
             Frame.Navigate(typeof(CategoryPage), pagePayload);
         }
     }
