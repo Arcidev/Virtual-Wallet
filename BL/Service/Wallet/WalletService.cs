@@ -5,7 +5,7 @@ using Shared.Modifiers;
 
 namespace BL.Service
 {
-    public class WalletService : BaseModifiableGetService<Wallet, DAL.Data.Wallet, Wallets, WalletFilter, WalletModifier>, IWalletService
+    public class WalletService : BaseModifiableCrudService<Wallet, DAL.Data.Wallet, Wallets, WalletFilter, WalletModifier>, IWalletService
     {
     }
 }
