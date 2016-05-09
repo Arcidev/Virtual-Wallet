@@ -24,8 +24,8 @@ namespace VirtualWallet.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            viewModel.Bank = (Bank)e.Parameter;
             base.OnNavigatedTo(e);
+            viewModel.Bank = (Bank)e.Parameter;
         }
 
         private async void AcceptAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)

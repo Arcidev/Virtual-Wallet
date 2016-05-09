@@ -26,8 +26,8 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            await viewModel.LoadDataAsync();
             base.OnNavigatedTo(e);
+            await viewModel.LoadDataAsync();
         }
 
         private void GridViewWallets_ItemClick(object sender, ItemClickEventArgs e)

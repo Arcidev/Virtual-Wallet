@@ -37,11 +37,11 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            base.OnNavigatedTo(e);
+
             pagePayload = (PagePayload)e.Parameter;
             viewModel.Wallet = (Wallet)pagePayload.Dto;
             await viewModel.LoadDataAsync();
-
-            base.OnNavigatedTo(e);
         }
 
         private async void AcceptAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
