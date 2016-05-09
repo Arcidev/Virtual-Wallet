@@ -1,4 +1,5 @@
 ﻿using BL.Filters;
+using BL.Metadata;
 using BL.Models;
 using BL.Service;
 using System;
@@ -25,7 +26,8 @@ namespace VirtualWallet.ViewModels
         private Bank bank;
         private IList<Tuple<string, double>> expenses;
         private IList<Tuple<string, double>> incomes;
-        private IList<Tuple<DateTime, double>> transactions;
+        private IList<Tuple<DateTime, double>> balances;
+        private IList<TransactionCategoryList> transactionCategories;
         private BankAccountInfo bankAccountInfo;
         private ICommand syncCommand;
         private Timer syncExecuteTimer;
@@ -66,7 +68,18 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public IList<Transaction> Transactions { get { return Bank?.StoredTransactions.OrderByDescending(x => x.Date).ToList(); } }
+        public IList<TransactionCategoryList> TransactionCategories
+        {
+            get { return transactionCategories; }
+            private set
+            {
+                if (transactionCategories == value)
+                    return;
+
+                transactionCategories = value;
+                NotifyPropertyChanged();
+            }
+        }
 
         public Bank Bank
         {
@@ -113,13 +126,13 @@ namespace VirtualWallet.ViewModels
 
         public IList<Tuple<DateTime, double>> Balances
         {
-            get { return transactions; }
+            get { return balances; }
             private set
             {
-                if (transactions == value)
+                if (balances == value)
                     return;
 
-                transactions = value;
+                balances = value;
                 NotifyPropertyChanged();
             }
         }
@@ -236,7 +249,7 @@ namespace VirtualWallet.ViewModels
 
         private async Task ReloadTransactions()
         {
-            NotifyPropertyChanged(nameof(Transactions));
+            NotifyPropertyChanged(nameof(TransactionCategories));
 
             if (Bank == null)
             {
@@ -259,9 +272,9 @@ namespace VirtualWallet.ViewModels
             trans.Add(Tuple.Create(DateTime.Now, BankAccountInfo.ClosingBalance));
             Balances = trans;
 
-            var transactionCategories = await categoryService.GroupTransactions(Bank.StoredTransactions);
-            Incomes = transactionCategories.Where(x => x.Item2 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item2)).ToList();
-            Expenses = transactionCategories.Where(x => x.Item3 > 0).Select(x => Tuple.Create(x.Item1?.Name ?? categoryOther, (double)x.Item3)).ToList();
+            TransactionCategories = await categoryService.GroupTransactions(Bank.StoredTransactions, categoryOther);
+            Incomes = TransactionCategories.Where(x => x.Transactions.Any(y => y.Amount > 0)).Select(x => Tuple.Create(x.CategoryName, (double)x.Transactions.Where(y => y.Amount > 0).Sum(y => y.Amount))).ToList();
+            Expenses = TransactionCategories.Where(x => x.Transactions.Any(y => y.Amount < 0)).Select(x => Tuple.Create(x.CategoryName, (double)x.Transactions.Where(y => y.Amount < 0).Sum(y => y.Amount))).ToList();
         }
     }
 }

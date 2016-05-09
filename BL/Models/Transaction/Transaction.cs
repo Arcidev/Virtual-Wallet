@@ -1,5 +1,4 @@
-﻿using Shared.Formatters;
-using System;
+﻿using System;
 
 namespace BL.Models
 {
@@ -18,9 +17,5 @@ namespace BL.Models
         public string Description { get; set; }
 
         public string Currency { get; set; }
-
-        public string DateString { get { return DateTimeFormatter.ToShortDate(Date); } }
-
-        public string AmountString { get { return CurrencyFormatter.Format(Amount, Currency); } }
     }
 }

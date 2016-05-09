@@ -2,41 +2,37 @@
 using Shared.Filters;
 using Shared.Modifiers;
 using BL.Models;
-using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Linq;
-using BL.Helpers.Data;
+using BL.Metadata;
 
 namespace BL.Service
 {
     public class CategoryService : BaseModifiableCrudService<Category, DAL.Data.Category, Categories, CategoryFilter, CategoryModifier>, ICategoryService
     {
-        public async Task<IList<Tuple<Category, decimal, decimal>>> GroupTransactions(IList<Transaction> transactions)
+        public async Task<IList<TransactionCategoryList>> GroupTransactions(IList<Transaction> transactions, string defaultCategoryName)
         {
-            var output = new List<Tuple<Category, decimal, decimal>>();
-            var innerTransactions = transactions.Select(x => new TransactionData{ Description = x.Description, Amount = x.Amount }).ToList();
+            var output = new List<TransactionCategoryList>();
+            var innerTransactions = transactions.Select(x => new TransactionMetadata { Description = x.Description, Amount = x.Amount, Date = x.Date, Currency = x.Currency }).ToList();
 
             var modifier = new CategoryModifier() { IncludeRules = true };
             var categories = await GetAllAsync(modifier);
             foreach(var category in categories)
             {
-                decimal expenses = 0;
-                decimal incomes = 0;
+                var items = new List<TransactionMetadata>();
                 bool add = false;
                 foreach (var rule in category.Rules)
                 {
                     foreach (var transaction in innerTransactions)
                     {
+                        if (transaction.Processed)
+                            continue;
+
                         if (rule.Fits(transaction.Description))
                         {
-                            if (transaction.Amount < 0)
-                                expenses += -transaction.Amount;
-                            else
-                                incomes += transaction.Amount;
-
-                            if (!transaction.Processed)
-                                transaction.Processed = true;
+                            items.Add(transaction);
+                            transaction.Processed = true;
                             if (!add)
                                 add = true;
                         }
@@ -44,12 +40,12 @@ namespace BL.Service
                 }
 
                 if (add)
-                    output.Add(Tuple.Create(category, incomes, expenses));
+                    output.Add(new TransactionCategoryList { Category = category, Transactions = items });
             }
 
-            var uncategorized = innerTransactions.Where(x => !x.Processed).Select(x => x.Amount);
+            var uncategorized = innerTransactions.Where(x => !x.Processed);
             if (uncategorized.Any())
-                output.Add(Tuple.Create((Category)null, uncategorized.Where(x => x > 0).Sum(), uncategorized.Where(x => x < 0).Sum() * -1));
+                output.Add(new TransactionCategoryList { DefaultCategoryName = defaultCategoryName, Transactions = uncategorized.ToList() });
 
             return output;
         }

@@ -19,7 +19,11 @@ namespace VirtualWallet.Pages
         {
             this.InitializeComponent();
             viewModel = new BankPageViewModel(new BankAccountInfoService(), new TransactionService(), new CategoryService(), ResourceLoader.GetForCurrentView());
-            viewModel.BeforeSync = () => IconRotation.Begin();
+            viewModel.BeforeSync = () =>
+            {
+                IconRotation.Begin();
+                TransactionsAccordion.UnselectAll();
+            };
             viewModel.AfterSync = () => IconRotation.Stop();
             this.DataContext = viewModel;
         }
@@ -58,13 +62,6 @@ namespace VirtualWallet.Pages
         private void TransactionsLineSeries_DataContextChanged(Windows.UI.Xaml.FrameworkElement sender, Windows.UI.Xaml.DataContextChangedEventArgs args)
         {
             RecalculateLineGraphInterval();
-
-            if (string.IsNullOrWhiteSpace(viewModel.BankAccountInfo.Currency))
-                return;
-
-            Style datapointStyle = new Style(typeof(DataPoint));
-            datapointStyle.Setters.Add(new Setter(DataPoint.DependentValueStringFormatProperty, CurrencyFormatter.GetFormatter(viewModel.BankAccountInfo.Currency)));
-            TransactionsLineSeries.DataPointStyle = datapointStyle;
         }
 
         private void RecalculateLineGraphInterval()
@@ -79,6 +76,16 @@ namespace VirtualWallet.Pages
                     Interval = viewModel.Balances.Count / size
                 };
             }
+        }
+
+        private void TransactionsLineSeries_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(viewModel.BankAccountInfo.Currency))
+                return;
+
+            Style datapointStyle = new Style(typeof(DataPoint));
+            datapointStyle.Setters.Add(new Setter(DataPoint.DependentValueStringFormatProperty, CurrencyFormatter.GetFormatter(viewModel.BankAccountInfo.Currency)));
+            TransactionsLineSeries.DataPointStyle = datapointStyle;
         }
     }
 }

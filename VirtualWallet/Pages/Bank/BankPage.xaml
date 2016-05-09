@@ -7,10 +7,11 @@
     xmlns:charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:controls="using:ZeroProximity.Controls"
     mc:Ignorable="d"
     SizeChanged="Page_SizeChanged">
 
-    <Pivot Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Pivot x:Name="MainPivot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <PivotItem x:Uid="Bank_Pivot_Overview" Header="Overview">
             <RelativePanel>
                 <RelativePanel x:Name="BankInfo">
@@ -31,7 +32,7 @@
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <RelativePanel>
                     <charting:Chart x:Uid="Bank_ChartTransactions" x:Name="TransactionsLineChart" Title="Transactions" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Height="400" >
-                        <charting:LineSeries x:Uid="Bank_LineSeriesBalance" x:Name="TransactionsLineSeries" Title="Balance" ItemsSource="{Binding Balances}" IndependentValuePath="Item1" DependentValuePath="Item2" DataContextChanged="TransactionsLineSeries_DataContextChanged" />
+                        <charting:LineSeries x:Uid="Bank_LineSeriesBalance" x:Name="TransactionsLineSeries" Title="Balance" ItemsSource="{Binding Balances}" IndependentValuePath="Item1" DependentValuePath="Item2" DataContextChanged="TransactionsLineSeries_DataContextChanged" Loaded="TransactionsLineSeries_Loaded" />
                         <charting:Chart.Axes>
                             <charting:LinearAxis Orientation="Y" ShowGridLines="True" Title="{Binding LinearAxisInfo}" />
                         </charting:Chart.Axes>
@@ -48,52 +49,55 @@
             </ScrollViewer>
         </PivotItem>
         <PivotItem x:Uid="Bank_Pivot_Transactions" Header="Transactions">
-            <Grid>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0" HorizontalAlignment="Stretch">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="120" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="150" />
-                    </Grid.ColumnDefinitions>
-                    
-                    <TextBlock x:Uid="Bank_TransactionHeader_Date" Grid.Column="0" Text="Date" Margin="5" />
-                    <TextBlock x:Uid="Bank_TransactionHeader_Description" Grid.Column="1" Text="Description" Margin="5" />
-                    <TextBlock x:Uid="Bank_TransactionHeader_Amount" Grid.Column="2" Text="Amount" Margin="5"/>
-                </Grid>
-                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                    <ItemsControl x:Name="TransactionsTable" ItemsSource="{Binding Transactions}" HorizontalAlignment="Stretch">
-                        <ItemsControl.Resources>
-                            <converters:AlternateConverter CurrentList="{Binding ElementName=TransactionsTable, Path=ItemsSource}" AlternateBrushes="{Binding Brushes}" x:Key="AlternateConverter"/>
-                        </ItemsControl.Resources>
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Background="{Binding Converter={StaticResource AlternateConverter}}">
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="120" />
-                                        <ColumnDefinition Width="*" />
-                                        <ColumnDefinition Width="150" />
-                                    </Grid.ColumnDefinitions>
+            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                <controls:Accordion x:Name="TransactionsAccordion" ItemsSource="{Binding TransactionCategories}" HorizontalAlignment="Stretch" Margin="5" SelectionMode="ZeroOrOne">
+                    <controls:Accordion.ItemTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <TextBlock Text="{Binding CategoryName}"/>
+                                <TextBlock Text="{Binding TotalAmount}" HorizontalAlignment="Right" Margin="0 0 10 0"/>
+                            </Grid>
+                        </DataTemplate>
+                    </controls:Accordion.ItemTemplate>
+                    <controls:Accordion.ContentTemplate>
+                        <DataTemplate>
+                            <ItemsControl ItemsSource="{Binding Transactions}">
+                                <ItemsControl.Resources>
+                                    <converters:AlternateConverter AlternateBrushes="{Binding ElementName=MainPivot, Path=DataContext.Brushes}" x:Key="AlternateConverter"/>
+                                </ItemsControl.Resources>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid Background="{Binding Converter={StaticResource AlternateConverter}}">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
 
-                                    <TextBlock Grid.Column="0" Margin="5" TextWrapping="Wrap" Text="{Binding DateString}" />
-                                    <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{Binding Description}" />
-                                    <TextBlock Grid.Column="2" Margin="5" TextWrapping="Wrap" Text="{Binding AmountString}" />
-                                </Grid>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                        <ItemsControl.ItemContainerStyle>
-                            <Style TargetType="ContentPresenter">
-                                <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                <Setter Property="BorderBrush" Value="Gray" />
-                                <Setter Property="BorderThickness" Value="0,0,0,1" />
-                            </Style>
-                        </ItemsControl.ItemContainerStyle>
-                    </ItemsControl>
-                </ScrollViewer>
-            </Grid>
+                                            <TextBlock Grid.Column="0" Margin="5" TextWrapping="Wrap" Text="{Binding DateString}" />
+                                            <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{Binding Description}" />
+                                            <TextBlock Grid.Column="2" Margin="5 5 15 5" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding AmountString}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                                <ItemsControl.ItemContainerStyle>
+                                    <Style TargetType="ContentPresenter">
+                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                        <Setter Property="BorderBrush" Value="Gray" />
+                                        <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                    </Style>
+                                </ItemsControl.ItemContainerStyle>
+                            </ItemsControl>
+                        </DataTemplate>
+                    </controls:Accordion.ContentTemplate>
+                    <controls:Accordion.ItemContainerStyle>
+                        <Style TargetType="controls:AccordionItem">
+                            <Setter Property="RequestedTheme" Value="Dark"/>
+                            <Setter Property="Background" Value="Black" />
+                        </Style>
+                    </controls:Accordion.ItemContainerStyle>
+                </controls:Accordion>
+            </ScrollViewer>
         </PivotItem>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
