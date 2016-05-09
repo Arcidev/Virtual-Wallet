@@ -37,14 +37,8 @@ namespace BL.Metadata
 
         public string DefaultCategoryName { get; set; }
 
-        public string CategoryName { get { return Category == null ? DefaultCategoryName : Category.Name; } }
+        public string CategoryName { get { return Category?.Name ?? DefaultCategoryName; } }
 
-        public string TotalAmount
-        {
-            get
-            {
-                return Transactions.Any() ? CurrencyFormatter.Format(Transactions.Sum(x => x.Amount), Transactions.First().Currency) : null;
-            }
-        }
+        public string TotalAmount { get { return Transactions.Any() ? CurrencyFormatter.Format(Transactions.Sum(x => x.Amount), Transactions.First().Currency) : null; } }
     }
 }

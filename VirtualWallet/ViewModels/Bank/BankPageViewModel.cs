@@ -34,9 +34,9 @@ namespace VirtualWallet.ViewModels
         private bool syncButtonForceDisabled;
         private string categoryOther;
         private string linearAxisInfo;
-        private List<SolidColorBrush> brushes;
+        private IList<SolidColorBrush> brushes;
 
-        public List<SolidColorBrush> Brushes { get { return brushes; } }
+        public IList<SolidColorBrush> Brushes { get { return brushes; } }
 
         public Action BeforeSync { get; set; }
 
@@ -58,7 +58,7 @@ namespace VirtualWallet.ViewModels
         public ICommand SyncCommand
         {
             get { return syncCommand; }
-            set
+            private set
             {
                 if (syncCommand == value)
                     return;
@@ -146,7 +146,7 @@ namespace VirtualWallet.ViewModels
                     return;
 
                 bankAccountInfo = value;
-                linearAxisInfo = string.Format(resources.GetString("Bank_LinearAxisBalanceInfo"), bankAccountInfo?.Currency);
+                LinearAxisInfo = string.Format(resources.GetString("Bank_LinearAxisBalanceInfo"), bankAccountInfo?.Currency);
                 NotifyPropertyChanged();
             }
         }
