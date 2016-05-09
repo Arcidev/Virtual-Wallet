@@ -1,10 +1,12 @@
 ﻿using BL.Service;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel.Resources.Core;
 using Windows.Globalization;
+using Windows.System.UserProfile;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
 
@@ -59,7 +61,7 @@ namespace VirtualWallet.Pages
 
             ApplicationLanguages.PrimaryLanguageOverride = viewModel.SelectedLanguageCode;
             // Hard way to force that language to be changed
-            ResourceContext.GetForCurrentView().QualifierValues["language"] = ApplicationLanguages.PrimaryLanguageOverride;
+            ResourceContext.GetForCurrentView().QualifierValues["language"] = string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) ? GlobalizationPreferences.Languages.FirstOrDefault() ?? "" : ApplicationLanguages.PrimaryLanguageOverride;
             viewModel.ReloadTexts();
         }
     }
