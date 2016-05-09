@@ -1,8 +1,11 @@
-﻿using System;
+﻿using BL.Models;
+using BL.Service;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
+using VirtualWallet.ViewModels;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -22,14 +25,37 @@ namespace VirtualWallet.Pages
     /// </summary>
     public sealed partial class CategoriesPage : Page
     {
+        private CategoriesPageViewModel viewModel;
+        private PagePayload pagePayload;
+
         public CategoriesPage()
         {
             this.InitializeComponent();
+            viewModel = new CategoriesPageViewModel(new CategoryService(), new WalletCategoryService());
+            this.DataContext = viewModel;
         }
 
-        private void GridViewCategories_ItemClick(object sender, ItemClickEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            pagePayload = (PagePayload)e.Parameter;
+            viewModel.Wallet = (Wallet)pagePayload.Dto;
+            await viewModel.LoadDataAsync();
 
+            base.OnNavigatedTo(e);
+        }
+
+        private async void AcceptAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await viewModel.SaveRelationAsync();
+
+            if (Frame.CanGoBack)
+                Frame.GoBack();
+        }
+
+        private void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            if (Frame.CanGoBack)
+                Frame.GoBack();
         }
     }
 }

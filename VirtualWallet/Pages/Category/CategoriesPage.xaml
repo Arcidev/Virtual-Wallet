@@ -30,12 +30,19 @@
                           ItemTemplate="{StaticResource CategoriesItemTemplate}" 
                           ItemsSource="{Binding Categories}" 
                           IsSwipeEnabled="False" 
-                          SelectionMode="None"
-                          IsItemClickEnabled="True"
-                          ItemClick="GridViewCategories_ItemClick">
+                          SelectionMode="Single"
+                          SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
                     </GridView>
                 </Grid>
             </Grid>
         </RelativePanel>
     </ScrollViewer>
+    <Page.BottomAppBar>
+        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Uid="CommandBar_Accept" Icon="Accept" Click="AcceptAppBarButton_Click"/>
+                <AppBarButton x:Uid="CommandBar_Cancel" Icon="Cancel" Click="CancelAppBarButton_Click"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </Page.BottomAppBar>
 </Page>
