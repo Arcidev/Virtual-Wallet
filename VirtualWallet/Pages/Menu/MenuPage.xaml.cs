@@ -32,8 +32,9 @@ namespace VirtualWallet.Pages
 
         private void GridViewWallets_ItemClick(object sender, ItemClickEventArgs e)
         {
-            //WalletViewModel s = e.ClickedItem as WalletViewModel;
-            //this.Frame.Navigate(typeof(WalletDetailPage), s);
+            var wallet = (Wallet)e.ClickedItem; ;
+            var pagePayload = new PagePayload() { Dto = wallet };
+            Frame.Navigate(typeof(WalletPage), pagePayload);
         }
 
         private void GridViewBanks_ItemClick(object sender, ItemClickEventArgs e)
@@ -95,6 +96,12 @@ namespace VirtualWallet.Pages
             FlyoutBase flyoutBase = FlyoutBase.GetAttachedFlyout((FrameworkElement)sender);
             flyoutBase.ShowAt((FrameworkElement)e.OriginalSource);
             e.Handled = true;
+        }
+
+        private void AddWalletButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var pagePayload = new PagePayload() { Dto = new Wallet() { Name = resources.GetString("Wallet_WalletDefaultName") } };
+            Frame.Navigate(typeof(WalletPage), pagePayload);
         }
 
         private void AddCategoryButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
