@@ -6,8 +6,6 @@ namespace Shared.Filters
     {
         public IEnumerable<int> Ids { get; set; }
 
-        public bool OrderDesc { get; set; }
-
         public int? Skip { get; set; }
 
         public int? Take { get; set; }
