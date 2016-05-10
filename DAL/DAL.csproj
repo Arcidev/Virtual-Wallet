@@ -133,8 +133,10 @@
     <Compile Include="DataAccess\Base\IModifiableGet.cs" />
     <Compile Include="DataAccess\Base\IGet.cs" />
     <Compile Include="DataAccess\Wallet\IWallets.cs" />
+    <Compile Include="DataAccess\Wallet\IWalletsBanks.cs" />
     <Compile Include="DataAccess\Wallet\IWalletsCategories.cs" />
     <Compile Include="DataAccess\Wallet\Wallets.cs" />
+    <Compile Include="DataAccess\Wallet\WalletsBanks.cs" />
     <Compile Include="DataAccess\Wallet\WalletsCategories.cs" />
     <Compile Include="Data\Bank.cs" />
     <Compile Include="Data\BankAccountInfo.cs" />
@@ -144,6 +146,7 @@
     <Compile Include="Data\Rule.cs" />
     <Compile Include="Data\Transaction.cs" />
     <Compile Include="Data\Wallet.cs" />
+    <Compile Include="Data\WalletBank.cs" />
     <Compile Include="Data\WalletCategory.cs" />
     <Compile Include="Helpers\ConnectionHelper.cs" />
     <Compile Include="Helpers\InitDataHelper.cs" />

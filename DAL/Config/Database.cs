@@ -19,6 +19,7 @@ namespace DAL.Config
             typeof(Image),
             typeof(Wallet),
             typeof(WalletCategory),
+            typeof(WalletBank),
             typeof(BankAccountInfo),
             typeof(Transaction)
         };
@@ -36,6 +37,7 @@ namespace DAL.Config
             var connection = ConnectionHelper.GetDbAsyncConnection();
             await connection.DeleteAllAsync<Rule>();
             await connection.DeleteAllAsync<WalletCategory>();
+            await connection.DeleteAllAsync<WalletBank>();
             await connection.DeleteAllAsync<Category>();
             await connection.DeleteAllAsync<Wallet>();
             await connection.DeleteAllAsync<BankAccountInfo>();
