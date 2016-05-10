@@ -197,21 +197,27 @@ namespace VirtualWallet.ViewModels
 
         public void DeleteWallet()
         {
-            DeleteWalletAsync();
+            DeleteWalletCategoryAsync(Wallet.Id);
+            walletService.DeleteAsync(Wallet.Id);
+            Wallet = null;
         }
 
-        public async void DeleteWalletAsync()
+        public async Task DeleteWalletAsync()
         {
-            var filter = new WalletCategoryFilter() { WalletId = Wallet.Id };
+            await DeleteWalletCategoryAsync(Wallet.Id);
+            await walletService.DeleteAsync(Wallet.Id);
+            Wallet = null;
+        }
+
+        public async Task DeleteWalletCategoryAsync(int walletId)
+        {
+            var filter = new WalletCategoryFilter() { WalletId = walletId };
             var walCats = await walletCategoryService.GetAsync(filter);
 
             foreach (WalletCategory walCat in walCats)
             {
                 await walletCategoryService.DeleteAsync(walCat.Id);
             }
-
-            await  walletService.DeleteAsync(Wallet.Id);
-            Wallet = null;
         }
 
         public async Task DetachCategoryAsync(Category category)
