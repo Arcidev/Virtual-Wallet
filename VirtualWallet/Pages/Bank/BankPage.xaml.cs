@@ -24,7 +24,12 @@ namespace VirtualWallet.Pages
                 IconRotation.Begin();
                 TransactionsAccordion.UnselectAll();
             };
-            viewModel.AfterSync = () => IconRotation.Stop();
+            viewModel.AfterSync = () =>
+            {
+                IconRotation.Stop();
+                RecalculateLineGraphInterval();
+                SetStyles();
+            };
             this.DataContext = viewModel;
         }
 
@@ -59,9 +64,9 @@ namespace VirtualWallet.Pages
             RecalculateLineGraphInterval();
         }
 
-        private void TransactionsLineSeries_DataContextChanged(Windows.UI.Xaml.FrameworkElement sender, Windows.UI.Xaml.DataContextChangedEventArgs args)
+        private void TransactionsLineSeries_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
-            RecalculateLineGraphInterval();
+            SetStyles();
         }
 
         private void RecalculateLineGraphInterval()
@@ -78,9 +83,9 @@ namespace VirtualWallet.Pages
             }
         }
 
-        private void TransactionsLineSeries_Loaded(object sender, RoutedEventArgs e)
+        private void SetStyles()
         {
-            if (string.IsNullOrWhiteSpace(viewModel.BankAccountInfo.Currency))
+            if (string.IsNullOrWhiteSpace(viewModel.BankAccountInfo?.Currency))
                 return;
 
             Style datapointStyle = new Style(typeof(DataPoint));

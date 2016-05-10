@@ -8,6 +8,8 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:controls="using:ZeroProximity.Controls"
+    xmlns:i="using:WinRTXamlToolkit.Interactivity"
+    xmlns:behaviors="using:VirtualWallet.Behaviors"
     mc:Ignorable="d"
     SizeChanged="Page_SizeChanged">
 
@@ -31,22 +33,25 @@
         <PivotItem x:Uid="Bank_Pivot_Category" Header="Category">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <RelativePanel>
-                    <charting:Chart x:Uid="Bank_ChartTransactions" x:Name="TransactionsLineChart" Title="Transactions" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Height="400" >
-                        <charting:LineSeries x:Uid="Bank_LineSeriesBalance" x:Name="TransactionsLineSeries" Title="Balance" ItemsSource="{Binding Balances}" IndependentValuePath="Item1" DependentValuePath="Item2" DataContextChanged="TransactionsLineSeries_DataContextChanged" Loaded="TransactionsLineSeries_Loaded" />
+                    <charting:Chart x:Uid="Bank_ChartTransactions" x:Name="TransactionsLineChart" Title="Transactions" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Height="400" Visibility="{Binding HasBalances, Converter={StaticResource BoolToVisibilityConverter}}">
+                        <charting:LineSeries x:Uid="Bank_LineSeriesBalance" x:Name="TransactionsLineSeries" Title="Balance" ItemsSource="{Binding Balances}" IndependentValuePath="Item1" DependentValuePath="Item2" DataContextChanged="TransactionsLineSeries_DataContextChanged" />
                         <charting:Chart.Axes>
                             <charting:LinearAxis Orientation="Y" ShowGridLines="True" Title="{Binding LinearAxisInfo}" />
                         </charting:Chart.Axes>
                     </charting:Chart>
                     <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TransactionsLineChart">
-                        <charting:Chart x:Uid="Bank_ChartIncomes" x:Name="IncomesPieChart" Title="Incomes" Width="330" Height="330">
+                        <charting:Chart x:Uid="Bank_ChartIncomes" x:Name="IncomesPieChart" Title="Incomes" Width="330" Height="330" Visibility="{Binding HasIncomes, Converter={StaticResource BoolToVisibilityConverter}}">
                             <charting:PieSeries ItemsSource="{Binding Incomes}" IndependentValuePath="Item1" DependentValuePath="Item2" />
                         </charting:Chart>
-                        <charting:Chart x:Uid="Bank_ChartExpenses" x:Name="ExpensesPieChart" Title="Expenses" RelativePanel.Below="IncomesPieChart" Width="330" Height="330">
+                        <charting:Chart x:Uid="Bank_ChartExpenses" x:Name="ExpensesPieChart" Title="Expenses" RelativePanel.Below="IncomesPieChart" Width="330" Height="330" Visibility="{Binding HasExpenses, Converter={StaticResource BoolToVisibilityConverter}}">
                             <charting:PieSeries ItemsSource="{Binding Expenses}" IndependentValuePath="Item1" DependentValuePath="Item2" />
                         </charting:Chart>
                     </RelativePanel>
                 </RelativePanel>
             </ScrollViewer>
+            <i:Interaction.Behaviors>
+                <behaviors:HideablePivotItemBehavior Visible="{Binding HasTransactions}" />
+            </i:Interaction.Behaviors>
         </PivotItem>
         <PivotItem x:Uid="Bank_Pivot_Transactions" Header="Transactions">
             <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
@@ -98,6 +103,9 @@
                     </controls:Accordion.ItemContainerStyle>
                 </controls:Accordion>
             </ScrollViewer>
+            <i:Interaction.Behaviors>
+                <behaviors:HideablePivotItemBehavior Visible="{Binding HasTransactions}" />
+            </i:Interaction.Behaviors>
         </PivotItem>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>

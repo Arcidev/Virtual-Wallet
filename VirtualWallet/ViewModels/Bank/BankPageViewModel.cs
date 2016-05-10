@@ -42,6 +42,14 @@ namespace VirtualWallet.ViewModels
 
         public Action AfterSync { get; set; }
 
+        public bool HasTransactions { get { return TransactionCategories?.Any() ?? false; } }
+
+        public bool HasIncomes { get { return Incomes?.Any() ?? false; } }
+
+        public bool HasExpenses { get { return Expenses?.Any() ?? false; } }
+
+        public bool HasBalances { get { return Balances?.Any() ?? false; } }
+
         public string LinearAxisInfo
         {
             get { return linearAxisInfo; }
@@ -78,6 +86,7 @@ namespace VirtualWallet.ViewModels
 
                 transactionCategories = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(HasTransactions));
             }
         }
 
@@ -108,6 +117,7 @@ namespace VirtualWallet.ViewModels
 
                 expenses = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(HasExpenses));
             }
         }
 
@@ -121,6 +131,7 @@ namespace VirtualWallet.ViewModels
 
                 incomes = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(HasIncomes));
             }
         }
 
@@ -134,6 +145,7 @@ namespace VirtualWallet.ViewModels
 
                 balances = value;
                 NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(HasBalances));
             }
         }
 
