@@ -34,14 +34,15 @@ namespace VirtualWallet.Pages
 
             if (Frame.Navigate(lastPage.SourcePageType, pagePayload))
             {
-                this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
-                this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
+                Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
+                Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
             }
         }
 
         private void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            Frame.GoBack();
+            if (Frame.CanGoBack)
+                Frame.GoBack();
         }
     }
 }

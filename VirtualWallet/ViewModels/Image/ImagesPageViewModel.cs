@@ -1,6 +1,7 @@
 ﻿using BL.Models;
 using BL.Service;
-using System.Collections.ObjectModel;
+using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 namespace VirtualWallet.ViewModels
@@ -10,7 +11,7 @@ namespace VirtualWallet.ViewModels
         private IImageService imageService;
         private Image selectedImage;
         private Image originalImage;
-        private ObservableCollection<Image> images;
+        private IList<Image> images;
 
         public ImagesPageViewModel(IImageService imageService)
         {
@@ -43,7 +44,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public ObservableCollection<Image> Images
+        public IList<Image> Images
         {
             get { return images; }
             set
@@ -58,20 +59,10 @@ namespace VirtualWallet.ViewModels
 
         public async Task LoadDataAsync()
         {
-            var images = await imageService.GetAllAsync();
-            Images = new ObservableCollection<Image>(images);
+            Images = await imageService.GetAllAsync();
 
-            foreach (Image image in Images)
-            {
-                if (image.Id == OriginalImage?.Id)
-                {
-                    SelectedImage = image;
-                }
-            }
+            if (OriginalImage != null)
+                SelectedImage = Images.FirstOrDefault(x => x.Id == OriginalImage.Id);
         }
     }
-    
-    
-
-    
 }
