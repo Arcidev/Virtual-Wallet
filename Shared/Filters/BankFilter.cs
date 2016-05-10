@@ -1,5 +1,4 @@
-﻿using Shared.Enums;
-
+﻿
 namespace Shared.Filters
 {
     public class BankFilter : BaseFilter

@@ -11,16 +11,12 @@ namespace BL.Models
         {
             // If parameter is null return false.
             if (obj == null)
-            {
                 return false;
-            }
 
             // If parameter cannot be cast to Image return false.
             Image i = obj as Image;
             if (i == null)
-            {
                 return false;
-            }
 
             // Return true if the fields match:
             return (this.Id == i.Id) && (this.Path.Equals(i.Path));

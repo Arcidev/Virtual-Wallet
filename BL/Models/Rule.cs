@@ -37,6 +37,8 @@ namespace BL.Models
                     return val.EndsWith(Pattern);
                 case PatternType.Contains:
                     return val.Contains(Pattern);
+                case PatternType.Equals:
+                    return val.Equals(Pattern);
                 case PatternType.Regex:
                     return Regex.IsMatch(val, Pattern);
                 default:
