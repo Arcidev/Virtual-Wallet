@@ -41,6 +41,13 @@ namespace BL.Mapping
             .ForMember(target => target.Category, action => action.Ignore())
             .ForMember(target => target.CategoryId, action => action.MapFrom(source => source.Category != null ? source.Category.Id : source.CategoryId));
 
+            cfg.CreateMap<DAL.Data.WalletBank, WalletBank>();
+            cfg.CreateMap<WalletBank, DAL.Data.WalletBank>()
+            .ForMember(target => target.Wallet, action => action.Ignore())
+            .ForMember(target => target.WalletId, action => action.MapFrom(source => source.Wallet != null ? source.Wallet.Id : source.WalletId))
+            .ForMember(target => target.Bank, action => action.Ignore())
+            .ForMember(target => target.BankId, action => action.MapFrom(source => source.Bank != null ? source.Bank.Id : source.BankId));
+
             cfg.CreateMap<DAL.Data.Rule, Rule>()
             .ForMember(target => target.PatternType, action => action.MapFrom(source => (PatternType)source.PatternTypeId));
             cfg.CreateMap<Rule, DAL.Data.Rule>()
