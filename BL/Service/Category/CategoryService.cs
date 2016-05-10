@@ -14,6 +14,9 @@ namespace BL.Service
         public async Task<IList<TransactionCategoryList>> GroupTransactions(IList<Transaction> transactions, string defaultCategoryName)
         {
             var output = new List<TransactionCategoryList>();
+            if (transactions == null || !transactions.Any())
+                return output;
+
             var innerTransactions = transactions.Select(x => new TransactionMetadata { Description = x.Description, Amount = x.Amount, Date = x.Date, Currency = x.Currency }).ToList();
 
             var modifier = new CategoryModifier() { IncludeRules = true };
