@@ -26,8 +26,6 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-
             pagePayload = (PagePayload)e.Parameter;
             viewModel.Category = (Category)pagePayload.Dto;
             await viewModel.LoadDataAsync();
@@ -36,6 +34,8 @@ namespace VirtualWallet.Pages
             {
                 viewModel.Image = pagePayload.NewImage;
             }
+
+            base.OnNavigatedTo(e);
         }
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)

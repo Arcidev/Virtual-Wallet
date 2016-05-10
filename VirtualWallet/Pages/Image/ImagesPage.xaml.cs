@@ -20,10 +20,9 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-
             viewModel.OriginalImage = (BL.Models.Image)e.Parameter;
             await viewModel.LoadDataAsync();
+            base.OnNavigatedTo(e);
         }
 
         private void AcceptAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)

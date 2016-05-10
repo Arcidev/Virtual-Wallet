@@ -28,8 +28,6 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            base.OnNavigatedTo(e);
-
             var pagePayload = (PagePayload)e.Parameter;
             var category = (Category)pagePayload?.Dto;
 
@@ -48,6 +46,7 @@ namespace VirtualWallet.Pages
             PatternTypeCombobox.ItemsSource = Enum.GetValues(typeof(PatternType)).Cast<PatternType>();
 
             await viewModel.LoadDataAsync();
+            base.OnNavigatedTo(e);
         }
 
         private async void SaveAppBarButton_Click(object sender, RoutedEventArgs e)
