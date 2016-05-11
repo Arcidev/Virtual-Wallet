@@ -110,6 +110,9 @@
     <Compile Include="Pages\Bank\BankPage.xaml.cs">
       <DependentUpon>BankPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Bank\BanksPage.xaml.cs">
+      <DependentUpon>BanksPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Category\CategoriesPage.xaml.cs">
       <DependentUpon>CategoriesPage.xaml</DependentUpon>
     </Compile>
@@ -135,6 +138,7 @@
     </Compile>
     <Compile Include="ViewModels\Bank\BankCredentialsPageViewModel.cs" />
     <Compile Include="ViewModels\Bank\BankPageViewModel.cs" />
+    <Compile Include="ViewModels\Bank\BanksPageViewModel.cs" />
     <Compile Include="ViewModels\Rule\RulePageViewModel.cs" />
     <Compile Include="ViewModels\Image\ImagesPageViewModel.cs" />
     <Compile Include="ViewModels\Category\CategoriesPageViewModel.cs" />
@@ -313,6 +317,10 @@
     <Page Include="Pages\Bank\BankPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Bank\BanksPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Category\CategoriesPage.xaml">
       <SubType>Designer</SubType>
