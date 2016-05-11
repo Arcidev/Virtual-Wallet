@@ -70,13 +70,25 @@ namespace VirtualWallet.ViewModels
             
             if (Wallet != null)
             {
-                var walCatModifier = new WalletBankModifier() { IncludeBank = true };
                 var walCatfilter = new WalletBankFilter() { WalletId = Wallet.Id };
-                var walletsBanks = await walletBankService.GetAsync(walCatfilter, walCatModifier);
-                
+                var walletsBanks = await walletBankService.GetAsync(walCatfilter);
+                List<Bank> attachedBanks = new List<Bank>();
+
                 foreach (var walletBank in walletsBanks)
                 {
-                    banks.Remove(walletBank.Bank);
+                    foreach (var bank in banks)
+                    {
+                        if (bank.Id == walletBank.BankId)
+                        {
+                            attachedBanks.Add(bank);
+                        }
+                        
+                    }
+                }
+
+                foreach (var attachedBank in attachedBanks)
+                {
+                    banks.Remove(attachedBank);
                 }
             }
             
