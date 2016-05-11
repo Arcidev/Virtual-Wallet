@@ -8,25 +8,17 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <!--DataTemplate x:Key="WalletsItemTemplate">
+        <DataTemplate x:Key="BanksItemTemplate">
             <RelativePanel HorizontalAlignment="Stretch">
-                <TextBlock x:Name="WalletName" Margin="5" Text="{Binding Name}" Width="235"/>
-                <Border RelativePanel.RightOf="WalletName" RelativePanel.AlignVerticalCenterWith="WalletName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <Image MaxHeight="32" MaxWidth="32" Source="{Binding ImageUri}"/>
-                </Border>
-            </RelativePanel>
-        </-->
-        <DataTemplate x:Key="CategoriesItemTemplateNarrow">
-            <RelativePanel HorizontalAlignment="Stretch">
-                <TextBlock x:Name="CategoryName" Margin="5" Text="{Binding Name}" Width="235"/>
-                <Button Click="DetacheCategoryButton_Click" RelativePanel.RightOf="CategoryName" RelativePanel.AlignVerticalCenterWith="CategoryName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <TextBlock x:Name="BankName" Margin="5" Text="{Binding Name}" Width="235"/>
+                <Button Click="DetacheBankButton_Click" RelativePanel.RightOf="BankName" RelativePanel.AlignVerticalCenterWith="BankName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <Image Source="{StaticResource ButtonRemove}" Width="16" Height="16"/>
                 </Button>
             </RelativePanel>
         </DataTemplate>
-        <DataTemplate x:Key="CategoriesItemTemplateWide">
+        <DataTemplate x:Key="CategoriesItemTemplate">
             <RelativePanel HorizontalAlignment="Stretch">
-                <TextBlock x:Name="CategoryName" Margin="5" Text="{Binding Name}" Width="200"/>
+                <TextBlock x:Name="CategoryName" Margin="5" Text="{Binding Name}" Width="235"/>
                 <Button Click="DetacheCategoryButton_Click" RelativePanel.RightOf="CategoryName" RelativePanel.AlignVerticalCenterWith="CategoryName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <Image Source="{StaticResource ButtonRemove}" Width="16" Height="16"/>
                 </Button>
@@ -57,12 +49,12 @@
                     </Border>
                 </Button>
             </Grid>
-            <TextBlock x:Name="CategoryTitle" x:Uid="Wallet_CategoriesTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Categories" RelativePanel.Below="WalletFormGrid"/>
-            <Button x:Uid="Wallet_AddCategory" Click="AddCategoryButton_Click" RelativePanel.RightOf="CategoryTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="CategoryTitle">
+            <TextBlock x:Name="CategoryTitle" x:Uid="Wallet_CategoriesTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Categories" RelativePanel.Below="WalletFormGrid" Width="250"/>
+            <Button x:Name="AddCategoryButton" x:Uid="Wallet_AddCategory" Click="AddCategoryButton_Click" RelativePanel.RightOf="CategoryTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="CategoryTitle">
                 <Image Source="{StaticResource ButtonAdd}" Width="32" Height="32"/>
             </Button>
             <ListView x:Name="ListViewCategories" 
-                          ItemTemplate="{StaticResource CategoriesItemTemplateNarrow}" 
+                          ItemTemplate="{StaticResource CategoriesItemTemplate}" 
                           ItemsSource="{Binding Categories}" 
                           IsSwipeEnabled="False" 
                           SelectionMode="None"
@@ -70,30 +62,35 @@
                           ItemClick="ListViewCategories_ItemClick"
                           RelativePanel.Below="CategoryTitle"
                           HorizontalAlignment="Left" 
-                          Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">
+                          Width="310">
             </ListView>
-            <!--TextBlock x:Name="WalletsTitle" x:Uid="Category_WalletsTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Wallets" RelativePanel.Below="ListViewRules"/>
-            <ListView x:Name="ListViewWallets" 
-                          ItemTemplate="{StaticResource WalletsItemTemplate}" 
-                          ItemsSource="{Binding Wallets}" 
+            <TextBlock x:Name="BanksTitle" x:Uid="Wallet_BanksTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Banks" RelativePanel.Below="ListViewCategories" Width="250"/>
+            <Button x:Uid="Wallet_AddBank" Click="AddBankButton_Click" RelativePanel.RightOf="BanksTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="BanksTitle">
+                <Image Source="{StaticResource ButtonAdd}" Width="32" Height="32"/>
+            </Button>
+            <ListView x:Name="ListViewBanks" 
+                          ItemTemplate="{StaticResource BanksItemTemplate}" 
+                          ItemsSource="{Binding Banks}" 
                           IsSwipeEnabled="False" 
                           SelectionMode="None"
                           IsItemClickEnabled="False"
-                          ItemClick="GridViewWallets_ItemClick"
-                          RelativePanel.Below="WalletsTitle"
+                          ItemClick="ListViewBanks_ItemClick"
+                          RelativePanel.Below="BanksTitle"
+                          RelativePanel.AlignLeftWith="BanksTitle"
                           HorizontalAlignment="Left" 
-                          Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">
-            </ListView-->
+                          Width="310">
+            </ListView>
         </RelativePanel>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState x:Name="WideState">
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="500" />
+                        <AdaptiveTrigger MinWindowWidth="630" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="ListViewCategories.Width" Value="500" />
-                        <Setter Target="ListViewCategories.ItemTemplate" Value="{StaticResource CategoriesItemTemplateWide}" />
+                        <Setter Target="BanksTitle.(RelativePanel.Below)" Value="" />
+                        <Setter Target="BanksTitle.(RelativePanel.RightOf)" Value="AddCategoryButton" />
+                        <Setter Target="BanksTitle.(RelativePanel.AlignTopWith)" Value="CategoryTitle" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowState">
@@ -101,7 +98,6 @@
                         <AdaptiveTrigger MinWindowWidth="0" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="ListViewCategories.ItemTemplate" Value="{StaticResource CategoriesItemTemplateNarrow}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>

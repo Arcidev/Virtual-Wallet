@@ -9,7 +9,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using VirtualWallet.Controls;
-using Windows.ApplicationModel.Resources;
 
 namespace VirtualWallet.ViewModels
 {
@@ -18,20 +17,23 @@ namespace VirtualWallet.ViewModels
         private ICategoryService categoryService;
         private IWalletService walletService;
         private IWalletCategoryService walletCategoryService;
+        private IWalletBankService walletBankService;
         //private ITransactionSourceService transactionSourceService;
 
         private Wallet wallet;
         private ObservableCollection<Category> categories;
+        private ObservableCollection<Bank> banks;
         private Boolean modified;
         private Boolean persisted;
 
         public ICommand DeleteWalletCommand { get; private set; }
 
-        public WalletPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService)
+        public WalletPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService, IWalletBankService walletBankService)
         {
             this.categoryService = categoryService;
             this.walletService = walletService;
             this.walletCategoryService = walletCategoryService;
+            this.walletBankService = walletBankService;
             this.modified = false;
 
             DeleteWalletCommand = new CommandHandler(DeleteWallet);
@@ -135,11 +137,24 @@ namespace VirtualWallet.ViewModels
             }
         }
 
+        public ObservableCollection<Bank> Banks
+        {
+            get { return banks; }
+            set
+            {
+                if (banks == value)
+                    return;
+
+                banks = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public async Task LoadDataAsync()
         {
             await LoadWalletAsync();
             await LoadCategoriesAsync();
-            //await LoadTransactionSourcesAsync();
+            await LoadBanksAsync();
         }
 
         private async Task LoadWalletAsync()
@@ -175,6 +190,23 @@ namespace VirtualWallet.ViewModels
             }
 
             Categories = new ObservableCollection<Category>(categories);
+        }
+
+        private async Task LoadBanksAsync()
+        {
+            var walletId = Wallet.Id;
+            var filter = new WalletBankFilter() { WalletId = walletId };
+            var modifier = new WalletBankModifier() { IncludeBank = true };
+            var walletsBanks = await walletBankService.GetAsync(filter, modifier);
+            var banks = new List<Bank>();
+
+            foreach (var walletBank in walletsBanks)
+            {
+                if (walletBank.Bank != null)
+                    banks.Add(walletBank.Bank);
+            }
+
+            Banks = new ObservableCollection<Bank>(banks);
         }
 
         public async Task SaveWalletAsync()
@@ -231,6 +263,19 @@ namespace VirtualWallet.ViewModels
             }
 
             Categories.Remove(Categories.First(x => x.Id == category.Id));
+        }
+
+        public async Task DetachBankAsync(Bank bank)
+        {
+            var filter = new WalletBankFilter() { WalletId = Wallet.Id, BankId = bank.Id };
+            var walCats = await walletBankService.GetAsync(filter);
+
+            foreach (WalletBank walCat in walCats)
+            {
+                await walletBankService.DeleteAsync(walCat.Id);
+            }
+
+            Banks.Remove(Banks.First(x => x.Id == bank.Id));
         }
     }
 }

@@ -20,7 +20,7 @@ namespace VirtualWallet.Pages
         {
             this.InitializeComponent();
             resources = ResourceLoader.GetForCurrentView();
-            viewModel = new WalletPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService());
+            viewModel = new WalletPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService(), new WalletBankService());
             this.DataContext = viewModel;
         }
 
@@ -62,6 +62,13 @@ namespace VirtualWallet.Pages
             Frame.Navigate(typeof(CategoryPage), pagePayload);
         }
 
+        private void ListViewBanks_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var bank = (Bank)e.ClickedItem;
+            var pagePayload = new PagePayload() { Dto = bank };
+            Frame.Navigate(typeof(BankPage), pagePayload);
+        }
+
         private async void SaveAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             await viewModel.SaveWalletAsync();
@@ -98,11 +105,24 @@ namespace VirtualWallet.Pages
             Frame.Navigate(typeof(CategoriesPage), pagePayload);
         }
 
+        private void AddBankButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var pagePayload = new PagePayload() { Dto = viewModel.Wallet };
+            Frame.Navigate(typeof(BanksPage), pagePayload);
+        }
+
         private async void DetacheCategoryButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             var button = sender as Button;
             var category = button.DataContext as Category;
             await viewModel.DetachCategoryAsync(category);
+        }
+
+        private async void DetacheBankButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            var bank = button.DataContext as Bank;
+            await viewModel.DetachBankAsync(bank);
         }
     }
 }
