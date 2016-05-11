@@ -227,10 +227,10 @@ namespace VirtualWallet.ViewModels
             await LoadWalletAsync();
         }
 
-        public void DeleteWallet()
+        public async void DeleteWallet()
         {
-            DeleteWalletCategoryAsync(Wallet.Id);
-            walletService.DeleteAsync(Wallet.Id);
+            await DeleteWalletCategoryAsync(Wallet.Id);
+            await walletService.DeleteAsync(Wallet.Id);
             Wallet = null;
         }
 
