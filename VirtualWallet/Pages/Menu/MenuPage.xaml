@@ -51,7 +51,7 @@
                     <TextBlock x:Uid="Menu_Wallets" x:Name="WalletsTitle" Style="{ThemeResource SubheaderTextBlockStyle}" Text="Wallets"/>
                 </Grid>
                 <Button Grid.Row="0" Grid.Column="1" Click="AddWalletButton_Click" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <Image Source="{StaticResource ButtonAdd}" Width="32" Height="32"/>
+                    <SymbolIcon Symbol="Add"/>
                 </Button>
                 <Grid Grid.Row="1" Grid.ColumnSpan="2">
                     <GridView x:Name="GridViewWallets" 
@@ -103,7 +103,7 @@
                     <TextBlock x:Uid="Menu_Categories" x:Name="CategoriesTitle" Style="{ThemeResource SubheaderTextBlockStyle}" Text="Categories"/>
                 </Grid>
                 <Button Grid.Row="0" Grid.Column="1" Click="AddCategoryButton_Click" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <Image Source="{StaticResource ButtonAdd}" Width="32" Height="32"/>
+                    <SymbolIcon Symbol="Add"/>
                 </Button>
                 <Grid Grid.Row="1" Grid.ColumnSpan="2">
                     <GridView x:Name="GridViewCategories" 

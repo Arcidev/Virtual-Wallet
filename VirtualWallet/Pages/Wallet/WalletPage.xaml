@@ -12,7 +12,7 @@
             <RelativePanel HorizontalAlignment="Stretch">
                 <TextBlock x:Name="BankName" Margin="5" Text="{Binding Name}" Width="235"/>
                 <Button Click="DetacheBankButton_Click" RelativePanel.RightOf="BankName" RelativePanel.AlignVerticalCenterWith="BankName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <Image Source="{StaticResource ButtonRemove}" Width="16" Height="16"/>
+                    <SymbolIcon Symbol="Remove"/>
                 </Button>
             </RelativePanel>
         </DataTemplate>
@@ -20,7 +20,7 @@
             <RelativePanel HorizontalAlignment="Stretch">
                 <TextBlock x:Name="CategoryName" Margin="5" Text="{Binding Name}" Width="235"/>
                 <Button Click="DetacheCategoryButton_Click" RelativePanel.RightOf="CategoryName" RelativePanel.AlignVerticalCenterWith="CategoryName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <Image Source="{StaticResource ButtonRemove}" Width="16" Height="16"/>
+                    <SymbolIcon Symbol="Remove"/>
                 </Button>
             </RelativePanel>
         </DataTemplate>
@@ -51,7 +51,7 @@
             </Grid>
             <TextBlock x:Name="CategoryTitle" x:Uid="Wallet_CategoriesTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Categories" RelativePanel.Below="WalletFormGrid" Width="250"/>
             <Button x:Name="AddCategoryButton" x:Uid="Wallet_AddCategory" Click="AddCategoryButton_Click" RelativePanel.RightOf="CategoryTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="CategoryTitle">
-                <Image Source="{StaticResource ButtonAdd}" Width="32" Height="32"/>
+                <SymbolIcon Symbol="Add"/>
             </Button>
             <ListView x:Name="ListViewCategories" 
                           ItemTemplate="{StaticResource CategoriesItemTemplate}" 
@@ -66,7 +66,7 @@
             </ListView>
             <TextBlock x:Name="BanksTitle" x:Uid="Wallet_BanksTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Banks" RelativePanel.Below="ListViewCategories" Width="250"/>
             <Button x:Uid="Wallet_AddBank" Click="AddBankButton_Click" RelativePanel.RightOf="BanksTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="BanksTitle">
-                <Image Source="{StaticResource ButtonAdd}" Width="32" Height="32"/>
+                <SymbolIcon Symbol="Add"/>
             </Button>
             <ListView x:Name="ListViewBanks" 
                           ItemTemplate="{StaticResource BanksItemTemplate}" 

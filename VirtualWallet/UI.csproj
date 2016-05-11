@@ -273,9 +273,6 @@
     <Content Include="Assets\Images\Categories\Vacation\CategoryVacation4.png" />
     <Content Include="Assets\Images\Categories\Vacation\CategoryVacation5.png" />
     <Content Include="Assets\Images\Fio.png" />
-    <Content Include="Assets\Images\Misc\cancel-button.png" />
-    <Content Include="Assets\Images\Misc\plus-button.png" />
-    <Content Include="Assets\Images\Misc\rounded-remove-button.png" />
     <Content Include="Assets\Images\Wallets\Wallet1.png" />
     <Content Include="Assets\Images\Wallets\wallet10.png" />
     <Content Include="Assets\Images\Wallets\wallet11.png" />
