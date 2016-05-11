@@ -16,15 +16,14 @@ namespace DAL.DataAccess
 
             var connection = ConnectionHelper.GetDbAsyncConnection();
             var query = connection.Table<Transaction>().Where(x => x.BankId == bankId);
-            ApplyFilters(query, filter);
 
-            return await query.ToListAsync();
+            return await ApplyFilters(query, filter).ToListAsync();
         }
 
         protected override AsyncTableQuery<Transaction> ApplyFilters(AsyncTableQuery<Transaction> query, TransactionFilter filter)
         {
             if (filter.DateSince.HasValue)
-                query.Where(x => x.Date >= filter.DateSince.Value);
+                query = query.Where(x => x.Date >= filter.DateSince.Value);
 
             return base.ApplyFilters(query, filter);
         }

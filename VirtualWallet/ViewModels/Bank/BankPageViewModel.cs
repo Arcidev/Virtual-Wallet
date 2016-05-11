@@ -179,7 +179,7 @@ namespace VirtualWallet.ViewModels
             {
                 bank.BankAccountInfo = await bankAccountInfoService.GetAsync(bank.Id);
                 var filter = new Shared.Filters.TransactionFilter() { DateSince = DateTime.Now.AddMonths(-1) };
-                bank.StoredTransactions = await transactionService.GetByBankIdAsync(bank.Id);
+                bank.StoredTransactions = await transactionService.GetByBankIdAsync(bank.Id, filter);
             }
 
             Bank = bank;

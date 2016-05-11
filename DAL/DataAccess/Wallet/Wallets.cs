@@ -30,6 +30,7 @@ namespace DAL.DataAccess
         protected override async Task OnEntityDeletedAsync(SQLiteAsyncConnection connection, int id)
         {
             await connection.ExecuteAsync($"DELETE FROM {nameof(WalletCategory)} WHERE {nameof(WalletCategory.WalletId)} = {id}");
+            await connection.ExecuteAsync($"DELETE FROM {nameof(WalletBank)} WHERE {nameof(WalletBank.WalletId)} = {id}");
         }
     }
 }

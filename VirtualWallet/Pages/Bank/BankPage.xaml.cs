@@ -67,13 +67,14 @@ namespace VirtualWallet.Pages
         private void TransactionsLineSeries_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
         {
             SetStyles();
+            RecalculateLineGraphInterval();
         }
 
         private void RecalculateLineGraphInterval()
         {
             if (viewModel.Balances?.Count > 0)
             {
-                var size = screenWidth / 200 - 1;
+                var size = screenWidth / 200 - 0.5;
                 TransactionsLineSeries.IndependentAxis = new DateTimeAxis()
                 {
                     Orientation = AxisOrientation.X,
