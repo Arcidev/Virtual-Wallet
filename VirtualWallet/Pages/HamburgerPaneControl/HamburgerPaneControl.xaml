@@ -7,6 +7,7 @@
     xmlns:controls="using:Cimbalino.Toolkit.Controls"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:fa="using:FontAwesome.UWP"
     mc:Ignorable="d"
     Loaded="UserControl_Loaded">
 
@@ -16,10 +17,21 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel>
-            <controls:HamburgerTitleBar/>
-            <controls:HamburgerMenuButton Content="Banks">
+            <controls:HamburgerMenuButton Content="{Binding Text_Wallets}">
                 <controls:HamburgerMenuButton.Icon>
-                    <FontIcon FontSize="16" Glyph="&#xE8BC;" />
+                    <fa:FontAwesome Icon="CreditCardAlt"/>
+                </controls:HamburgerMenuButton.Icon>
+            </controls:HamburgerMenuButton>
+            <ItemsControl ItemsSource="{Binding Wallets}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <localControls:HamburgerArgumentMenuButton IconVisibility="Collapsed" Content="{Binding Name}" NavigationSourcePageType="local:WalletPage" NavigationParameter="{Binding PagePayload}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+            <controls:HamburgerMenuButton Content="{Binding Text_Banks}">
+                <controls:HamburgerMenuButton.Icon>
+                    <fa:FontAwesome Icon="Bank"/>
                 </controls:HamburgerMenuButton.Icon>
             </controls:HamburgerMenuButton>
             <ItemsControl ItemsSource="{Binding Banks}">
@@ -29,17 +41,24 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <!--<controls:HamburgerMenuButton Content="Details" NavigationSourcePageType="views:CategoriesPage">
+            <controls:HamburgerMenuButton Content="{Binding Text_Categories}">
                 <controls:HamburgerMenuButton.Icon>
-                    <FontIcon FontSize="16" Glyph="&#xE8BC;" />
+                    <fa:FontAwesome Icon="Sitemap"/>
                 </controls:HamburgerMenuButton.Icon>
-            </controls:HamburgerMenuButton>-->
+            </controls:HamburgerMenuButton>
+            <ItemsControl ItemsSource="{Binding Categories}">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <localControls:HamburgerArgumentMenuButton IconVisibility="Collapsed" Content="{Binding Name}" NavigationSourcePageType="local:CategoryPage" NavigationParameter="{Binding PagePayload}" />
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
 
-        <controls:HamburgerMenuButton Grid.Row="1" Content="Settings" NavigationSourcePageType="local:SettingsPage">
-            <controls:HamburgerMenuButton.Icon>
+        <localControls:HamburgerArgumentMenuButton Grid.Row="1" Content="{Binding Text_Settings}" NavigationSourcePageType="local:SettingsPage" NavigationParameter="{Binding ReloadTextsCommand}">
+            <localControls:HamburgerArgumentMenuButton.Icon>
                 <SymbolIcon Symbol="Setting"/>
-            </controls:HamburgerMenuButton.Icon>
-        </controls:HamburgerMenuButton>
+            </localControls:HamburgerArgumentMenuButton.Icon>
+        </localControls:HamburgerArgumentMenuButton>
     </Grid>
 </UserControl>

@@ -18,5 +18,7 @@ namespace BL.Models
         public IList<Category> Categories { get; set; }
 
         public IList<ITransactionSource> TransactionSources { get; set; }
+
+        public PagePayload PagePayload { get { return new PagePayload() { Dto = this }; } }
     }
 }

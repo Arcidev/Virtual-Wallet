@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel.Resources.Core;
@@ -9,6 +10,7 @@ using Windows.Globalization;
 using Windows.System.UserProfile;
 using Windows.UI.Popups;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Navigation;
 
 namespace VirtualWallet.Pages
 {
@@ -16,6 +18,7 @@ namespace VirtualWallet.Pages
     {
         private SettingsViewModel viewModel;
         private ResourceLoader resources;
+        private ICommand hamburgerReloadTextsCommand;
 
         public SettingsPage()
         {
@@ -23,6 +26,12 @@ namespace VirtualWallet.Pages
             resources = ResourceLoader.GetForCurrentView();
             viewModel = new SettingsViewModel(new DatabaseService(), new BankService(), resources);
             this.DataContext = viewModel;
+        }
+
+        protected override void OnNavigatedTo(NavigationEventArgs e)
+        {
+            hamburgerReloadTextsCommand = e.Parameter as ICommand;
+            base.OnNavigatedTo(e);
         }
 
         private async void RemoveCredentialsButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -63,6 +72,7 @@ namespace VirtualWallet.Pages
             // Hard way to force that language to be changed
             ResourceContext.GetForCurrentView().QualifierValues["language"] = string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) ? GlobalizationPreferences.Languages.FirstOrDefault() ?? "" : ApplicationLanguages.PrimaryLanguageOverride;
             viewModel.ReloadTexts();
+            hamburgerReloadTextsCommand?.Execute(null);
         }
     }
 }

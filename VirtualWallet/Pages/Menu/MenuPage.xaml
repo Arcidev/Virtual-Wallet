@@ -34,7 +34,6 @@
         </DataTemplate>
     </Page.Resources>
 
-
     <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
         <RelativePanel d:DataContext="{Binding Source={StaticResource WalletsSampleDataSource}}" ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <TextBlock x:Uid="Menu_Header" x:Name="MenuTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Virtual Wallet" RelativePanel.AlignHorizontalCenterWithPanel="True"/>

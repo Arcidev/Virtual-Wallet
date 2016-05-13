@@ -22,6 +22,7 @@ namespace VirtualWallet.ViewModels
         private IBankAccountInfoService bankAccountInfoService;
         private ITransactionService transactionService;
         private ICategoryService categoryService;
+        private IImageService imageService;
         private ResourceLoader resources;
         private Bank bank;
         private IList<Tuple<string, double>> expenses;
@@ -163,11 +164,12 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public BankPageViewModel(IBankAccountInfoService bankAccountInfoService, ITransactionService transactionService, ICategoryService categoryService, ResourceLoader resources)
+        public BankPageViewModel(IBankAccountInfoService bankAccountInfoService, ITransactionService transactionService, ICategoryService categoryService, IImageService imageService, ResourceLoader resources)
         {
             this.bankAccountInfoService = bankAccountInfoService;
             this.transactionService = transactionService;
             this.categoryService = categoryService;
+            this.imageService = imageService;
             this.resources = resources;
             categoryOther = resources.GetString("Category_Other");
             brushes = new List<SolidColorBrush> { new SolidColorBrush(Colors.Black), new SolidColorBrush(Colors.DarkSlateGray) };
@@ -178,6 +180,8 @@ namespace VirtualWallet.ViewModels
             if (bank != null)
             {
                 bank.BankAccountInfo = await bankAccountInfoService.GetAsync(bank.Id);
+                if (bank.ImageId.HasValue)
+                    bank.Image = await imageService.GetAsync(bank.ImageId.Value);
                 var filter = new Shared.Filters.TransactionFilter() { DateSince = DateTime.Now.AddMonths(-1) };
                 bank.StoredTransactions = await transactionService.GetByBankIdAsync(bank.Id, filter);
             }

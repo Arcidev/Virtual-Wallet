@@ -1,5 +1,6 @@
 ﻿using BL.Service;
 using VirtualWallet.ViewModels;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
@@ -16,7 +17,7 @@ namespace VirtualWallet.Pages
         public HamburgerPaneControl()
         {
             this.InitializeComponent();
-            viewModel = new HamburgerPaneViewModel(new BankService());
+            viewModel = new HamburgerPaneViewModel(new BankService(), new WalletService(), new CategoryService(), ResourceLoader.GetForCurrentView());
             this.DataContext = viewModel;
         }
 

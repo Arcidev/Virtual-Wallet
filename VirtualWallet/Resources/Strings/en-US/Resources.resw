@@ -327,4 +327,16 @@
   <data name="Category_DeleteCategoryDialog" xml:space="preserve">
     <value>Are you sure you want to delete this category?</value>
   </data>
+  <data name="HamburgerPane_Wallets" xml:space="preserve">
+    <value>Wallets</value>
+  </data>
+  <data name="HamburgerPane_Banks" xml:space="preserve">
+    <value>Banks</value>
+  </data>
+  <data name="HamburgerPane_Categories" xml:space="preserve">
+    <value>Categories</value>
+  </data>
+  <data name="HamburgerPane_Settings" xml:space="preserve">
+    <value>Settings</value>
+  </data>
 </root>

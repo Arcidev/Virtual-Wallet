@@ -327,4 +327,16 @@
   <data name="Category_DeleteCategoryDialog" xml:space="preserve">
     <value>Skutočne chcete zmazať túto kategóriu?</value>
   </data>
+  <data name="HamburgerPane_Wallets" xml:space="preserve">
+    <value>Peňaženky</value>
+  </data>
+  <data name="HamburgerPane_Banks" xml:space="preserve">
+    <value>Banky</value>
+  </data>
+  <data name="HamburgerPane_Categories" xml:space="preserve">
+    <value>Kategórie</value>
+  </data>
+  <data name="HamburgerPane_Settings" xml:space="preserve">
+    <value>Nastavenia</value>
+  </data>
 </root>

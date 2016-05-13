@@ -18,5 +18,7 @@ namespace BL.Models
         public IList<Rule> Rules { get; set; }
 
         public IList<Wallet> Wallets { get; set; }
+
+        public PagePayload PagePayload { get { return new PagePayload() { Dto = this }; } }
     }
 }

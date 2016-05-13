@@ -327,4 +327,16 @@
   <data name="Category_DeleteCategoryDialog" xml:space="preserve">
     <value>¿Seguro que desea eliminar esta categoría?</value>
   </data>
+  <data name="HamburgerPane_Wallets" xml:space="preserve">
+    <value>Billeteras</value>
+  </data>
+  <data name="HamburgerPane_Banks" xml:space="preserve">
+    <value>Bancos</value>
+  </data>
+  <data name="HamburgerPane_Categories" xml:space="preserve">
+    <value>Categorías</value>
+  </data>
+  <data name="HamburgerPane_Settings" xml:space="preserve">
+    <value>Ajustes</value>
+  </data>
 </root>

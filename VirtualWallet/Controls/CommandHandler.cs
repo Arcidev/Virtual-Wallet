@@ -18,7 +18,7 @@ namespace VirtualWallet.Controls
 
         public bool CanExecute(object parameter)
         {
-            return canExecute == null || canExecute.Invoke();
+            return canExecute?.Invoke() ?? true;
         }
 
         public void Execute(object parameter)
