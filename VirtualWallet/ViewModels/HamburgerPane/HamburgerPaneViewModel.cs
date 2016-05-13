@@ -79,7 +79,7 @@ namespace VirtualWallet.ViewModels
 
         public async Task LoadDataAsync()
         {
-            Banks = await bankService.GetAllAsync();
+            Banks = await bankService.GetAllAsync(new BankModifier() { IncludeImage = true });
             Wallets = await walletService.GetAllAsync(new WalletModifier() { IncludeImage = true });
             Categories = await categoryService.GetAllAsync(new CategoryModifier() { IncludeImage = true });
         }
