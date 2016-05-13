@@ -101,6 +101,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\HideablePivotItemBehavior.cs" />
+    <Compile Include="Controls\HamburgerArgumentMenuButton.cs" />
     <Compile Include="Converters\AlternateConverter.cs" />
     <Compile Include="Converters\InvertedBoolToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
@@ -126,6 +127,9 @@
     <Compile Include="Pages\Menu\MenuPage.xaml.cs">
       <DependentUpon>MenuPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\HamburgerPaneControl\HamburgerPaneControl.xaml.cs">
+      <DependentUpon>HamburgerPaneControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Settings\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
@@ -139,6 +143,7 @@
     <Compile Include="ViewModels\Bank\BankCredentialsPageViewModel.cs" />
     <Compile Include="ViewModels\Bank\BankPageViewModel.cs" />
     <Compile Include="ViewModels\Bank\BanksPageViewModel.cs" />
+    <Compile Include="ViewModels\HamburgerPane\HamburgerPaneViewModel.cs" />
     <Compile Include="ViewModels\Rule\RulePageViewModel.cs" />
     <Compile Include="ViewModels\Image\ImagesPageViewModel.cs" />
     <Compile Include="ViewModels\Category\CategoriesPageViewModel.cs" />
@@ -307,6 +312,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\Styles\HamburgerArgumentMenuButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
     <Page Include="Pages\Bank\BankCredentialsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -330,6 +340,10 @@
     <Page Include="Pages\Image\ImagesPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\HamburgerPaneControl\HamburgerPaneControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Rule\RulePage.xaml">
       <SubType>Designer</SubType>

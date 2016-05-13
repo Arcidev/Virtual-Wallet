@@ -1,5 +1,6 @@
 ﻿{
   "dependencies": {
+    "Cimbalino.Toolkit.Controls": "2.2.1",
     "Microsoft.NETCore.UniversalWindowsPlatform": "5.1.0",
     "WinRTXamlToolkit.Controls.DataVisualization.UWP": "2.0.0",
     "ZeroProximity.Accordion": "1.0.0.6"

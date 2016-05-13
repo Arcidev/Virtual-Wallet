@@ -7,12 +7,15 @@
     RequestedTheme="Dark"
     x:Class="VirtualWallet.App">
 
-
     <Application.Resources>
-        <SampleData:WalletsSampleDataSource x:Key="WalletsSampleDataSource" d:IsDataSource="True"/>
-        <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
-        <converters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter"></converters:InvertedBoolToVisibilityConverter>
+        <ResourceDictionary>
+            <SampleData:WalletsSampleDataSource x:Key="WalletsSampleDataSource" d:IsDataSource="True"/>
+            <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
+            <converters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter"></converters:InvertedBoolToVisibilityConverter>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Controls/Styles/HamburgerArgumentMenuButton.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
-
 
 </Application>

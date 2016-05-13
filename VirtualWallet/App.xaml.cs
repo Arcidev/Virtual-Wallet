@@ -50,6 +50,10 @@ namespace VirtualWallet
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new Frame();
+                //rootFrame = new Cimbalino.Toolkit.Controls.HamburgerFrame()
+                //{
+                //    Pane = new HamburgerPaneControl()
+                //};
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
                 rootFrame.Navigated += OnNavigated;
