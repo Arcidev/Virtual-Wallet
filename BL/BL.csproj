@@ -118,12 +118,12 @@
     <Compile Include="Models\Wallet\WalletBank.cs" />
     <Compile Include="Models\Wallet\WalletCategory.cs" />
     <Compile Include="Service\Bank\BankAccountInfoService.cs" />
-    <Compile Include="Service\Rule\RuleService.cs" />
+    <Compile Include="Service\Category\RuleService.cs" />
     <Compile Include="Service\Database\DatabaseService.cs" />
     <Compile Include="Service\Image\ImageService.cs" />
     <Compile Include="Service\Bank\IBankService.cs" />
     <Compile Include="Service\Bank\IBankAccountInfoService.cs" />
-    <Compile Include="Service\Rule\IRuleService.cs" />
+    <Compile Include="Service\Category\IRuleService.cs" />
     <Compile Include="Service\Database\IDatabaseService.cs" />
     <Compile Include="Mapping\MapperInstance.cs" />
     <Compile Include="Models\Bank\Bank.cs" />
