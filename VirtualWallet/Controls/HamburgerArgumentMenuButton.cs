@@ -125,10 +125,7 @@ namespace VirtualWallet.Controls
                 lock (registerdHamburgerArgumentMenuButtons)
                 {
                     if (!registerdHamburgerArgumentMenuButtons.Any())
-                    {
-                        hamburgerFrame.Navigated -= HamburgerFrame_Navigated;
                         hamburgerFrame.Navigated += HamburgerFrame_Navigated;
-                    }
 
                     registerdHamburgerArgumentMenuButtons.Add(this);
                     Click += HamburgerSubMenuButton_Click;
