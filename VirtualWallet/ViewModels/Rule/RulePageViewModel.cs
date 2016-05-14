@@ -87,23 +87,6 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public String Description
-        {
-            get
-            {
-                return Rule == null ? string.Empty : Rule.Description;
-            }
-            set
-            {
-                if (Rule == null || Rule.Description == value)
-                    return;
-
-                Rule.Description = value;
-                Modified = true;
-                NotifyPropertyChanged();
-            }
-        }
-
         public String Pattern
         {
             get
@@ -208,7 +191,6 @@ namespace VirtualWallet.ViewModels
 
             this.rule = rule;
             NotifyPropertyChanged(nameof(Name));
-            NotifyPropertyChanged(nameof(Description));
             NotifyPropertyChanged(nameof(Pattern));
             NotifyPropertyChanged(nameof(PatternType));
             Modified = false;

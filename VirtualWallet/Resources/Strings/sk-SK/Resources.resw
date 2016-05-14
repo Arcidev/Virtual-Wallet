@@ -276,9 +276,6 @@
   <data name="Bank_LineSeriesBalance.Title" xml:space="preserve">
     <value>Zostatok</value>
   </data>
-  <data name="Rule_Description.Text" xml:space="preserve">
-    <value>Popis</value>
-  </data>
   <data name="Rule_Name.Text" xml:space="preserve">
     <value>Meno</value>
   </data>

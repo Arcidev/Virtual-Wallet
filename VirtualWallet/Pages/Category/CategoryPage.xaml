@@ -27,8 +27,7 @@
         <DataTemplate x:Key="RulesItemTemplateWide">
             <RelativePanel HorizontalAlignment="Stretch">
                 <TextBlock x:Name="RuleName" Margin="5" Text="{Binding Name}" Width="200"/>
-                <TextBlock x:Name="RuleDescription" Margin="5" Text="{Binding Description}" RelativePanel.RightOf="RuleName" Width="200" />
-                <Button Click="RemoveRuleButton_Click" RelativePanel.RightOf="RuleDescription" RelativePanel.AlignVerticalCenterWith="RuleName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Button Click="RemoveRuleButton_Click" RelativePanel.RightOf="RuleName" RelativePanel.AlignVerticalCenterWith="RuleName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <SymbolIcon Symbol="Remove"/>
                 </Button>
             </RelativePanel>

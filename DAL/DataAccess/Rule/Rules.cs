@@ -22,9 +22,6 @@ namespace DAL.DataAccess
             if (!string.IsNullOrEmpty(filter.Name))
                 query = query.Where(x => x.Name.Contains(filter.Name));
 
-            if (!string.IsNullOrEmpty(filter.Description))
-                query = query.Where(x => x.Description.Contains(filter.Description));
-
             if (!string.IsNullOrEmpty(filter.Pattern))
                 query = query.Where(x => x.Pattern.Contains(filter.Pattern));
 
