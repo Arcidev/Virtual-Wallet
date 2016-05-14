@@ -267,8 +267,8 @@
   <data name="Bank_ChartIncomes.Title" xml:space="preserve">
     <value>Ingresos</value>
   </data>
-  <data name="Bank_ChartTransactions.Title" xml:space="preserve">
-    <value>Transacciones</value>
+  <data name="Bank_ChartBalances.Title" xml:space="preserve">
+    <value>Equilibrios</value>
   </data>
   <data name="Bank_ChartExpenses.Title" xml:space="preserve">
     <value>Expensas</value>

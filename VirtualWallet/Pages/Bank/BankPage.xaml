@@ -33,7 +33,7 @@
         <PivotItem x:Uid="Bank_Pivot_Category" Header="Category">
             <ScrollViewer VerticalScrollBarVisibility="Auto">
                 <RelativePanel>
-                    <charting:Chart x:Uid="Bank_ChartTransactions" x:Name="TransactionsLineChart" Title="Transactions" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Height="400" Visibility="{Binding HasBalances, Converter={StaticResource BoolToVisibilityConverter}}">
+                    <charting:Chart x:Uid="Bank_ChartBalances" x:Name="TransactionsLineChart" Title="Transactions" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Height="400" Visibility="{Binding HasBalances, Converter={StaticResource BoolToVisibilityConverter}}">
                         <charting:LineSeries x:Uid="Bank_LineSeriesBalance" x:Name="TransactionsLineSeries" Title="Balance" ItemsSource="{Binding Balances}" IndependentValuePath="Item1" DependentValuePath="Item2" DataContextChanged="TransactionsLineSeries_DataContextChanged" />
                         <charting:Chart.Axes>
                             <charting:LinearAxis Orientation="Y" ShowGridLines="True" Title="{Binding LinearAxisInfo}" />

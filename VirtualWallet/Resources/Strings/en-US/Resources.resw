@@ -264,8 +264,8 @@
   <data name="Category_Other" xml:space="preserve">
     <value>Other</value>
   </data>
-  <data name="Bank_ChartTransactions.Title" xml:space="preserve">
-    <value>Transactions</value>
+  <data name="Bank_ChartBalances.Title" xml:space="preserve">
+    <value>Balances</value>
   </data>
   <data name="Bank_ChartIncomes.Title" xml:space="preserve">
     <value>Incomes</value>
