@@ -50,11 +50,6 @@ namespace VirtualWallet.Pages
             Frame.Navigate(typeof(BankCredentialsPage), viewModel.Bank);
         }
 
-        private void SettingsAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            Frame.Navigate(typeof(SettingsPage));
-        }
-
         private void Page_SizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
         {
             if (screenWidth == e.NewSize.Width)

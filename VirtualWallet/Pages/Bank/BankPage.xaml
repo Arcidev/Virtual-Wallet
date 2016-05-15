@@ -168,7 +168,6 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton x:Uid="CommandBar_Edit" Icon="Edit" Click="EditAppBarButton_Click" />
-                <AppBarButton x:Uid="CommandBar_Settings" Icon="Setting" Click="SettingsAppBarButton_Click" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </Page.BottomAppBar>

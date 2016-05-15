@@ -126,9 +126,6 @@
     <Compile Include="Pages\Image\ImagesPage.xaml.cs">
       <DependentUpon>ImagesPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Menu\MenuPage.xaml.cs">
-      <DependentUpon>MenuPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\HamburgerPaneControl\HamburgerPaneControl.xaml.cs">
       <DependentUpon>HamburgerPaneControl.xaml</DependentUpon>
     </Compile>
@@ -150,7 +147,6 @@
     <Compile Include="ViewModels\Image\ImagesPageViewModel.cs" />
     <Compile Include="ViewModels\Category\CategoriesPageViewModel.cs" />
     <Compile Include="ViewModels\Category\CategoryPageViewModel.cs" />
-    <Compile Include="ViewModels\Menu\MenuPageViewModel.cs" />
     <Compile Include="ViewModels\Settings\SettingsViewModel.cs" />
     <Compile Include="ViewModels\ViewModelBase.cs" />
     <Compile Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource.xaml.cs">
@@ -362,10 +358,6 @@
     <Page Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Pages\Menu\MenuPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
   </ItemGroup>
   <ItemGroup>

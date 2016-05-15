@@ -150,14 +150,8 @@
   <data name="CommandBar_Edit.Label" xml:space="preserve">
     <value>Upraviť</value>
   </data>
-  <data name="CommandBar_Settings.Label" xml:space="preserve">
-    <value>Nastavenia</value>
-  </data>
   <data name="CommandBar_Sync.Label" xml:space="preserve">
     <value>Synchronizovať</value>
-  </data>
-  <data name="Menu_Categories.Text" xml:space="preserve">
-    <value>Kategórie</value>
   </data>
   <data name="Bank_ErrorDialog" xml:space="preserve">
     <value>Och! Niečo sa pokazilo. Skontrolujte prosím pripojenie k internetu a platnosť tokenu.</value>
@@ -182,15 +176,6 @@
   </data>
   <data name="Settings_CopyDbToRoaming" xml:space="preserve">
     <value>Kopírovať dáta do zdieľanej zložky</value>
-  </data>
-  <data name="Menu_Wallets.Text" xml:space="preserve">
-    <value>Peňaženky</value>
-  </data>
-  <data name="Menu_Header.Text" xml:space="preserve">
-    <value>Virtual Wallet</value>
-  </data>
-  <data name="Menu_Banks.Text" xml:space="preserve">
-    <value>Banky</value>
   </data>
   <data name="Settings_UserContent" xml:space="preserve">
     <value>Užívateľský obsah:</value>
@@ -224,15 +209,6 @@
   </data>
   <data name="CommandBar_Cancel.Label" xml:space="preserve">
     <value>Zrušiť</value>
-  </data>
-  <data name="Flyout_Edit.Text" xml:space="preserve">
-    <value>Upraviť</value>
-  </data>
-  <data name="Menu_RemoveCredentials" xml:space="preserve">
-    <value>Odstrániť prihlasovacie údaje</value>
-  </data>
-  <data name="Menu_BankRemoveDialog" xml:space="preserve">
-    <value>Vykonaním tejto akcie zmažete prihlasovacie údaje vybranej banky uložené touto aplikáciou. Ste si istí, že chcete pokračovať?</value>
   </data>
   <data name="Category_Icon.Text" xml:space="preserve">
     <value>Ikona</value>
@@ -317,9 +293,6 @@
   </data>
   <data name="Bank_TransactionHeader_Amount.Text" xml:space="preserve">
     <value>Čiastka</value>
-  </data>
-  <data name="Category_CategoryDefaultName" xml:space="preserve">
-    <value>Nová kategória</value>
   </data>
   <data name="Category_DeleteCategoryDialog" xml:space="preserve">
     <value>Skutočne chcete zmazať túto kategóriu?</value>

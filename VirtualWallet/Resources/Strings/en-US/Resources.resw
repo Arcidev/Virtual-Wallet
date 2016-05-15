@@ -150,14 +150,8 @@
   <data name="CommandBar_Edit.Label" xml:space="preserve">
     <value>Edit</value>
   </data>
-  <data name="CommandBar_Settings.Label" xml:space="preserve">
-    <value>Settings</value>
-  </data>
   <data name="CommandBar_Sync.Label" xml:space="preserve">
     <value>Sync</value>
-  </data>
-  <data name="Menu_Categories.Text" xml:space="preserve">
-    <value>Category</value>
   </data>
   <data name="Bank_ErrorDialog" xml:space="preserve">
     <value>Oops, something went wrong. Please check your internet connection and token validity.</value>
@@ -182,15 +176,6 @@
   </data>
   <data name="Settings_CopyDbToRoaming" xml:space="preserve">
     <value>Copy stored data into roaming folder</value>
-  </data>
-  <data name="Menu_Wallets.Text" xml:space="preserve">
-    <value>Wallets</value>
-  </data>
-  <data name="Menu_Header.Text" xml:space="preserve">
-    <value>Virtual Wallet</value>
-  </data>
-  <data name="Menu_Banks.Text" xml:space="preserve">
-    <value>Banks</value>
   </data>
   <data name="Settings_UserContent" xml:space="preserve">
     <value>User content:</value>
@@ -224,15 +209,6 @@
   </data>
   <data name="CommandBar_Cancel.Label" xml:space="preserve">
     <value>Cancel</value>
-  </data>
-  <data name="Flyout_Edit.Text" xml:space="preserve">
-    <value>Edit</value>
-  </data>
-  <data name="Menu_RemoveCredentials" xml:space="preserve">
-    <value>Remove credentials</value>
-  </data>
-  <data name="Menu_BankRemoveDialog" xml:space="preserve">
-    <value>By performing this action you will erase credentials of selected bank stored by this application. Are you sure you want to continue?</value>
   </data>
   <data name="Category_Icon.Text" xml:space="preserve">
     <value>Icon</value>
@@ -317,9 +293,6 @@
   </data>
   <data name="Bank_TransactionHeader_Amount.Text" xml:space="preserve">
     <value>Amount</value>
-  </data>
-  <data name="Category_CategoryDefaultName" xml:space="preserve">
-    <value>New Category</value>
   </data>
   <data name="Category_DeleteCategoryDialog" xml:space="preserve">
     <value>Are you sure you want to delete this category?</value>

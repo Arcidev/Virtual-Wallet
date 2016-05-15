@@ -150,14 +150,8 @@
   <data name="CommandBar_Edit.Label" xml:space="preserve">
     <value>Upravit</value>
   </data>
-  <data name="CommandBar_Settings.Label" xml:space="preserve">
-    <value>Nastavení</value>
-  </data>
   <data name="CommandBar_Sync.Label" xml:space="preserve">
     <value>Synchronizovat</value>
-  </data>
-  <data name="Menu_Categories.Text" xml:space="preserve">
-    <value>Kategorie</value>
   </data>
   <data name="Bank_ErrorDialog" xml:space="preserve">
     <value>Jejda! Něco se pokazilo. Zkontrolujte prosím připojení k internetu a platnost tokenu.</value>
@@ -182,15 +176,6 @@
   </data>
   <data name="Settings_CopyDbToRoaming" xml:space="preserve">
     <value>Kopírovat data do sdílené složky</value>
-  </data>
-  <data name="Menu_Wallets.Text" xml:space="preserve">
-    <value>Peněženky</value>
-  </data>
-  <data name="Menu_Header.Text" xml:space="preserve">
-    <value>Virtual Wallet</value>
-  </data>
-  <data name="Menu_Banks.Text" xml:space="preserve">
-    <value>Banky</value>
   </data>
   <data name="Settings_UserContent" xml:space="preserve">
     <value>Uživatelský obsah:</value>
@@ -224,15 +209,6 @@
   </data>
   <data name="CommandBar_Cancel.Label" xml:space="preserve">
     <value>Zrušit</value>
-  </data>
-  <data name="Flyout_Edit.Text" xml:space="preserve">
-    <value>Upravit</value>
-  </data>
-  <data name="Menu_RemoveCredentials" xml:space="preserve">
-    <value>Odstranit přihlašovací údaje</value>
-  </data>
-  <data name="Menu_BankRemoveDialog" xml:space="preserve">
-    <value>Provedením této akce smažete přihlašovací údaje vybrané banky uložené touto aplikací. Jste si jisti, že chcete pokračovat?</value>
   </data>
   <data name="Category_Icon.Text" xml:space="preserve">
     <value>Ikona</value>
@@ -317,9 +293,6 @@
   </data>
   <data name="Bank_TransactionHeader_Amount.Text" xml:space="preserve">
     <value>Částka</value>
-  </data>
-  <data name="Category_CategoryDefaultName" xml:space="preserve">
-    <value>Nová kategorie</value>
   </data>
   <data name="Category_DeleteCategoryDialog" xml:space="preserve">
     <value>Opravdu chcete vymazat tuto kategorii?</value>
