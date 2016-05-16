@@ -13,100 +13,116 @@
     mc:Ignorable="d"
     SizeChanged="Page_SizeChanged">
 
-    <Pivot x:Name="MainPivot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-        <PivotItem x:Uid="Bank_Pivot_Overview" Header="Overview">
-            <RelativePanel>
-                <RelativePanel x:Name="BankInfo">
-                    <Image x:Name="BankImage" RelativePanel.AlignVerticalCenterWithPanel="True" MaxHeight="40" MaxWidth="60" Source="{Binding Bank.ImageUri}" />
-                    <TextBlock RelativePanel.RightOf="BankImage" FontSize="40" Text="{Binding Bank.Name}" />
-                </RelativePanel>
-                <TextBlock x:Uid="Bank_Balance" x:Name="Balance" RelativePanel.Below="BankInfo" Margin="5" Text="Balance:" />
-                <TextBlock RelativePanel.Below="BankInfo" RelativePanel.RightOf="Balance" Margin="5" Text="{Binding BankAccountInfo.ClosingBalanceString}" />
-                <TextBlock x:Uid="Bank_OpeningBalance" x:Name="OpeningBalance" RelativePanel.Below="Balance" Margin="5" Text="Opening balance:" />
-                <TextBlock RelativePanel.Below="Balance" RelativePanel.RightOf="OpeningBalance" Margin="5" Text="{Binding BankAccountInfo.OpeningBalanceString}" />
-                <TextBlock x:Uid="Bank_DateStart" x:Name="DateStart" RelativePanel.Below="OpeningBalance" Margin="5" Text="Opening date:" />
-                <TextBlock RelativePanel.Below="OpeningBalance" RelativePanel.RightOf="DateStart" Margin="5" Text="{Binding BankAccountInfo.DateStartString}" />
-                <TextBlock x:Uid="Bank_DateEnd" x:Name="DateEnd" RelativePanel.Below="DateStart" Margin="5" Text="Last sync date:" />
-                <TextBlock RelativePanel.Below="DateStart" RelativePanel.RightOf="DateEnd" Margin="5" Text="{Binding BankAccountInfo.DateEndString}" />
-            </RelativePanel>
-        </PivotItem>
-        <PivotItem x:Uid="Bank_Pivot_Category" Header="Category">
-            <ScrollViewer VerticalScrollBarVisibility="Auto">
+    <Grid>
+        <Pivot x:Name="MainPivot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <PivotItem x:Uid="Bank_Pivot_Overview" Header="Overview">
                 <RelativePanel>
-                    <charting:Chart x:Uid="Bank_ChartBalances" x:Name="TransactionsLineChart" Title="Transactions" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Height="400" Visibility="{Binding HasBalances, Converter={StaticResource BoolToVisibilityConverter}}">
-                        <charting:LineSeries x:Uid="Bank_LineSeriesBalance" x:Name="TransactionsLineSeries" Title="Balance" ItemsSource="{Binding Balances}" IndependentValueBinding="{Binding Item1}" DependentValueBinding="{Binding Item2}" DataContextChanged="TransactionsLineSeries_DataContextChanged" />
-                        <charting:Chart.Axes>
-                            <charting:LinearAxis Orientation="Y" ShowGridLines="True" Title="{Binding LinearAxisInfo}" />
-                        </charting:Chart.Axes>
-                    </charting:Chart>
-                    <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TransactionsLineChart">
-                        <charting:Chart x:Uid="Bank_ChartIncomes" x:Name="IncomesPieChart" Title="Incomes" Width="330" Height="330" Visibility="{Binding HasIncomes, Converter={StaticResource BoolToVisibilityConverter}}">
-                            <charting:PieSeries ItemsSource="{Binding Incomes}" IndependentValuePath="Item1" DependentValuePath="Item2" />
-                        </charting:Chart>
-                        <charting:Chart x:Uid="Bank_ChartExpenses" x:Name="ExpensesPieChart" Title="Expenses" RelativePanel.Below="IncomesPieChart" Width="330" Height="330" Visibility="{Binding HasExpenses, Converter={StaticResource BoolToVisibilityConverter}}">
-                            <charting:PieSeries ItemsSource="{Binding Expenses}" IndependentValuePath="Item1" DependentValuePath="Item2" />
-                        </charting:Chart>
+                    <RelativePanel x:Name="BankInfo">
+                        <Image x:Name="BankImage" RelativePanel.AlignVerticalCenterWithPanel="True" MaxHeight="40" MaxWidth="60" Source="{Binding Bank.ImageUri}" />
+                        <TextBlock RelativePanel.RightOf="BankImage" FontSize="40" Text="{Binding Bank.Name}" />
                     </RelativePanel>
+                    <TextBlock x:Uid="Bank_Balance" x:Name="Balance" RelativePanel.Below="BankInfo" Margin="5" Text="Balance:" />
+                    <TextBlock RelativePanel.Below="BankInfo" RelativePanel.RightOf="Balance" Margin="5" Text="{Binding BankAccountInfo.ClosingBalanceString}" />
+                    <TextBlock x:Uid="Bank_OpeningBalance" x:Name="OpeningBalance" RelativePanel.Below="Balance" Margin="5" Text="Opening balance:" />
+                    <TextBlock RelativePanel.Below="Balance" RelativePanel.RightOf="OpeningBalance" Margin="5" Text="{Binding BankAccountInfo.OpeningBalanceString}" />
+                    <TextBlock x:Uid="Bank_DateStart" x:Name="DateStart" RelativePanel.Below="OpeningBalance" Margin="5" Text="Opening date:" />
+                    <TextBlock RelativePanel.Below="OpeningBalance" RelativePanel.RightOf="DateStart" Margin="5" Text="{Binding BankAccountInfo.DateStartString}" />
+                    <TextBlock x:Uid="Bank_DateEnd" x:Name="DateEnd" RelativePanel.Below="DateStart" Margin="5" Text="Last sync date:" />
+                    <TextBlock RelativePanel.Below="DateStart" RelativePanel.RightOf="DateEnd" Margin="5" Text="{Binding BankAccountInfo.DateEndString}" />
                 </RelativePanel>
-            </ScrollViewer>
-            <i:Interaction.Behaviors>
-                <behaviors:HideablePivotItemBehavior Visible="{Binding HasTransactions}" />
-            </i:Interaction.Behaviors>
-        </PivotItem>
-        <PivotItem x:Uid="Bank_Pivot_Transactions" Header="Transactions">
-            <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
-                <controls:Accordion x:Name="TransactionsAccordion" ItemsSource="{Binding TransactionCategories}" HorizontalAlignment="Stretch" Margin="5" SelectionMode="ZeroOrOne">
-                    <controls:Accordion.ItemTemplate>
-                        <DataTemplate>
-                            <Grid>
-                                <TextBlock Text="{Binding CategoryName}"/>
-                                <TextBlock Text="{Binding TotalAmount}" HorizontalAlignment="Right" Margin="0 0 10 0"/>
-                            </Grid>
-                        </DataTemplate>
-                    </controls:Accordion.ItemTemplate>
-                    <controls:Accordion.ContentTemplate>
-                        <DataTemplate>
-                            <ItemsControl ItemsSource="{Binding Transactions}">
-                                <ItemsControl.Resources>
-                                    <converters:AlternateConverter AlternateBrushes="{Binding ElementName=MainPivot, Path=DataContext.Brushes}" x:Key="AlternateConverter"/>
-                                </ItemsControl.Resources>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Grid Background="{Binding Converter={StaticResource AlternateConverter}}">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="Auto" />
-                                                <ColumnDefinition Width="*" />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
+            </PivotItem>
+            <PivotItem x:Uid="Bank_Pivot_Category" Header="Category">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <RelativePanel>
+                        <charting:Chart x:Uid="Bank_ChartBalances" x:Name="TransactionsLineChart" Title="Transactions" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Height="400" Visibility="{Binding HasBalances, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <charting:LineSeries x:Uid="Bank_LineSeriesBalance" x:Name="TransactionsLineSeries" Title="Balance" ItemsSource="{Binding Balances}" IndependentValueBinding="{Binding Item1}" DependentValueBinding="{Binding Item2}" DataContextChanged="TransactionsLineSeries_DataContextChanged" />
+                            <charting:Chart.Axes>
+                                <charting:LinearAxis Orientation="Y" ShowGridLines="True" Title="{Binding LinearAxisInfo}" />
+                            </charting:Chart.Axes>
+                        </charting:Chart>
+                        <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TransactionsLineChart">
+                            <charting:Chart x:Uid="Bank_ChartIncomes" x:Name="IncomesPieChart" Title="Incomes" Width="330" Height="330" Visibility="{Binding HasIncomes, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <charting:PieSeries ItemsSource="{Binding Incomes}" IndependentValuePath="Item1" DependentValuePath="Item2" />
+                            </charting:Chart>
+                            <charting:Chart x:Uid="Bank_ChartExpenses" x:Name="ExpensesPieChart" Title="Expenses" RelativePanel.Below="IncomesPieChart" Width="330" Height="330" Visibility="{Binding HasExpenses, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <charting:PieSeries ItemsSource="{Binding Expenses}" IndependentValuePath="Item1" DependentValuePath="Item2" />
+                            </charting:Chart>
+                        </RelativePanel>
+                    </RelativePanel>
+                </ScrollViewer>
+                <i:Interaction.Behaviors>
+                    <behaviors:HideablePivotItemBehavior Visible="{Binding HasTransactions}" />
+                </i:Interaction.Behaviors>
+            </PivotItem>
+            <PivotItem x:Uid="Bank_Pivot_Transactions" Header="Transactions">
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <controls:Accordion x:Name="TransactionsAccordion" ItemsSource="{Binding TransactionCategories}" HorizontalAlignment="Stretch" Margin="5" SelectionMode="ZeroOrOne">
+                        <controls:Accordion.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock Text="{Binding CategoryName}"/>
+                                    <TextBlock Text="{Binding TotalAmount}" HorizontalAlignment="Right" Margin="0 0 10 0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:Accordion.ItemTemplate>
+                        <controls:Accordion.ContentTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Transactions}">
+                                    <ItemsControl.Resources>
+                                        <converters:AlternateConverter AlternateBrushes="{Binding ElementName=MainPivot, Path=DataContext.Brushes}" x:Key="AlternateConverter"/>
+                                    </ItemsControl.Resources>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Background="{Binding Converter={StaticResource AlternateConverter}}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
 
-                                            <TextBlock Grid.Column="0" Margin="5" TextWrapping="Wrap" Text="{Binding DateString}" />
-                                            <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{Binding Description}" />
-                                            <TextBlock Grid.Column="2" Margin="5 5 15 5" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding AmountString}" />
-                                        </Grid>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                                <ItemsControl.ItemContainerStyle>
-                                    <Style TargetType="ContentPresenter">
-                                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
-                                        <Setter Property="BorderBrush" Value="Gray" />
-                                        <Setter Property="BorderThickness" Value="0,0,0,1" />
-                                    </Style>
-                                </ItemsControl.ItemContainerStyle>
-                            </ItemsControl>
-                        </DataTemplate>
-                    </controls:Accordion.ContentTemplate>
-                    <controls:Accordion.ItemContainerStyle>
-                        <Style TargetType="controls:AccordionItem">
-                            <Setter Property="RequestedTheme" Value="Dark"/>
-                            <Setter Property="Background" Value="Black" />
-                        </Style>
-                    </controls:Accordion.ItemContainerStyle>
-                </controls:Accordion>
-            </ScrollViewer>
-            <i:Interaction.Behaviors>
-                <behaviors:HideablePivotItemBehavior Visible="{Binding HasTransactions}" />
-            </i:Interaction.Behaviors>
-        </PivotItem>
+                                                <TextBlock Grid.Column="0" Margin="5" TextWrapping="Wrap" Text="{Binding DateString}" />
+                                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{Binding Description}" />
+                                                <TextBlock Grid.Column="2" Margin="5 5 15 5" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding AmountString}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemContainerStyle>
+                                        <Style TargetType="ContentPresenter">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="BorderBrush" Value="Gray" />
+                                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                        </Style>
+                                    </ItemsControl.ItemContainerStyle>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </controls:Accordion.ContentTemplate>
+                        <controls:Accordion.ItemContainerStyle>
+                            <Style TargetType="controls:AccordionItem">
+                                <Setter Property="RequestedTheme" Value="Dark"/>
+                                <Setter Property="Background" Value="Black" />
+                            </Style>
+                        </controls:Accordion.ItemContainerStyle>
+                    </controls:Accordion>
+                </ScrollViewer>
+                <i:Interaction.Behaviors>
+                    <behaviors:HideablePivotItemBehavior Visible="{Binding HasTransactions}" />
+                </i:Interaction.Behaviors>
+            </PivotItem>
+        </Pivot>
+        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact" VerticalAlignment="Bottom">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Uid="CommandBar_Sync" Command="{Binding SyncCommand}">
+                    <AppBarButton.Icon>
+                        <SymbolIcon x:Name="SyncIcon"  Symbol="Sync" RenderTransformOrigin="0.5,0.5">
+                            <SymbolIcon.RenderTransform>
+                                <CompositeTransform/>
+                            </SymbolIcon.RenderTransform>
+                        </SymbolIcon>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Uid="CommandBar_Edit" Icon="Edit" Click="EditAppBarButton_Click" />
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
                 <VisualState>
@@ -154,23 +170,7 @@
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
-    </Pivot>
-    <Page.BottomAppBar>
-        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact">
-            <CommandBar.PrimaryCommands>
-                <AppBarButton x:Uid="CommandBar_Sync" Command="{Binding SyncCommand}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon x:Name="SyncIcon"  Symbol="Sync" RenderTransformOrigin="0.5,0.5">
-                            <SymbolIcon.RenderTransform>
-                                <CompositeTransform/>
-                            </SymbolIcon.RenderTransform>
-                        </SymbolIcon>
-                    </AppBarButton.Icon>
-                </AppBarButton>
-                <AppBarButton x:Uid="CommandBar_Edit" Icon="Edit" Click="EditAppBarButton_Click" />
-            </CommandBar.PrimaryCommands>
-        </CommandBar>
-    </Page.BottomAppBar>
+    </Grid>
     <Page.Resources>
         <Storyboard x:Name="IconRotation" AutoReverse="False" RepeatBehavior="Forever">
             <DoubleAnimation Duration="0:0:1" To="360" Storyboard.TargetProperty="UIElement.RenderTransform.CompositeTransform.Rotation" Storyboard.TargetName="SyncIcon" />

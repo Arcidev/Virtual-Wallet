@@ -18,32 +18,32 @@
         </DataTemplate>
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
-        <RelativePanel ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <TextBlock x:Name="PageTitle" x:Uid="Icons_PageTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Icons" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-            <Grid x:Name="CategoriesGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.Below="PageTitle" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <GridView x:Name="GridViewIcons" 
+    <Grid>
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
+            <RelativePanel ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <TextBlock x:Name="PageTitle" x:Uid="Icons_PageTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Icons" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                <Grid x:Name="CategoriesGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.Below="PageTitle" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <GridView x:Name="GridViewIcons" 
                           ItemTemplate="{StaticResource ImagesItemTemplate}" 
                           ItemsSource="{Binding Images}" 
                           IsSwipeEnabled="False" 
                           SelectionMode="Single"
                           SelectedItem="{Binding SelectedImage, Mode=TwoWay}"
                           IsItemClickEnabled="True">
-                    </GridView>
+                        </GridView>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </RelativePanel>
-    </ScrollViewer>
-    <Page.BottomAppBar>
-        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact">
+            </RelativePanel>
+        </ScrollViewer>
+        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact" VerticalAlignment="Bottom">
             <CommandBar.PrimaryCommands>
                 <AppBarButton x:Uid="CommandBar_Accept" Icon="Accept" Click="AcceptAppBarButton_Click"/>
                 <AppBarButton x:Uid="CommandBar_Cancel" Icon="Cancel" Click="CancelAppBarButton_Click"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
-    </Page.BottomAppBar>
+    </Grid>
 </Page>
