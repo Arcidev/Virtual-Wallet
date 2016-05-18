@@ -1,4 +1,5 @@
 ﻿using BL.Service;
+using Cimbalino.Toolkit.Controls;
 using System;
 using VirtualWallet.Pages;
 using Windows.ApplicationModel;
@@ -16,6 +17,7 @@ namespace VirtualWallet
     sealed partial class App : Application
     {
         private static readonly IDatabaseService _database = new DatabaseService();
+        private object lastParameter;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -57,6 +59,7 @@ namespace VirtualWallet
 
                 rootFrame.NavigationFailed += OnNavigationFailed;
                 rootFrame.Navigated += OnNavigated;
+                rootFrame.Navigating += OnNavigating;
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
@@ -97,15 +100,35 @@ namespace VirtualWallet
         }
 
         /// <summary>
-        /// Invoked when Navigation occurs
+        /// Invoked when Navigation happened
         /// </summary>
         /// <param name="sender">The frame where we are navigating</param>
         /// <param name="e">Details about the navigation</param>
         private void OnNavigated(object sender, NavigationEventArgs e)
         {
+            // Store last parameter for navigation check
+            lastParameter = e.Parameter;
+
             // Each time a navigation event occurs, update the Back button's visibility
             SystemNavigationManager.GetForCurrentView().AppViewBackButtonVisibility =
                 ((Frame)sender).CanGoBack ? AppViewBackButtonVisibility.Visible : AppViewBackButtonVisibility.Collapsed;
+        }
+
+        /// <summary>
+        /// Invoked when Navigation occurs
+        /// </summary>
+        /// <param name="sender">The frame from which we are navigating</param>
+        /// <param name="e">Details about navigation</param>
+        private void OnNavigating(object sender, NavigatingCancelEventArgs e)
+        {
+            // Sender should always be hamburger frame
+            var hamburgerFrame = sender as HamburgerFrame;
+            if (hamburgerFrame == null)
+                return;
+            
+            // Prevents navigation to the same page as it is possible to do multiple navigations from hamburger menu to the same page
+            if (hamburgerFrame.CurrentSourcePageType == e.SourcePageType && lastParameter == e.Parameter)
+                e.Cancel = true;
         }
 
         /// <summary>
