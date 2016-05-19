@@ -20,7 +20,7 @@
 
     <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
         <RelativePanel d:DataContext="{Binding Source={StaticResource WalletsSampleDataSource}}" ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <TextBlock x:Name="PageTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Wallets" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+            <TextBlock x:Name="PageTitle" x:Uid="Wallets_PageTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Wallets" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
             <Grid x:Name="WalletsGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.Below="PageTitle" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10">
                 <Grid.RowDefinitions>
                     <RowDefinition />
