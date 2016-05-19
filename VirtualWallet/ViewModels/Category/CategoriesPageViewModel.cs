@@ -59,7 +59,6 @@ namespace VirtualWallet.ViewModels
                     return;
 
                 categories = value;
-                wallet.Categories = value;
                 NotifyPropertyChanged();
             }
         }

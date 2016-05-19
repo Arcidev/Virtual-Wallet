@@ -6,6 +6,7 @@ using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using VirtualWallet.ViewModels;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -27,9 +28,11 @@ namespace VirtualWallet.Pages
     {
         private CategoriesPageViewModel viewModel;
         private PagePayload pagePayload;
+        private ResourceLoader resources;
 
         public CategoriesPage()
         {
+            resources = ResourceLoader.GetForCurrentView();
             this.InitializeComponent();
             viewModel = new CategoriesPageViewModel(new CategoryService(), new WalletCategoryService());
             this.DataContext = viewModel;
@@ -38,7 +41,19 @@ namespace VirtualWallet.Pages
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             pagePayload = (PagePayload)e.Parameter;
-            viewModel.Wallet = (Wallet)pagePayload.Dto;
+
+            if (pagePayload != null)
+            {
+                CommandBar_Add.Visibility = Visibility.Collapsed;
+                viewModel.Wallet = (Wallet)pagePayload?.Dto;
+            }
+            else
+            {
+                GridViewCategories.IsItemClickEnabled = true;
+                CommandBar_Accept.Visibility = Visibility.Collapsed;
+                CommandBar_Cancel.Visibility = Visibility.Collapsed;
+            }
+            
             await viewModel.LoadDataAsync();
 
             base.OnNavigatedTo(e);
@@ -56,6 +71,19 @@ namespace VirtualWallet.Pages
         {
             if (Frame.CanGoBack)
                 Frame.GoBack();
+        }
+
+        private void AddAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            var pagePayload = new PagePayload() { Dto = new Category() { Name = resources.GetString("Category_CategoryDefaultName") } };
+            Frame.Navigate(typeof(CategoryPage), pagePayload);
+        }
+
+        private void GridViewCategories_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            var category = (Category)e.ClickedItem; ;
+            var categoryPageDto = new BL.Models.PagePayload() { Dto = category };
+            Frame.Navigate(typeof(CategoryPage), categoryPageDto);
         }
     }
 }

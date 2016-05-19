@@ -15,7 +15,6 @@ namespace VirtualWallet.ViewModels
         private ICategoryService categoryService;
         private IWalletService walletService;
         private IList<Bank> banks;
-        private IList<Category> categories;
         private IList<Wallet> wallets;
         private ResourceLoader resources;
 
@@ -28,19 +27,6 @@ namespace VirtualWallet.ViewModels
                     return;
 
                 banks = value;
-                NotifyPropertyChanged();
-            }
-        }
-
-        public IList<Category> Categories
-        {
-            get { return categories; }
-            set
-            {
-                if (categories == value)
-                    return;
-
-                categories = value;
                 NotifyPropertyChanged();
             }
         }
@@ -81,7 +67,6 @@ namespace VirtualWallet.ViewModels
         {
             Banks = await bankService.GetAllAsync(new BankModifier() { IncludeImage = true });
             Wallets = await walletService.GetAllAsync(new WalletModifier() { IncludeImage = true });
-            Categories = await categoryService.GetAllAsync(new CategoryModifier() { IncludeImage = true });
         }
 
         private void ReloadTextsExecute()
