@@ -41,11 +41,11 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <controls:HamburgerMenuButton Content="{Binding Text_Categories}" NavigationSourcePageType="local:CategoriesPage">
-                <controls:HamburgerMenuButton.Icon>
+            <localControls:HamburgerArgumentMenuButton Content="{Binding Text_Categories}" NavigationSourcePageType="local:CategoriesPage">
+                <localControls:HamburgerArgumentMenuButton.Icon>
                     <fa:FontAwesome Icon="Sitemap"/>
-                </controls:HamburgerMenuButton.Icon>
-            </controls:HamburgerMenuButton>
+                </localControls:HamburgerArgumentMenuButton.Icon>
+            </localControls:HamburgerArgumentMenuButton>
         </StackPanel>
 
         <localControls:HamburgerArgumentMenuButton Grid.Row="1" Content="{Binding Text_Settings}" NavigationSourcePageType="local:SettingsPage" NavigationParameter="{Binding ReloadTextsCommand}">
