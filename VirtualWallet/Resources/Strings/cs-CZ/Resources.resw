@@ -336,13 +336,19 @@
   <data name="Wallet_WalletDefaultName" xml:space="preserve">
     <value>Nová peněženka</value>
   </data>
-  <data name="Categories_PageTitle" xml:space="preserve">
+  <data name="Banks_PageTitle.Text" xml:space="preserve">
+    <value>Banky</value>
+  </data>
+  <data name="Categories_PageTitle.Text" xml:space="preserve">
     <value>Kategorie</value>
   </data>
-  <data name="CommandBar_Add" xml:space="preserve">
+  <data name="CommandBar_Add.Label" xml:space="preserve">
     <value>Přidat</value>
   </data>
-  <data name="Wallets_PageTitle" xml:space="preserve">
+  <data name="Wallets_PageTitle.Text" xml:space="preserve">
     <value>Peněženky</value>
+  </data>
+  <data name="Wallet_BanksTitle.Text" xml:space="preserve">
+    <value>Přiřazené banky</value>
   </data>
 </root>

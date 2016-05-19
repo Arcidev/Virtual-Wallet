@@ -309,14 +309,20 @@
   <data name="HamburgerPane_Settings" xml:space="preserve">
     <value>Nastavenia</value>
   </data>
-  <data name="Categories_PageTitle" xml:space="preserve">
+  <data name="Banks_PageTitle.Text" xml:space="preserve">
+    <value>Banky</value>
+  </data>
+  <data name="Categories_PageTitle.Text" xml:space="preserve">
     <value>Kategórie</value>
   </data>
-  <data name="CommandBar_Add" xml:space="preserve">
+  <data name="CommandBar_Add.Label" xml:space="preserve">
     <value>Pridať</value>
   </data>
-  <data name="Wallets_PageTitle" xml:space="preserve">
+  <data name="Wallets_PageTitle.Text" xml:space="preserve">
     <value>Peňaženky</value>
+  </data>
+  <data name="Wallet_BanksTitle.Text" xml:space="preserve">
+    <value>Priradené banky</value>
   </data>
   <data name="Wallet_CategoriesTitle.Text" xml:space="preserve">
     <value>Priradené kategórie</value>

@@ -309,14 +309,20 @@
   <data name="HamburgerPane_Settings" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="Categories_PageTitle" xml:space="preserve">
+  <data name="Banks_PageTitle.Text" xml:space="preserve">
+    <value>Banks</value>
+  </data>
+  <data name="Categories_PageTitle.Text" xml:space="preserve">
     <value>Categories</value>
   </data>
-  <data name="CommandBar_Add" xml:space="preserve">
+  <data name="CommandBar_Add.Label" xml:space="preserve">
     <value>Add</value>
   </data>
-  <data name="Wallets_PageTitle" xml:space="preserve">
+  <data name="Wallets_PageTitle.Text" xml:space="preserve">
     <value>Wallets</value>
+  </data>
+  <data name="Wallet_BanksTitle.Text" xml:space="preserve">
+    <value>Associated banks</value>
   </data>
   <data name="Wallet_CategoriesTitle.Text" xml:space="preserve">
     <value>Associated categories</value>
