@@ -132,6 +132,9 @@
     <Compile Include="Pages\Settings\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Wallet\WalletsPage.xaml.cs">
+      <DependentUpon>WalletsPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Wallet\WalletPage.xaml.cs">
       <DependentUpon>WalletPage.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,7 @@
     <Compile Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource.xaml.cs">
       <DependentUpon>WalletsSampleDataSource.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ViewModels\Wallet\WalletsPageViewModel.cs" />
     <Compile Include="ViewModels\Wallet\WalletPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -350,6 +354,10 @@
     <Page Include="Pages\Settings\SettingsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Wallet\WalletsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Pages\Wallet\WalletPage.xaml">
       <Generator>MSBuild:Compile</Generator>

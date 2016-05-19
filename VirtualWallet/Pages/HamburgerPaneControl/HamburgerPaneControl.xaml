@@ -17,11 +17,11 @@
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <StackPanel>
-            <controls:HamburgerMenuButton Content="{Binding Text_Wallets}">
-                <controls:HamburgerMenuButton.Icon>
+            <localControls:HamburgerArgumentMenuButton Content="{Binding Text_Wallets}" NavigationSourcePageType="local:WalletsPage">
+                <localControls:HamburgerArgumentMenuButton.Icon>
                     <fa:FontAwesome Icon="CreditCardAlt"/>
-                </controls:HamburgerMenuButton.Icon>
-            </controls:HamburgerMenuButton>
+                </localControls:HamburgerArgumentMenuButton.Icon>
+            </localControls:HamburgerArgumentMenuButton>
             <ItemsControl ItemsSource="{Binding Wallets}">
                 <ItemsControl.ItemTemplate>
                     <DataTemplate>
