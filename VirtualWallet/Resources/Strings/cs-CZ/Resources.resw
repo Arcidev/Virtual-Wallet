@@ -150,8 +150,14 @@
   <data name="CommandBar_Edit.Label" xml:space="preserve">
     <value>Upravit</value>
   </data>
+  <data name="CommandBar_Settings.Label" xml:space="preserve">
+    <value>Nastavení</value>
+  </data>
   <data name="CommandBar_Sync.Label" xml:space="preserve">
     <value>Synchronizovat</value>
+  </data>
+  <data name="Menu_Categories.Text" xml:space="preserve">
+    <value>Kategorie</value>
   </data>
   <data name="Bank_ErrorDialog" xml:space="preserve">
     <value>Jejda! Něco se pokazilo. Zkontrolujte prosím připojení k internetu a platnost tokenu.</value>
@@ -308,5 +314,35 @@
   </data>
   <data name="HamburgerPane_Settings" xml:space="preserve">
     <value>Nastavení</value>
+  </data>
+  <data name="Wallet_CategoriesTitle.Text" xml:space="preserve">
+    <value>Přiřazené kategorie</value>
+  </data>
+  <data name="Wallet_DeleteWalletDialog" xml:space="preserve">
+    <value>Opravdu chcete vymazat tuto peněženku?</value>
+  </data>
+  <data name="Wallet_Icon.Text" xml:space="preserve">
+    <value>Ikona</value>
+  </data>
+  <data name="Wallet_Name.Text" xml:space="preserve">
+    <value>Jméno</value>
+  </data>
+  <data name="Wallet_Other" xml:space="preserve">
+    <value>Ostatní</value>
+  </data>
+  <data name="Wallet_PageTitle.Text" xml:space="preserve">
+    <value>Upravit peněženku</value>
+  </data>
+  <data name="Wallet_WalletDefaultName" xml:space="preserve">
+    <value>Nová peněženka</value>
+  </data>
+  <data name="Categories_PageTitle" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
+  <data name="CommandBar_Add" xml:space="preserve">
+    <value>Přidat</value>
+  </data>
+  <data name="Wallets_PageTitle" xml:space="preserve">
+    <value>Peněženky</value>
   </data>
 </root>

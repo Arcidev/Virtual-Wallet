@@ -309,4 +309,34 @@
   <data name="HamburgerPane_Settings" xml:space="preserve">
     <value>Ajustes</value>
   </data>
+  <data name="Categories_PageTitle" xml:space="preserve">
+    <value>Categorías</value>
+  </data>
+  <data name="CommandBar_Add" xml:space="preserve">
+    <value>Añadir</value>
+  </data>
+  <data name="Wallets_PageTitle" xml:space="preserve">
+    <value>Billeteras</value>
+  </data>
+  <data name="Wallet_CategoriesTitle.Text" xml:space="preserve">
+    <value>Asociadas categorías</value>
+  </data>
+  <data name="Wallet_DeleteWalletDialog" xml:space="preserve">
+    <value>Realmente desea eliminar esta cartera?</value>
+  </data>
+  <data name="Wallet_Icon.Text" xml:space="preserve">
+    <value>Icono</value>
+  </data>
+  <data name="Wallet_Name.Text" xml:space="preserve">
+    <value>Nombre</value>
+  </data>
+  <data name="Wallet_Other" xml:space="preserve">
+    <value>Otro</value>
+  </data>
+  <data name="Wallet_PageTitle.Text" xml:space="preserve">
+    <value>Editar Monedero</value>
+  </data>
+  <data name="Wallet_WalletDefaultName" xml:space="preserve">
+    <value>Nueva Monedero</value>
+  </data>
 </root>
