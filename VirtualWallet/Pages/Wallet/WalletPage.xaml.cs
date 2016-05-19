@@ -1,10 +1,12 @@
 ﻿using BL.Models;
 using BL.Service;
+using Cimbalino.Toolkit.Controls;
 using System;
 using System.Threading.Tasks;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -40,9 +42,9 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            if (viewModel.Modified)
+            if (viewModel.Modified && viewModel.Persisted)
             {
-                await viewModel.SaveWalletAsync();
+                await SaveWallet();
             }
         }
 
@@ -55,15 +57,25 @@ namespace VirtualWallet.Pages
             await dialog.ShowAsync();
         }
 
-        private void ListViewCategories_ItemClick(object sender, ItemClickEventArgs e)
+        private async void ListViewCategories_ItemClick(object sender, ItemClickEventArgs e)
         {
+            if (viewModel.Modified)
+            {
+                await SaveWallet();
+            }
+
             var category = (Category)e.ClickedItem;
             var pagePayload = new PagePayload() { Dto = category };
             Frame.Navigate(typeof(CategoryPage), pagePayload);
         }
 
-        private void ListViewBanks_ItemClick(object sender, ItemClickEventArgs e)
+        private async void ListViewBanks_ItemClick(object sender, ItemClickEventArgs e)
         {
+            if (viewModel.Modified)
+            {
+                await SaveWallet();
+            }
+
             var bank = (Bank)e.ClickedItem;
             var pagePayload = new PagePayload() { Dto = bank };
             Frame.Navigate(typeof(BankPage), pagePayload);
@@ -71,12 +83,7 @@ namespace VirtualWallet.Pages
 
         private async void SaveAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            await viewModel.SaveWalletAsync();
-
-            if (Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
+            await SaveWallet();
         }
 
         private async void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
@@ -87,6 +94,7 @@ namespace VirtualWallet.Pages
         private async void DeleteAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             await ShowDialog(resources.GetString("Wallet_DeleteWalletDialog"), viewModel.DeleteWalletCommand.Execute);
+            await ReloadMenu();
 
             if ( viewModel.Wallet == null && Frame.CanGoBack)
             {
@@ -94,19 +102,34 @@ namespace VirtualWallet.Pages
             }
         }
 
-        private void IconButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void IconButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            if (viewModel.Modified)
+            {
+                await SaveWallet();
+            }
+
             Frame.Navigate(typeof(ImagesPage), viewModel.Image);
         }
 
-        private void AddCategoryButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void AddCategoryButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            if (viewModel.Modified)
+            {
+                await SaveWallet();
+            }
+
             var pagePayload = new PagePayload() { Dto = viewModel.Wallet };
             Frame.Navigate(typeof(CategoriesPage), pagePayload);
         }
 
-        private void AddBankButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void AddBankButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
+            if (viewModel.Modified)
+            {
+                await SaveWallet();
+            }
+
             var pagePayload = new PagePayload() { Dto = viewModel.Wallet };
             Frame.Navigate(typeof(BanksPage), pagePayload);
         }
@@ -123,6 +146,19 @@ namespace VirtualWallet.Pages
             var button = sender as Button;
             var bank = button.DataContext as Bank;
             await viewModel.DetachBankAsync(bank);
+        }
+
+        private async Task SaveWallet()
+        {
+            await viewModel.SaveWalletAsync();
+            await ReloadMenu();
+        }
+
+        private async Task ReloadMenu()
+        {
+            var rootFrame = Window.Current.Content as HamburgerFrame;
+            var pane = rootFrame.Pane as HamburgerPaneControl;
+            await pane.ReloadData();
         }
     }
 }

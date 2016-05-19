@@ -1,4 +1,5 @@
 ﻿using BL.Service;
+using System.Threading.Tasks;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
@@ -22,6 +23,11 @@ namespace VirtualWallet.Pages
         }
 
         private async void UserControl_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        {
+            await viewModel.LoadDataAsync();
+        }
+
+        public async Task ReloadData()
         {
             await viewModel.LoadDataAsync();
         }
