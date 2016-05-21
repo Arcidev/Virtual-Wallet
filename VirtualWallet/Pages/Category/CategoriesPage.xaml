@@ -18,15 +18,16 @@
         </DataTemplate>
     </Page.Resources>
 
-    <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
-        <RelativePanel d:DataContext="{Binding Source={StaticResource WalletsSampleDataSource}}" ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-            <TextBlock x:Name="PageTitle" x:Uid="Categories_PageTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Categories" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-            <Grid x:Name="CategoriesGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.Below="PageTitle" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10">
-                <Grid.RowDefinitions>
-                    <RowDefinition />
-                </Grid.RowDefinitions>
-                <Grid Grid.Row="0">
-                    <GridView x:Name="GridViewCategories" 
+    <Grid>
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
+            <RelativePanel d:DataContext="{Binding Source={StaticResource WalletsSampleDataSource}}" ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <TextBlock x:Name="PageTitle" x:Uid="Categories_PageTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Categories" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
+                <Grid x:Name="CategoriesGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.Below="PageTitle" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10">
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <Grid Grid.Row="0">
+                        <GridView x:Name="GridViewCategories" 
                           ItemTemplate="{StaticResource CategoriesItemTemplate}" 
                           ItemsSource="{Binding Categories}" 
                           IsSwipeEnabled="False" 
@@ -34,18 +35,17 @@
                           IsItemClickEnabled="False"
                           ItemClick="GridViewCategories_ItemClick"
                           SelectedItem="{Binding SelectedCategory, Mode=TwoWay}">
-                    </GridView>
+                        </GridView>
+                    </Grid>
                 </Grid>
-            </Grid>
-        </RelativePanel>
-    </ScrollViewer>
-    <Page.BottomAppBar>
-        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact">
+            </RelativePanel>
+        </ScrollViewer>
+        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact" VerticalAlignment="Bottom">
             <CommandBar.PrimaryCommands>
                 <AppBarButton x:Name="CommandBar_Add" x:Uid="CommandBar_Add" Icon="Add" Click="AddAppBarButton_Click"/>
                 <AppBarButton x:Name="CommandBar_Accept" x:Uid="CommandBar_Accept" Icon="Accept" Click="AcceptAppBarButton_Click"/>
                 <AppBarButton x:Name="CommandBar_Cancel" x:Uid="CommandBar_Cancel" Icon="Cancel" Click="CancelAppBarButton_Click"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
-    </Page.BottomAppBar>
+    </Grid>
 </Page>

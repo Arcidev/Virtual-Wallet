@@ -16,20 +16,22 @@
     <Grid>
         <Pivot x:Name="MainPivot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
             <PivotItem x:Uid="Bank_Pivot_Overview" Header="Overview">
-                <RelativePanel>
-                    <RelativePanel x:Name="BankInfo">
-                        <Image x:Name="BankImage" RelativePanel.AlignVerticalCenterWithPanel="True" MaxHeight="40" MaxWidth="60" Source="{Binding Bank.ImageUri}" />
-                        <TextBlock RelativePanel.RightOf="BankImage" FontSize="40" Text="{Binding Bank.Name}" />
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <RelativePanel>
+                        <RelativePanel x:Name="BankInfo">
+                            <Image x:Name="BankImage" RelativePanel.AlignVerticalCenterWithPanel="True" MaxHeight="40" MaxWidth="60" Source="{Binding Bank.ImageUri}" />
+                            <TextBlock RelativePanel.RightOf="BankImage" FontSize="40" Text="{Binding Bank.Name}" />
+                        </RelativePanel>
+                        <TextBlock x:Uid="Bank_Balance" x:Name="Balance" RelativePanel.Below="BankInfo" Margin="5" Text="Balance:" />
+                        <TextBlock RelativePanel.Below="BankInfo" RelativePanel.RightOf="Balance" Margin="5" Text="{Binding BankAccountInfo.ClosingBalanceString}" />
+                        <TextBlock x:Uid="Bank_OpeningBalance" x:Name="OpeningBalance" RelativePanel.Below="Balance" Margin="5" Text="Opening balance:" />
+                        <TextBlock RelativePanel.Below="Balance" RelativePanel.RightOf="OpeningBalance" Margin="5" Text="{Binding BankAccountInfo.OpeningBalanceString}" />
+                        <TextBlock x:Uid="Bank_DateStart" x:Name="DateStart" RelativePanel.Below="OpeningBalance" Margin="5" Text="Opening date:" />
+                        <TextBlock RelativePanel.Below="OpeningBalance" RelativePanel.RightOf="DateStart" Margin="5" Text="{Binding BankAccountInfo.DateStartString}" />
+                        <TextBlock x:Uid="Bank_DateEnd" x:Name="DateEnd" RelativePanel.Below="DateStart" Margin="5" Text="Last sync date:" />
+                        <TextBlock RelativePanel.Below="DateStart" RelativePanel.RightOf="DateEnd" Margin="5" Text="{Binding BankAccountInfo.DateEndString}" />
                     </RelativePanel>
-                    <TextBlock x:Uid="Bank_Balance" x:Name="Balance" RelativePanel.Below="BankInfo" Margin="5" Text="Balance:" />
-                    <TextBlock RelativePanel.Below="BankInfo" RelativePanel.RightOf="Balance" Margin="5" Text="{Binding BankAccountInfo.ClosingBalanceString}" />
-                    <TextBlock x:Uid="Bank_OpeningBalance" x:Name="OpeningBalance" RelativePanel.Below="Balance" Margin="5" Text="Opening balance:" />
-                    <TextBlock RelativePanel.Below="Balance" RelativePanel.RightOf="OpeningBalance" Margin="5" Text="{Binding BankAccountInfo.OpeningBalanceString}" />
-                    <TextBlock x:Uid="Bank_DateStart" x:Name="DateStart" RelativePanel.Below="OpeningBalance" Margin="5" Text="Opening date:" />
-                    <TextBlock RelativePanel.Below="OpeningBalance" RelativePanel.RightOf="DateStart" Margin="5" Text="{Binding BankAccountInfo.DateStartString}" />
-                    <TextBlock x:Uid="Bank_DateEnd" x:Name="DateEnd" RelativePanel.Below="DateStart" Margin="5" Text="Last sync date:" />
-                    <TextBlock RelativePanel.Below="DateStart" RelativePanel.RightOf="DateEnd" Margin="5" Text="{Binding BankAccountInfo.DateEndString}" />
-                </RelativePanel>
+                </ScrollViewer>
             </PivotItem>
             <PivotItem x:Uid="Bank_Pivot_Category" Header="Category">
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
