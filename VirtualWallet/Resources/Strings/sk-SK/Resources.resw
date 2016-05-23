@@ -216,7 +216,7 @@
   <data name="Category_Name.Text" xml:space="preserve">
     <value>Meno</value>
   </data>
-  <data name="Category_PageTitle.Text" xml:space="preserve">
+  <data name="Category_PageTitle" xml:space="preserve">
     <value>Upraviť kategóriu</value>
   </data>
   <data name="Category_RulesTitle.Text" xml:space="preserve">
@@ -231,7 +231,7 @@
   <data name="CommandBar_Undo.Label" xml:space="preserve">
     <value>Vrátiť zmeny</value>
   </data>
-  <data name="Icons_PageTitle.Text" xml:space="preserve">
+  <data name="Images_PageTitle" xml:space="preserve">
     <value>Ikony</value>
   </data>
   <data name="CommandBar_Delete.Label" xml:space="preserve">
@@ -255,7 +255,7 @@
   <data name="Rule_Name.Text" xml:space="preserve">
     <value>Meno</value>
   </data>
-  <data name="Rule_PageTitle.Text" xml:space="preserve">
+  <data name="Rule_PageTitle" xml:space="preserve">
     <value>Upraviť pravidlo</value>
   </data>
   <data name="Rule_Pattern.Text" xml:space="preserve">
@@ -309,16 +309,16 @@
   <data name="HamburgerPane_Settings" xml:space="preserve">
     <value>Nastavenia</value>
   </data>
-  <data name="Banks_PageTitle.Text" xml:space="preserve">
+  <data name="Banks_PageTitle" xml:space="preserve">
     <value>Banky</value>
   </data>
-  <data name="Categories_PageTitle.Text" xml:space="preserve">
+  <data name="Categories_PageTitle" xml:space="preserve">
     <value>Kategórie</value>
   </data>
   <data name="CommandBar_Add.Label" xml:space="preserve">
     <value>Pridať</value>
   </data>
-  <data name="Wallets_PageTitle.Text" xml:space="preserve">
+  <data name="Wallets_PageTitle" xml:space="preserve">
     <value>Peňaženky</value>
   </data>
   <data name="Wallet_BanksTitle.Text" xml:space="preserve">
@@ -339,10 +339,13 @@
   <data name="Wallet_Other" xml:space="preserve">
     <value>Ostatné</value>
   </data>
-  <data name="Wallet_PageTitle.Text" xml:space="preserve">
-    <value>Upraviť peňaženku</value>
+  <data name="Wallet_PageTitle" xml:space="preserve">
+    <value>Peňaženka</value>
   </data>
   <data name="Wallet_WalletDefaultName" xml:space="preserve">
     <value>Nová peňaženka</value>
+  </data>
+  <data name="Bank_PageTitle" xml:space="preserve">
+    <value>Banka</value>
   </data>
 </root>

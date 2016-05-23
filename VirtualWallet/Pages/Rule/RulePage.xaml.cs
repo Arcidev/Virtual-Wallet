@@ -1,9 +1,11 @@
 ﻿using BL.Models;
 using BL.Service;
+using Cimbalino.Toolkit.Controls;
 using Shared.Enums;
 using System;
 using System.Linq;
 using VirtualWallet.ViewModels;
+using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -18,9 +20,11 @@ namespace VirtualWallet.Pages
     public sealed partial class RulePage : Page
     {
         private RulePageViewModel viewModel;
+        private ResourceLoader resources;
 
         public RulePage()
         {
+            resources = ResourceLoader.GetForCurrentView();
             this.InitializeComponent();
             viewModel = new RulePageViewModel(new RuleService());
             this.DataContext = viewModel;
@@ -28,6 +32,8 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.setPageHeader();
+
             var pagePayload = (PagePayload)e.Parameter;
             var category = (Category)pagePayload?.Dto;
 
@@ -72,6 +78,13 @@ namespace VirtualWallet.Pages
             {
                 Frame.GoBack();
             }
+        }
+
+        private void setPageHeader()
+        {
+            var rootFrame = Window.Current.Content as HamburgerFrame;
+            var header = rootFrame.Header as HamburgerTitleBar;
+            header.Title = resources.GetString("Rule_PageTitle");
         }
     }
 }

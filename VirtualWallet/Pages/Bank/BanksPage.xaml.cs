@@ -1,11 +1,13 @@
 ﻿using BL.Models;
 using BL.Service;
+using Cimbalino.Toolkit.Controls;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices.WindowsRuntime;
 using VirtualWallet.ViewModels;
+using Windows.ApplicationModel.Resources;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
@@ -27,9 +29,11 @@ namespace VirtualWallet.Pages
     {
         private BanksPageViewModel viewModel;
         private PagePayload pagePayload;
+        private ResourceLoader resources;
 
         public BanksPage()
         {
+            resources = ResourceLoader.GetForCurrentView();
             this.InitializeComponent();
             viewModel = new BanksPageViewModel(new BankService(), new WalletBankService());
             this.DataContext = viewModel;
@@ -37,6 +41,8 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.setPageHeader();
+
             pagePayload = (PagePayload)e.Parameter;
             viewModel.Wallet = (Wallet)pagePayload.Dto;
             await viewModel.LoadDataAsync();
@@ -56,6 +62,13 @@ namespace VirtualWallet.Pages
         {
             if (Frame.CanGoBack)
                 Frame.GoBack();
+        }
+
+        private void setPageHeader()
+        {
+            var rootFrame = Window.Current.Content as HamburgerFrame;
+            var header = rootFrame.Header as HamburgerTitleBar;
+            header.Title = resources.GetString("Banks_PageTitle");
         }
     }
 }

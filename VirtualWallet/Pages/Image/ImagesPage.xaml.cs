@@ -1,7 +1,10 @@
 ﻿using BL.Models;
 using BL.Service;
+using Cimbalino.Toolkit.Controls;
 using System.Linq;
 using VirtualWallet.ViewModels;
+using Windows.ApplicationModel.Resources;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -10,9 +13,11 @@ namespace VirtualWallet.Pages
     public sealed partial class ImagesPage : Page
     {
         private ImagesPageViewModel viewModel;
+        private ResourceLoader resources;
 
         public ImagesPage()
         {
+            resources = ResourceLoader.GetForCurrentView();
             this.InitializeComponent();
             viewModel = new ImagesPageViewModel(new ImageService());
             this.DataContext = viewModel;
@@ -20,6 +25,8 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.setPageHeader();
+
             viewModel.OriginalImage = (BL.Models.Image)e.Parameter;
             await viewModel.LoadDataAsync();
             base.OnNavigatedTo(e);
@@ -43,6 +50,13 @@ namespace VirtualWallet.Pages
         {
             if (Frame.CanGoBack)
                 Frame.GoBack();
+        }
+
+        private void setPageHeader()
+        {
+            var rootFrame = Window.Current.Content as HamburgerFrame;
+            var header = rootFrame.Header as HamburgerTitleBar;
+            header.Title = resources.GetString("Images_PageTitle");
         }
     }
 }

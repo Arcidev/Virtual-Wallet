@@ -1,5 +1,6 @@
 ﻿using BL.Models;
 using BL.Service;
+using Cimbalino.Toolkit.Controls;
 using Shared.Formatters;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -14,9 +15,11 @@ namespace VirtualWallet.Pages
     {
         private BankPageViewModel viewModel;
         private double screenWidth;
+        private ResourceLoader resources;
 
         public BankPage()
         {
+            resources = ResourceLoader.GetForCurrentView();
             this.InitializeComponent();
             viewModel = new BankPageViewModel(new BankAccountInfoService(), new TransactionService(), new CategoryService(), ResourceLoader.GetForCurrentView());
             viewModel.BeforeSync = () =>
@@ -35,6 +38,7 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.setPageHeader();
             await viewModel.LoadDataAsync((Bank)e.Parameter);
             base.OnNavigatedTo(e);
         }
@@ -87,6 +91,13 @@ namespace VirtualWallet.Pages
             Style datapointStyle = new Style(typeof(DataPoint));
             datapointStyle.Setters.Add(new Setter(DataPoint.DependentValueStringFormatProperty, CurrencyFormatter.GetFormatter(viewModel.BankAccountInfo.Currency)));
             TransactionsLineSeries.DataPointStyle = datapointStyle;
+        }
+
+        private void setPageHeader()
+        {
+            var rootFrame = Window.Current.Content as HamburgerFrame;
+            var header = rootFrame.Header as HamburgerTitleBar;
+            header.Title = resources.GetString("Bank_PageTitle");
         }
     }
 }

@@ -216,7 +216,7 @@
   <data name="Category_Name.Text" xml:space="preserve">
     <value>Nombre</value>
   </data>
-  <data name="Category_PageTitle.Text" xml:space="preserve">
+  <data name="Category_PageTitle" xml:space="preserve">
     <value>Editar categoría</value>
   </data>
   <data name="Category_RulesTitle.Text" xml:space="preserve">
@@ -231,7 +231,7 @@
   <data name="CommandBar_Undo.Label" xml:space="preserve">
     <value>Deshacer</value>
   </data>
-  <data name="Icons_PageTitle.Text" xml:space="preserve">
+  <data name="Images_PageTitle" xml:space="preserve">
     <value>Iconos</value>
   </data>
   <data name="CommandBar_Delete.Label" xml:space="preserve">
@@ -255,7 +255,7 @@
   <data name="Rule_Name.Text" xml:space="preserve">
     <value>Nombre</value>
   </data>
-  <data name="Rule_PageTitle.Text" xml:space="preserve">
+  <data name="Rule_PageTitle" xml:space="preserve">
     <value>Editar regla</value>
   </data>
   <data name="Rule_Pattern.Text" xml:space="preserve">
@@ -309,16 +309,16 @@
   <data name="HamburgerPane_Settings" xml:space="preserve">
     <value>Ajustes</value>
   </data>
-  <data name="Banks_PageTitle.Text" xml:space="preserve">
+  <data name="Banks_PageTitle" xml:space="preserve">
     <value>Bancos</value>
   </data>
-  <data name="Categories_PageTitle.Text" xml:space="preserve">
+  <data name="Categories_PageTitle" xml:space="preserve">
     <value>Categorías</value>
   </data>
   <data name="CommandBar_Add.Label" xml:space="preserve">
     <value>Añadir</value>
   </data>
-  <data name="Wallets_PageTitle.Text" xml:space="preserve">
+  <data name="Wallets_PageTitle" xml:space="preserve">
     <value>Billeteras</value>
   </data>
   <data name="Wallet_BanksTitle.Text" xml:space="preserve">
@@ -339,10 +339,13 @@
   <data name="Wallet_Other" xml:space="preserve">
     <value>Otro</value>
   </data>
-  <data name="Wallet_PageTitle.Text" xml:space="preserve">
-    <value>Editar Monedero</value>
+  <data name="Wallet_PageTitle" xml:space="preserve">
+    <value>Monedero</value>
   </data>
   <data name="Wallet_WalletDefaultName" xml:space="preserve">
     <value>Nueva Monedero</value>
+  </data>
+  <data name="Bank_PageTitle" xml:space="preserve">
+    <value>Banco</value>
   </data>
 </root>

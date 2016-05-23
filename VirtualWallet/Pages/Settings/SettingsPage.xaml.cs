@@ -1,4 +1,5 @@
 ﻿using BL.Service;
+using Cimbalino.Toolkit.Controls;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,6 +10,7 @@ using Windows.ApplicationModel.Resources.Core;
 using Windows.Globalization;
 using Windows.System.UserProfile;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -31,6 +33,7 @@ namespace VirtualWallet.Pages
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             hamburgerReloadTextsCommand = e.Parameter as ICommand;
+            setPageHeader();
             base.OnNavigatedTo(e);
         }
 
@@ -73,6 +76,14 @@ namespace VirtualWallet.Pages
             ResourceContext.GetForCurrentView().QualifierValues["language"] = string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) ? GlobalizationPreferences.Languages.FirstOrDefault() ?? "" : ApplicationLanguages.PrimaryLanguageOverride;
             viewModel.ReloadTexts();
             hamburgerReloadTextsCommand?.Execute(null);
+            setPageHeader();
+        }
+
+        private void setPageHeader()
+        {
+            var rootFrame = Window.Current.Content as HamburgerFrame;
+            var header = rootFrame.Header as HamburgerTitleBar;
+            header.Title = resources.GetString("Settings_Header");
         }
     }
 }

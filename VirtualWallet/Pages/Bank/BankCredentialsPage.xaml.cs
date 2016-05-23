@@ -1,9 +1,11 @@
 ﻿using BL.Models;
+using Cimbalino.Toolkit.Controls;
 using System;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.System;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -24,6 +26,7 @@ namespace VirtualWallet.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.setPageHeader();
             viewModel.Bank = (Bank)e.Parameter;
             base.OnNavigatedTo(e);
         }
@@ -60,6 +63,13 @@ namespace VirtualWallet.Pages
                 control.IsEnabled = false;
                 control.IsEnabled = true;
             }
+        }
+
+        private void setPageHeader()
+        {
+            var rootFrame = Window.Current.Content as HamburgerFrame;
+            var header = rootFrame.Header as HamburgerTitleBar;
+            header.Title = resources.GetString("BankCredentials_PageTitle");
         }
     }
 }

@@ -1,10 +1,12 @@
 ﻿using BL.Models;
 using BL.Service;
+using Cimbalino.Toolkit.Controls;
 using System;
 using System.Threading.Tasks;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -26,6 +28,8 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            setPageHeader();
+
             pagePayload = (PagePayload)e.Parameter;
             viewModel.Category = (Category)pagePayload.Dto;
             await viewModel.LoadDataAsync();
@@ -114,6 +118,13 @@ namespace VirtualWallet.Pages
             var button = sender as Button;
             var rule = button.DataContext as Rule;
             await viewModel.DetachRuleAsync(rule);
+        }
+
+        private void setPageHeader()
+        {
+            var rootFrame = Window.Current.Content as HamburgerFrame;
+            var header = rootFrame.Header as HamburgerTitleBar;
+            header.Title = resources.GetString("Category_PageTitle");
         }
     }
 }

@@ -28,6 +28,8 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            this.setPageHeader();
+
             pagePayload = (PagePayload)e.Parameter;
             viewModel.Wallet = (Wallet)pagePayload.Dto;
             await viewModel.LoadDataAsync();
@@ -159,6 +161,13 @@ namespace VirtualWallet.Pages
             var rootFrame = Window.Current.Content as HamburgerFrame;
             var pane = rootFrame.Pane as HamburgerPaneControl;
             await pane.ReloadData();
+        }
+
+        private void setPageHeader()
+        {
+            var rootFrame = Window.Current.Content as HamburgerFrame;
+            var header = rootFrame.Header as HamburgerTitleBar;
+            header.Title = resources.GetString("Wallet_PageTitle");
         }
     }
 }
