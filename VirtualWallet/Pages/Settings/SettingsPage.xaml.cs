@@ -1,6 +1,5 @@
 ﻿using BL.Service;
 using BL.Service.Menu;
-using Cimbalino.Toolkit.Controls;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
@@ -11,7 +10,6 @@ using Windows.ApplicationModel.Resources.Core;
 using Windows.Globalization;
 using Windows.System.UserProfile;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 

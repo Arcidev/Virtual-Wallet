@@ -1,12 +1,10 @@
 ﻿using BL.Models;
 using BL.Service.Menu;
-using Cimbalino.Toolkit.Controls;
 using System;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.System;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
