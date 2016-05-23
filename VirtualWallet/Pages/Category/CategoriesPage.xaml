@@ -21,8 +21,7 @@
     <Grid>
         <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
             <RelativePanel d:DataContext="{Binding Source={StaticResource WalletsSampleDataSource}}" ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <TextBlock x:Name="PageTitle" x:Uid="Categories_PageTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Categories" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-                <Grid x:Name="CategoriesGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.Below="PageTitle" RelativePanel.AlignHorizontalCenterWithPanel="True" Margin="10">
+                <Grid x:Name="CategoriesGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" Margin="10">
                     <Grid.RowDefinitions>
                         <RowDefinition />
                     </Grid.RowDefinitions>

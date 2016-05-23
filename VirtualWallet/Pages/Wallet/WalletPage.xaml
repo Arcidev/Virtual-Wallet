@@ -29,8 +29,7 @@
     <Grid>
         <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
             <RelativePanel x:Name="MainRelativePanel" d:DataContext="{Binding Source={StaticResource WalletsSampleDataSource}, Path=Category}" ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <TextBlock x:Name="PageTitle" x:Uid="Wallet_PageTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Edit Wallet" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-                <Grid x:Name="WalletFormGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.Below="PageTitle" HorizontalAlignment="Left" Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">
+                <Grid x:Name="WalletFormGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Left" Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
                         <ColumnDefinition Width="auto" />

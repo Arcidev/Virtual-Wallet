@@ -10,8 +10,7 @@
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
         <RelativePanel Margin="10">
-            <TextBlock x:Name="SettingsTextBlock" FontSize="40" Text="{Binding Text_Header}" />
-            <RelativePanel x:Name="ApplicationSettings" RelativePanel.Below="SettingsTextBlock">
+            <RelativePanel x:Name="ApplicationSettings">
                 <TextBlock x:Name="ApplicationTextBlock" Text="{Binding Text_Application}" />
                 <TextBlock x:Name="LanguageTextBlock" RelativePanel.Below="ApplicationTextBlock" Text="{Binding Text_Language}" />
                 <ComboBox RelativePanel.Below="LanguageTextBlock" ItemsSource="{Binding AvailableLanguages}" SelectionChanged="LanguageComboBox_SelectionChanged" DisplayMemberPath="DisplayName" SelectedValuePath="Code" SelectedValue="{Binding SelectedLanguageCode, Mode=TwoWay}" />

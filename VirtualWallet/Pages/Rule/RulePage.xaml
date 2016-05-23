@@ -10,8 +10,7 @@
     <Grid>
         <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
             <RelativePanel ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <TextBlock x:Name="PageTitle" x:Uid="Rule_PageTitle" Style="{ThemeResource HeaderTextBlockStyle}" Text="Rule" RelativePanel.AlignHorizontalCenterWithPanel="True"/>
-                <TextBlock Grid.Row="0" x:Name="RuleProperties" x:Uid="Rule_Properties" Margin="5" RelativePanel.Below="PageTitle">Rule properties</TextBlock>
+                <TextBlock Grid.Row="0" x:Name="RuleProperties" x:Uid="Rule_Properties" Margin="5">Rule properties</TextBlock>
                 <Grid x:Name="RuleGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.Below="RuleProperties" Margin="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto" />
