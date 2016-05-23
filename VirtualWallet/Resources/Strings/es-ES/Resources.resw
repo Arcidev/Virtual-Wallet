@@ -348,4 +348,7 @@
   <data name="Bank_PageTitle" xml:space="preserve">
     <value>Banco</value>
   </data>
+  <data name="BankCredentials_PageTitle" xml:space="preserve">
+    <value>Bancarias Credenciales</value>
+  </data>
 </root>

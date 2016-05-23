@@ -152,6 +152,7 @@
     <Compile Include="Service\Image\IImageService.cs" />
     <Compile Include="Service\Base\IModifiableCrudService.cs" />
     <Compile Include="Service\Base\IModifiableGetService.cs" />
+    <Compile Include="Service\Menu\MenuUnil.cs" />
     <Compile Include="Service\Transaction\ITransactionService.cs" />
     <Compile Include="Service\Transaction\TransactionService.cs" />
     <Compile Include="Service\Wallet\IWalletBankService.cs" />

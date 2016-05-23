@@ -1,5 +1,6 @@
 ﻿using BL.Models;
 using BL.Service;
+using BL.Service.Menu;
 using Cimbalino.Toolkit.Controls;
 using System;
 using System.Threading.Tasks;
@@ -28,7 +29,7 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.setPageHeader();
+            MenuUnil.setHeader("Wallet_PageTitle");
 
             pagePayload = (PagePayload)e.Parameter;
             viewModel.Wallet = (Wallet)pagePayload.Dto;
@@ -161,13 +162,6 @@ namespace VirtualWallet.Pages
             var rootFrame = Window.Current.Content as HamburgerFrame;
             var pane = rootFrame.Pane as HamburgerPaneControl;
             await pane.ReloadData();
-        }
-
-        private void setPageHeader()
-        {
-            var rootFrame = Window.Current.Content as HamburgerFrame;
-            var header = rootFrame.Header as HamburgerTitleBar;
-            header.Title = resources.GetString("Wallet_PageTitle");
         }
     }
 }

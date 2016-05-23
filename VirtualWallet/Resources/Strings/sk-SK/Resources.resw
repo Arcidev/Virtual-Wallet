@@ -348,4 +348,7 @@
   <data name="Bank_PageTitle" xml:space="preserve">
     <value>Banka</value>
   </data>
+  <data name="BankCredentials_PageTitle" xml:space="preserve">
+    <value>Bankové spojenie</value>
+  </data>
 </root>

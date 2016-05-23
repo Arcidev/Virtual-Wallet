@@ -1,4 +1,5 @@
 ﻿using BL.Models;
+using BL.Service.Menu;
 using Cimbalino.Toolkit.Controls;
 using System;
 using VirtualWallet.ViewModels;
@@ -26,7 +27,7 @@ namespace VirtualWallet.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            this.setPageHeader();
+            MenuUnil.setHeader("BankCredentials_PageTitle");
             viewModel.Bank = (Bank)e.Parameter;
             base.OnNavigatedTo(e);
         }
@@ -63,13 +64,6 @@ namespace VirtualWallet.Pages
                 control.IsEnabled = false;
                 control.IsEnabled = true;
             }
-        }
-
-        private void setPageHeader()
-        {
-            var rootFrame = Window.Current.Content as HamburgerFrame;
-            var header = rootFrame.Header as HamburgerTitleBar;
-            header.Title = resources.GetString("BankCredentials_PageTitle");
         }
     }
 }
