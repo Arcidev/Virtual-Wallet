@@ -349,6 +349,6 @@
     <value>Banka</value>
   </data>
   <data name="BankCredentials_PageTitle" xml:space="preserve">
-    <value>Bankovní spojení</value>
+    <value>Bankovní identifikační údaje</value>
   </data>
 </root>

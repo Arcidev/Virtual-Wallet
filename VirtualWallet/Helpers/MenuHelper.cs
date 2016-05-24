@@ -29,7 +29,7 @@ namespace VirtualWallet.Helpers
 
         public static void ReloadTexts(string header)
         {
-            Pane.ReloadTexts();
+            Pane?.ReloadTexts();
             SetHeader(header);
         }
     }
