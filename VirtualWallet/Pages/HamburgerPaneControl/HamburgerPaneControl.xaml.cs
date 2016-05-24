@@ -31,5 +31,10 @@ namespace VirtualWallet.Pages
         {
             await viewModel.LoadDataAsync();
         }
+
+        public void ReloadTexts()
+        {
+            viewModel.ReloadTexts();
+        }
     }
 }

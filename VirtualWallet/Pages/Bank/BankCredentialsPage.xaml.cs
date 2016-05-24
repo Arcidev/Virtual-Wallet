@@ -1,6 +1,6 @@
 ﻿using BL.Models;
-using BL.Service.Menu;
 using System;
+using VirtualWallet.Helpers;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.System;
@@ -25,7 +25,7 @@ namespace VirtualWallet.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            MenuUnil.setHeader("BankCredentials_PageTitle");
+            MenuHelper.SetHeader(resources.GetString("BankCredentials_PageTitle"));
             viewModel.Bank = (Bank)e.Parameter;
             base.OnNavigatedTo(e);
         }

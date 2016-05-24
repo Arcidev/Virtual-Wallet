@@ -44,8 +44,6 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public ICommand ReloadTextsCommand { get; private set; }
-
         public string Text_Banks { get { return resources.GetString("HamburgerPane_Banks"); } }
 
         public string Text_Wallets { get { return resources.GetString("HamburgerPane_Wallets"); } }
@@ -60,7 +58,6 @@ namespace VirtualWallet.ViewModels
             this.walletService = walletService;
             this.categoryService = categoryService;
             this.resources = resources;
-            ReloadTextsCommand = new CommandHandler(ReloadTextsExecute);
         }
 
         public async Task LoadDataAsync()
@@ -69,7 +66,7 @@ namespace VirtualWallet.ViewModels
             Wallets = await walletService.GetAllAsync(new WalletModifier() { IncludeImage = true });
         }
 
-        private void ReloadTextsExecute()
+        public void ReloadTexts()
         {
             NotifyPropertyChanged(nameof(Text_Banks));
             NotifyPropertyChanged(nameof(Text_Wallets));

@@ -48,7 +48,7 @@
             </localControls:HamburgerArgumentMenuButton>
         </StackPanel>
 
-        <localControls:HamburgerArgumentMenuButton Grid.Row="1" Content="{Binding Text_Settings}" NavigationSourcePageType="local:SettingsPage" NavigationParameter="{Binding ReloadTextsCommand}">
+        <localControls:HamburgerArgumentMenuButton Grid.Row="1" Content="{Binding Text_Settings}" NavigationSourcePageType="local:SettingsPage">
             <localControls:HamburgerArgumentMenuButton.Icon>
                 <SymbolIcon Symbol="Setting"/>
             </localControls:HamburgerArgumentMenuButton.Icon>

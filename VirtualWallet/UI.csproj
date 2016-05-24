@@ -107,6 +107,7 @@
     <Compile Include="Converters\AlternateConverter.cs" />
     <Compile Include="Converters\InvertedBoolToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
+    <Compile Include="Helpers\MenuHelper.cs" />
     <Compile Include="Pages\Bank\BankCredentialsPage.xaml.cs">
       <DependentUpon>BankCredentialsPage.xaml</DependentUpon>
     </Compile>

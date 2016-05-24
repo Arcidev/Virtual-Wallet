@@ -1,9 +1,9 @@
 ﻿using BL.Models;
 using BL.Service;
-using BL.Service.Menu;
 using Shared.Enums;
 using System;
 using System.Linq;
+using VirtualWallet.Helpers;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
@@ -32,7 +32,7 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            MenuUnil.setHeader("Rule_PageTitle");
+            MenuHelper.SetHeader(resources.GetString("Rule_PageTitle"));
 
             var pagePayload = (PagePayload)e.Parameter;
             var category = (Category)pagePayload?.Dto;

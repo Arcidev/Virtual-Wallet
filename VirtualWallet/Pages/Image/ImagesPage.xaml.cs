@@ -1,7 +1,7 @@
 ﻿using BL.Models;
 using BL.Service;
-using BL.Service.Menu;
 using System.Linq;
+using VirtualWallet.Helpers;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
@@ -24,7 +24,7 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            MenuUnil.setHeader("Images_PageTitle");
+            MenuHelper.SetHeader(resources.GetString("Images_PageTitle"));
 
             viewModel.OriginalImage = (BL.Models.Image)e.Parameter;
             await viewModel.LoadDataAsync();

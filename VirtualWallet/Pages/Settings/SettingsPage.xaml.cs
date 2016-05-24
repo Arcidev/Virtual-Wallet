@@ -1,9 +1,8 @@
 ﻿using BL.Service;
-using BL.Service.Menu;
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using System.Windows.Input;
+using VirtualWallet.Helpers;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.ApplicationModel.Resources.Core;
@@ -19,7 +18,6 @@ namespace VirtualWallet.Pages
     {
         private SettingsViewModel viewModel;
         private ResourceLoader resources;
-        private ICommand hamburgerReloadTextsCommand;
 
         public SettingsPage()
         {
@@ -31,8 +29,7 @@ namespace VirtualWallet.Pages
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            hamburgerReloadTextsCommand = e.Parameter as ICommand;
-            MenuUnil.setHeader("Settings_Header");
+            MenuHelper.SetHeader(resources.GetString("Settings_Header"));
             base.OnNavigatedTo(e);
         }
 
@@ -74,8 +71,7 @@ namespace VirtualWallet.Pages
             // Hard way to force that language to be changed
             ResourceContext.GetForCurrentView().QualifierValues["language"] = string.IsNullOrEmpty(ApplicationLanguages.PrimaryLanguageOverride) ? GlobalizationPreferences.Languages.FirstOrDefault() ?? "" : ApplicationLanguages.PrimaryLanguageOverride;
             viewModel.ReloadTexts();
-            hamburgerReloadTextsCommand?.Execute(null);
-            MenuUnil.setHeader("Settings_Header");
+            MenuHelper.ReloadTexts(resources.GetString("Settings_Header"));
         }
     }
 }

@@ -1,13 +1,11 @@
 ﻿using BL.Models;
 using BL.Service;
-using BL.Service.Menu;
-using Cimbalino.Toolkit.Controls;
 using System;
 using System.Threading.Tasks;
+using VirtualWallet.Helpers;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
 
@@ -29,7 +27,7 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            MenuUnil.setHeader("Wallet_PageTitle");
+            MenuHelper.SetHeader(resources.GetString("Wallet_PageTitle"));
 
             pagePayload = (PagePayload)e.Parameter;
             viewModel.Wallet = (Wallet)pagePayload.Dto;
@@ -159,9 +157,7 @@ namespace VirtualWallet.Pages
 
         private async Task ReloadMenu()
         {
-            var rootFrame = Window.Current.Content as HamburgerFrame;
-            var pane = rootFrame.Pane as HamburgerPaneControl;
-            await pane.ReloadData();
+            await MenuHelper.ReloadData();
         }
     }
 }

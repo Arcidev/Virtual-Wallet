@@ -1,6 +1,6 @@
 ﻿using BL.Models;
 using BL.Service;
-using BL.Service.Menu;
+using VirtualWallet.Helpers;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml.Controls;
@@ -28,7 +28,7 @@ namespace VirtualWallet.Pages
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
-            MenuUnil.setHeader("Wallets_PageTitle");
+            MenuHelper.SetHeader(resources.GetString("Wallets_PageTitle"));
             await viewModel.LoadDataAsync();
             base.OnNavigatedTo(e);
         }
