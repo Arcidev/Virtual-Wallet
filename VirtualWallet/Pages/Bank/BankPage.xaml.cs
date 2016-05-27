@@ -4,6 +4,7 @@ using Shared.Formatters;
 using VirtualWallet.Helpers;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -39,6 +40,21 @@ namespace VirtualWallet.Pages
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             MenuHelper.SetHeader(resources.GetString("Bank_PageTitle"));
+
+            Bank bank = (Bank) e.Parameter;
+
+            if (!bank.HasCredentials)
+            {
+                var dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
+                dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
+                  {
+                      if (Frame.Navigate(typeof(BankCredentialsPage), bank))
+                      {
+                          Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
+                      }
+                  });
+            }
+            
             await viewModel.LoadDataAsync((Bank)e.Parameter);
             base.OnNavigatedTo(e);
         }
