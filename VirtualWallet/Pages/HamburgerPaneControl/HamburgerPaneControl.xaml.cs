@@ -1,4 +1,5 @@
-﻿using BL.Service;
+﻿using BL.Models;
+using BL.Service;
 using System.Threading.Tasks;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;

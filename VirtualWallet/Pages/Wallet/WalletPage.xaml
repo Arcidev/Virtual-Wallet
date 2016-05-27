@@ -3,112 +3,180 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:VirtualWallet.Pages"
+    xmlns:converters="using:VirtualWallet.Converters"
+    xmlns:charting="using:WinRTXamlToolkit.Controls.DataVisualization.Charting"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d">
+    xmlns:controls="using:ZeroProximity.Controls"
+    xmlns:i="using:WinRTXamlToolkit.Interactivity"
+    xmlns:behaviors="using:VirtualWallet.Behaviors"
+    mc:Ignorable="d"
+    SizeChanged="Page_SizeChanged">
 
-    <Page.Resources>
-        <DataTemplate x:Key="BanksItemTemplate">
-            <RelativePanel HorizontalAlignment="Stretch">
-                <TextBlock x:Name="BankName" Margin="5" Text="{Binding Name}" Width="235"/>
-                <Button Click="DetacheBankButton_Click" RelativePanel.RightOf="BankName" RelativePanel.AlignVerticalCenterWith="BankName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <SymbolIcon Symbol="Remove"/>
-                </Button>
-            </RelativePanel>
-        </DataTemplate>
-        <DataTemplate x:Key="CategoriesItemTemplate">
-            <RelativePanel HorizontalAlignment="Stretch">
-                <TextBlock x:Name="CategoryName" Margin="5" Text="{Binding Name}" Width="235"/>
-                <Button Click="DetacheCategoryButton_Click" RelativePanel.RightOf="CategoryName" RelativePanel.AlignVerticalCenterWith="CategoryName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <SymbolIcon Symbol="Remove"/>
-                </Button>
-            </RelativePanel>
-        </DataTemplate>
-    </Page.Resources>
 
     <Grid>
-        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
-            <RelativePanel x:Name="MainRelativePanel" d:DataContext="{Binding Source={StaticResource WalletsSampleDataSource}, Path=Category}" ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <Grid x:Name="WalletFormGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Left" Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="auto" />
-                        <ColumnDefinition Width="9*"/>
-                        <ColumnDefinition Width="32*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <TextBlock Grid.Row="0" x:Uid="Wallet_Name" Margin="10" >Name:</TextBlock>
-                    <TextBox Grid.Row="0" Grid.Column="1" Margin="10" x:Name="WalletName" Text="{Binding Name,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
-                    <TextBlock Grid.Row="1" Margin="10" x:Uid="Wallet_Icon">Icon:</TextBlock>
-                    <Button Grid.Row="1" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" Click="IconButton_Click">
-                        <Border x:Name="Icon" Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="10">
-                            <Image MaxHeight="110" MaxWidth="110" Source="{Binding Image.Path}"/>
-                        </Border>
-                    </Button>
-                </Grid>
-                <TextBlock x:Name="CategoryTitle" x:Uid="Wallet_CategoriesTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Categories" RelativePanel.Below="WalletFormGrid" Width="250"/>
-                <Button x:Name="AddCategoryButton" x:Uid="Wallet_AddCategory" Click="AddCategoryButton_Click" RelativePanel.RightOf="CategoryTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="CategoryTitle">
-                    <SymbolIcon Symbol="Add"/>
-                </Button>
-                <ListView x:Name="ListViewCategories" 
-                          ItemTemplate="{StaticResource CategoriesItemTemplate}" 
-                          ItemsSource="{Binding Categories}" 
-                          IsSwipeEnabled="False" 
-                          SelectionMode="None"
-                          IsItemClickEnabled="True"
-                          ItemClick="ListViewCategories_ItemClick"
-                          RelativePanel.Below="CategoryTitle"
-                          HorizontalAlignment="Left" 
-                          Width="310">
-                </ListView>
-                <TextBlock x:Name="BanksTitle" x:Uid="Wallet_BanksTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Banks" RelativePanel.Below="ListViewCategories" Width="250"/>
-                <Button x:Uid="Wallet_AddBank" Click="AddBankButton_Click" RelativePanel.RightOf="BanksTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="BanksTitle">
-                    <SymbolIcon Symbol="Add"/>
-                </Button>
-                <ListView x:Name="ListViewBanks" 
-                          ItemTemplate="{StaticResource BanksItemTemplate}" 
-                          ItemsSource="{Binding Banks}" 
-                          IsSwipeEnabled="False" 
-                          SelectionMode="None"
-                          IsItemClickEnabled="False"
-                          ItemClick="ListViewBanks_ItemClick"
-                          RelativePanel.Below="BanksTitle"
-                          RelativePanel.AlignLeftWith="BanksTitle"
-                          HorizontalAlignment="Left" 
-                          Width="310">
-                </ListView>
-            </RelativePanel>
-        </ScrollViewer>
+        <Pivot x:Name="MainPivot" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+            <PivotItem x:Uid="Wallet_Pivot_Overview" Header="Overview">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <RelativePanel>
+                        <RelativePanel x:Name="WalletInfo">
+                            <Image x:Name="WalletImage" RelativePanel.AlignVerticalCenterWithPanel="True" MaxHeight="40" MaxWidth="60" Source="{Binding Wallet.ImageUri}" />
+                            <TextBlock RelativePanel.RightOf="WalletImage" FontSize="40" Text="{Binding Wallet.Name}" />
+                        </RelativePanel>
+                        <TextBlock x:Uid="Wallet_Balance" x:Name="Balance" RelativePanel.Below="WalletInfo" Margin="5" Text="Balance:" />
+                        <TextBlock RelativePanel.Below="WalletInfo" RelativePanel.RightOf="Balance" Margin="5" Text="{Binding ClosingBalanceString}" />
+                        <TextBlock x:Uid="Wallet_OpeningBalance" x:Name="OpeningBalance" RelativePanel.Below="Balance" Margin="5" Text="Opening balance:" />
+                        <TextBlock RelativePanel.Below="Balance" RelativePanel.RightOf="OpeningBalance" Margin="5" Text="{Binding OpeningBalanceString}" />
+                        <TextBlock x:Uid="Wallet_DateStart" x:Name="DateStart" RelativePanel.Below="OpeningBalance" Margin="5" Text="Opening date:" />
+                        <TextBlock RelativePanel.Below="OpeningBalance" RelativePanel.RightOf="DateStart" Margin="5" Text="{Binding OpeningDateString}" />
+                        <TextBlock x:Uid="Wallet_DateEnd" x:Name="DateEnd" RelativePanel.Below="DateStart" Margin="5" Text="Last sync date:" />
+                        <TextBlock RelativePanel.Below="DateStart" RelativePanel.RightOf="DateEnd" Margin="5" Text="{Binding LastSyncString}" />
+                    </RelativePanel>
+                </ScrollViewer>
+            </PivotItem>
+            <PivotItem x:Uid="Wallet_Pivot_Category" Header="Category">
+                <ScrollViewer VerticalScrollBarVisibility="Auto">
+                    <RelativePanel>
+                        <charting:Chart x:Uid="Wallet_ChartBalances" x:Name="TransactionsLineChart" Title="Transactions" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" Height="400" Visibility="{Binding HasBalances, Converter={StaticResource BoolToVisibilityConverter}}">
+                            <charting:LineSeries x:Uid="Wallet_LineSeriesBalance" x:Name="TransactionsLineSeries" Title="Balance" ItemsSource="{Binding Balances}" IndependentValueBinding="{Binding Item1}" DependentValueBinding="{Binding Item2}" DataContextChanged="TransactionsLineSeries_DataContextChanged" />
+                            <charting:Chart.Axes>
+                                <charting:LinearAxis Orientation="Y" ShowGridLines="True" Title="{Binding LinearAxisInfo}" />
+                            </charting:Chart.Axes>
+                        </charting:Chart>
+                        <RelativePanel RelativePanel.AlignHorizontalCenterWithPanel="True" RelativePanel.Below="TransactionsLineChart">
+                            <charting:Chart x:Uid="Wallet_ChartIncomes" x:Name="IncomesPieChart" Title="Incomes" Width="330" Height="330" Visibility="{Binding HasIncomes, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <charting:PieSeries ItemsSource="{Binding Incomes}" IndependentValuePath="Item1" DependentValuePath="Item2" />
+                            </charting:Chart>
+                            <charting:Chart x:Uid="Wallet_ChartExpenses" x:Name="ExpensesPieChart" Title="Expenses" RelativePanel.Below="IncomesPieChart" Width="330" Height="330" Visibility="{Binding HasExpenses, Converter={StaticResource BoolToVisibilityConverter}}">
+                                <charting:PieSeries ItemsSource="{Binding Expenses}" IndependentValuePath="Item1" DependentValuePath="Item2" />
+                            </charting:Chart>
+                        </RelativePanel>
+                    </RelativePanel>
+                </ScrollViewer>
+                <i:Interaction.Behaviors>
+                    <behaviors:HideablePivotItemBehavior Visible="{Binding HasTransactions}" />
+                </i:Interaction.Behaviors>
+            </PivotItem>
+            <PivotItem x:Uid="Wallet_Pivot_Transactions" Header="Transactions">
+                <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
+                    <controls:Accordion x:Name="TransactionsAccordion" ItemsSource="{Binding TransactionCategories}" HorizontalAlignment="Stretch" Margin="5" SelectionMode="ZeroOrOne">
+                        <controls:Accordion.ItemTemplate>
+                            <DataTemplate>
+                                <Grid>
+                                    <TextBlock Text="{Binding CategoryName}"/>
+                                    <TextBlock Text="{Binding TotalAmount}" HorizontalAlignment="Right" Margin="0 0 10 0"/>
+                                </Grid>
+                            </DataTemplate>
+                        </controls:Accordion.ItemTemplate>
+                        <controls:Accordion.ContentTemplate>
+                            <DataTemplate>
+                                <ItemsControl ItemsSource="{Binding Transactions}">
+                                    <ItemsControl.Resources>
+                                        <converters:AlternateConverter AlternateBrushes="{Binding ElementName=MainPivot, Path=DataContext.Brushes}" x:Key="AlternateConverter"/>
+                                    </ItemsControl.Resources>
+                                    <ItemsControl.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid Background="{Binding Converter={StaticResource AlternateConverter}}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+
+                                                <TextBlock Grid.Column="0" Margin="5" TextWrapping="Wrap" Text="{Binding DateString}" />
+                                                <TextBlock Grid.Column="1" Margin="5" TextWrapping="Wrap" Text="{Binding Description}" />
+                                                <TextBlock Grid.Column="2" Margin="5 5 15 5" HorizontalAlignment="Right" TextWrapping="Wrap" Text="{Binding AmountString}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </ItemsControl.ItemTemplate>
+                                    <ItemsControl.ItemContainerStyle>
+                                        <Style TargetType="ContentPresenter">
+                                            <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                                            <Setter Property="BorderBrush" Value="Gray" />
+                                            <Setter Property="BorderThickness" Value="0,0,0,1" />
+                                        </Style>
+                                    </ItemsControl.ItemContainerStyle>
+                                </ItemsControl>
+                            </DataTemplate>
+                        </controls:Accordion.ContentTemplate>
+                        <controls:Accordion.ItemContainerStyle>
+                            <Style TargetType="controls:AccordionItem">
+                                <Setter Property="RequestedTheme" Value="Dark"/>
+                                <Setter Property="Background" Value="Black" />
+                            </Style>
+                        </controls:Accordion.ItemContainerStyle>
+                    </controls:Accordion>
+                </ScrollViewer>
+                <i:Interaction.Behaviors>
+                    <behaviors:HideablePivotItemBehavior Visible="{Binding HasTransactions}" />
+                </i:Interaction.Behaviors>
+            </PivotItem>
+        </Pivot>
         <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact" VerticalAlignment="Bottom">
             <CommandBar.PrimaryCommands>
-                <AppBarButton x:Uid="CommandBar_Save" Icon="Save" Click="SaveAppBarButton_Click" IsEnabled="{Binding Modified}"/>
-                <AppBarButton x:Uid="CommandBar_Undo" Icon="Undo" Click="CancelAppBarButton_Click" IsEnabled="{Binding Modified}"/>
-                <AppBarButton x:Uid="CommandBar_Delete" Icon="Delete" Click="DeleteAppBarButton_Click" IsEnabled="{Binding Persisted}"/>
+                <AppBarButton x:Uid="CommandBar_Sync" Command="{Binding SyncCommand}">
+                    <AppBarButton.Icon>
+                        <SymbolIcon x:Name="SyncIcon"  Symbol="Sync" RenderTransformOrigin="0.5,0.5">
+                            <SymbolIcon.RenderTransform>
+                                <CompositeTransform/>
+                            </SymbolIcon.RenderTransform>
+                        </SymbolIcon>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton x:Uid="CommandBar_Edit" Icon="Edit" Click="EditAppBarButton_Click" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
         <VisualStateManager.VisualStateGroups>
             <VisualStateGroup>
-                <VisualState x:Name="WideState">
+                <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="630" />
+                        <AdaptiveTrigger MinWindowWidth="1080" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
-                        <Setter Target="BanksTitle.(RelativePanel.Below)" Value="" />
-                        <Setter Target="BanksTitle.(RelativePanel.RightOf)" Value="AddCategoryButton" />
-                        <Setter Target="BanksTitle.(RelativePanel.AlignTopWith)" Value="CategoryTitle" />
+                        <Setter Target="ExpensesPieChart.(RelativePanel.Below)" Value="" />
+                        <Setter Target="ExpensesPieChart.(RelativePanel.RightOf)" Value="IncomesPieChart" />
+                        <Setter Target="IncomesPieChart.Width" Value="450" />
+                        <Setter Target="IncomesPieChart.Height" Value="450" />
+                        <Setter Target="ExpensesPieChart.Width" Value="450" />
+                        <Setter Target="ExpensesPieChart.Height" Value="450" />
                     </VisualState.Setters>
                 </VisualState>
-                <VisualState x:Name="NarrowState">
+                <VisualState>
                     <VisualState.StateTriggers>
-                        <AdaptiveTrigger MinWindowWidth="0" />
+                        <AdaptiveTrigger MinWindowWidth="720" />
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
+                        <Setter Target="ExpensesPieChart.(RelativePanel.Below)" Value="" />
+                        <Setter Target="ExpensesPieChart.(RelativePanel.RightOf)" Value="IncomesPieChart" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="IncomesPieChart.Width" Value="450" />
+                        <Setter Target="IncomesPieChart.Height" Value="450" />
+                        <Setter Target="ExpensesPieChart.Width" Value="450" />
+                        <Setter Target="ExpensesPieChart.Height" Value="450" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState>
+                    <VisualState.Setters>
+                        <Setter Target="ExpensesPieChart.(RelativePanel.Below)" Value="IncomesPieChart" />
+                        <Setter Target="ExpensesPieChart.(RelativePanel.RightOf)" Value="" />
+                        <Setter Target="IncomesPieChart.Width" Value="330" />
+                        <Setter Target="IncomesPieChart.Height" Value="330" />
+                        <Setter Target="ExpensesPieChart.Width" Value="330" />
+                        <Setter Target="ExpensesPieChart.Height" Value="330" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
         </VisualStateManager.VisualStateGroups>
     </Grid>
+    <Page.Resources>
+        <Storyboard x:Name="IconRotation" AutoReverse="False" RepeatBehavior="Forever">
+            <DoubleAnimation Duration="0:0:1" To="360" Storyboard.TargetProperty="UIElement.RenderTransform.CompositeTransform.Rotation" Storyboard.TargetName="SyncIcon" />
+        </Storyboard>
+    </Page.Resources>
 </Page>

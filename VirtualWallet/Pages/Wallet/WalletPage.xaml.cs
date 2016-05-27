@@ -1,163 +1,100 @@
 ﻿using BL.Models;
 using BL.Service;
+using Shared.Formatters;
 using System;
 using System.Threading.Tasks;
 using VirtualWallet.Helpers;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
 using Windows.UI.Popups;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using WinRTXamlToolkit.Controls.DataVisualization.Charting;
 
 namespace VirtualWallet.Pages
 {
     public sealed partial class WalletPage : Page
     {
         private WalletPageViewModel viewModel;
-        private PagePayload pagePayload;
+        private double screenWidth;
         private ResourceLoader resources;
 
         public WalletPage()
         {
-            this.InitializeComponent();
             resources = ResourceLoader.GetForCurrentView();
-            viewModel = new WalletPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService(), new WalletBankService());
+            this.InitializeComponent();
+            viewModel = new WalletPageViewModel(new BankAccountInfoService(), new TransactionService(), new CategoryService(), new WalletCategoryService(), new WalletBankService(), ResourceLoader.GetForCurrentView());
+            viewModel.BeforeSync = () =>
+            {
+                IconRotation.Begin();
+                TransactionsAccordion.UnselectAll();
+            };
+            viewModel.AfterSync = () =>
+            {
+                IconRotation.Stop();
+                RecalculateLineGraphInterval();
+                SetStyles();
+            };
             this.DataContext = viewModel;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             MenuHelper.SetHeader(resources.GetString("Wallet_PageTitle"));
-
-            pagePayload = (PagePayload)e.Parameter;
-            viewModel.Wallet = (Wallet)pagePayload.Dto;
-            await viewModel.LoadDataAsync();
-
-            if (pagePayload.NewImage != null)
-            {
-                viewModel.Image = pagePayload.NewImage;
-            }
-
+            await viewModel.LoadDataAsync((Wallet)e.Parameter);
             base.OnNavigatedTo(e);
         }
 
-        protected override async void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
-            if (viewModel.Modified && viewModel.Persisted)
-            {
-                await SaveWallet();
-            }
+            viewModel.Dispose();
+            base.OnNavigatingFrom(e);
         }
 
-        private async Task ShowDialog(string message, UICommandInvokedHandler yesHandler)
+        private void EditAppBarButton_Click(object sender, RoutedEventArgs e)
         {
-            var dialog = new MessageDialog(message);
-            dialog.Commands.Add(new UICommand(resources.GetString("Dialog_Yes"), yesHandler));
-            dialog.Commands.Add(new UICommand(resources.GetString("Dialog_No")));
-
-            await dialog.ShowAsync();
-        }
-
-        private async void ListViewCategories_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            if (viewModel.Modified)
-            {
-                await SaveWallet();
-            }
-
-            var category = (Category)e.ClickedItem;
-            var pagePayload = new PagePayload() { Dto = category };
-            Frame.Navigate(typeof(CategoryPage), pagePayload);
-        }
-
-        private async void ListViewBanks_ItemClick(object sender, ItemClickEventArgs e)
-        {
-            if (viewModel.Modified)
-            {
-                await SaveWallet();
-            }
-
-            var bank = (Bank)e.ClickedItem;
-            var pagePayload = new PagePayload() { Dto = bank };
-            Frame.Navigate(typeof(BankPage), pagePayload);
-        }
-
-        private async void SaveAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            await SaveWallet();
-        }
-
-        private async void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            await viewModel.DiscardChangesAsync();
-        }
-
-        private async void DeleteAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            await ShowDialog(resources.GetString("Wallet_DeleteWalletDialog"), viewModel.DeleteWalletCommand.Execute);
-            await ReloadMenu();
-
-            if ( viewModel.Wallet == null && Frame.CanGoBack)
-            {
-                Frame.GoBack();
-            }
-        }
-
-        private async void IconButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            if (viewModel.Modified)
-            {
-                await SaveWallet();
-            }
-
-            Frame.Navigate(typeof(ImagesPage), viewModel.Image);
-        }
-
-        private async void AddCategoryButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            if (viewModel.Modified)
-            {
-                await SaveWallet();
-            }
-
             var pagePayload = new PagePayload() { Dto = viewModel.Wallet };
-            Frame.Navigate(typeof(CategoriesPage), pagePayload);
+            Frame.Navigate(typeof(WalletEditPage), pagePayload);
         }
 
-        private async void AddBankButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            if (viewModel.Modified)
+            if (screenWidth == e.NewSize.Width)
+                return;
+
+            screenWidth = e.NewSize.Width;
+            RecalculateLineGraphInterval();
+        }
+
+        private void TransactionsLineSeries_DataContextChanged(FrameworkElement sender, DataContextChangedEventArgs args)
+        {
+            SetStyles();
+            RecalculateLineGraphInterval();
+        }
+
+        private void RecalculateLineGraphInterval()
+        {
+            if (viewModel.Balances?.Count > 0)
             {
-                await SaveWallet();
+                var size = screenWidth / 200 - 0.5;
+                TransactionsLineSeries.IndependentAxis = new DateTimeAxis()
+                {
+                    Orientation = AxisOrientation.X,
+                    IntervalType = DateTimeIntervalType.Days,
+                    Interval = viewModel.Balances.Count / size
+                };
             }
-
-            var pagePayload = new PagePayload() { Dto = viewModel.Wallet };
-            Frame.Navigate(typeof(BanksPage), pagePayload);
         }
 
-        private async void DetacheCategoryButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void SetStyles()
         {
-            var button = sender as Button;
-            var category = button.DataContext as Category;
-            await viewModel.DetachCategoryAsync(category);
-        }
+            if (string.IsNullOrWhiteSpace(viewModel.Currency))
+                return;
 
-        private async void DetacheBankButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
-        {
-            var button = sender as Button;
-            var bank = button.DataContext as Bank;
-            await viewModel.DetachBankAsync(bank);
-        }
-
-        private async Task SaveWallet()
-        {
-            await viewModel.SaveWalletAsync();
-            await ReloadMenu();
-        }
-
-        private async Task ReloadMenu()
-        {
-            await MenuHelper.ReloadData();
+            Style datapointStyle = new Style(typeof(DataPoint));
+            datapointStyle.Setters.Add(new Setter(DataPoint.DependentValueStringFormatProperty, CurrencyFormatter.GetFormatter(viewModel.Currency)));
+            TransactionsLineSeries.DataPointStyle = datapointStyle;
         }
     }
 }

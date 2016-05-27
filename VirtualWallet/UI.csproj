@@ -133,11 +133,14 @@
     <Compile Include="Pages\Settings\SettingsPage.xaml.cs">
       <DependentUpon>SettingsPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\Wallet\WalletPage.xaml.cs">
+      <DependentUpon>WalletPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Wallet\WalletsPage.xaml.cs">
       <DependentUpon>WalletsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Wallet\WalletPage.xaml.cs">
-      <DependentUpon>WalletPage.xaml</DependentUpon>
+    <Compile Include="Pages\Wallet\WalletEditPage.xaml.cs">
+      <DependentUpon>WalletEditPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Pages\Rule\RulePage.xaml.cs">
@@ -156,8 +159,9 @@
     <Compile Include="SampleData\WalletsSampleDataSource\WalletsSampleDataSource.xaml.cs">
       <DependentUpon>WalletsSampleDataSource.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ViewModels\Wallet\WalletsPageViewModel.cs" />
     <Compile Include="ViewModels\Wallet\WalletPageViewModel.cs" />
+    <Compile Include="ViewModels\Wallet\WalletsPageViewModel.cs" />
+    <Compile Include="ViewModels\Wallet\WalletEditPageViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <AppxManifest Include="Package.appxmanifest">
@@ -356,11 +360,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\Wallet\WalletPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Pages\Wallet\WalletsPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Pages\Wallet\WalletPage.xaml">
+    <Page Include="Pages\Wallet\WalletEditPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

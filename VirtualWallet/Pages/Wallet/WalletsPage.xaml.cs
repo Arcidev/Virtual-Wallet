@@ -36,14 +36,13 @@ namespace VirtualWallet.Pages
         private void AddAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
             var pagePayload = new PagePayload() { Dto = new Wallet() { Name = resources.GetString("Wallet_WalletDefaultName") } };
-            Frame.Navigate(typeof(WalletPage), pagePayload);
+            Frame.Navigate(typeof(WalletEditPage), pagePayload);
         }
 
         private void GridViewWallets_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var wallet = (Wallet)e.ClickedItem; ;
-            var walletPageDto = new BL.Models.PagePayload() { Dto = wallet };
-            Frame.Navigate(typeof(WalletPage), walletPageDto);
+            var wallet = (Wallet)e.ClickedItem;
+            Frame.Navigate(typeof(WalletPage), wallet);
         }
     }
 }

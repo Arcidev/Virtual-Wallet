@@ -1,0 +1,114 @@
+﻿<Page
+    x:Class="VirtualWallet.Pages.WalletEditPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VirtualWallet.Pages"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="BanksItemTemplate">
+            <RelativePanel HorizontalAlignment="Stretch">
+                <TextBlock x:Name="BankName" Margin="5" Text="{Binding Name}" Width="235"/>
+                <Button Click="DetacheBankButton_Click" RelativePanel.RightOf="BankName" RelativePanel.AlignVerticalCenterWith="BankName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <SymbolIcon Symbol="Remove"/>
+                </Button>
+            </RelativePanel>
+        </DataTemplate>
+        <DataTemplate x:Key="CategoriesItemTemplate">
+            <RelativePanel HorizontalAlignment="Stretch">
+                <TextBlock x:Name="CategoryName" Margin="5" Text="{Binding Name}" Width="235"/>
+                <Button Click="DetacheCategoryButton_Click" RelativePanel.RightOf="CategoryName" RelativePanel.AlignVerticalCenterWith="CategoryName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <SymbolIcon Symbol="Remove"/>
+                </Button>
+            </RelativePanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
+            <RelativePanel x:Name="MainRelativePanel" d:DataContext="{Binding Source={StaticResource WalletsSampleDataSource}, Path=Category}" ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <Grid x:Name="WalletFormGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Left" Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="9*"/>
+                        <ColumnDefinition Width="32*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" x:Uid="Wallet_Name" Margin="10" >Name:</TextBlock>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="10" x:Name="WalletName" Text="{Binding Name,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Grid.Row="1" Margin="10" x:Uid="Wallet_Icon">Icon:</TextBlock>
+                    <Button Grid.Row="1" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" Click="IconButton_Click">
+                        <Border x:Name="Icon" Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="10">
+                            <Image MaxHeight="110" MaxWidth="110" Source="{Binding Image.Path}"/>
+                        </Border>
+                    </Button>
+                </Grid>
+                <TextBlock x:Name="CategoryTitle" x:Uid="Wallet_CategoriesTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Categories" RelativePanel.Below="WalletFormGrid" Width="250"/>
+                <Button x:Name="AddCategoryButton" x:Uid="Wallet_AddCategory" Click="AddCategoryButton_Click" RelativePanel.RightOf="CategoryTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="CategoryTitle">
+                    <SymbolIcon Symbol="Add"/>
+                </Button>
+                <ListView x:Name="ListViewCategories" 
+                          ItemTemplate="{StaticResource CategoriesItemTemplate}" 
+                          ItemsSource="{Binding Categories}" 
+                          IsSwipeEnabled="False" 
+                          SelectionMode="None"
+                          IsItemClickEnabled="True"
+                          ItemClick="ListViewCategories_ItemClick"
+                          RelativePanel.Below="CategoryTitle"
+                          HorizontalAlignment="Left" 
+                          Width="310">
+                </ListView>
+                <TextBlock x:Name="BanksTitle" x:Uid="Wallet_BanksTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Banks" RelativePanel.Below="ListViewCategories" Width="250"/>
+                <Button x:Uid="Wallet_AddBank" Click="AddBankButton_Click" RelativePanel.RightOf="BanksTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="BanksTitle">
+                    <SymbolIcon Symbol="Add"/>
+                </Button>
+                <ListView x:Name="ListViewBanks" 
+                          ItemTemplate="{StaticResource BanksItemTemplate}" 
+                          ItemsSource="{Binding Banks}" 
+                          IsSwipeEnabled="False" 
+                          SelectionMode="None"
+                          IsItemClickEnabled="False"
+                          ItemClick="ListViewBanks_ItemClick"
+                          RelativePanel.Below="BanksTitle"
+                          RelativePanel.AlignLeftWith="BanksTitle"
+                          HorizontalAlignment="Left" 
+                          Width="310">
+                </ListView>
+            </RelativePanel>
+        </ScrollViewer>
+        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact" VerticalAlignment="Bottom">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton x:Uid="CommandBar_Save" Icon="Save" Click="SaveAppBarButton_Click" IsEnabled="{Binding Modified}"/>
+                <AppBarButton x:Uid="CommandBar_Undo" Icon="Undo" Click="CancelAppBarButton_Click" IsEnabled="{Binding Modified}"/>
+                <AppBarButton x:Uid="CommandBar_Delete" Icon="Delete" Click="DeleteAppBarButton_Click" IsEnabled="{Binding Persisted}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="630" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="BanksTitle.(RelativePanel.Below)" Value="" />
+                        <Setter Target="BanksTitle.(RelativePanel.RightOf)" Value="AddCategoryButton" />
+                        <Setter Target="BanksTitle.(RelativePanel.AlignTopWith)" Value="CategoryTitle" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>
