@@ -150,7 +150,6 @@
     <Compile Include="Data\Wallet\WalletCategory.cs" />
     <Compile Include="Helpers\ConnectionHelper.cs" />
     <Compile Include="Helpers\InitDataHelper.cs" />
-    <Compile Include="Helpers\InitDataDevHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Properties\DAL.rd.xml" />
   </ItemGroup>

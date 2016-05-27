@@ -36,7 +36,6 @@ namespace VirtualWallet.ViewModels
         private IList<Tuple<string, double>> incomes;
         private IList<Tuple<DateTime, double>> balances;
         private IList<TransactionCategoryList> transactionCategories;
-        private BankAccountInfo bankAccountInfo;
         private ICommand syncCommand;
         private Timer syncExecuteTimer;
         private bool syncButtonForceDisabled;

@@ -41,20 +41,6 @@ namespace VirtualWallet.Pages
         {
             MenuHelper.SetHeader(resources.GetString("Bank_PageTitle"));
 
-            Bank bank = (Bank) e.Parameter;
-
-            if (!bank.HasCredentials)
-            {
-                var dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
-                dispatcher.RunAsync(CoreDispatcherPriority.Normal, () =>
-                  {
-                      if (Frame.Navigate(typeof(BankCredentialsPage), bank))
-                      {
-                          Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
-                      }
-                  });
-            }
-            
             await viewModel.LoadDataAsync((Bank)e.Parameter);
             base.OnNavigatedTo(e);
         }
