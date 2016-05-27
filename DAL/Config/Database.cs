@@ -69,7 +69,7 @@ namespace DAL.Config
         private async Task InitData(SQLiteAsyncConnection connection)
         {
             await InitDataHelper.InitData(connection);
-            await InitDataDevHelper.InitTempData(connection);
+            //await InitDataDevHelper.InitTempData(connection);
         }
     }
 }
