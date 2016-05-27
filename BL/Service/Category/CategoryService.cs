@@ -29,31 +29,32 @@ namespace BL.Service
             var output = new List<TransactionCategoryList>();
             if (transactions == null || !transactions.Any())
                 return output;
-            if (categories == null || !categories.Any())
-                return output;
 
             var innerTransactions = transactions.Select(x => new TransactionMetadata { Description = x.Description, Amount = x.Amount, Date = x.Date, Currency = x.Currency }).ToList();
 
-            foreach (var category in categories)
+            if (categories != null)
             {
-                var items = new List<TransactionMetadata>();
-                bool add = false;
-                foreach (var rule in category.Rules)
+                foreach (var category in categories)
                 {
-                    foreach (var transaction in innerTransactions)
+                    var items = new List<TransactionMetadata>();
+                    bool add = false;
+                    foreach (var rule in category.Rules)
                     {
-                        if (rule.Fits(transaction.Description))
+                        foreach (var transaction in innerTransactions)
                         {
-                            items.Add(transaction);
-                            transaction.Processed = true;
-                            if (!add)
-                                add = true;
+                            if (rule.Fits(transaction.Description))
+                            {
+                                items.Add(transaction);
+                                transaction.Processed = true;
+                                if (!add)
+                                    add = true;
+                            }
                         }
                     }
-                }
 
-                if (add)
-                    output.Add(new TransactionCategoryList { Category = category, Transactions = items });
+                    if (add)
+                        output.Add(new TransactionCategoryList { Category = category, Transactions = items });
+                }
             }
 
             var uncategorized = innerTransactions.Where(x => !x.Processed);
