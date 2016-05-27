@@ -25,6 +25,10 @@ namespace BL.Models
 
         public string DateEndString { get { return ParseDate(DateEnd); } }
 
+        public DateTime DateStartAsDate { get { return DateTime.Parse(DateStart); } }
+
+        public DateTime DateEndAsDate { get { return DateTime.Parse(DateEnd); } }
+
         private string ParseDate(string date)
         {
             if (date == null)
