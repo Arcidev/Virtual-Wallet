@@ -52,5 +52,44 @@ namespace BL.Service
 
             return output;
         }
+
+        public IList<TransactionCategoryList> GroupTransactionsForWallet(IList<Category> categories, IList<Transaction> transactions, string defaultCategoryName)
+        {
+            var output = new List<TransactionCategoryList>();
+            if (transactions == null || !transactions.Any())
+                return output;
+            if (categories == null || !categories.Any())
+                return output;
+
+            var innerTransactions = transactions.Select(x => new TransactionMetadata { Description = x.Description, Amount = x.Amount, Date = x.Date, Currency = x.Currency }).ToList();
+            
+            foreach (var category in categories)
+            {
+                var items = new List<TransactionMetadata>();
+                bool add = false;
+                foreach (var rule in category.Rules)
+                {
+                    foreach (var transaction in innerTransactions)
+                    {
+                        if (rule.Fits(transaction.Description))
+                        {
+                            items.Add(transaction);
+                            transaction.Processed = true;
+                            if (!add)
+                                add = true;
+                        }
+                    }
+                }
+
+                if (add)
+                    output.Add(new TransactionCategoryList { Category = category, Transactions = items });
+            }
+
+            var uncategorized = innerTransactions.Where(x => !x.Processed);
+            if (uncategorized.Any())
+                output.Add(new TransactionCategoryList { DefaultCategoryName = defaultCategoryName, Transactions = uncategorized.ToList() });
+
+            return output;
+        }
     }
 }
