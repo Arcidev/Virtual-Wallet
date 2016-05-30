@@ -19,21 +19,26 @@ namespace VirtualWallet.ViewModels
         private IWalletService walletService;
         private IWalletCategoryService walletCategoryService;
         private IWalletBankService walletBankService;
+        private ICurrencyService currencyService;
 
         private Wallet wallet;
+        private Currency selectedCurrency;
+        private Currency defaultCurrency;
         private ObservableCollection<Category> categories;
         private ObservableCollection<Bank> banks;
+        private ObservableCollection<Currency> currencies;
         private Boolean modified;
         private Boolean persisted;
 
         public ICommand DeleteWalletCommand { get; private set; }
 
-        public WalletEditPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService, IWalletBankService walletBankService)
+        public WalletEditPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService, IWalletBankService walletBankService, ICurrencyService currencyService)
         {
             this.categoryService = categoryService;
             this.walletService = walletService;
             this.walletCategoryService = walletCategoryService;
             this.walletBankService = walletBankService;
+            this.currencyService = currencyService;
             this.modified = false;
 
             DeleteWalletCommand = new CommandHandler(DeleteWallet);
@@ -55,6 +60,7 @@ namespace VirtualWallet.ViewModels
                 NotifyPropertyChanged(nameof(Name));
                 NotifyPropertyChanged(nameof(Image));
                 NotifyPropertyChanged(nameof(TimeRange));
+                NotifyPropertyChanged(nameof(SelectedCurrency));
             }
         }
 
@@ -141,6 +147,34 @@ namespace VirtualWallet.ViewModels
             }
         }
 
+        public Currency SelectedCurrency
+        {
+            get { return selectedCurrency; }
+            set
+            {
+                if (selectedCurrency == value || Wallet == null)
+                    return;
+
+                selectedCurrency = value;
+                Wallet.CurrencyId = value.Id;
+                Modified = true;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public ObservableCollection<Currency> Currencies
+        {
+            get { return currencies; }
+            set
+            {
+                if (currencies == value)
+                    return;
+
+                currencies = value;
+                NotifyPropertyChanged();
+            }
+        }
+
         public ObservableCollection<Category> Categories
         {
             get { return categories; }
@@ -170,6 +204,7 @@ namespace VirtualWallet.ViewModels
 
         public async Task LoadDataAsync()
         {
+            await LoadCurrencies();
             await LoadWalletAsync();
             await LoadCategoriesAsync();
             await LoadBanksAsync();
@@ -184,10 +219,19 @@ namespace VirtualWallet.ViewModels
             {
                 Persisted = false;
                 Wallet.TimeRange = TimeRange.Month;
+                SelectedCurrency = defaultCurrency;
                 Modified = true; //User can save new category.
             }
             else
             {
+                foreach(Currency c in Currencies)
+                {
+                    if (c.Id == wallet.CurrencyId)
+                    {
+                        SelectedCurrency = c;
+                    }
+                }
+
                 Wallet = wallet;
                 Persisted = true;
                 Modified = false;
@@ -226,6 +270,21 @@ namespace VirtualWallet.ViewModels
             }
 
             Banks = new ObservableCollection<Bank>(banks);
+        }
+
+        private async Task LoadCurrencies()
+        {
+            var currencies = await currencyService.GetAllAsync();
+            Currencies = new ObservableCollection<Currency>(currencies);
+
+            foreach (Currency c in currencies)
+            {
+                if (c.IsDefaultCurrency)
+                {
+                    defaultCurrency = c;
+                    break;
+                }
+            }
         }
 
         public async Task SaveWalletAsync()

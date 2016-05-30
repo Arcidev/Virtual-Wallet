@@ -23,7 +23,7 @@ namespace VirtualWallet.Pages
         {
             this.InitializeComponent();
             resources = ResourceLoader.GetForCurrentView();
-            viewModel = new WalletEditPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService(), new WalletBankService());
+            viewModel = new WalletEditPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService(), new WalletBankService(), new CurrencyService());
             this.DataContext = viewModel;
             TimeRangeCombobox.ItemsSource = Enum.GetValues(typeof(TimeRange)).Cast<TimeRange>();
         }
