@@ -1,5 +1,6 @@
 ﻿using BL.Models;
 using BL.Service;
+using Shared.Enums;
 using Shared.Filters;
 using Shared.Modifiers;
 using System;
@@ -53,6 +54,7 @@ namespace VirtualWallet.ViewModels
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(Name));
                 NotifyPropertyChanged(nameof(Image));
+                NotifyPropertyChanged(nameof(TimeRange));
             }
         }
 
@@ -122,6 +124,23 @@ namespace VirtualWallet.ViewModels
             }
         }
 
+        public TimeRange TimeRange
+        {
+            get
+            {
+                return Wallet == null ? TimeRange.Month : Wallet.TimeRange;
+            }
+            set
+            {
+                if (Wallet == null || Wallet.TimeRange == value)
+                    return;
+
+                Wallet.TimeRange = value;
+                Modified = true;
+                NotifyPropertyChanged();
+            }
+        }
+
         public ObservableCollection<Category> Categories
         {
             get { return categories; }
@@ -164,6 +183,7 @@ namespace VirtualWallet.ViewModels
             if (wallet == null)
             {
                 Persisted = false;
+                Wallet.TimeRange = TimeRange.Month;
                 Modified = true; //User can save new category.
             }
             else

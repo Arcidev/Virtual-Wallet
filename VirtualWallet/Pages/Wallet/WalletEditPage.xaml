@@ -39,6 +39,7 @@
                     <Grid.RowDefinitions>
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
                     </Grid.RowDefinitions>
                     <TextBlock Grid.Row="0" x:Uid="Wallet_Name" Margin="10" >Name:</TextBlock>
                     <TextBox Grid.Row="0" Grid.Column="1" Margin="10" x:Name="WalletName" Text="{Binding Name,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
@@ -48,6 +49,8 @@
                             <Image MaxHeight="110" MaxWidth="110" Source="{Binding Image.Path}"/>
                         </Border>
                     </Button>
+                    <TextBlock Grid.Row="2" Margin="10" x:Uid="Wallet_DefaultTimeRange">Default time range:</TextBlock>
+                    <ComboBox Grid.Row="2" Grid.Column="1" x:Name="TimeRangeCombobox" x:Uid="Wallet_TimeRange" Margin="10" SelectedItem="{Binding TimeRange, Mode=TwoWay}" MinWidth="120"/>
                 </Grid>
                 <TextBlock x:Name="CategoryTitle" x:Uid="Wallet_CategoriesTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Categories" RelativePanel.Below="WalletFormGrid" Width="250"/>
                 <Button x:Name="AddCategoryButton" x:Uid="Wallet_AddCategory" Click="AddCategoryButton_Click" RelativePanel.RightOf="CategoryTitle" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" RelativePanel.AlignVerticalCenterWith="CategoryTitle">
