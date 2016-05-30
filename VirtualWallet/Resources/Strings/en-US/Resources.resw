@@ -351,4 +351,7 @@
   <data name="BankCredentials_PageTitle" xml:space="preserve">
     <value>Bank credentials</value>
   </data>
+  <data name="Settings_Currency" xml:space="preserve">
+    <value>Default currency</value>
+  </data>
 </root>

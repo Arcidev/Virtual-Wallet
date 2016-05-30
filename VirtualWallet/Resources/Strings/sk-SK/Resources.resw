@@ -351,4 +351,7 @@
   <data name="BankCredentials_PageTitle" xml:space="preserve">
     <value>Bankové identifikačné údaje</value>
   </data>
+  <data name="Settings_Currency" xml:space="preserve">
+    <value>Základná mena</value>
+  </data>
 </root>

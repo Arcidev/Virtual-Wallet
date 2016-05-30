@@ -23,13 +23,14 @@ namespace VirtualWallet.Pages
         {
             this.InitializeComponent();
             resources = ResourceLoader.GetForCurrentView();
-            viewModel = new SettingsViewModel(new DatabaseService(), new BankService(), resources);
+            viewModel = new SettingsViewModel(new DatabaseService(), new BankService(), new CurrencyService(), resources);
             this.DataContext = viewModel;
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             MenuHelper.SetHeader(resources.GetString("Settings_Header"));
+            await viewModel.LoadDataAsync();
             base.OnNavigatedTo(e);
         }
 
