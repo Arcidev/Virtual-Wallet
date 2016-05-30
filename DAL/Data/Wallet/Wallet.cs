@@ -14,5 +14,7 @@ namespace DAL.Data
 
         [Ignore]
         public Image Image { get; set; }
+
+        public int TimeRangeId { get; set; }
     }
 }

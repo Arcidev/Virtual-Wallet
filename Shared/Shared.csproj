@@ -107,6 +107,7 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\TimeRange.cs" />
     <Compile Include="Enums\Results\CopyDatabaseResult.cs" />
     <Compile Include="Enums\BankId.cs" />
     <Compile Include="Enums\ImageId.cs" />

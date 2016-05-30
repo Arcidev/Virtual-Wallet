@@ -29,10 +29,12 @@ namespace BL.Mapping
             cfg.CreateMap<DAL.Data.BankAccountInfo, BankAccountInfo>();
             cfg.CreateMap<BankAccountInfo, DAL.Data.BankAccountInfo>();
 
-            cfg.CreateMap<DAL.Data.Wallet, Wallet>();
+            cfg.CreateMap<DAL.Data.Wallet, Wallet>()
+            .ForMember(target => target.TimeRange, action => action.MapFrom(source => (TimeRange)source.TimeRangeId)); ;
             cfg.CreateMap<Wallet, DAL.Data.Wallet>()
             .ForMember(target => target.Image, action => action.Ignore())
-            .ForMember(target => target.ImageId, action => action.MapFrom(source => source.Image != null ? source.Image.Id : source.ImageId));
+            .ForMember(target => target.ImageId, action => action.MapFrom(source => source.Image != null ? source.Image.Id : source.ImageId))
+            .ForMember(target => target.TimeRangeId, action => action.MapFrom(source => (int)source.TimeRange));
 
             cfg.CreateMap<DAL.Data.WalletCategory, WalletCategory>();
             cfg.CreateMap<WalletCategory, DAL.Data.WalletCategory>()
