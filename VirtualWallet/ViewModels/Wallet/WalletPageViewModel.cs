@@ -2,6 +2,7 @@
 using BL.Metadata;
 using BL.Models;
 using BL.Service;
+using Shared.Enums;
 using Shared.Filters;
 using Shared.Formatters;
 using Shared.Modifiers;
@@ -206,6 +207,23 @@ namespace VirtualWallet.ViewModels
             }
         }
 
+        public TimeRange TimeRange
+        {
+            get
+            {
+                return Wallet == null ? TimeRange.Month : Wallet.TimeRange;
+            }
+            set
+            {
+                if (Wallet == null || Wallet.TimeRange == value)
+                    return;
+
+                Wallet.TimeRange = value;
+                NotifyPropertyChanged();
+                LoadBanksDataAsync();
+            }
+        }
+
         public ObservableCollection<Bank> Banks
         {
             get { return banks; }
@@ -301,13 +319,7 @@ namespace VirtualWallet.ViewModels
             Wallet = wallet;
             await LoadCategoriesAsync();
             await LoadBanksAsync();
-
-            foreach(Bank bank in Banks)
-            {
-                await LoadBankDataAsync(bank);
-            }
-
-            ComputeWalletInfo();
+            await LoadBanksDataAsync();
         }
         
         private async Task LoadCategoriesAsync()
@@ -340,19 +352,21 @@ namespace VirtualWallet.ViewModels
                 if (walletBank.Bank != null)
                     banks.Add(walletBank.Bank);
             }
-
             Banks = new ObservableCollection<Bank>(banks);
         }
 
-        public async Task LoadBankDataAsync(Bank bank)
+        public async Task LoadBanksDataAsync()
         {
-            if (bank != null)
+            foreach (Bank bank in Banks)
             {
-                bank.BankAccountInfo = await bankAccountInfoService.GetAsync(bank.Id);
-                var filter = new Shared.Filters.TransactionFilter() { DateSince = DateTime.Now.AddMonths(-1).Date };
-                bank.StoredTransactions = await transactionService.GetByBankIdAsync(bank.Id, filter);
+                if (bank != null)
+                {
+                    bank.BankAccountInfo = await bankAccountInfoService.GetAsync(bank.Id);
+                    var filter = new Shared.Filters.TransactionFilter() { DateSince = this.TimeRange.ToDateSince() };
+                    bank.StoredTransactions = await transactionService.GetByBankIdAsync(bank.Id, filter);
+                }
             }
-
+            
             ReloadTransactions();
         }
 
@@ -469,7 +483,7 @@ namespace VirtualWallet.ViewModels
                 amount = closingBalance = bank.BankAccountInfo.ClosingBalance;
                 mergedTrans.AddRange(bank.StoredTransactions);
             }
-            
+
             var trans = mergedTrans.GroupBy(x => x.Date).Select(x => Tuple.Create(x.Key, x.Sum(y => y.Amount))).OrderByDescending(x => x.Item1).Select(x =>
             {
                 amount -= (double)x.Item2;
@@ -479,12 +493,24 @@ namespace VirtualWallet.ViewModels
             if (trans.FirstOrDefault()?.Item1.Date == DateTime.Now.Date)
                 trans.RemoveAt(0);
 
-            trans.Add(Tuple.Create(DateTime.Now, closingBalance));
-            Balances = trans;
+            if (trans.Count() != 0)
+            {
+                trans.Add(Tuple.Create(DateTime.Now, closingBalance));
+                Balances = trans;
 
-            TransactionCategories = categoryService.GroupTransactionsForWallet(Categories, mergedTrans, categoryOther);
-            Incomes = TransactionCategories.Where(x => x.Transactions.Any(y => y.Amount > 0)).Select(x => Tuple.Create(x.CategoryName, (double)x.Transactions.Where(y => y.Amount > 0).Sum(y => y.Amount))).ToList();
-            Expenses = TransactionCategories.Where(x => x.Transactions.Any(y => y.Amount < 0)).Select(x => Tuple.Create(x.CategoryName, (double)x.Transactions.Where(y => y.Amount < 0).Sum(y => y.Amount))).ToList();
+                TransactionCategories = categoryService.GroupTransactionsForWallet(Categories, mergedTrans, categoryOther);
+                Incomes = TransactionCategories.Where(x => x.Transactions.Any(y => y.Amount > 0)).Select(x => Tuple.Create(x.CategoryName, (double)x.Transactions.Where(y => y.Amount > 0).Sum(y => y.Amount))).ToList();
+                Expenses = TransactionCategories.Where(x => x.Transactions.Any(y => y.Amount < 0)).Select(x => Tuple.Create(x.CategoryName, (double)x.Transactions.Where(y => y.Amount < 0).Sum(y => y.Amount))).ToList();
+            }
+            else
+            {
+                Balances = null;
+                Incomes = null;
+                Expenses = null;
+                TransactionCategories = null;
+            }
+            
+            ComputeWalletInfo();
         }
 
 

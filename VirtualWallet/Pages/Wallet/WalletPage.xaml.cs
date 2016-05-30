@@ -1,7 +1,9 @@
 ﻿using BL.Models;
 using BL.Service;
+using Shared.Enums;
 using Shared.Formatters;
 using System;
+using System.Linq;
 using System.Threading.Tasks;
 using VirtualWallet.Helpers;
 using VirtualWallet.ViewModels;
@@ -37,6 +39,9 @@ namespace VirtualWallet.Pages
                 SetStyles();
             };
             this.DataContext = viewModel;
+
+            TimeRangeComboboxCat.ItemsSource = Enum.GetValues(typeof(TimeRange)).Cast<TimeRange>();
+            TimeRangeComboboxTrans.ItemsSource = Enum.GetValues(typeof(TimeRange)).Cast<TimeRange>();
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
