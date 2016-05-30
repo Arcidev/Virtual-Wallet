@@ -29,6 +29,7 @@ namespace VirtualWallet.ViewModels
         private ICategoryService categoryService;
         private IWalletCategoryService walletCategoryService;
         private IWalletBankService walletBankService;
+        private ICurrencyService currencyService;
         private ResourceLoader resources;
         private Wallet wallet;
         private ObservableCollection<Bank> banks;
@@ -300,16 +301,16 @@ namespace VirtualWallet.ViewModels
             LinearAxisInfo = string.Format(resources.GetString("Bank_LinearAxisBalanceInfo"), currency);
         }
 
-        public WalletPageViewModel(IBankAccountInfoService bankAccountInfoService, ITransactionService transactionService, ICategoryService categoryService, IWalletCategoryService walletCategoryService, IWalletBankService walletBankService, ResourceLoader resources)
+        public WalletPageViewModel(IBankAccountInfoService bankAccountInfoService, ITransactionService transactionService, ICategoryService categoryService, IWalletCategoryService walletCategoryService, IWalletBankService walletBankService, ICurrencyService currencyService, ResourceLoader resources)
         {
             this.bankAccountInfoService = bankAccountInfoService;
             this.transactionService = transactionService;
             this.categoryService = categoryService;
             this.walletCategoryService = walletCategoryService;
             this.walletBankService = walletBankService;
+            this.currencyService = currencyService;
             this.resources = resources;
-
-            Currency = "Kč";
+            
             categoryOther = resources.GetString("Category_Other");
             brushes = new List<SolidColorBrush> { new SolidColorBrush(Colors.Black), new SolidColorBrush(Colors.DarkSlateGray) };
         }
@@ -317,6 +318,7 @@ namespace VirtualWallet.ViewModels
         public async Task LoadDataAsync(Wallet wallet)
         {
             Wallet = wallet;
+            await LoadCurrencyAsync();
             await LoadCategoriesAsync();
             await LoadBanksAsync();
             await LoadBanksDataAsync();
@@ -368,6 +370,15 @@ namespace VirtualWallet.ViewModels
             }
             
             ReloadTransactions();
+        }
+
+        public async Task LoadCurrencyAsync()
+        {
+            if (Wallet?.CurrencyId != null)
+            {
+                var currency = await currencyService.GetAsync((int) Wallet.CurrencyId);
+                Currency = currency.Code;
+            }
         }
 
         public void Dispose()
