@@ -109,6 +109,8 @@
   <ItemGroup>
     <Compile Include="Config\Database.cs" />
     <Compile Include="Config\IDatabase.cs" />
+    <Compile Include="DataAccess\Currency\ICurrency.cs" />
+    <Compile Include="DataAccess\Currency\Currency.cs" />
     <Compile Include="DataAccess\Transaction\Transactions.cs" />
     <Compile Include="DataAccess\Base\BaseCrudDataAccess.cs" />
     <Compile Include="DataAccess\Base\BaseModifiableDataAccess.cs">
@@ -141,6 +143,7 @@
     <Compile Include="Data\Bank\Bank.cs" />
     <Compile Include="Data\Bank\BankAccountInfo.cs" />
     <Compile Include="Data\Category\Category.cs" />
+    <Compile Include="Data\Currency\Currency.cs" />
     <Compile Include="Data\Interface\IDao.cs" />
     <Compile Include="Data\Image\Image.cs" />
     <Compile Include="Data\Category\Rule.cs" />

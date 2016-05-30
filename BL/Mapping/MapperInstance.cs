@@ -59,6 +59,9 @@ namespace BL.Mapping
 
             cfg.CreateMap<DAL.Data.Transaction, Transaction>();
             cfg.CreateMap<Transaction, DAL.Data.Transaction>();
+
+            cfg.CreateMap<DAL.Data.Currency, Currency>();
+            cfg.CreateMap<Currency, DAL.Data.Currency>();
         }).CreateMapper();
     }
 }

@@ -163,6 +163,10 @@ namespace DAL.Helpers
                 new Image() { Id = 139, Path= $"{imageStorage}/Categories/Vacation/CategoryVacation5.png" },
 
                 new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio },
+
+                new Currency() { Id = (int)CurrencyId.EUR, Code = "EUR", ExchangeRate = 1, IsDefaultCurrency = false},
+                new Currency() { Id = (int)CurrencyId.CZK, Code = "CZK", ExchangeRate = 28, IsDefaultCurrency = true},
+                new Currency() { Id = (int)CurrencyId.USD, Code = "USD", ExchangeRate = 1.11f, IsDefaultCurrency = false},
             });
         }
     }

@@ -21,7 +21,8 @@ namespace DAL.Config
             typeof(WalletCategory),
             typeof(WalletBank),
             typeof(BankAccountInfo),
-            typeof(Transaction)
+            typeof(Transaction),
+            typeof(Currency),
         };
 
         public async Task InitAsync()

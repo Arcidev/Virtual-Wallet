@@ -107,11 +107,13 @@
     <None Include="project.json" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\CurrencyId.cs" />
     <Compile Include="Enums\TimeRange.cs" />
     <Compile Include="Enums\Results\CopyDatabaseResult.cs" />
     <Compile Include="Enums\BankId.cs" />
     <Compile Include="Enums\ImageId.cs" />
     <Compile Include="Enums\PatternType.cs" />
+    <Compile Include="Filters\CurrencyFilter.cs" />
     <Compile Include="Filters\BankFilter.cs" />
     <Compile Include="Filters\BaseFilter.cs" />
     <Compile Include="Filters\TransactionFilter.cs" />
@@ -120,6 +122,7 @@
     <Compile Include="Filters\WalletBankFilter.cs" />
     <Compile Include="Formatters\CurrencyFormatter.cs" />
     <Compile Include="Formatters\DateTimeFormatter.cs" />
+    <Compile Include="Modifiers\CurrencyModifier.cs" />
     <Compile Include="Modifiers\RuleModifier.cs" />
     <Compile Include="Filters\WalletCategoryFilter.cs" />
     <Compile Include="Filters\WalletFilter.cs" />

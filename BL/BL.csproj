@@ -111,6 +111,7 @@
     <Compile Include="Metadata\TransactionCategoryList.cs" />
     <Compile Include="Metadata\TransactionMetadata.cs" />
     <Compile Include="Models\Bank\BankAccountInfo.cs" />
+    <Compile Include="Models\Currency.cs" />
     <Compile Include="Models\Image.cs" />
     <Compile Include="Models\Interface\IPagePayload.cs" />
     <Compile Include="Models\LanguageInfo.cs" />
@@ -119,6 +120,8 @@
     <Compile Include="Models\Wallet\WalletCategory.cs" />
     <Compile Include="Service\Bank\BankAccountInfoService.cs" />
     <Compile Include="Service\Category\RuleService.cs" />
+    <Compile Include="Service\Currency\CurrencyService.cs" />
+    <Compile Include="Service\Currency\ICurrencyService.cs" />
     <Compile Include="Service\Database\DatabaseService.cs" />
     <Compile Include="Service\Image\ImageService.cs" />
     <Compile Include="Service\Bank\IBankService.cs" />
