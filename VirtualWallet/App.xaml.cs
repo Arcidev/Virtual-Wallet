@@ -56,10 +56,12 @@ namespace VirtualWallet
                     Pane = new HamburgerPaneControl(),
                     Header = new Cimbalino.Toolkit.Controls.HamburgerTitleBar()
                 };
-
+                
                 rootFrame.NavigationFailed += OnNavigationFailed;
                 rootFrame.Navigated += OnNavigated;
                 rootFrame.Navigating += OnNavigating;
+
+                rootFrame.Navigate(typeof(WalletsPage));
 
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
