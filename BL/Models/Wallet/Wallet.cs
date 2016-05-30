@@ -23,5 +23,7 @@ namespace BL.Models
         public PagePayload PagePayload { get { return new PagePayload() { Dto = this }; } }
 
         public TimeRange TimeRange { get; set; }
+
+        public int? CurrencyId { get; set; }
     }
 }

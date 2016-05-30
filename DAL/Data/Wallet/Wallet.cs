@@ -16,5 +16,7 @@ namespace DAL.Data
         public Image Image { get; set; }
 
         public int TimeRangeId { get; set; }
+
+        public int? CurrencyId { get; set; }
     }
 }
