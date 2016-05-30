@@ -1,5 +1,4 @@
-﻿using BL.Filters;
-using BL.Metadata;
+﻿using BL.Metadata;
 using BL.Models;
 using BL.Service;
 using Shared.Enums;
