@@ -1,5 +1,6 @@
 ﻿using BL.Models;
 using BL.Service;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
@@ -18,8 +19,8 @@ namespace VirtualWallet.ViewModels
         private ICurrencyService currencyService;
         private string selectedLanguageCode;
         private ResourceLoader resources;
-        private ObservableCollection<LanguageInfo> availableLanguages;
-        private ObservableCollection<Currency> currencies;
+        private IList<LanguageInfo> availableLanguages;
+        private IList<Currency> currencies;
         private Currency selectedCurrency;
 
         public ICommand RemoveAllDataCommand { get; private set; }
@@ -30,7 +31,7 @@ namespace VirtualWallet.ViewModels
 
         public ICommand RetrieveDatabaseFromRoamingFolderCommand { get; private set; }
 
-        public ObservableCollection<LanguageInfo> AvailableLanguages
+        public IList<LanguageInfo> AvailableLanguages
         {
             get { return availableLanguages; }
             private set
@@ -39,6 +40,34 @@ namespace VirtualWallet.ViewModels
                     return;
 
                 availableLanguages = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+
+        public Currency SelectedCurrency
+        {
+            get { return selectedCurrency; }
+            set
+            {
+                if (selectedCurrency == value)
+                    return;
+
+                selectedCurrency = value;
+                SaveCurrencies();
+                NotifyPropertyChanged();
+            }
+        }
+
+        public IList<Currency> Currencies
+        {
+            get { return currencies; }
+            set
+            {
+                if (currencies == value)
+                    return;
+
+                currencies = value;
                 NotifyPropertyChanged();
             }
         }
@@ -85,35 +114,6 @@ namespace VirtualWallet.ViewModels
             RemoveAllCredentialsCommand = new CommandHandler(RemoveAllCredentialsExecute);
             CopyDatabaseToRoamingFolderCommand = new CommandHandler(CopyDatabaseToRoamingFolderExecute);
             RetrieveDatabaseFromRoamingFolderCommand = new CommandHandler(RetrieveDatabaseFromRoamingFolderExecute);
-
-            LoadAvailableLanguages();
-        }
-
-        public Currency SelectedCurrency
-        {
-            get { return selectedCurrency; }
-            set
-            {
-                if (selectedCurrency == value)
-                    return;
-
-                selectedCurrency = value;
-                SaveCurrencies();
-                NotifyPropertyChanged();
-            }
-        }
-
-        public ObservableCollection<Currency> Currencies
-        {
-            get { return currencies; }
-            set
-            {
-                if (currencies == value)
-                    return;
-
-                currencies = value;
-                NotifyPropertyChanged();
-            }
         }
 
         public void ReloadTexts()
@@ -135,7 +135,7 @@ namespace VirtualWallet.ViewModels
         {
             var languages = ApplicationLanguages.ManifestLanguages.Select(x => new LanguageInfo() { DisplayName = new CultureInfo(x).NativeName, Code = x }).ToList();
             languages.Insert(0, new LanguageInfo() { DisplayName = resources.GetString("Settings_Language_None"), Code = "" });
-            AvailableLanguages = new ObservableCollection<LanguageInfo>(languages);
+            AvailableLanguages = languages;
 
             SelectedLanguageCode = ApplicationLanguages.PrimaryLanguageOverride;
         }
@@ -164,32 +164,23 @@ namespace VirtualWallet.ViewModels
 
         public async Task LoadDataAsync()
         {
+            LoadAvailableLanguages();
             await LoadCurrencies();
         }
 
         private async Task LoadCurrencies()
         {
-            var currencies = await currencyService.GetAllAsync();
-            Currencies = new ObservableCollection<Currency>(currencies);
+            Currencies = await currencyService.GetAllAsync();
 
-            foreach (Currency c in currencies)
-            {
-                if (c.IsDefaultCurrency)
-                {
-                    SelectedCurrency = c;
-                    break;
-                }
-            }
+            SelectedCurrency = Currencies.FirstOrDefault(x => x.IsDefaultCurrency);
         }
 
         private async void SaveCurrencies()
         {
             foreach (Currency c in Currencies)
-            {
                 c.IsDefaultCurrency = c == SelectedCurrency;
-            }
 
-            await currencyService.InsertOrReplaceAsync(true, Currencies.ToArray());
+            await currencyService.UpdateAsync(Currencies.ToArray());
         }
     }
 }

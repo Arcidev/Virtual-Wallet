@@ -15,7 +15,7 @@
                 <TextBlock x:Name="LanguageTextBlock" RelativePanel.Below="ApplicationTextBlock" Text="{Binding Text_Language}" Margin="5"/>
                 <ComboBox  x:Name="LanguageComboBox"  RelativePanel.Below="LanguageTextBlock" Margin="5" ItemsSource="{Binding AvailableLanguages}" SelectionChanged="LanguageComboBox_SelectionChanged" DisplayMemberPath="DisplayName" SelectedValuePath="Code" SelectedValue="{Binding SelectedLanguageCode, Mode=TwoWay}" />
                 <TextBlock x:Name="CurrencyTextBlock" RelativePanel.Below="LanguageComboBox" Text="{Binding Text_Currency}" Margin="5"/>
-                <ComboBox  x:Name="TimeRangeCombobox" RelativePanel.Below="CurrencyTextBlock" Margin="5" SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}" ItemsSource="{Binding Currencies}"/>
+                <ComboBox  x:Name="CurrencyCombobox" RelativePanel.Below="CurrencyTextBlock" Margin="5" SelectedItem="{Binding SelectedCurrency, Mode=TwoWay}" ItemsSource="{Binding Currencies}" DisplayMemberPath="Code" SelectedValuePath="Code"/>
             </RelativePanel>
             <RelativePanel RelativePanel.Below="ApplicationSettings">
                 <TextBlock x:Name="UserContentTextBlock" Text="{Binding Text_UserContent}" />

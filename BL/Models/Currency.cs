@@ -9,10 +9,5 @@
         public float ExchangeRate { get; set; }
 
         public bool IsDefaultCurrency { get; set; }
-
-        public override string ToString()
-        {
-            return Code;
-        }
     }
 }

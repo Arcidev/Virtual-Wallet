@@ -42,6 +42,7 @@ namespace DAL.Config
             await connection.DeleteAllAsync<Category>();
             await connection.DeleteAllAsync<Wallet>();
             await connection.DeleteAllAsync<BankAccountInfo>();
+            await connection.DeleteAllAsync<Transaction>();
         }
 
         public async Task<CopyDatabaseResult> CopyToRoamingFolder()

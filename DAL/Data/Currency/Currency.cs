@@ -7,7 +7,7 @@ namespace DAL.Data
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
 
-        [MaxLength(3)]
+        [MaxLength(3), Unique]
         public string Code { get; set; }
 
         public float ExchangeRate { get; set; }

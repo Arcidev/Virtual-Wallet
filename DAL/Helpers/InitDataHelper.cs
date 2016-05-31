@@ -162,12 +162,18 @@ namespace DAL.Helpers
                 new Image() { Id = 138, Path= $"{imageStorage}/Categories/Vacation/CategoryVacation4.png" },
                 new Image() { Id = 139, Path= $"{imageStorage}/Categories/Vacation/CategoryVacation5.png" },
 
-                new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio },
-
-                new Currency() { Id = (int)CurrencyId.EUR, Code = "EUR", ExchangeRate = 1, IsDefaultCurrency = false},
-                new Currency() { Id = (int)CurrencyId.CZK, Code = "CZK", ExchangeRate = 28, IsDefaultCurrency = true},
-                new Currency() { Id = (int)CurrencyId.USD, Code = "USD", ExchangeRate = 1.11f, IsDefaultCurrency = false},
+                new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio }
             });
+
+            if (await connection.Table<Currency>().FirstOrDefaultAsync() == null)
+            {
+                await connection.InsertAllAsync(new object[]
+                {
+                    new Currency() { Code = "EUR", ExchangeRate = 1, IsDefaultCurrency = false },
+                    new Currency() { Code = "CZK", ExchangeRate = 28, IsDefaultCurrency = true },
+                    new Currency() { Code = "USD", ExchangeRate = 1.11f, IsDefaultCurrency = false }
+                });
+            }
         }
     }
 }
