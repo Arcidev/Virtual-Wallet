@@ -11,9 +11,7 @@
     <Page.Resources>
         <DataTemplate x:Key="ImagesItemTemplate" x:DataType="models:Image">
             <RelativePanel Margin="10">
-                <Border x:Name="Icon" RelativePanel.AlignHorizontalCenterWithPanel="True" Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
-                    <Image Height="110" Width="110" Source="{x:Bind Path}" x:Phase="1"/>
-                </Border>
+                <Image x:Name="Icon" Height="110" Width="110" Source="{x:Bind Path}" x:Phase="1"/>
             </RelativePanel>
         </DataTemplate>
     </Page.Resources>

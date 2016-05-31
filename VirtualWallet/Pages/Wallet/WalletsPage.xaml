@@ -10,9 +10,7 @@
     <Page.Resources>
         <DataTemplate x:Key="WalletsItemTemplate">
             <RelativePanel Margin="10">
-                <Border x:Name="Icon" RelativePanel.AlignHorizontalCenterWithPanel="True" Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Width="110" Height="110">
-                    <Image Height="110" Width="110" Source="{Binding ImageUri}"/>
-                </Border>
+                <Image x:Name="Icon" Height="110" Width="110" Source="{Binding ImageUri}"/>
                 <TextBlock x:Name="WalletName" Text="{Binding Name}" Margin="0,10,0,0" Style="{StaticResource CaptionTextBlockStyle}" RelativePanel.Below="Icon" RelativePanel.AlignHorizontalCenterWith="Icon"/>
             </RelativePanel>
         </DataTemplate>

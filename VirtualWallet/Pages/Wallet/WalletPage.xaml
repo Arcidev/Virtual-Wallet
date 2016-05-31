@@ -20,7 +20,7 @@
                 <ScrollViewer VerticalScrollBarVisibility="Auto">
                     <RelativePanel>
                         <RelativePanel x:Name="WalletInfo">
-                            <Image x:Name="WalletImage" RelativePanel.AlignVerticalCenterWithPanel="True" MaxHeight="40" MaxWidth="60" Source="{Binding Wallet.ImageUri}" />
+                            <Image x:Name="WalletImage" Margin="5" RelativePanel.AlignVerticalCenterWithPanel="True" MaxHeight="40" MaxWidth="60" Source="{Binding Wallet.ImageUri}" />
                             <TextBlock RelativePanel.RightOf="WalletImage" FontSize="40" Text="{Binding Wallet.Name}" />
                         </RelativePanel>
                         <TextBlock x:Uid="Wallet_Balance" x:Name="Balance" RelativePanel.Below="WalletInfo" Margin="5" Text="Balance:" />
@@ -60,7 +60,7 @@
                 <ScrollViewer Grid.Row="1" VerticalScrollBarVisibility="Auto">
                     <RelativePanel>
                         <ComboBox  x:Name="TimeRangeComboboxTrans" x:Uid="Wallet_TimeRange" Header="Time range"  Margin="5" SelectedItem="{Binding TimeRange, Mode=TwoWay}" MinWidth="120"/>
-                        <TextBlock Margin="5" Text="No data found." Foreground="Red" RelativePanel.Below="TimeRangeComboboxTrans" Visibility="{Binding HasTransactions, Converter={StaticResource InvertedBoolToVisibilityConverter}}"/>
+                        <TextBlock x:Uid="Wallet_NoDataFound" Margin="5" Text="No data found." Foreground="Red" RelativePanel.Below="TimeRangeComboboxTrans" Visibility="{Binding HasTransactions, Converter={StaticResource InvertedBoolToVisibilityConverter}}"/>
                         <controls:Accordion x:Name="TransactionsAccordion" ItemsSource="{Binding TransactionCategories}" HorizontalAlignment="Stretch" Margin="5" SelectionMode="ZeroOrOne" RelativePanel.AlignLeftWithPanel="True" RelativePanel.AlignRightWithPanel="True" RelativePanel.Below="TimeRangeComboboxTrans" Visibility="{Binding HasTransactions, Converter={StaticResource BoolToVisibilityConverter}}">
                             <controls:Accordion.ItemTemplate>
                                 <DataTemplate>

@@ -8,12 +8,16 @@
     mc:Ignorable="d">
 
     <Page.Resources>
-        <DataTemplate x:Key="WalletsItemTemplate">
+        <DataTemplate x:Key="WalletsItemTemplateNarrow">
             <RelativePanel HorizontalAlignment="Stretch">
                 <TextBlock x:Name="WalletName" Margin="5" Text="{Binding Name}" Width="235"/>
-                <Border RelativePanel.RightOf="WalletName" RelativePanel.AlignVerticalCenterWith="WalletName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                    <Image MaxHeight="32" MaxWidth="32" Source="{Binding ImageUri}"/>
-                </Border>
+                <Image RelativePanel.RightOf="WalletName" RelativePanel.AlignVerticalCenterWith="WalletName" MaxHeight="32" MaxWidth="32" Source="{Binding ImageUri}"/>
+            </RelativePanel>
+        </DataTemplate>
+        <DataTemplate x:Key="WalletsItemTemplateWide">
+            <RelativePanel HorizontalAlignment="Stretch">
+                <TextBlock x:Name="WalletName" Margin="5" Text="{Binding Name}" Width="350"/>
+                <Image RelativePanel.RightOf="WalletName" RelativePanel.AlignVerticalCenterWith="WalletName" MaxHeight="32" MaxWidth="32" Source="{Binding ImageUri}"/>
             </RelativePanel>
         </DataTemplate>
         <DataTemplate x:Key="RulesItemTemplateNarrow">
@@ -26,8 +30,10 @@
         </DataTemplate>
         <DataTemplate x:Key="RulesItemTemplateWide">
             <RelativePanel HorizontalAlignment="Stretch">
-                <TextBlock x:Name="RuleName" Margin="5" Text="{Binding Name}" Width="200"/>
-                <Button Click="RemoveRuleButton_Click" RelativePanel.RightOf="RuleName" RelativePanel.AlignVerticalCenterWith="RuleName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <TextBlock x:Name="RuleName" Margin="5" Text="{Binding Name}" Width="150"/>
+                <TextBlock x:Name="RulePatternType" Margin="5" RelativePanel.RightOf="RuleName" Text="{Binding PatternType}" Width="70"/>
+                <TextBlock x:Name="RulePattern" Margin="5" RelativePanel.RightOf="RulePatternType" Text="{Binding Pattern}" Width="105"/>
+                <Button Click="RemoveRuleButton_Click" RelativePanel.RightOf="RulePattern" RelativePanel.AlignVerticalCenterWith="RuleName" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
                     <SymbolIcon Symbol="Remove"/>
                 </Button>
             </RelativePanel>
@@ -51,10 +57,8 @@
                     <TextBlock Grid.Row="0" x:Uid="Category_Name" Margin="10" >Name:</TextBlock>
                     <TextBox Grid.Row="0" Grid.Column="1" Margin="10" x:Name="CategoryName" Text="{Binding Name,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
                     <TextBlock Grid.Row="1" Margin="10" x:Uid="Category_Icon">Icon:</TextBlock>
-                    <Button Grid.Row="1" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" Click="IconButton_Click">
-                        <Border x:Name="Icon" Background="{StaticResource ListViewItemPlaceholderBackgroundThemeBrush}" Margin="10">
-                            <Image MaxHeight="110" MaxWidth="110" Source="{Binding Image.Path}"/>
-                        </Border>
+                    <Button Grid.Row="1" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" Click="IconButton_Click" MinHeight="110" MinWidth="110">
+                        <Image x:Name="Icon" MaxHeight="110" MaxWidth="110" Source="{Binding Image.Path}"/>
                     </Button>
                 </Grid>
                 <TextBlock x:Name="RulesTitle" x:Uid="Category_RulesTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Rules" RelativePanel.Below="CategoryFormGrid"/>
@@ -70,11 +74,12 @@
                           ItemClick="ListViewRules_ItemClick"
                           RelativePanel.Below="RulesTitle"
                           HorizontalAlignment="Left" 
-                          Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">
+                          RelativePanel.AlignLeftWithPanel="True" 
+                          RelativePanel.AlignRightWithPanel="True">
                 </ListView>
                 <TextBlock x:Name="WalletsTitle" x:Uid="Category_WalletsTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Associated Wallets" RelativePanel.Below="ListViewRules"/>
                 <ListView x:Name="ListViewWallets" 
-                          ItemTemplate="{StaticResource WalletsItemTemplate}" 
+                          ItemTemplate="{StaticResource WalletsItemTemplateNarrow}" 
                           ItemsSource="{Binding Wallets}" 
                           IsSwipeEnabled="False" 
                           SelectionMode="None"
@@ -102,6 +107,7 @@
                     <VisualState.Setters>
                         <Setter Target="ListViewRules.Width" Value="500" />
                         <Setter Target="ListViewRules.ItemTemplate" Value="{StaticResource RulesItemTemplateWide}" />
+                        <Setter Target="ListViewWallets.ItemTemplate" Value="{StaticResource WalletsItemTemplateWide}" />
                     </VisualState.Setters>
                 </VisualState>
                 <VisualState x:Name="NarrowState">
@@ -110,6 +116,7 @@
                     </VisualState.StateTriggers>
                     <VisualState.Setters>
                         <Setter Target="ListViewRules.ItemTemplate" Value="{StaticResource RulesItemTemplateNarrow}" />
+                        <Setter Target="ListViewWallets.ItemTemplate" Value="{StaticResource WalletsItemTemplateNarrow}" />
                     </VisualState.Setters>
                 </VisualState>
             </VisualStateGroup>
