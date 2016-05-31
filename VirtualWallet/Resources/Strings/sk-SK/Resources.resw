@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -353,5 +353,56 @@
   </data>
   <data name="Settings_Currency" xml:space="preserve">
     <value>Základná mena</value>
+  </data>
+  <data name="Wallet_Balance.Text" xml:space="preserve">
+    <value>Zostatok:</value>
+  </data>
+  <data name="Wallet_ChartBalances.Title" xml:space="preserve">
+    <value>Zostatky</value>
+  </data>
+  <data name="Wallet_ChartExpenses.Title" xml:space="preserve">
+    <value>Výdaje</value>
+  </data>
+  <data name="Wallet_ChartIncomes.Title" xml:space="preserve">
+    <value>Príjmy</value>
+  </data>
+  <data name="Wallet_DateEnd.Text" xml:space="preserve">
+    <value>Posledná synchronizácia:</value>
+  </data>
+  <data name="Wallet_DateStart.Text" xml:space="preserve">
+    <value>Datované od:</value>
+  </data>
+  <data name="Wallet_ErrorDialog" xml:space="preserve">
+    <value>Och! Niečo sa pokazilo. Skontrolujte prosím pripojenie k internetu a platnosť tokenu.</value>
+  </data>
+  <data name="Wallet_LinearAxisBalanceInfo" xml:space="preserve">
+    <value>Zostatok ({0})</value>
+  </data>
+  <data name="Wallet_LineSeriesBalance.Title" xml:space="preserve">
+    <value>Zostatok</value>
+  </data>
+  <data name="Wallet_OpeningBalance.Text" xml:space="preserve">
+    <value>Počiatočný zostatok:</value>
+  </data>
+  <data name="Wallet_Pivot_Category.Header" xml:space="preserve">
+    <value>Kategória</value>
+  </data>
+  <data name="Wallet_Pivot_Overview.Header" xml:space="preserve">
+    <value>Prehľad</value>
+  </data>
+  <data name="Wallet_Pivot_Transactions.Header" xml:space="preserve">
+    <value>Transakcie</value>
+  </data>
+  <data name="Wallet_NoDataFound" xml:space="preserve">
+    <value>Neboli nalezené žiadne transakcie</value>
+  </data>
+  <data name="Wallet_TimeRange.Header" xml:space="preserve">
+    <value>Časové obdobie</value>
+  </data>
+  <data name="Wallet_Currency.Text" xml:space="preserve">
+    <value>Mena</value>
+  </data>
+  <data name="Wallet_DefaultTimeRange.Text" xml:space="preserve">
+    <value>Predvolený časový rozsah</value>
   </data>
 </root>

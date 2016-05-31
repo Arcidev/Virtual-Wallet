@@ -354,4 +354,55 @@
   <data name="Settings_Currency" xml:space="preserve">
     <value>Výchozí měna</value>
   </data>
+  <data name="Wallet_Balance.Text" xml:space="preserve">
+    <value>Zůstatek:</value>
+  </data>
+  <data name="Wallet_ChartBalances.Title" xml:space="preserve">
+    <value>Zůstatky</value>
+  </data>
+  <data name="Wallet_ChartExpenses.Title" xml:space="preserve">
+    <value>Výdaje</value>
+  </data>
+  <data name="Wallet_ChartIncomes.Title" xml:space="preserve">
+    <value>Příjmy</value>
+  </data>
+  <data name="Wallet_DateEnd.Text" xml:space="preserve">
+    <value>Poslední synchronizace:</value>
+  </data>
+  <data name="Wallet_DateStart.Text" xml:space="preserve">
+    <value>Datován od:</value>
+  </data>
+  <data name="Wallet_ErrorDialog" xml:space="preserve">
+    <value>Jejda! Něco se pokazilo. Zkontrolujte prosím připojení k internetu a platnost tokenu.</value>
+  </data>
+  <data name="Wallet_LinearAxisBalanceInfo" xml:space="preserve">
+    <value>Zůstatek ({0})</value>
+  </data>
+  <data name="Wallet_LineSeriesBalance.Title" xml:space="preserve">
+    <value>Zůstatek</value>
+  </data>
+  <data name="Wallet_NoDataFound" xml:space="preserve">
+    <value>Nebyly zaznamenány žádné transakce</value>
+  </data>
+  <data name="Wallet_OpeningBalance.Text" xml:space="preserve">
+    <value>Počáteční zůstatek:</value>
+  </data>
+  <data name="Wallet_Pivot_Category.Header" xml:space="preserve">
+    <value>Kategorie</value>
+  </data>
+  <data name="Wallet_Pivot_Overview.Header" xml:space="preserve">
+    <value>Přehled</value>
+  </data>
+  <data name="Wallet_Pivot_Transactions.Header" xml:space="preserve">
+    <value>Transakce</value>
+  </data>
+  <data name="Wallet_TimeRange.Header" xml:space="preserve">
+    <value>Časové období</value>
+  </data>
+  <data name="Wallet_Currency.Text" xml:space="preserve">
+    <value>Měna</value>
+  </data>
+  <data name="Wallet_DefaultTimeRange.Text" xml:space="preserve">
+    <value>Výchozí časový rozsah</value>
+  </data>
 </root>

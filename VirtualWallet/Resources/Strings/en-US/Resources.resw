@@ -1,4 +1,4 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -353,5 +353,56 @@
   </data>
   <data name="Settings_Currency" xml:space="preserve">
     <value>Default currency</value>
+  </data>
+  <data name="Wallet_Balance.Text" xml:space="preserve">
+    <value>Balance:</value>
+  </data>
+  <data name="Wallet_ChartBalances.Title" xml:space="preserve">
+    <value>Balances</value>
+  </data>
+  <data name="Wallet_ChartExpenses.Title" xml:space="preserve">
+    <value>Expenses</value>
+  </data>
+  <data name="Wallet_ChartIncomes.Title" xml:space="preserve">
+    <value>Incomes</value>
+  </data>
+  <data name="Wallet_DateEnd.Text" xml:space="preserve">
+    <value>Last sync date:</value>
+  </data>
+  <data name="Wallet_DateStart.Text" xml:space="preserve">
+    <value>Opening date:</value>
+  </data>
+  <data name="Wallet_ErrorDialog" xml:space="preserve">
+    <value>Oops, something went wrong. Please check your internet connection and token validity.</value>
+  </data>
+  <data name="Wallet_LinearAxisBalanceInfo" xml:space="preserve">
+    <value>Balance ({0})</value>
+  </data>
+  <data name="Wallet_LineSeriesBalance.Title" xml:space="preserve">
+    <value>Balance</value>
+  </data>
+  <data name="Wallet_OpeningBalance.Text" xml:space="preserve">
+    <value>Opening balance:</value>
+  </data>
+  <data name="Wallet_Pivot_Category.Header" xml:space="preserve">
+    <value>Category</value>
+  </data>
+  <data name="Wallet_Pivot_Overview.Header" xml:space="preserve">
+    <value>Overview</value>
+  </data>
+  <data name="Wallet_Pivot_Transactions.Header" xml:space="preserve">
+    <value>Transactions</value>
+  </data>
+  <data name="Wallet_NoDataFound" xml:space="preserve">
+    <value>No data found</value>
+  </data>
+  <data name="Wallet_TimeRange.Header" xml:space="preserve">
+    <value>Time range</value>
+  </data>
+  <data name="Wallet_Currency.Text" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="Wallet_DefaultTimeRange.Text" xml:space="preserve">
+    <value>Default time range</value>
   </data>
 </root>
