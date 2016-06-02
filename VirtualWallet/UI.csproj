@@ -117,6 +117,9 @@
     <Compile Include="Pages\Bank\BanksPage.xaml.cs">
       <DependentUpon>BanksPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\CashPayment\CashPayment.xaml.cs">
+      <DependentUpon>CashPayment.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\Category\CategoriesPage.xaml.cs">
       <DependentUpon>CategoriesPage.xaml</DependentUpon>
     </Compile>
@@ -149,6 +152,7 @@
     <Compile Include="ViewModels\Bank\BankCredentialsPageViewModel.cs" />
     <Compile Include="ViewModels\Bank\BankPageViewModel.cs" />
     <Compile Include="ViewModels\Bank\BanksPageViewModel.cs" />
+    <Compile Include="ViewModels\CashPayment\CashPaymentViewModel.cs" />
     <Compile Include="ViewModels\HamburgerPane\HamburgerPaneViewModel.cs" />
     <Compile Include="ViewModels\Rule\RulePageViewModel.cs" />
     <Compile Include="ViewModels\Image\ImagesPageViewModel.cs" />
@@ -335,6 +339,10 @@
     <Page Include="Pages\Bank\BanksPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Pages\CashPayment\CashPayment.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\Category\CategoriesPage.xaml">
       <SubType>Designer</SubType>

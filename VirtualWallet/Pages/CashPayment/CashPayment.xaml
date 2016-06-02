@@ -1,0 +1,102 @@
+﻿<Page
+    x:Class="VirtualWallet.Pages.CashPayment"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:VirtualWallet.Pages.CashPayment"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d">
+
+    <Page.Resources>
+        <DataTemplate x:Key="TransactionItemTemplateNarrow">
+            <RelativePanel HorizontalAlignment="Stretch">
+                <TextBlock x:Name="Date" Margin="5" Text="{Binding Date}" Width="60"/>
+                <TextBlock x:Name="Description" Margin="5" RelativePanel.RightOf="Date" Text="{Binding Description}" Width="100"/>
+                <TextBlock x:Name="Amount" Margin="5" RelativePanel.RightOf="Description" Text="{Binding Amount}" Width="50"/>
+                <TextBlock x:Name="Currency" Margin="5" RelativePanel.RightOf="Amount" Text="{Binding Currency}" Width="50"/>
+                <Button Click="RemoveTransactionButton_Click" RelativePanel.RightOf="Currency" RelativePanel.AlignVerticalCenterWith="Currency" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <SymbolIcon Symbol="Remove"/>
+                </Button>
+            </RelativePanel>
+        </DataTemplate>
+        <DataTemplate x:Key="TransactionItemTemplateWide">
+            <RelativePanel HorizontalAlignment="Stretch">
+                <TextBlock x:Name="Date" Margin="5" Text="{Binding Date}" Width="50"/>
+                <TextBlock x:Name="Description" Margin="5" RelativePanel.RightOf="Date" Text="{Binding Description}" Width="200"/>
+                <TextBlock x:Name="Amount" Margin="5" RelativePanel.RightOf="Description" Text="{Binding Amount}" Width="50"/>
+                <TextBlock x:Name="Currency" Margin="5" RelativePanel.RightOf="Amount" Text="{Binding Currency}" Width="50"/>
+                <Button Click="RemoveTransactionButton_Click" RelativePanel.RightOf="Currency" RelativePanel.AlignVerticalCenterWith="Currency" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                    <SymbolIcon Symbol="Remove"/>
+                </Button>
+            </RelativePanel>
+        </DataTemplate>
+    </Page.Resources>
+
+    <Grid>
+        <ScrollViewer VerticalScrollMode="Auto" VerticalScrollBarVisibility="Auto" VerticalAlignment="Stretch">
+            <RelativePanel x:Name="MainRelativePanel" ScrollViewer.VerticalScrollMode="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+                <TextBlock x:Name="NewPaymentTitle" x:Uid="CashPayment_NewPaymentTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Create new cash payment"/>
+                <Grid x:Name="PaymentFormGrid" Background="{ThemeResource ApplicationPageBackgroundThemeBrush}" HorizontalAlignment="Left" Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}" RelativePanel.Below="NewPaymentTitle">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <TextBlock Grid.Row="0" x:Uid="CashPayment_Description" Margin="10" >Description:</TextBlock>
+                    <TextBox Grid.Row="0" Grid.Column="1" Margin="10" x:Name="PaymentDescription" Text="{Binding PaymentDescription,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Grid.Row="1" x:Uid="CashPayment_Amount" Margin="10" >Amount:</TextBlock>
+                    <TextBox Grid.Row="1" Grid.Column="1" Margin="10" x:Name="PaymentAmount" Text="{Binding PaymentAmount,  Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+                    <TextBlock Grid.Row="2" x:Uid="CashPayment_Currency" Margin="10" >Currency:</TextBlock>
+                    <ComboBox Grid.Row="2" Grid.Column="1" Margin="10" x:Name="PaymentCurrency" SelectedItem="{Binding PaymentCurrency, Mode=TwoWay}" ItemsSource="{Binding Currencies}" DisplayMemberPath="Code" SelectedValuePath="Code"/>
+                    <Button Grid.Row="3" Grid.Column="1" Margin="10" HorizontalAlignment="Stretch" Click="CreateButton_Click">
+                        <SymbolIcon Symbol="Accept"/>
+                    </Button>
+                </Grid>
+                <TextBlock x:Name="TransactionsTitle" x:Uid="CashPayment_TransactionsTitle" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="10" Text="Cash payments" RelativePanel.Below="PaymentFormGrid"/>
+                <ListView x:Name="ListViewTransactions" 
+                          ItemTemplate="{StaticResource TransactionItemTemplateNarrow}" 
+                          ItemsSource="{Binding Transactions}" 
+                          IsSwipeEnabled="False" 
+                          SelectionMode="None"
+                          IsItemClickEnabled="True"
+                          ItemClick="ListViewRules_ItemClick"
+                          RelativePanel.Below="TransactionsTitle"
+                          HorizontalAlignment="Left" 
+                          RelativePanel.AlignLeftWithPanel="True" 
+                          RelativePanel.AlignRightWithPanel="True">
+                </ListView>
+            </RelativePanel>
+        </ScrollViewer>
+        <CommandBar x:Name="BotomAppBar" ClosedDisplayMode="Compact" VerticalAlignment="Bottom">
+            <CommandBar.PrimaryCommands>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroup>
+                <VisualState x:Name="WideState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="500" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ListViewTransactions.Width" Value="500" />
+                        <Setter Target="ListViewTransactions.ItemTemplate" Value="{StaticResource TransactionItemTemplateWide}" />
+                    </VisualState.Setters>
+                </VisualState>
+                <VisualState x:Name="NarrowState">
+                    <VisualState.StateTriggers>
+                        <AdaptiveTrigger MinWindowWidth="0" />
+                    </VisualState.StateTriggers>
+                    <VisualState.Setters>
+                        <Setter Target="ListViewTransactions.ItemTemplate" Value="{StaticResource TransactionItemTemplateNarrow}" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateManager.VisualStateGroups>
+    </Grid>
+</Page>
