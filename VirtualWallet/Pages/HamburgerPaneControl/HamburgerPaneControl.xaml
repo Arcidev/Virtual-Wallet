@@ -11,7 +11,7 @@
     mc:Ignorable="d"
     Loaded="UserControl_Loaded">
 
-    <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+    <Grid Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition />
             <RowDefinition Height="Auto" />
@@ -29,11 +29,6 @@
                     </DataTemplate>
                 </ItemsControl.ItemTemplate>
             </ItemsControl>
-            <localControls:HamburgerArgumentMenuButton Content="{Binding Text_CashPaynment}" NavigationSourcePageType="local:CashPayment">
-                <localControls:HamburgerArgumentMenuButton.Icon>
-                    <fa:FontAwesome Icon="Money"/>
-                </localControls:HamburgerArgumentMenuButton.Icon>
-            </localControls:HamburgerArgumentMenuButton>
             <controls:HamburgerMenuButton Content="{Binding Text_Banks}">
                 <controls:HamburgerMenuButton.Icon>
                     <fa:FontAwesome Icon="Bank"/>
@@ -53,10 +48,17 @@
             </localControls:HamburgerArgumentMenuButton>
         </StackPanel>
 
-        <localControls:HamburgerArgumentMenuButton Grid.Row="1" Content="{Binding Text_Settings}" NavigationSourcePageType="local:SettingsPage">
-            <localControls:HamburgerArgumentMenuButton.Icon>
-                <SymbolIcon Symbol="Setting"/>
-            </localControls:HamburgerArgumentMenuButton.Icon>
-        </localControls:HamburgerArgumentMenuButton>
+        <StackPanel Grid.Row="1">
+            <localControls:HamburgerArgumentMenuButton Content="{Binding Text_AddCashPaynment}" NavigationSourcePageType="local:CashPayment">
+                <localControls:HamburgerArgumentMenuButton.Icon>
+                    <fa:FontAwesome Icon="Money"/>
+                </localControls:HamburgerArgumentMenuButton.Icon>
+            </localControls:HamburgerArgumentMenuButton>
+            <localControls:HamburgerArgumentMenuButton Content="{Binding Text_Settings}" NavigationSourcePageType="local:SettingsPage">
+                <localControls:HamburgerArgumentMenuButton.Icon>
+                    <SymbolIcon Symbol="Setting"/>
+                </localControls:HamburgerArgumentMenuButton.Icon>
+            </localControls:HamburgerArgumentMenuButton>
+        </StackPanel>
     </Grid>
 </UserControl>

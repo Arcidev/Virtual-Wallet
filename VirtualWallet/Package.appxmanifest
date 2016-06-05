@@ -4,7 +4,7 @@
   <mp:PhoneIdentity PhoneProductId="ceee03ad-da69-49b2-933b-86665b420951" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>VirtualWallet</DisplayName>
-    <PublisherDisplayName>Andrej Dobeš, Lukáš Valach, Jan Grundmann</PublisherDisplayName>
+    <PublisherDisplayName>Andrej Dobeš, Lukáš Valach</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

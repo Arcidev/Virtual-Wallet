@@ -405,4 +405,7 @@
   <data name="Wallet_DefaultTimeRange.Text" xml:space="preserve">
     <value>Výchozí časový rozsah</value>
   </data>
+  <data name="HamburgerPane_AddCashPaynment" xml:space="preserve">
+    <value>Přidat hotovostní platbu</value>
+  </data>
 </root>

@@ -20,7 +20,7 @@
                     <RelativePanel>
                         <RelativePanel x:Name="BankInfo">
                             <Image x:Name="BankImage" RelativePanel.AlignVerticalCenterWithPanel="True" MaxHeight="40" MaxWidth="60" Source="{Binding Bank.ImageUri}" />
-                            <TextBlock RelativePanel.RightOf="BankImage" FontSize="40" Text="{Binding Bank.Name}" />
+                            <TextBlock Margin="5 0 0 0" RelativePanel.RightOf="BankImage" FontSize="40" Text="{Binding Bank.Name}" />
                         </RelativePanel>
                         <TextBlock x:Uid="Bank_Balance" x:Name="Balance" RelativePanel.Below="BankInfo" Margin="5" Text="Balance:" />
                         <TextBlock RelativePanel.Below="BankInfo" RelativePanel.RightOf="Balance" Margin="5" Text="{Binding BankAccountInfo.ClosingBalanceString}" />

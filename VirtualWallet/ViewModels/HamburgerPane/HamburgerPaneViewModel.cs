@@ -52,6 +52,8 @@ namespace VirtualWallet.ViewModels
 
         public string Text_Settings { get { return resources.GetString("HamburgerPane_Settings"); } }
 
+        public string Text_AddCashPaynment { get { return resources.GetString("HamburgerPane_AddCashPaynment"); } }
+
         public HamburgerPaneViewModel(IBankService bankService, IWalletService walletService, ICategoryService categoryService, ResourceLoader resources)
         {
             this.bankService = bankService;
