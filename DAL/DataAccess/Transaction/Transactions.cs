@@ -25,6 +25,9 @@ namespace DAL.DataAccess
             if (filter.DateSince.HasValue)
                 query = query.Where(x => x.Date >= filter.DateSince.Value);
 
+            if (filter.IsCashPayment)
+                query = query.Where(x => x.BankId == null);
+
             return base.ApplyFilters(query, filter);
         }
     }

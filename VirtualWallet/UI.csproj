@@ -105,6 +105,7 @@
     <Compile Include="Behaviors\HideablePivotItemBehavior.cs" />
     <Compile Include="Controls\HamburgerArgumentMenuButton.cs" />
     <Compile Include="Converters\AlternateConverter.cs" />
+    <Compile Include="Converters\DateTimeToDateTimeOffsetConverter.cs" />
     <Compile Include="Converters\InvertedBoolToVisibilityConverter.cs" />
     <Compile Include="Converters\BoolToVisibilityConverter.cs" />
     <Compile Include="Helpers\MenuHelper.cs" />

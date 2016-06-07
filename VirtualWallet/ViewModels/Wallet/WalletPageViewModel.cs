@@ -37,12 +37,14 @@ namespace VirtualWallet.ViewModels
         private IList<Tuple<string, double>> incomes;
         private IList<Tuple<DateTime, double>> balances;
         private IList<TransactionCategoryList> transactionCategories;
+        private IList<Transaction> cashPayments;
         private ICommand syncCommand;
         private Timer syncExecuteTimer;
         private bool syncButtonForceDisabled;
         private string categoryOther;
         private string linearAxisInfo;
         private IList<SolidColorBrush> brushes;
+        private double walletBalance;
         private double closingBalance;
         private double openingBalance;
         private DateTime openingDate;
@@ -116,6 +118,25 @@ namespace VirtualWallet.ViewModels
 
                 // BankAccountInfo = Bank?.BankAccountInfo ?? new BankAccountInfo();
             }
+        }
+
+        public double WalletBalance
+        {
+            get { return walletBalance; }
+            private set
+            {
+                if (walletBalance == value)
+                    return;
+
+                walletBalance = value;
+                NotifyPropertyChanged();
+                NotifyPropertyChanged(nameof(WalletBalanceString));
+            }
+        }
+
+        public string WalletBalanceString
+        {
+            get { return CurrencyFormatter.Format(walletBalance, Currency); }
         }
 
         public double ClosingBalance
@@ -319,8 +340,10 @@ namespace VirtualWallet.ViewModels
             Wallet = wallet;
             await LoadCurrencyAsync();
             await LoadCategoriesAsync();
+            await LoadCashPaymentsAsync();
             await LoadBanksAsync();
             await LoadBanksDataAsync();
+            await LoadCurrencyAsync();
         }
         
         private async Task LoadCategoriesAsync()
@@ -353,6 +376,7 @@ namespace VirtualWallet.ViewModels
                 if (walletBank.Bank != null)
                     banks.Add(walletBank.Bank);
             }
+
             Banks = new ObservableCollection<Bank>(banks);
         }
 
@@ -369,6 +393,12 @@ namespace VirtualWallet.ViewModels
             }
             
             ReloadTransactions();
+        }
+
+        private async Task LoadCashPaymentsAsync()
+        {
+            var filter = new TransactionFilter() { IsCashPayment = true, DateSince = TimeRange.ToDateSince() };
+            cashPayments = await transactionService.GetAsync(filter);
         }
 
         public async Task LoadCurrencyAsync()
@@ -494,6 +524,9 @@ namespace VirtualWallet.ViewModels
                 mergedTrans.AddRange(bank.StoredTransactions);
             }
 
+            if (cashPayments != null)
+                mergedTrans.AddRange(cashPayments);
+
             var trans = mergedTrans.GroupBy(x => x.Date).Select(x => Tuple.Create(x.Key, x.Sum(y => y.Amount))).OrderByDescending(x => x.Item1).Select(x =>
             {
                 amount -= (double)x.Item2;
@@ -526,6 +559,7 @@ namespace VirtualWallet.ViewModels
 
         private void ComputeWalletInfo()
         {
+            var cashPaymentBalance = 0.0;
             var closingBalance = 0.0;
             var openingBalance = 0.0;
             var openingDate = DateTime.Now;
@@ -548,7 +582,13 @@ namespace VirtualWallet.ViewModels
                     lastSync = endDate;
                 }
             }
+            
+            foreach(Transaction t in cashPayments)
+            {
+                cashPaymentBalance += decimal.ToDouble(t.Amount);
+            }
 
+            WalletBalance = closingBalance + cashPaymentBalance;
             ClosingBalance = closingBalance;
             OpeningBalance = openingBalance;
             OpeningDate = openingDate;

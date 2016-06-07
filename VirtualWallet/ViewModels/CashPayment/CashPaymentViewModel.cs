@@ -1,23 +1,12 @@
-﻿using BL.Metadata;
-using BL.Models;
+﻿using BL.Models;
 using BL.Service;
 using Shared.Enums;
 using Shared.Filters;
-using Shared.Formatters;
-using Shared.Modifiers;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Linq;
-using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using VirtualWallet.Controls;
 using Windows.ApplicationModel.Resources;
-using Windows.UI;
-using Windows.UI.Core;
-using Windows.UI.Popups;
-using Windows.UI.Xaml.Media;
 
 namespace VirtualWallet.ViewModels
 {
@@ -27,7 +16,8 @@ namespace VirtualWallet.ViewModels
         private ICurrencyService currencyService;
         private ResourceLoader resources;
 
-        decimal paymentAmount;
+        DateTime paymentDate;
+        string paymentAmount;
         string paymentDescription;
         Currency paymentCurrency;
         TimeRange timeRange;
@@ -41,6 +31,7 @@ namespace VirtualWallet.ViewModels
             this.resources = resources;
 
             this.timeRange = TimeRange.Month;
+            this.PaymentDate = DateTime.Now;
         }
 
         public IList<Currency> Currencies
@@ -69,7 +60,23 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public decimal PaymentAmount
+        public DateTime PaymentDate
+        {
+            get
+            {
+                return paymentDate;
+            }
+            set
+            {
+                if (paymentDate == value)
+                    return;
+
+                paymentDate = value;
+                NotifyPropertyChanged();
+            }
+        }
+
+        public string PaymentAmount
         {
             get
             {
@@ -130,6 +137,7 @@ namespace VirtualWallet.ViewModels
 
                 timeRange = value;
                 NotifyPropertyChanged();
+                LoadTransactions();
             }
         }
 
@@ -148,15 +156,24 @@ namespace VirtualWallet.ViewModels
         private async Task LoadTransactions()
         {
             var filter = new TransactionFilter() { Ids = null, DateSince = TimeRange.ToDateSince() };
-            var trans = await transactionService.GetByBankIdAsync(null, filter); //GetAsync(filter);
-            trans.OrderByDescending(x => x.Date);
+            var trans = await transactionService.GetByBankIdAsync(null, filter);
+            trans = trans.OrderByDescending(x => x.Date).ToList();
             Transactions = trans;
         }
 
         public async Task CreateTransaction()
         {
-            var newTransaction = new Transaction() { BankId = null, Date = DateTime.Now, Description = paymentDescription, Currency = paymentCurrency.Code, Amount = paymentAmount };
+            var amount = decimal.Parse(paymentAmount);
+
+            var newTransaction = new Transaction() { BankId = null, Date = PaymentDate, Description = paymentDescription, Currency = paymentCurrency.Code, Amount = amount };
+
             await transactionService.InsertAsync(false, newTransaction);
+            await LoadTransactions();
+        }
+
+        public async Task DeleteTransaction(Transaction t)
+        {
+            await transactionService.DeleteAsync(t.Id);
             await LoadTransactions();
         }
     }

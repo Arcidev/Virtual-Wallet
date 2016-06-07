@@ -23,13 +23,18 @@
                             <Image x:Name="WalletImage" Margin="5" RelativePanel.AlignVerticalCenterWithPanel="True" MaxHeight="40" MaxWidth="60" Source="{Binding Wallet.ImageUri}" />
                             <TextBlock RelativePanel.RightOf="WalletImage" FontSize="40" Text="{Binding Wallet.Name}" />
                         </RelativePanel>
-                        <TextBlock x:Uid="Wallet_Balance" x:Name="Balance" RelativePanel.Below="WalletInfo" Margin="5" Text="Balance:" />
-                        <TextBlock RelativePanel.Below="WalletInfo" RelativePanel.RightOf="Balance" Margin="5" Text="{Binding ClosingBalanceString}" />
-                        <TextBlock x:Uid="Wallet_OpeningBalance" x:Name="OpeningBalance" RelativePanel.Below="Balance" Margin="5" Text="Opening balance:" />
-                        <TextBlock RelativePanel.Below="Balance" RelativePanel.RightOf="OpeningBalance" Margin="5" Text="{Binding OpeningBalanceString}" />
-                        <TextBlock x:Uid="Wallet_DateStart" x:Name="DateStart" RelativePanel.Below="OpeningBalance" Margin="5" Text="Opening date:" />
+                        <TextBlock x:Name="WalletOverview" x:Uid="Wallet_WalletOverview" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="5,10,0,0" Text="Wallet overview" RelativePanel.Below="WalletInfo"/>
+                        <TextBlock x:Uid="Wallet_Balance" x:Name="WalletBalance" RelativePanel.Below="WalletOverview" Margin="10,5,5,5" Text="Balance:" />
+                        <TextBlock RelativePanel.Below="WalletOverview" RelativePanel.RightOf="WalletBalance" Margin="5" Text="{Binding WalletBalanceString}" />
+
+                        <TextBlock x:Name="BanksOverview" x:Uid="Wallet_BanksOverview" Style="{ThemeResource SubtitleTextBlockStyle}" Margin="5,10,0,0" Text="Banks overview" RelativePanel.Below="WalletBalance"/>
+                        <TextBlock x:Uid="Wallet_Balance" x:Name="BanksBalance" RelativePanel.Below="BanksOverview" Margin="10,5,5,5" Text="Balance:" />
+                        <TextBlock RelativePanel.Below="BanksOverview" RelativePanel.RightOf="BanksBalance" Margin="5" Text="{Binding ClosingBalanceString}" />
+                        <TextBlock x:Uid="Wallet_OpeningBalance" x:Name="OpeningBalance" RelativePanel.Below="BanksBalance" Margin="10,5,5,5" Text="Opening balance:" />
+                        <TextBlock RelativePanel.Below="BanksBalance" RelativePanel.RightOf="OpeningBalance" Margin="5" Text="{Binding OpeningBalanceString}" />
+                        <TextBlock x:Uid="Wallet_DateStart" x:Name="DateStart" RelativePanel.Below="OpeningBalance" Margin="10,5,5,5" Text="Opening date:" />
                         <TextBlock RelativePanel.Below="OpeningBalance" RelativePanel.RightOf="DateStart" Margin="5" Text="{Binding OpeningDateString}" />
-                        <TextBlock x:Uid="Wallet_DateEnd" x:Name="DateEnd" RelativePanel.Below="DateStart" Margin="5" Text="Last sync date:" />
+                        <TextBlock x:Uid="Wallet_DateEnd" x:Name="DateEnd" RelativePanel.Below="DateStart" Margin="10,5,5,5" Text="Last sync date:" />
                         <TextBlock RelativePanel.Below="DateStart" RelativePanel.RightOf="DateEnd" Margin="5" Text="{Binding LastSyncString}" />
                     </RelativePanel>
                 </ScrollViewer>

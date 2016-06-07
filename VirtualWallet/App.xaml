@@ -12,6 +12,7 @@
             <SampleData:WalletsSampleDataSource x:Key="WalletsSampleDataSource" d:IsDataSource="True"/>
             <converters:BoolToVisibilityConverter x:Key="BoolToVisibilityConverter"></converters:BoolToVisibilityConverter>
             <converters:InvertedBoolToVisibilityConverter x:Key="InvertedBoolToVisibilityConverter"></converters:InvertedBoolToVisibilityConverter>
+            <converters:DateTimeToDateTimeOffsetConverter x:Key="DateTimeToDateTimeOffsetConverter"></converters:DateTimeToDateTimeOffsetConverter>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Controls/Styles/HamburgerArgumentMenuButton.xaml" />
             </ResourceDictionary.MergedDictionaries>

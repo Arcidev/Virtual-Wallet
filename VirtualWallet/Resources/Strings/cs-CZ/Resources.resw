@@ -408,4 +408,37 @@
   <data name="HamburgerPane_AddCashPaynment" xml:space="preserve">
     <value>Přidat hotovostní platbu</value>
   </data>
+  <data name="CashPayment_Amount.Text" xml:space="preserve">
+    <value>Částka</value>
+  </data>
+  <data name="CashPayment_AmountFormatException" xml:space="preserve">
+    <value>Zadána neplatná částka.</value>
+  </data>
+  <data name="CashPayment_Currency.Text" xml:space="preserve">
+    <value>Měna</value>
+  </data>
+  <data name="CashPayment_Date.Text" xml:space="preserve">
+    <value>Datum</value>
+  </data>
+  <data name="CashPayment_Description.Text" xml:space="preserve">
+    <value>Popis</value>
+  </data>
+  <data name="CashPayment_NewPaymentTitle.Text" xml:space="preserve">
+    <value>Vložení nové hotovostní transakce</value>
+  </data>
+  <data name="CashPayment_TimeRange.Header" xml:space="preserve">
+    <value>Časové období</value>
+  </data>
+  <data name="CashPayment_TransactionsTitle.Text" xml:space="preserve">
+    <value>Hotovostní transakce</value>
+  </data>
+  <data name="CashPayment_PageTitle" xml:space="preserve">
+    <value>Hotovostní platby</value>
+  </data>
+  <data name="Wallet_BanksOverview.Text" xml:space="preserve">
+    <value>Přehled bank</value>
+  </data>
+  <data name="Wallet_WalletOverview.Text" xml:space="preserve">
+    <value>Přehled peněženky</value>
+  </data>
 </root>
