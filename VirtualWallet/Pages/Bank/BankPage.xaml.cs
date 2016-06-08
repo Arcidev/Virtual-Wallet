@@ -75,7 +75,7 @@ namespace VirtualWallet.Pages
         {
             if (viewModel.Balances?.Count > 0)
             {
-                var size = screenWidth / 200 - 0.5;
+                var size = (screenWidth / 200 - 0.5) / 5;
                 TransactionsLineSeries.IndependentAxis = new DateTimeAxis()
                 {
                     Orientation = AxisOrientation.X,
