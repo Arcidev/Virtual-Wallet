@@ -1,6 +1,8 @@
 ﻿using BL.Models;
 using BL.Service;
 using Shared.Formatters;
+using System;
+using System.Linq;
 using VirtualWallet.Helpers;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -75,12 +77,23 @@ namespace VirtualWallet.Pages
         {
             if (viewModel.Balances?.Count > 0)
             {
-                var size = (screenWidth / 200 - 0.5) / 5;
+                var firstDay = viewModel.Balances?.Last<Tuple<DateTime, double>>();
+                var lastDay = viewModel.Balances?.First<Tuple<DateTime, double>>();
+
+                int daysBetween = 10;
+                if (firstDay != null && lastDay != null)
+                {
+                    daysBetween = Math.Max((lastDay.Item1 - firstDay.Item1).Days, daysBetween);
+                }
+
+                var size = screenWidth / 130 - 0.5;
+                var interval = daysBetween / Math.Min(size, 10);
+
                 TransactionsLineSeries.IndependentAxis = new DateTimeAxis()
                 {
                     Orientation = AxisOrientation.X,
                     IntervalType = DateTimeIntervalType.Days,
-                    Interval = viewModel.Balances.Count / size
+                    Interval = interval
                 };
             }
         }

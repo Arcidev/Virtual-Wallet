@@ -538,7 +538,7 @@ namespace VirtualWallet.ViewModels
 
             if (trans.Count() != 0)
             {
-                trans.Add(Tuple.Create(DateTime.Now, closingBalance));
+                trans.Insert(0, Tuple.Create(DateTime.Now, closingBalance));
                 Balances = trans;
 
                 TransactionCategories = categoryService.GroupTransactionsForWallet(Categories, mergedTrans, categoryOther);

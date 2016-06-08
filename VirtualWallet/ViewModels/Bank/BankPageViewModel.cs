@@ -281,7 +281,7 @@ namespace VirtualWallet.ViewModels
             if (trans.FirstOrDefault()?.Item1.Date == DateTime.Now.Date)
                 trans.RemoveAt(0);
 
-            trans.Add(Tuple.Create(DateTime.Now, BankAccountInfo.ClosingBalance));
+            trans.Insert(0, Tuple.Create(DateTime.Now, BankAccountInfo.ClosingBalance));
             Balances = trans;
 
             TransactionCategories = await categoryService.GroupTransactions(Bank.StoredTransactions, categoryOther);
