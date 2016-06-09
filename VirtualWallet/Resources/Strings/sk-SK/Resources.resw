@@ -408,4 +408,37 @@
   <data name="HamburgerPane_AddCashPaynment" xml:space="preserve">
     <value>Pridať hotovostnú platbu</value>
   </data>
+  <data name="CashPayment_Amount.Text" xml:space="preserve">
+    <value>Čiastka</value>
+  </data>
+  <data name="CashPayment_AmountFormatException" xml:space="preserve">
+    <value>Zadná neplatná čiastka.</value>
+  </data>
+  <data name="CashPayment_Currency.Text" xml:space="preserve">
+    <value>Mena</value>
+  </data>
+  <data name="CashPayment_Date.Text" xml:space="preserve">
+    <value>Dátum</value>
+  </data>
+  <data name="CashPayment_Description.Text" xml:space="preserve">
+    <value>Popis</value>
+  </data>
+  <data name="CashPayment_NewPaymentTitle.Text" xml:space="preserve">
+    <value>Vloženie novej hotovostnej transakcie</value>
+  </data>
+  <data name="CashPayment_TimeRange.Header" xml:space="preserve">
+    <value>Časové obdobie</value>
+  </data>
+  <data name="CashPayment_TransactionsTitle.Text" xml:space="preserve">
+    <value>Hotovostná transakcia</value>
+  </data>
+  <data name="CashPayment_PageTitle" xml:space="preserve">
+    <value>Hotovostné platby</value>
+  </data>
+  <data name="Wallet_BanksOverview.Text" xml:space="preserve">
+    <value>Prehľad bánk</value>
+  </data>
+  <data name="Wallet_WalletOverview.Text" xml:space="preserve">
+    <value>Prehľad peňaženiek</value>
+  </data>
 </root>

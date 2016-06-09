@@ -408,4 +408,37 @@
   <data name="HamburgerPane_AddCashPaynment" xml:space="preserve">
     <value>Añadir pago en efectivo</value>
   </data>
+  <data name="CashPayment_Amount.Text" xml:space="preserve">
+    <value>Cantidad</value>
+  </data>
+  <data name="CashPayment_AmountFormatException" xml:space="preserve">
+    <value>Cantidad inválida</value>
+  </data>
+  <data name="CashPayment_Currency.Text" xml:space="preserve">
+    <value>Moneda</value>
+  </data>
+  <data name="CashPayment_Date.Text" xml:space="preserve">
+    <value>Dato</value>
+  </data>
+  <data name="CashPayment_Description.Text" xml:space="preserve">
+    <value>Descripción</value>
+  </data>
+  <data name="CashPayment_NewPaymentTitle.Text" xml:space="preserve">
+    <value>Pago nuevo</value>
+  </data>
+  <data name="CashPayment_TimeRange.Header" xml:space="preserve">
+    <value>Intervalo de tiempo</value>
+  </data>
+  <data name="CashPayment_PageTitle" xml:space="preserve">
+    <value>Pago en efectivo</value>
+  </data>
+  <data name="CashPayment_TransactionsTitle.Text" xml:space="preserve">
+    <value>Transacción en efectivo</value>
+  </data>
+  <data name="Wallet_BanksOverview.Text" xml:space="preserve">
+    <value>Información general del banco</value>
+  </data>
+  <data name="Wallet_WalletOverview.Text" xml:space="preserve">
+    <value>Información general de la billetera</value>
+  </data>
 </root>

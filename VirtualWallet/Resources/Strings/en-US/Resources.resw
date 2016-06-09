@@ -408,4 +408,37 @@
   <data name="HamburgerPane_AddCashPaynment" xml:space="preserve">
     <value>Add cash payment</value>
   </data>
+  <data name="CashPayment_Amount.Text" xml:space="preserve">
+    <value>Amount</value>
+  </data>
+  <data name="CashPayment_AmountFormatException" xml:space="preserve">
+    <value>Invalid amount.</value>
+  </data>
+  <data name="CashPayment_Currency.Text" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="CashPayment_Date.Text" xml:space="preserve">
+    <value>Date</value>
+  </data>
+  <data name="CashPayment_Description.Text" xml:space="preserve">
+    <value>Description</value>
+  </data>
+  <data name="CashPayment_NewPaymentTitle.Text" xml:space="preserve">
+    <value>New payment</value>
+  </data>
+  <data name="CashPayment_TimeRange.Header" xml:space="preserve">
+    <value>Time range</value>
+  </data>
+  <data name="CashPayment_TransactionsTitle.Text" xml:space="preserve">
+    <value>Cash transaction</value>
+  </data>
+  <data name="CashPayment_PageTitle" xml:space="preserve">
+    <value>Cash payments</value>
+  </data>
+  <data name="Wallet_BanksOverview.Text" xml:space="preserve">
+    <value>Bank overview</value>
+  </data>
+  <data name="Wallet_WalletOverview.Text" xml:space="preserve">
+    <value>Wallet overview</value>
+  </data>
 </root>
