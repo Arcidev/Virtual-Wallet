@@ -137,7 +137,7 @@ namespace VirtualWallet.ViewModels
 
                 timeRange = value;
                 NotifyPropertyChanged();
-                LoadTransactions();
+                LoadTransactionsInner();
             }
         }
 
@@ -174,6 +174,11 @@ namespace VirtualWallet.ViewModels
         public async Task DeleteTransaction(Transaction t)
         {
             await transactionService.DeleteAsync(t.Id);
+            await LoadTransactions();
+        }
+
+        private async void LoadTransactionsInner()
+        {
             await LoadTransactions();
         }
     }

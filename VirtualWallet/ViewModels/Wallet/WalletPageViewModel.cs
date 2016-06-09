@@ -241,7 +241,7 @@ namespace VirtualWallet.ViewModels
 
                 Wallet.TimeRange = value;
                 NotifyPropertyChanged();
-                LoadBanksDataAsync();
+                LoadBanksInner();
             }
         }
 
@@ -593,6 +593,11 @@ namespace VirtualWallet.ViewModels
             OpeningBalance = openingBalance;
             OpeningDate = openingDate;
             LastSync = lastSync;
+        }
+
+        private async void LoadBanksInner()
+        {
+            await LoadBanksDataAsync();
         }
     }
 }

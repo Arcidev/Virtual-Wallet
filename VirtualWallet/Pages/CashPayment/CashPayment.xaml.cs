@@ -46,7 +46,7 @@ namespace VirtualWallet.Pages
             {
                 await viewModel.CreateTransaction();
             }
-            catch (FormatException ex)
+            catch (FormatException)
             {
                 await ShowDialog(resources.GetString("CashPayment_AmountFormatException"));
             }

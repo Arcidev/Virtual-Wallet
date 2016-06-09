@@ -12,7 +12,7 @@ namespace VirtualWallet.Converters
                 DateTime date = (DateTime)value;
                 return new DateTimeOffset(date);
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return DateTimeOffset.MinValue;
             }
@@ -25,7 +25,7 @@ namespace VirtualWallet.Converters
                 DateTimeOffset dto = (DateTimeOffset)value;
                 return dto.DateTime;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return DateTime.MinValue;
             }
