@@ -11,8 +11,8 @@ namespace VirtualWallet.Converters
     {
         public List<SolidColorBrush> AlternateBrushes
         {
-            get { return (List<SolidColorBrush>)GetValue(AlternateBrushesProperty); }
-            set { SetValue(AlternateBrushesProperty, value); }
+            get => (List<SolidColorBrush>)GetValue(AlternateBrushesProperty);
+            set => SetValue(AlternateBrushesProperty, value);
         }
 
         public static readonly DependencyProperty AlternateBrushesProperty =

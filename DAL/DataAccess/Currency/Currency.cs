@@ -1,6 +1,6 @@
 ﻿using DAL.Data;
 using Shared.Filters;
-using SQLite.Net.Async;
+using SQLite;
 
 namespace DAL.DataAccess
 {

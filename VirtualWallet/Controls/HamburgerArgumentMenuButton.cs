@@ -21,8 +21,8 @@ namespace VirtualWallet.Controls
         /// <value>The <see cref="IconElement"/> for this button.</value>
         public IconElement Icon
         {
-            get { return (IconElement)GetValue(IconProperty); }
-            set { SetValue(IconProperty, value); }
+            get => (IconElement)GetValue(IconProperty);
+            set => SetValue(IconProperty, value);
         }
 
         /// <summary>
@@ -37,8 +37,8 @@ namespace VirtualWallet.Controls
         /// <value>The Icon <see cref="Visibility"/> for this button.</value>
         public Visibility IconVisibility
         {
-            get { return (Visibility)GetValue(IconVisibilityProperty); }
-            set { SetValue(IconVisibilityProperty, value); }
+            get => (Visibility)GetValue(IconVisibilityProperty);
+            set => SetValue(IconVisibilityProperty, value);
         }
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace VirtualWallet.Controls
         /// <value>The visibility of the label.</value>
         public Visibility LabelVisibility
         {
-            get { return (Visibility)GetValue(LabelVisibilityProperty); }
-            set { SetValue(LabelVisibilityProperty, value); }
+            get => (Visibility)GetValue(LabelVisibilityProperty);
+            set => SetValue(LabelVisibilityProperty, value);
         }
 
         /// <summary>
@@ -69,8 +69,8 @@ namespace VirtualWallet.Controls
         /// <value>The navigation source page type.</value>
         public Type NavigationSourcePageType
         {
-            get { return (Type)GetValue(NavigationSourcePageTypeProperty); }
-            set { SetValue(NavigationSourcePageTypeProperty, value); }
+            get => (Type)GetValue(NavigationSourcePageTypeProperty);
+            set => SetValue(NavigationSourcePageTypeProperty, value);
         }
 
         /// <summary>
@@ -85,8 +85,8 @@ namespace VirtualWallet.Controls
         /// <value>The navigation parameter.</value>
         public object NavigationParameter
         {
-            get { return GetValue(NavigationParameterProperty); }
-            set { SetValue(NavigationParameterProperty, value); }
+            get => GetValue(NavigationParameterProperty);
+            set => SetValue(NavigationParameterProperty, value);
         }
 
         /// <summary>

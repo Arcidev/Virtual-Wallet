@@ -7,11 +7,11 @@ namespace VirtualWallet.Helpers
 {
     public static class MenuHelper
     {
-        private static HamburgerFrame RootFrame { get { return Window.Current.Content as HamburgerFrame; } }
+        private static HamburgerFrame RootFrame => Window.Current.Content as HamburgerFrame;
 
-        private static HamburgerTitleBar Header { get { return RootFrame?.Header as HamburgerTitleBar; } }
+        private static HamburgerTitleBar Header => RootFrame?.Header as HamburgerTitleBar;
 
-        private static HamburgerPaneControl Pane { get { return RootFrame?.Pane as HamburgerPaneControl; } }
+        private static HamburgerPaneControl Pane => RootFrame?.Pane as HamburgerPaneControl;
 
         public static void SetHeader(string header)
         {

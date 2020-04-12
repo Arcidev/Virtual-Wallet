@@ -1,5 +1,5 @@
-﻿using BL.Mapping;
-using FioSdkCsharp;
+﻿using FioSdkCsharp;
+using Mapster;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -60,13 +60,15 @@ namespace BL.Models
             return GetTransactions(statement);
         }
 
-        public override async Task SetLastDownloadDateAsync(DateTime date)
+        public override Task SetLastDownloadDateAsync(DateTime date)
         {
             if (string.IsNullOrWhiteSpace(Token))
                 throw new InvalidOperationException("Fio bank token has not been set");
 
-            ApiExplorer explorer = new ApiExplorer(Token);
-            await explorer.SetLastDownloadDateAsync(date);
+            var explorer = new ApiExplorer(Token);
+            explorer.SetLastDownloadDateAsync(date);
+
+            return Task.FromResult(0);
         }
 
         public override void SaveCredentials()
@@ -99,7 +101,7 @@ namespace BL.Models
 
         private IList<Transaction> GetTransactions(FioSdkCsharp.Models.AccountStatement accountStatement)
         {
-            BankAccountInfo = MapperInstance.Mapper.Map<BankAccountInfo>(accountStatement.Info);
+            BankAccountInfo = accountStatement.Info.Adapt<BankAccountInfo>();
             BankAccountInfo.Id = Id;
 
             var transactions = new List<Transaction>();

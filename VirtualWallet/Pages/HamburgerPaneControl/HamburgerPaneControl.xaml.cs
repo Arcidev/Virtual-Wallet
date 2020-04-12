@@ -1,5 +1,4 @@
-﻿using BL.Models;
-using BL.Service;
+﻿using BL.Service;
 using System.Threading.Tasks;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
@@ -14,13 +13,13 @@ namespace VirtualWallet.Pages
     /// </summary>
     public sealed partial class HamburgerPaneControl : UserControl
     {
-        private HamburgerPaneViewModel viewModel;
+        private readonly HamburgerPaneViewModel viewModel;
 
         public HamburgerPaneControl()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             viewModel = new HamburgerPaneViewModel(new BankService(), new WalletService(), new CategoryService(), ResourceLoader.GetForCurrentView());
-            this.DataContext = viewModel;
+            DataContext = viewModel;
         }
 
         private async void UserControl_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)

@@ -7,8 +7,8 @@ namespace VirtualWallet.Controls
     {
         public event EventHandler CanExecuteChanged;
 
-        private Action action;
-        private Func<bool> canExecute;
+        private readonly Action action;
+        private readonly Func<bool> canExecute;
 
         public CommandHandler(Action action, Func<bool> canExecute = null)
         {
@@ -23,7 +23,7 @@ namespace VirtualWallet.Controls
 
         public void Execute(object parameter)
         {
-            this.action.Invoke();
+            action.Invoke();
         }
     }
 }

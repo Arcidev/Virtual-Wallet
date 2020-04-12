@@ -1,7 +1,4 @@
-﻿using SQLite.Net;
-using SQLite.Net.Async;
-using SQLite.Net.Platform.WinRT;
-using System;
+﻿using SQLite;
 using System.IO;
 using Windows.Storage;
 
@@ -13,7 +10,7 @@ namespace DAL.Helpers
 
         public const string DbFileName = "VirtualWalletDB.sqlite";
 
-        public static string DbFilePath { get { return Path.Combine(DbPath, DbFileName); } }
+        public static string DbFilePath => Path.Combine(DbPath, DbFileName);
 
         /// <summary>
         /// Gets db connection or creates new db if not exists
@@ -21,14 +18,7 @@ namespace DAL.Helpers
         /// <returns>Db connection</returns>
         public static SQLiteAsyncConnection GetDbAsyncConnection()
         {
-            var connectionFactory =
-                new Func<SQLiteConnectionWithLock>(
-                    () =>
-                    new SQLiteConnectionWithLock(
-                        new SQLitePlatformWinRT(),
-                        new SQLiteConnectionString(DbFilePath, storeDateTimeAsTicks: false)));
-
-            return new SQLiteAsyncConnection(connectionFactory);
+            return new SQLiteAsyncConnection(DbFilePath, false);
         }
     }
 }

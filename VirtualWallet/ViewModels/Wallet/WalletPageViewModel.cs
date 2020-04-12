@@ -316,11 +316,6 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        private void setChartCurrency(String currency)
-        {
-            LinearAxisInfo = string.Format(resources.GetString("Bank_LinearAxisBalanceInfo"), currency);
-        }
-
         public WalletPageViewModel(IBankAccountInfoService bankAccountInfoService, ITransactionService transactionService, ICategoryService categoryService, IWalletCategoryService walletCategoryService, IWalletBankService walletBankService, ICurrencyService currencyService, ResourceLoader resources)
         {
             this.bankAccountInfoService = bankAccountInfoService;
@@ -443,35 +438,6 @@ namespace VirtualWallet.ViewModels
             SetSyncExecuteTimer();
 
             AfterSync?.Invoke();
-        }
-
-        private async Task SyncBank(Bank bank, BL.Filters.TransactionFilter filter)
-        {
-            var bankTransactions = await bank.GetTransactionsAsync(filter);
-
-            if (bank.StoredTransactions != null && bank.StoredTransactions.Any())
-            {
-                var toStore = new List<Transaction>();
-                foreach (var transaction in bankTransactions)
-                {
-                    if (!bank.StoredTransactions.Any(x => x.ExternalId == transaction.ExternalId))
-                    {
-                        bank.StoredTransactions.Add(transaction);
-                        toStore.Add(transaction);
-                    }
-                }
-
-                await transactionService.InsertOrIgnoreAsync(false, toStore.ToArray());
-            }
-            else
-            {
-                bank.StoredTransactions = bankTransactions;
-                await transactionService.InsertOrIgnoreAsync(false, bankTransactions.ToArray());
-            }
-            
-            ReloadTransactions();
-
-            await bankAccountInfoService.InsertOrReplaceAsync(false, bank.BankAccountInfo);
         }
 
         private void SetSyncExecuteTimer()

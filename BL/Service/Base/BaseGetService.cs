@@ -1,8 +1,8 @@
 ﻿using BL.Models;
-using BL.Mapping;
 using Shared.Filters;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mapster;
 
 namespace BL.Service
 {
@@ -12,17 +12,17 @@ namespace BL.Service
 
         public async Task<T1> GetAsync(int id)
         {
-            return MapperInstance.Mapper.Map<T1>(await _instance.GetAsync(id));
+            return (await _instance.GetAsync(id)).Adapt<T1>();
         }
 
         public async Task<IList<T1>> GetAsync(T4 filter = null)
         {
-            return MapperInstance.Mapper.Map<IList<T1>>(await _instance.GetAsync(filter));
+            return (await _instance.GetAsync(filter)).Adapt<IList<T1>>();
         }
 
         public async Task<IList<T1>> GetAllAsync()
         {
-            return MapperInstance.Mapper.Map<IList<T1>>(await _instance.GetAllAsync());
+            return (await _instance.GetAllAsync()).Adapt<IList<T1>>();
         }
     }
 }

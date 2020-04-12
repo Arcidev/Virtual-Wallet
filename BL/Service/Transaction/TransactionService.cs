@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 using BL.Models;
 using DAL.DataAccess;
 using Shared.Filters;
-using BL.Mapping;
+using Mapster;
 
 namespace BL.Service
 {
@@ -11,7 +11,7 @@ namespace BL.Service
     {
         public async Task<IList<Transaction>> GetByBankIdAsync(int? bankId, TransactionFilter filter = null)
         {
-            return MapperInstance.Mapper.Map<IList<Transaction>>(await _instance.GetByBankIdAsync(bankId, filter));
+            return (await _instance.GetByBankIdAsync(bankId, filter)).Adapt<IList<Transaction>>();
         }
     }
 }

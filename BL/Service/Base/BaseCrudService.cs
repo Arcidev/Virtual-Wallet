@@ -1,8 +1,8 @@
 ﻿using BL.Models;
-using BL.Mapping;
 using Shared.Filters;
 using System.Threading.Tasks;
 using System;
+using Mapster;
 
 namespace BL.Service
 {
@@ -13,7 +13,7 @@ namespace BL.Service
             if (storeDbId)
                 await InsertAsync(_instance.InsertAsync, entities);
             else
-                await _instance.InsertAsync(MapperInstance.Mapper.Map<T2[]>(entities));
+                await _instance.InsertAsync(entities.Adapt<T2[]>());
         }
 
         public async Task InsertOrIgnoreAsync(bool storeDbId, params T1[] entities)
@@ -21,7 +21,7 @@ namespace BL.Service
             if (storeDbId)
                 await InsertAsync(_instance.InsertOrIgnoreAsync, entities);
             else
-                await _instance.InsertOrIgnoreAsync(MapperInstance.Mapper.Map<T2[]>(entities));
+                await _instance.InsertOrIgnoreAsync(entities.Adapt<T2[]>());
         }
 
         public async Task InsertOrReplaceAsync(bool storeDbId, params T1[] entities)
@@ -29,12 +29,12 @@ namespace BL.Service
             if (storeDbId)
                 await InsertAsync(_instance.InsertOrReplaceAsync, entities);
             else
-                await _instance.InsertOrReplaceAsync(MapperInstance.Mapper.Map<T2[]>(entities));
+                await _instance.InsertOrReplaceAsync(entities.Adapt<T2[]>());
         }
 
         public async Task UpdateAsync(params T1[] entities)
         {
-            await _instance.UpdateAsync(MapperInstance.Mapper.Map<T2[]>(entities));
+            await _instance.UpdateAsync(entities.Adapt<T2[]>());
         }
 
         public async Task DeleteAsync(int id)
@@ -51,7 +51,7 @@ namespace BL.Service
         {
             foreach (var entity in entities)
             {
-                var e = MapperInstance.Mapper.Map<T2>(entity);
+                var e = entity.Adapt<T2>();
                 await action(e);
                 entity.Id = e.Id;
             }

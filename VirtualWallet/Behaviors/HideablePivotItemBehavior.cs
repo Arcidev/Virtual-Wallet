@@ -25,13 +25,13 @@ namespace VirtualWallet.Behaviors
 
         public bool Visible
         {
-            get { return (bool)this.GetValue(VisibleProperty); }
-            set { this.SetValue(VisibleProperty, value); }
+            get => (bool)GetValue(VisibleProperty);
+            set => SetValue(VisibleProperty, value);
         }
 
         protected override void OnAttached()
         {
-            this.pivotItem = AssociatedObject;
+            pivotItem = AssociatedObject;
             base.OnAttached();
         }
 

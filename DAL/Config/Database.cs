@@ -1,7 +1,7 @@
 ﻿using DAL.Data;
 using DAL.Helpers;
 using Shared.Enums;
-using SQLite.Net.Async;
+using SQLite;
 using System;
 using System.IO;
 using System.Threading.Tasks;
@@ -28,7 +28,7 @@ namespace DAL.Config
         public async Task InitAsync()
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.CreateTablesAsync(tables);
+            await connection.CreateTablesAsync(CreateFlags.None, tables);
 
             await InitData(connection);
         }

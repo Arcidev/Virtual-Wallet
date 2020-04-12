@@ -1,7 +1,7 @@
 ﻿using DAL.Data;
 using DAL.Helpers;
 using Shared.Filters;
-using SQLite.Net.Async;
+using SQLite;
 using System.Threading.Tasks;
 
 namespace DAL.DataAccess
@@ -23,13 +23,16 @@ namespace DAL.DataAccess
         public async Task InsertOrIgnoreAsync(T1 entity)
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.InsertOrIgnoreAsync(entity);
+            //  await connection.InsertOrIgnoreAsync(entities);
+
+            await connection.InsertAsync(entity);
         }
 
         public async Task InsertOrIgnoreAsync(params T1[] entities)
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.InsertOrIgnoreAllAsync(entities);
+            //  await connection.InsertOrIgnoreAllAsync(entities);
+            await connection.InsertAllAsync(entities);
         }
 
         public async Task InsertOrReplaceAsync(T1 entity)
@@ -41,7 +44,8 @@ namespace DAL.DataAccess
         public async Task InsertOrReplaceAsync(params T1[] entities)
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
-            await connection.InsertOrReplaceAllAsync(entities);
+            //await connection.InsertOrReplaceAllAsync(entities);
+            await connection.InsertAllAsync(entities);
         }
 
         public async Task UpdateAsync(params T1[] entities)

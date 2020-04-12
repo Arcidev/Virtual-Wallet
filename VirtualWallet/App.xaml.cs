@@ -1,4 +1,5 @@
-﻿using BL.Service;
+﻿using BL.Mapping;
+using BL.Service;
 using Cimbalino.Toolkit.Controls;
 using System;
 using VirtualWallet.Pages;
@@ -16,7 +17,7 @@ namespace VirtualWallet
     /// </summary>
     sealed partial class App : Application
     {
-        private static readonly IDatabaseService _database = new DatabaseService();
+        private readonly IDatabaseService _database = new DatabaseService();
         private object lastParameter;
 
         /// <summary>
@@ -25,8 +26,8 @@ namespace VirtualWallet
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += OnSuspending;
+            InitializeComponent();
+            Suspending += OnSuspending;
         }
 
         /// <summary>
@@ -36,25 +37,22 @@ namespace VirtualWallet
         /// <param name="e">Details about the launch request and process.</param>
         protected override async void OnLaunched(LaunchActivatedEventArgs e)
         {
-
-#if DEBUG
+            #if DEBUG
             if (System.Diagnostics.Debugger.IsAttached)
             {
-                this.DebugSettings.EnableFrameRateCounter = true;
+                DebugSettings.EnableFrameRateCounter = true;
             }
-#endif
-
-            Frame rootFrame = Window.Current.Content as Frame;
+            #endif
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
-            if (rootFrame == null)
+            if (!(Window.Current.Content is Frame rootFrame))
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Cimbalino.Toolkit.Controls.HamburgerFrame()
+                rootFrame = new HamburgerFrame()
                 {
                     Pane = new HamburgerPaneControl(),
-                    Header = new Cimbalino.Toolkit.Controls.HamburgerTitleBar()
+                    Header = new HamburgerTitleBar()
                 };
                 
                 rootFrame.NavigationFailed += OnNavigationFailed;
@@ -69,6 +67,7 @@ namespace VirtualWallet
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
 
+                MapperInstaller.ConfigureMapper();
                 await _database.InitAsync();
 
                 // Register a handler for BackRequested events and set the
@@ -85,6 +84,7 @@ namespace VirtualWallet
                 // parameter
                 rootFrame.Navigate(typeof(WalletsPage));
             }
+
             // Ensure the current window is active
             Window.Current.Activate();
         }
@@ -122,10 +122,9 @@ namespace VirtualWallet
         private void OnNavigating(object sender, NavigatingCancelEventArgs e)
         {
             // Sender should always be hamburger frame
-            var hamburgerFrame = sender as HamburgerFrame;
-            if (hamburgerFrame == null)
+            if (!(sender is HamburgerFrame hamburgerFrame))
                 return;
-            
+
             // Prevents navigation to the same page as it is possible to do multiple navigations from hamburger menu to the same page
             if (hamburgerFrame.CurrentSourcePageType == e.SourcePageType && lastParameter == e.Parameter)
                 e.Cancel = true;
@@ -150,9 +149,7 @@ namespace VirtualWallet
         /// </summary>
         private void OnBackRequested(object sender, BackRequestedEventArgs e)
         {
-            Frame rootFrame = Window.Current.Content as Frame;
-
-            if (rootFrame.CanGoBack)
+            if (Window.Current.Content is Frame rootFrame && rootFrame.CanGoBack)
             {
                 e.Handled = true;
                 rootFrame.GoBack();

@@ -1,7 +1,7 @@
 ﻿using DAL.Data;
 using Shared.Filters;
 using Shared.Modifiers;
-using SQLite.Net.Async;
+using SQLite;
 using System.Threading.Tasks;
 
 namespace DAL.DataAccess

@@ -3,7 +3,7 @@ using DAL.Data;
 using Shared.Filters;
 using DAL.Helpers;
 using System.Threading.Tasks;
-using SQLite.Net.Async;
+using SQLite;
 
 namespace DAL.DataAccess
 {

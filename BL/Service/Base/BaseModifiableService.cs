@@ -1,9 +1,9 @@
 ﻿using BL.Models;
-using BL.Mapping;
 using Shared.Filters;
 using Shared.Modifiers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Mapster;
 
 namespace BL.Service
 {
@@ -11,17 +11,17 @@ namespace BL.Service
     {
         public async Task<T1> GetAsync(int id, T5 modifier)
         {
-            return MapperInstance.Mapper.Map<T1>(await _instance.GetAsync(id, modifier));
+            return (await _instance.GetAsync(id, modifier)).Adapt<T1>();
         }
 
         public async Task<IList<T1>> GetAsync(T4 filter, T5 modifier)
         {
-            return MapperInstance.Mapper.Map<IList<T1>>(await _instance.GetAsync(filter, modifier));
+            return (await _instance.GetAsync(filter, modifier)).Adapt<IList<T1>>();
         }
 
         public async Task<IList<T1>> GetAllAsync(T5 modifier)
         {
-            return MapperInstance.Mapper.Map<IList<T1>>(await _instance.GetAllAsync(modifier));
+            return (await _instance.GetAllAsync(modifier)).Adapt<IList<T1>>();
         }
     }
 
@@ -29,18 +29,17 @@ namespace BL.Service
     {
         public async Task<T1> GetAsync(int id, T5 modifier)
         {
-            return MapperInstance.Mapper.Map<T1>(await _instance.GetAsync(id, modifier));
+            return (await _instance.GetAsync(id, modifier)).Adapt<T1>();
         }
 
         public async Task<IList<T1>> GetAsync(T4 filter, T5 modifier)
         {
-            return MapperInstance.Mapper.Map<IList<T1>>(await _instance.GetAsync(filter, modifier));
+            return (await _instance.GetAsync(filter, modifier)).Adapt<IList<T1>>();
         }
 
         public async Task<IList<T1>> GetAllAsync(T5 modifier)
         {
-            return MapperInstance.Mapper.Map<IList<T1>>(await _instance.GetAllAsync(modifier));
+            return (await _instance.GetAllAsync(modifier)).Adapt<IList<T1>>();
         }
     }
-
 }

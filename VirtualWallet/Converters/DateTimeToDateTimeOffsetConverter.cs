@@ -9,8 +9,7 @@ namespace VirtualWallet.Converters
         {
             try
             {
-                DateTime date = (DateTime)value;
-                return new DateTimeOffset(date);
+                return new DateTimeOffset((DateTime)value);
             }
             catch (Exception)
             {
@@ -22,7 +21,7 @@ namespace VirtualWallet.Converters
         {
             try
             {
-                DateTimeOffset dto = (DateTimeOffset)value;
+                var dto = (DateTimeOffset)value;
                 return dto.DateTime;
             }
             catch (Exception)

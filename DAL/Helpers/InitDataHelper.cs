@@ -1,6 +1,6 @@
 ﻿using DAL.Data;
 using Shared.Enums;
-using SQLite.Net.Async;
+using SQLite;
 using System.Threading.Tasks;
 
 namespace DAL.Helpers
@@ -15,7 +15,7 @@ namespace DAL.Helpers
         /// <param name="connection">SQLiteAsyncConnection that should be inicialized outside</param>
         public static async Task InitData(SQLiteAsyncConnection connection)
         {
-            await connection.InsertOrReplaceAllAsync(new object[]
+            var entities = new object[]
             {
                 new Image() { Id = (int)ImageId.Fio, Path= $"{imageStorage}Fio.png" },
 
@@ -163,6 +163,12 @@ namespace DAL.Helpers
                 new Image() { Id = 139, Path= $"{imageStorage}/Categories/Vacation/CategoryVacation5.png" },
 
                 new Bank() { Id = (int)BankId.Fio, Name = "Fio banka", ImageId = (int)ImageId.Fio }
+            };
+
+            await connection.RunInTransactionAsync(transaction =>
+            {
+                foreach (var entity in entities)
+                    transaction.InsertOrReplace(entity);
             });
 
             if (await connection.Table<Currency>().FirstOrDefaultAsync() == null)
