@@ -6,7 +6,6 @@ using System.Linq;
 using VirtualWallet.Helpers;
 using VirtualWallet.ViewModels;
 using Windows.ApplicationModel.Resources;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -16,27 +15,29 @@ namespace VirtualWallet.Pages
 {
     public sealed partial class BankPage : Page
     {
-        private BankPageViewModel viewModel;
+        private readonly BankPageViewModel viewModel;
         private double screenWidth;
-        private ResourceLoader resources;
+        private readonly ResourceLoader resources;
 
         public BankPage()
         {
             resources = ResourceLoader.GetForCurrentView();
-            this.InitializeComponent();
-            viewModel = new BankPageViewModel(new BankAccountInfoService(), new TransactionService(), new CategoryService(), ResourceLoader.GetForCurrentView());
-            viewModel.BeforeSync = () =>
+            InitializeComponent();
+            viewModel = new BankPageViewModel(new BankAccountInfoService(), new TransactionService(), new CategoryService(), ResourceLoader.GetForCurrentView())
             {
-                IconRotation.Begin();
-                TransactionsAccordion.UnselectAll();
+                BeforeSync = () =>
+                {
+                    IconRotation.Begin();
+                    TransactionsAccordion.UnselectAll();
+                },
+                AfterSync = () =>
+                {
+                    IconRotation.Stop();
+                    RecalculateLineGraphInterval();
+                    SetStyles();
+                }
             };
-            viewModel.AfterSync = () =>
-            {
-                IconRotation.Stop();
-                RecalculateLineGraphInterval();
-                SetStyles();
-            };
-            this.DataContext = viewModel;
+            DataContext = viewModel;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

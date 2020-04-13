@@ -1,7 +1,6 @@
 ﻿using BL.Models;
 using BL.Service;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Threading.Tasks;
@@ -14,11 +13,11 @@ namespace VirtualWallet.ViewModels
 {
     public class SettingsViewModel : ViewModelBase
     {
-        private IDatabaseService databaseService;
-        private IBankService bankService;
-        private ICurrencyService currencyService;
+        private readonly IDatabaseService databaseService;
+        private readonly IBankService bankService;
+        private readonly ICurrencyService currencyService;
         private string selectedLanguageCode;
-        private ResourceLoader resources;
+        private readonly ResourceLoader resources;
         private IList<LanguageInfo> availableLanguages;
         private IList<Currency> currencies;
         private Currency selectedCurrency;
@@ -33,7 +32,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<LanguageInfo> AvailableLanguages
         {
-            get { return availableLanguages; }
+            get => availableLanguages;
             private set
             {
                 if (availableLanguages == value)
@@ -47,7 +46,7 @@ namespace VirtualWallet.ViewModels
 
         public Currency SelectedCurrency
         {
-            get { return selectedCurrency; }
+            get => selectedCurrency;
             set
             {
                 if (selectedCurrency == value)
@@ -61,7 +60,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<Currency> Currencies
         {
-            get { return currencies; }
+            get => currencies;
             set
             {
                 if (currencies == value)
@@ -72,28 +71,28 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public string Text_Application { get { return resources.GetString("Settings_Application"); } }
+        public string Text_Application => resources.GetString("Settings_Application");
 
-        public string Text_Language { get { return resources.GetString("Settings_Language"); } }
+        public string Text_Language => resources.GetString("Settings_Language");
 
-        public string Text_Header { get { return resources.GetString("Settings_Header"); } }
+        public string Text_Header => resources.GetString("Settings_Header");
 
-        public string Text_UserContent { get { return resources.GetString("Settings_UserContent"); } }
+        public string Text_UserContent => resources.GetString("Settings_UserContent");
 
-        public string Text_RemoveCredentials { get { return resources.GetString("Settings_RemoveCredentials"); } }
+        public string Text_RemoveCredentials => resources.GetString("Settings_RemoveCredentials");
 
-        public string Text_RemoveData { get { return resources.GetString("Settings_RemoveData"); } }
+        public string Text_RemoveData => resources.GetString("Settings_RemoveData");
 
-        public string Text_CopyDbToRoaming { get { return resources.GetString("Settings_CopyDbToRoaming"); } }
+        public string Text_CopyDbToRoaming => resources.GetString("Settings_CopyDbToRoaming");
 
-        public string Text_RetrieveDbFromRoaming { get { return resources.GetString("Settings_RetrieveDbFromRoaming"); } }
+        public string Text_RetrieveDbFromRoaming => resources.GetString("Settings_RetrieveDbFromRoaming");
 
-        public string Text_Currency { get { return resources.GetString("Settings_Currency"); } }
-        
+        public string Text_Currency => resources.GetString("Settings_Currency");
+
 
         public string SelectedLanguageCode
         {
-            get { return selectedLanguageCode; }
+            get => selectedLanguageCode;
             set
             {
                 if (value == null)

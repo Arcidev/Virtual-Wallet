@@ -7,11 +7,11 @@ namespace BL.Metadata
 {
     public class TransactionCategoryList
     {
-        private IList<TransactionMetadata> transactions;
+        private List<TransactionMetadata> transactions;
 
         public Category Category { get; set; }
 
-        public IList<TransactionMetadata> Transactions
+        public IEnumerable<TransactionMetadata> Transactions
         {
             get { return transactions; }
             set
@@ -37,8 +37,8 @@ namespace BL.Metadata
 
         public string DefaultCategoryName { get; set; }
 
-        public string CategoryName { get { return Category?.Name ?? DefaultCategoryName; } }
+        public string CategoryName => Category?.Name ?? DefaultCategoryName;
 
-        public string TotalAmount { get { return Transactions.Any() ? CurrencyFormatter.Format(Transactions.Sum(x => x.Amount), Transactions.First().Currency) : null; } }
+        public string TotalAmount => Transactions.Any() ? CurrencyFormatter.Format(Transactions.Sum(x => x.Amount), Transactions.First().Currency) : null;
     }
 }

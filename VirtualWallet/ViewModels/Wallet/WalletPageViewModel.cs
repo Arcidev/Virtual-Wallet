@@ -11,7 +11,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using VirtualWallet.Controls;
 using Windows.ApplicationModel.Resources;
 using Windows.UI;
@@ -23,13 +22,13 @@ namespace VirtualWallet.ViewModels
 {
     public class WalletPageViewModel : ViewModelBase, IDisposable
     {
-        private IBankAccountInfoService bankAccountInfoService;
-        private ITransactionService transactionService;
-        private ICategoryService categoryService;
-        private IWalletCategoryService walletCategoryService;
-        private IWalletBankService walletBankService;
-        private ICurrencyService currencyService;
-        private ResourceLoader resources;
+        private readonly IBankAccountInfoService bankAccountInfoService;
+        private readonly ITransactionService transactionService;
+        private readonly ICategoryService categoryService;
+        private readonly IWalletCategoryService walletCategoryService;
+        private readonly IWalletBankService walletBankService;
+        private readonly ICurrencyService currencyService;
+        private readonly ResourceLoader resources;
         private Wallet wallet;
         private ObservableCollection<Bank> banks;
         private ObservableCollection<Category> categories;
@@ -38,12 +37,11 @@ namespace VirtualWallet.ViewModels
         private IList<Tuple<DateTime, double>> balances;
         private IList<TransactionCategoryList> transactionCategories;
         private IList<Transaction> cashPayments;
-        private ICommand syncCommand;
+        private CommandHandler syncCommand;
         private Timer syncExecuteTimer;
         private bool syncButtonForceDisabled;
-        private string categoryOther;
+        private readonly string categoryOther;
         private string linearAxisInfo;
-        private IList<SolidColorBrush> brushes;
         private double walletBalance;
         private double closingBalance;
         private double openingBalance;
@@ -51,23 +49,23 @@ namespace VirtualWallet.ViewModels
         private DateTime lastSync;
         private string currency;
 
-        public IList<SolidColorBrush> Brushes { get { return brushes; } }
+        public IList<SolidColorBrush> Brushes { get; }
 
         public Action BeforeSync { get; set; }
 
         public Action AfterSync { get; set; }
 
-        public bool HasTransactions { get { return TransactionCategories?.Any() ?? false; } }
+        public bool HasTransactions => TransactionCategories?.Any() ?? false;
 
-        public bool HasIncomes { get { return Incomes?.Any() ?? false; } }
+        public bool HasIncomes => Incomes?.Any() ?? false;
 
-        public bool HasExpenses { get { return Expenses?.Any() ?? false; } }
+        public bool HasExpenses => Expenses?.Any() ?? false;
 
-        public bool HasBalances { get { return Balances?.Any() ?? false; } }
+        public bool HasBalances => Balances?.Any() ?? false;
 
         public string LinearAxisInfo
         {
-            get { return linearAxisInfo; }
+            get => linearAxisInfo;
             private set
             {
                 if (linearAxisInfo == value)
@@ -78,9 +76,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public ICommand SyncCommand
+        public CommandHandler SyncCommand
         {
-            get { return syncCommand; }
+            get => syncCommand;
             private set
             {
                 if (syncCommand == value)
@@ -93,7 +91,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<TransactionCategoryList> TransactionCategories
         {
-            get { return transactionCategories; }
+            get => transactionCategories;
             private set
             {
                 if (transactionCategories == value)
@@ -107,7 +105,7 @@ namespace VirtualWallet.ViewModels
 
         public Wallet Wallet
         {
-            get { return wallet; }
+            get => wallet;
             private set
             {
                 if (wallet == value)
@@ -122,7 +120,7 @@ namespace VirtualWallet.ViewModels
 
         public double WalletBalance
         {
-            get { return walletBalance; }
+            get => walletBalance;
             private set
             {
                 if (walletBalance == value)
@@ -134,14 +132,11 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public string WalletBalanceString
-        {
-            get { return CurrencyFormatter.Format(walletBalance, Currency); }
-        }
+        public string WalletBalanceString => CurrencyFormatter.Format(walletBalance, Currency);
 
         public double ClosingBalance
         {
-            get { return closingBalance; }
+            get => closingBalance;
             private set
             {
                 if (closingBalance == value)
@@ -153,14 +148,11 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public string ClosingBalanceString
-        {
-            get { return CurrencyFormatter.Format(closingBalance, Currency); }
-        }
+        public string ClosingBalanceString => CurrencyFormatter.Format(closingBalance, Currency);
 
         public double OpeningBalance
         {
-            get { return openingBalance; }
+            get => openingBalance;
             private set
             {
                 if (openingBalance == value)
@@ -172,14 +164,11 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public string OpeningBalanceString
-        {
-            get { return CurrencyFormatter.Format(openingBalance, Currency); }
-        }
+        public string OpeningBalanceString => CurrencyFormatter.Format(openingBalance, Currency);
 
         public DateTime OpeningDate
         {
-            get { return openingDate; }
+            get => openingDate;
             private set
             {
                 if (openingDate == value)
@@ -191,14 +180,11 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public string OpeningDateString
-        {
-            get { return DateTimeFormatter.ToShortDate(OpeningDate); }
-        }
+        public string OpeningDateString => DateTimeFormatter.ToShortDate(OpeningDate);
 
         public DateTime LastSync
         {
-            get { return lastSync; }
+            get => lastSync;
             private set
             {
                 if (lastSync == value)
@@ -210,14 +196,11 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public string LastSyncString
-        {
-            get { return DateTimeFormatter.ToShortDate(LastSync); }
-        }
+        public string LastSyncString => DateTimeFormatter.ToShortDate(LastSync);
 
         public string Currency
         {
-            get { return currency; }
+            get => currency;
             private set
             {
                 if (currency == value)
@@ -230,10 +213,7 @@ namespace VirtualWallet.ViewModels
 
         public TimeRange TimeRange
         {
-            get
-            {
-                return Wallet == null ? TimeRange.Month : Wallet.TimeRange;
-            }
+            get => Wallet == null ? TimeRange.Month : Wallet.TimeRange;
             set
             {
                 if (Wallet == null || Wallet.TimeRange == value)
@@ -247,7 +227,7 @@ namespace VirtualWallet.ViewModels
 
         public ObservableCollection<Bank> Banks
         {
-            get { return banks; }
+            get => banks;
             private set
             {
                 if (banks == value)
@@ -263,7 +243,7 @@ namespace VirtualWallet.ViewModels
 
         public ObservableCollection<Category> Categories
         {
-            get { return categories; }
+            get => categories;
             private set
             {
                 if (categories == value)
@@ -276,7 +256,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<Tuple<string, double>> Expenses
         {
-            get { return expenses; }
+            get => expenses;
             private set
             {
                 if (expenses == value)
@@ -290,7 +270,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<Tuple<string, double>> Incomes
         {
-            get { return incomes; }
+            get => incomes;
             private set
             {
                 if (incomes == value)
@@ -304,7 +284,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<Tuple<DateTime, double>> Balances
         {
-            get { return balances; }
+            get => balances;
             private set
             {
                 if (balances == value)
@@ -327,7 +307,7 @@ namespace VirtualWallet.ViewModels
             this.resources = resources;
             
             categoryOther = resources.GetString("Category_Other");
-            brushes = new List<SolidColorBrush> { new SolidColorBrush(Colors.Black), new SolidColorBrush(Colors.DarkSlateGray) };
+            Brushes = new List<SolidColorBrush> { new SolidColorBrush(Colors.Black), new SolidColorBrush(Colors.DarkSlateGray) };
         }
 
         public async Task LoadDataAsync(Wallet wallet)
@@ -382,7 +362,7 @@ namespace VirtualWallet.ViewModels
                 if (bank != null)
                 {
                     bank.BankAccountInfo = await bankAccountInfoService.GetAsync(bank.Id);
-                    var filter = new Shared.Filters.TransactionFilter() { DateSince = this.TimeRange.ToDateSince() };
+                    var filter = new Shared.Filters.TransactionFilter() { DateSince = TimeRange.ToDateSince() };
                     bank.StoredTransactions = await transactionService.GetByBankIdAsync(bank.Id, filter);
                 }
             }
@@ -416,14 +396,14 @@ namespace VirtualWallet.ViewModels
 
             // Disable button immediatly after invoking command
             syncButtonForceDisabled = true;
-            NotifyPropertyChanged(nameof(SyncCommand));
+            SyncCommand.NotifyCanExecuteChanged();
 
             var filter = new BL.Filters.TransactionFilter();
             filter.AddMonths(1);
 
             try
             {
-                
+                // Something should probably be here
             }
             catch (Exception)
             {
@@ -434,7 +414,7 @@ namespace VirtualWallet.ViewModels
             }
 
             syncButtonForceDisabled = false;
-            NotifyPropertyChanged(nameof(SyncCommand));
+            SyncCommand.NotifyCanExecuteChanged();
             SetSyncExecuteTimer();
 
             AfterSync?.Invoke();
@@ -464,7 +444,7 @@ namespace VirtualWallet.ViewModels
             if (!allCanSync)
             {
                 var dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
-                syncExecuteTimer = new Timer(async (obj) => await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => NotifyPropertyChanged(nameof(SyncCommand))), null, (int)Math.Ceiling((lastPossibleSyncTime - DateTime.Now).TotalMilliseconds), Timeout.Infinite);
+                syncExecuteTimer = new Timer(async (obj) => await dispatcher.RunAsync(CoreDispatcherPriority.Normal, SyncCommand.NotifyCanExecuteChanged), null, (int)Math.Ceiling((lastPossibleSyncTime - DateTime.Now).TotalMilliseconds), Timeout.Infinite);
             }
         }
 

@@ -21,15 +21,15 @@ namespace VirtualWallet.Pages
     /// </summary>
     public sealed partial class CashPayment : Page
     {
-        private CashPaymentViewModel viewModel;
-        private ResourceLoader resources;
+        private readonly CashPaymentViewModel viewModel;
+        private readonly ResourceLoader resources;
 
         public CashPayment()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             resources = ResourceLoader.GetForCurrentView();
-            viewModel = new CashPaymentViewModel(new TransactionService(), new CurrencyService(), ResourceLoader.GetForCurrentView());
-            this.DataContext = viewModel;
+            viewModel = new CashPaymentViewModel(new TransactionService(), new CurrencyService());
+            DataContext = viewModel;
             TimeRangeCombobox.ItemsSource = Enum.GetValues(typeof(TimeRange)).Cast<TimeRange>();
         }
 

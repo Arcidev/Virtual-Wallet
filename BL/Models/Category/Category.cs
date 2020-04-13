@@ -13,12 +13,12 @@ namespace BL.Models
 
         public Image Image { get; set; }
 
-        public Uri ImageUri { get { return Image != null ? new Uri(Image.Path) : null; } }
+        public Uri ImageUri => Image != null ? new Uri(Image.Path) : null;
 
         public IList<Rule> Rules { get; set; }
 
         public IList<Wallet> Wallets { get; set; }
 
-        public PagePayload PagePayload { get { return new PagePayload() { Dto = this }; } }
+        public PagePayload PagePayload => new PagePayload() { Dto = this };
     }
 }

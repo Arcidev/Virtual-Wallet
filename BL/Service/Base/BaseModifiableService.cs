@@ -1,9 +1,9 @@
 ﻿using BL.Models;
+using Mapster;
 using Shared.Filters;
 using Shared.Modifiers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Mapster;
 
 namespace BL.Service
 {
@@ -42,4 +42,5 @@ namespace BL.Service
             return (await _instance.GetAllAsync(modifier)).Adapt<IList<T1>>();
         }
     }
+
 }

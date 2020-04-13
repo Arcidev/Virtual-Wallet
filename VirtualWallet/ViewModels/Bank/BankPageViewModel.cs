@@ -7,7 +7,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Input;
 using VirtualWallet.Controls;
 using Windows.ApplicationModel.Resources;
 using Windows.UI;
@@ -19,40 +18,39 @@ namespace VirtualWallet.ViewModels
 {
     public class BankPageViewModel : ViewModelBase, IDisposable
     {
-        private IBankAccountInfoService bankAccountInfoService;
-        private ITransactionService transactionService;
-        private ICategoryService categoryService;
-        private ResourceLoader resources;
+        private readonly IBankAccountInfoService bankAccountInfoService;
+        private readonly ITransactionService transactionService;
+        private readonly ICategoryService categoryService;
+        private readonly ResourceLoader resources;
         private Bank bank;
         private IList<Tuple<string, double>> expenses;
         private IList<Tuple<string, double>> incomes;
         private IList<Tuple<DateTime, double>> balances;
         private IList<TransactionCategoryList> transactionCategories;
         private BankAccountInfo bankAccountInfo;
-        private ICommand syncCommand;
+        private CommandHandler syncCommand;
         private Timer syncExecuteTimer;
         private bool syncButtonForceDisabled;
-        private string categoryOther;
+        private readonly string categoryOther;
         private string linearAxisInfo;
-        private IList<SolidColorBrush> brushes;
 
-        public IList<SolidColorBrush> Brushes { get { return brushes; } }
+        public IList<SolidColorBrush> Brushes { get; }
 
         public Action BeforeSync { get; set; }
 
         public Action AfterSync { get; set; }
 
-        public bool HasTransactions { get { return TransactionCategories?.Any() ?? false; } }
+        public bool HasTransactions => TransactionCategories?.Any() ?? false;
 
-        public bool HasIncomes { get { return Incomes?.Any() ?? false; } }
+        public bool HasIncomes => Incomes?.Any() ?? false;
 
-        public bool HasExpenses { get { return Expenses?.Any() ?? false; } }
+        public bool HasExpenses => Expenses?.Any() ?? false;
 
-        public bool HasBalances { get { return Balances?.Any() ?? false; } }
+        public bool HasBalances => Balances?.Any() ?? false;
 
         public string LinearAxisInfo
         {
-            get { return linearAxisInfo; }
+            get => linearAxisInfo;
             private set
             {
                 if (linearAxisInfo == value)
@@ -63,9 +61,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public ICommand SyncCommand
+        public CommandHandler SyncCommand
         {
-            get { return syncCommand; }
+            get => syncCommand;
             private set
             {
                 if (syncCommand == value)
@@ -78,7 +76,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<TransactionCategoryList> TransactionCategories
         {
-            get { return transactionCategories; }
+            get => transactionCategories;
             private set
             {
                 if (transactionCategories == value)
@@ -92,7 +90,7 @@ namespace VirtualWallet.ViewModels
 
         public Bank Bank
         {
-            get { return bank; }
+            get => bank;
             private set
             {
                 if (bank == value)
@@ -109,7 +107,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<Tuple<string, double>> Expenses
         {
-            get { return expenses; }
+            get => expenses;
             private set
             {
                 if (expenses == value)
@@ -123,7 +121,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<Tuple<string, double>> Incomes
         {
-            get { return incomes; }
+            get => incomes;
             private set
             {
                 if (incomes == value)
@@ -137,7 +135,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<Tuple<DateTime, double>> Balances
         {
-            get { return balances; }
+            get => balances;
             private set
             {
                 if (balances == value)
@@ -151,7 +149,7 @@ namespace VirtualWallet.ViewModels
 
         public BankAccountInfo BankAccountInfo
         {
-            get { return bankAccountInfo; }
+            get => bankAccountInfo;
             private set
             {
                 if (bankAccountInfo == value)
@@ -170,7 +168,7 @@ namespace VirtualWallet.ViewModels
             this.categoryService = categoryService;
             this.resources = resources;
             categoryOther = resources.GetString("Category_Other");
-            brushes = new List<SolidColorBrush> { new SolidColorBrush(Colors.Black), new SolidColorBrush(Colors.DarkSlateGray) };
+            Brushes = new List<SolidColorBrush> { new SolidColorBrush(Colors.Black), new SolidColorBrush(Colors.DarkSlateGray) };
         }
 
         public async Task LoadDataAsync(Bank bank)
@@ -197,7 +195,7 @@ namespace VirtualWallet.ViewModels
 
             // Disable button immediatly after invoking command
             syncButtonForceDisabled = true;
-            NotifyPropertyChanged(nameof(SyncCommand));
+            SyncCommand.NotifyCanExecuteChanged();
 
             var filter = new TransactionFilter();
             filter.AddMonths(1);
@@ -241,7 +239,7 @@ namespace VirtualWallet.ViewModels
             }
 
             syncButtonForceDisabled = false;
-            NotifyPropertyChanged(nameof(SyncCommand));
+            SyncCommand.NotifyCanExecuteChanged();
             SetSyncExecuteTimer();
 
             AfterSync?.Invoke();
@@ -255,7 +253,7 @@ namespace VirtualWallet.ViewModels
             if (!(Bank?.CanSyncExecute ?? true))
             {
                 var dispatcher = CoreWindow.GetForCurrentThread().Dispatcher;
-                syncExecuteTimer = new Timer(async (obj) => await dispatcher.RunAsync(CoreDispatcherPriority.Normal, () => NotifyPropertyChanged(nameof(SyncCommand))), null, (int)Math.Ceiling((Bank.NextPossibleSyncTime - DateTime.Now).TotalMilliseconds), Timeout.Infinite);
+                syncExecuteTimer = new Timer(async (obj) => await dispatcher.RunAsync(CoreDispatcherPriority.Normal, SyncCommand.NotifyCanExecuteChanged), null, (int)Math.Ceiling((Bank.NextPossibleSyncTime - DateTime.Now).TotalMilliseconds), Timeout.Infinite);
             }
         }
 

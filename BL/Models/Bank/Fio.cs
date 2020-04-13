@@ -19,9 +19,9 @@ namespace BL.Models
 
         public static string Token { get; set; }
 
-        public override bool HasCredentials { get { return !string.IsNullOrEmpty(Token); } }
+        public override bool HasCredentials => !string.IsNullOrEmpty(Token);
 
-        public override DateTime NextPossibleSyncTime { get { return nextPossibleSyncTime; } }
+        public override DateTime NextPossibleSyncTime => nextPossibleSyncTime;
 
         public Fio()
         {

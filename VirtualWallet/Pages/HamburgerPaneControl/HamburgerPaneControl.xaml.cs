@@ -18,7 +18,7 @@ namespace VirtualWallet.Pages
         public HamburgerPaneControl()
         {
             InitializeComponent();
-            viewModel = new HamburgerPaneViewModel(new BankService(), new WalletService(), new CategoryService(), ResourceLoader.GetForCurrentView());
+            viewModel = new HamburgerPaneViewModel(new BankService(), new WalletService(), ResourceLoader.GetForCurrentView());
             DataContext = viewModel;
         }
 

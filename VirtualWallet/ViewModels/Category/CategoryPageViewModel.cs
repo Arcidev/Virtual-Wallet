@@ -14,54 +14,49 @@ namespace VirtualWallet.ViewModels
 {
     class CategoryPageViewModel : ViewModelBase
     {
-        private ICategoryService categoryService;
-        private IWalletService walletService;
-        private IWalletCategoryService walletCategoryService;
-        private IRuleService ruleService;
+        private readonly ICategoryService categoryService;
+        private readonly IWalletCategoryService walletCategoryService;
+        private readonly IRuleService ruleService;
 
         private Category category;
         private ObservableCollection<Wallet> wallets;
         private ObservableCollection<Rule> rules;
-        private Boolean modified;
-        private Boolean persisted;
+        private bool modified;
+        private bool persisted;
 
         public ICommand DeleCategoryCommand { get; private set; }
 
-        public CategoryPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService, IRuleService ruleService)
+        public CategoryPageViewModel(ICategoryService categoryService, IWalletCategoryService walletCategoryService, IRuleService ruleService)
         {
             this.categoryService = categoryService;
-            this.walletService = walletService;
             this.walletCategoryService = walletCategoryService;
             this.ruleService = ruleService;
-            this.modified = false;
+            modified = false;
 
             DeleCategoryCommand = new CommandHandler(DeleteCategory);
 
-            this.Category = new Category();       
+            Category = new Category();       
         }
 
         public Category Category
         {
-            get { return category; }
+            get => category;
             set
             {
                 if (category == value)
                     return;
 
                 category = value;
-                
+
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(Name));
                 NotifyPropertyChanged(nameof(Image));
             }
         }
 
-        public Boolean Modified
+        public bool Modified
         {
-            get
-            {
-                return modified;
-            }
+            get => modified;
             set
             {
                 if (modified == value)
@@ -72,12 +67,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public Boolean Persisted
+        public bool Persisted
         {
-            get
-            {
-                return persisted;
-            }
+            get => persisted;
             set
             {
                 if (persisted == value)
@@ -88,12 +80,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public String Name
+        public string Name
         {
-            get
-            { 
-                return Category == null ? string.Empty : Category.Name;
-            }
+            get => Category == null ? string.Empty : Category.Name;
             set
             {
                 if (Category == null || Category.Name == value)
@@ -107,10 +96,7 @@ namespace VirtualWallet.ViewModels
 
         public Image Image
         {
-            get
-            {
-                return Category?.Image;
-            }
+            get => Category?.Image;
             set
             {
                 if (Category == null || value == null || value.Equals(Category.Image))
@@ -124,7 +110,7 @@ namespace VirtualWallet.ViewModels
 
         public ObservableCollection<Wallet> Wallets
         {
-            get { return wallets; }
+            get => wallets;
             set
             {
                 if (wallets == value)
@@ -138,7 +124,7 @@ namespace VirtualWallet.ViewModels
 
         public ObservableCollection<Rule> Rules
         {
-            get { return rules; }
+            get => rules;
             set
             {
                 if (rules == value)

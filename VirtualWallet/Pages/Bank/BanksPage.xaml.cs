@@ -15,16 +15,16 @@ namespace VirtualWallet.Pages
     /// </summary>
     public sealed partial class BanksPage : Page
     {
-        private BanksPageViewModel viewModel;
+        private readonly BanksPageViewModel viewModel;
         private PagePayload pagePayload;
-        private ResourceLoader resources;
+        private readonly ResourceLoader resources;
 
         public BanksPage()
         {
             resources = ResourceLoader.GetForCurrentView();
-            this.InitializeComponent();
+            InitializeComponent();
             viewModel = new BanksPageViewModel(new BankService(), new WalletBankService());
-            this.DataContext = viewModel;
+            DataContext = viewModel;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

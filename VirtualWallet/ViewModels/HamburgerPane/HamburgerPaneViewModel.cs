@@ -3,24 +3,21 @@ using BL.Service;
 using Shared.Modifiers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using VirtualWallet.Controls;
 using Windows.ApplicationModel.Resources;
 
 namespace VirtualWallet.ViewModels
 {
     public class HamburgerPaneViewModel : ViewModelBase
     {
-        private IBankService bankService;
-        private ICategoryService categoryService;
-        private IWalletService walletService;
+        private readonly IBankService bankService;
+        private readonly IWalletService walletService;
         private IList<Bank> banks;
         private IList<Wallet> wallets;
-        private ResourceLoader resources;
+        private readonly ResourceLoader resources;
 
         public IList<Bank> Banks
         {
-            get { return banks; }
+            get => banks;
             set
             {
                 if (banks == value)
@@ -33,7 +30,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<Wallet> Wallets
         {
-            get { return wallets; }
+            get => wallets;
             set
             {
                 if (wallets == value)
@@ -44,21 +41,20 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public string Text_Banks { get { return resources.GetString("HamburgerPane_Banks"); } }
+        public string Text_Banks => resources.GetString("HamburgerPane_Banks");
 
-        public string Text_Wallets { get { return resources.GetString("HamburgerPane_Wallets"); } }
+        public string Text_Wallets => resources.GetString("HamburgerPane_Wallets");
 
-        public string Text_Categories { get { return resources.GetString("HamburgerPane_Categories"); } }
+        public string Text_Categories => resources.GetString("HamburgerPane_Categories");
 
-        public string Text_Settings { get { return resources.GetString("HamburgerPane_Settings"); } }
+        public string Text_Settings => resources.GetString("HamburgerPane_Settings");
 
-        public string Text_AddCashPaynment { get { return resources.GetString("HamburgerPane_AddCashPaynment"); } }
+        public string Text_AddCashPaynment => resources.GetString("HamburgerPane_AddCashPaynment");
 
-        public HamburgerPaneViewModel(IBankService bankService, IWalletService walletService, ICategoryService categoryService, ResourceLoader resources)
+        public HamburgerPaneViewModel(IBankService bankService, IWalletService walletService, ResourceLoader resources)
         {
             this.bankService = bankService;
             this.walletService = walletService;
-            this.categoryService = categoryService;
             this.resources = resources;
         }
 
@@ -74,6 +70,7 @@ namespace VirtualWallet.ViewModels
             NotifyPropertyChanged(nameof(Text_Wallets));
             NotifyPropertyChanged(nameof(Text_Categories));
             NotifyPropertyChanged(nameof(Text_Settings));
+            NotifyPropertyChanged(nameof(Text_AddCashPaynment));
         }
     }
 }

@@ -14,13 +14,13 @@ namespace BL.Models
 
         public Image Image { get; set; }
 
-        public Uri ImageUri { get { return Image != null ? new Uri(Image.Path) : null; } }
+        public Uri ImageUri => Image != null ? new Uri(Image.Path) : null;
 
         public IList<Category> Categories { get; set; }
 
         public IList<ITransactionSource> TransactionSources { get; set; }
 
-        public PagePayload PagePayload { get { return new PagePayload() { Dto = this }; } }
+        public PagePayload PagePayload => new PagePayload() { Dto = this };
 
         public TimeRange TimeRange { get; set; }
 

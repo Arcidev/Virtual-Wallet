@@ -16,16 +16,16 @@ namespace VirtualWallet.Pages
     /// </summary>
     public sealed partial class CategoriesPage : Page
     {
-        private CategoriesPageViewModel viewModel;
+        private readonly CategoriesPageViewModel viewModel;
         private PagePayload pagePayload;
-        private ResourceLoader resources;
+        private readonly ResourceLoader resources;
 
         public CategoriesPage()
         {
             resources = ResourceLoader.GetForCurrentView();
-            this.InitializeComponent();
+            InitializeComponent();
             viewModel = new CategoriesPageViewModel(new CategoryService(), new WalletCategoryService());
-            this.DataContext = viewModel;
+            DataContext = viewModel;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

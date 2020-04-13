@@ -11,15 +11,15 @@ namespace VirtualWallet.Pages
 {
     public sealed partial class ImagesPage : Page
     {
-        private ImagesPageViewModel viewModel;
-        private ResourceLoader resources;
+        private readonly ImagesPageViewModel viewModel;
+        private readonly ResourceLoader resources;
 
         public ImagesPage()
         {
             resources = ResourceLoader.GetForCurrentView();
-            this.InitializeComponent();
+            InitializeComponent();
             viewModel = new ImagesPageViewModel(new ImageService());
-            this.DataContext = viewModel;
+            DataContext = viewModel;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

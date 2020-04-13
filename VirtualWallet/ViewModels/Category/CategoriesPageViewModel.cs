@@ -9,8 +9,8 @@ namespace VirtualWallet.ViewModels
 {
     class CategoriesPageViewModel : ViewModelBase
     {
-        private ICategoryService categoryService;
-        private IWalletCategoryService walletCategoryService;
+        private readonly ICategoryService categoryService;
+        private readonly IWalletCategoryService walletCategoryService;
 
         private Wallet wallet;
         private ObservableCollection<Category> categories;
@@ -25,7 +25,7 @@ namespace VirtualWallet.ViewModels
 
         public Wallet Wallet
         {
-            get { return wallet; }
+            get => wallet;
             set
             {
                 if (wallet == value)
@@ -38,7 +38,7 @@ namespace VirtualWallet.ViewModels
 
         public Category SelectedCategory
         {
-            get { return selectedCategory; }
+            get => selectedCategory;
             set
             {
                 if (selectedCategory == value)
@@ -51,7 +51,7 @@ namespace VirtualWallet.ViewModels
 
         public ObservableCollection<Category> Categories
         {
-            get { return categories; }
+            get => categories;
             set
             {
                 if (categories == value)

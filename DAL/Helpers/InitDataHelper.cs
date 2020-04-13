@@ -176,8 +176,8 @@ namespace DAL.Helpers
                 await connection.InsertAllAsync(new object[]
                 {
                     new Currency() { Code = "EUR", ExchangeRate = 1, IsDefaultCurrency = false },
-                    new Currency() { Code = "CZK", ExchangeRate = 28, IsDefaultCurrency = true },
-                    new Currency() { Code = "USD", ExchangeRate = 1.11f, IsDefaultCurrency = false }
+                    new Currency() { Code = "CZK", ExchangeRate = 27, IsDefaultCurrency = true },
+                    new Currency() { Code = "USD", ExchangeRate = 1.09f, IsDefaultCurrency = false }
                 });
             }
         }

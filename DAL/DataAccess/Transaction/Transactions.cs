@@ -11,13 +11,10 @@ namespace DAL.DataAccess
     {
         public async Task<IList<Transaction>> GetByBankIdAsync(int? bankId, TransactionFilter filter = null)
         {
-            if (filter == null)
-                filter = new TransactionFilter();
-
             var connection = ConnectionHelper.GetDbAsyncConnection();
             var query = connection.Table<Transaction>().Where(x => x.BankId == bankId);
 
-            return await ApplyFilters(query, filter).ToListAsync();
+            return await ApplyFilters(query, filter ?? new TransactionFilter()).ToListAsync();
         }
 
         protected override AsyncTableQuery<Transaction> ApplyFilters(AsyncTableQuery<Transaction> query, TransactionFilter filter)
@@ -26,7 +23,7 @@ namespace DAL.DataAccess
                 query = query.Where(x => x.Date >= filter.DateSince.Value);
 
             if (filter.IsCashPayment)
-                query = query.Where(x => x.BankId == null);
+                query = query.Where(x => !x.BankId.HasValue);
 
             return base.ApplyFilters(query, filter);
         }

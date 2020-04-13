@@ -8,7 +8,7 @@ namespace VirtualWallet.ViewModels
 {
     class WalletsPageViewModel : ViewModelBase
     {
-        private IWalletService walletService;
+        private readonly IWalletService walletService;
         
         private ObservableCollection<Wallet> wallets;
 
@@ -19,7 +19,7 @@ namespace VirtualWallet.ViewModels
 
         public ObservableCollection<Wallet> Wallets
         {
-            get { return wallets; }
+            get => wallets;
             set
             {
                 if (wallets == value)

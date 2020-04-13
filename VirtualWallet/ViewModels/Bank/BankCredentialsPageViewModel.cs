@@ -11,7 +11,7 @@ namespace VirtualWallet.ViewModels
 
         public string Token
         {
-            get { return token; }
+            get => token;
             set
             {
                 if (token == value)
@@ -24,7 +24,7 @@ namespace VirtualWallet.ViewModels
 
         public bool RememberCredentials
         {
-            get { return rememberCredentials; }
+            get => rememberCredentials;
             set
             {
                 if (rememberCredentials == value)
@@ -37,7 +37,7 @@ namespace VirtualWallet.ViewModels
 
         public Bank Bank
         {
-            get { return bank; }
+            get => bank;
             set
             {
                 if (bank == value)
@@ -48,7 +48,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public bool IsValid { get { return !string.IsNullOrWhiteSpace(Token); } }
+        public bool IsValid => !string.IsNullOrWhiteSpace(Token);
 
         public BankCredentialsPageViewModel()
         {

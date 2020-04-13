@@ -6,15 +6,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Windows.ApplicationModel.Resources;
 
 namespace VirtualWallet.ViewModels
 {
     public class CashPaymentViewModel : ViewModelBase
     {
-        private ITransactionService transactionService;
-        private ICurrencyService currencyService;
-        private ResourceLoader resources;
+        private readonly ITransactionService transactionService;
+        private readonly ICurrencyService currencyService;
 
         DateTime paymentDate;
         string paymentAmount;
@@ -24,19 +22,18 @@ namespace VirtualWallet.ViewModels
         private IList<Currency> currencies;
         private IList<Transaction> transactions;
 
-        public CashPaymentViewModel(ITransactionService transactionService, ICurrencyService currencyService, ResourceLoader resources)
+        public CashPaymentViewModel(ITransactionService transactionService, ICurrencyService currencyService)
         {
             this.transactionService = transactionService;
             this.currencyService = currencyService;
-            this.resources = resources;
 
-            this.timeRange = TimeRange.Month;
-            this.PaymentDate = DateTime.Now;
+            timeRange = TimeRange.Month;
+            PaymentDate = DateTime.Now;
         }
 
         public IList<Currency> Currencies
         {
-            get { return currencies; }
+            get => currencies;
             set
             {
                 if (currencies == value)
@@ -49,7 +46,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<Transaction> Transactions
         {
-            get { return transactions; }
+            get => transactions;
             set
             {
                 if (transactions == value)
@@ -62,10 +59,7 @@ namespace VirtualWallet.ViewModels
 
         public DateTime PaymentDate
         {
-            get
-            {
-                return paymentDate;
-            }
+            get => paymentDate;
             set
             {
                 if (paymentDate == value)
@@ -78,10 +72,7 @@ namespace VirtualWallet.ViewModels
 
         public string PaymentAmount
         {
-            get
-            {
-                return paymentAmount;
-            }
+            get => paymentAmount;
             set
             {
                 if (paymentAmount == value)
@@ -94,10 +85,7 @@ namespace VirtualWallet.ViewModels
 
         public string PaymentDescription
         {
-            get
-            {
-                return paymentDescription;
-            }
+            get => paymentDescription;
             set
             {
                 if (paymentDescription == value)
@@ -110,10 +98,7 @@ namespace VirtualWallet.ViewModels
 
         public Currency PaymentCurrency
         {
-            get
-            {
-                return paymentCurrency;
-            }
+            get => paymentCurrency;
             set
             {
                 if (paymentCurrency == value)
@@ -126,10 +111,7 @@ namespace VirtualWallet.ViewModels
 
         public TimeRange TimeRange
         {
-            get
-            {
-                return timeRange;
-            }
+            get => timeRange;
             set
             {
                 if (timeRange == value)
@@ -164,7 +146,6 @@ namespace VirtualWallet.ViewModels
         public async Task CreateTransaction()
         {
             var amount = decimal.Parse(paymentAmount);
-
             var newTransaction = new Transaction() { BankId = null, Date = PaymentDate, Description = paymentDescription, Currency = paymentCurrency.Code, Amount = amount };
 
             await transactionService.InsertAsync(false, newTransaction);

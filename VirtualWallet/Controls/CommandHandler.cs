@@ -25,5 +25,10 @@ namespace VirtualWallet.Controls
         {
             action.Invoke();
         }
+
+        public void NotifyCanExecuteChanged()
+        {
+            CanExecuteChanged?.Invoke(this, new EventArgs());
+        }
     }
 }

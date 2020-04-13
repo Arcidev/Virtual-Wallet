@@ -17,26 +17,24 @@ namespace BL.Models
 
         public string DateEnd { get; set; }
 
-        public string ClosingBalanceString { get { return CurrencyFormatter.Format(ClosingBalance, Currency); } }
+        public string ClosingBalanceString => CurrencyFormatter.Format(ClosingBalance, Currency);
 
-        public string OpeningBalanceString { get { return CurrencyFormatter.Format(OpeningBalance, Currency); } }
+        public string OpeningBalanceString => CurrencyFormatter.Format(OpeningBalance, Currency);
 
-        public string DateStartString { get { return ParseDate(DateStart); } }
+        public string DateStartString => ParseDate(DateStart);
 
-        public string DateEndString { get { return ParseDate(DateEnd); } }
+        public string DateEndString => ParseDate(DateEnd);
 
-        public DateTime DateStartAsDate { get { return DateTime.Parse(DateStart); } }
+        public DateTime DateStartAsDate => DateTime.Parse(DateStart);
 
-        public DateTime DateEndAsDate { get { return DateTime.Parse(DateEnd); } }
+        public DateTime DateEndAsDate => DateTime.Parse(DateEnd);
 
         private string ParseDate(string date)
         {
             if (date == null)
                 return null;
 
-            DateTime result;
-            var success = DateTime.TryParse(date, out result);
-            return success ? DateTimeFormatter.ToShortDate(result) : date;
+            return DateTime.TryParse(date, out var result) ? DateTimeFormatter.ToShortDate(result) : date;
         }
     }
 }

@@ -15,9 +15,9 @@ namespace BL.Metadata
 
         public string Currency { get; set; }
 
-        public string DateString { get { return DateTimeFormatter.ToShortDate(Date); } }
+        public string DateString => DateTimeFormatter.ToShortDate(Date);
 
-        public string AmountString { get { return CurrencyFormatter.Format(Amount, Currency); } }
+        public string AmountString => CurrencyFormatter.Format(Amount, Currency);
 
         public int Index { get; set; }
     }

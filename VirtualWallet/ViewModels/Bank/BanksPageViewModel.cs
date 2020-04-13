@@ -10,8 +10,8 @@ namespace VirtualWallet.ViewModels
 {
     class BanksPageViewModel : ViewModelBase
     {
-        private IBankService bankService;
-        private IWalletBankService walletBankService;
+        private readonly IBankService bankService;
+        private readonly IWalletBankService walletBankService;
 
         private Wallet wallet;
         private ObservableCollection<Bank> banks;
@@ -26,7 +26,7 @@ namespace VirtualWallet.ViewModels
 
         public Wallet Wallet
         {
-            get { return wallet; }
+            get => wallet;
             set
             {
                 if (wallet == value)
@@ -39,7 +39,7 @@ namespace VirtualWallet.ViewModels
 
         public Bank SelectedBank
         {
-            get { return selectedBank; }
+            get => selectedBank;
             set
             {
                 if (selectedBank == value)
@@ -52,7 +52,7 @@ namespace VirtualWallet.ViewModels
 
         public ObservableCollection<Bank> Banks
         {
-            get { return banks; }
+            get => banks;
             set
             {
                 if (banks == value)

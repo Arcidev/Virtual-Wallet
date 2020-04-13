@@ -18,9 +18,9 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -36,51 +36,24 @@ namespace Blend.SampleData.WalletsSampleDataSource
             }
         }
 
-        private Wallets _Wallets = new Wallets();
+        public Wallets Wallets { get; } = new Wallets();
 
-        public Wallets Wallets
-        {
-            get
-            {
-                return this._Wallets;
-            }
-        }
+        public Banks Banks { get; } = new Banks();
 
-        private Banks _Banks = new Banks();
-
-        public Banks Banks
-        {
-            get
-            {
-                return this._Banks;
-            }
-        }
-
-        private Categories _Categories = new Categories();
-
-        public Categories Categories
-        {
-            get
-            {
-                return this._Categories;
-            }
-        }
+        public Categories Categories { get; } = new Categories();
 
         private Category _Category = new Category();
 
         public Category Category
         {
-            get
-            {
-                return this._Category;
-            }
+            get => _Category;
 
             set
             {
-                if (this._Category != value)
+                if (_Category != value)
                 {
-                    this._Category = value;
-                    this.OnPropertyChanged("Category");
+                    _Category = value;
+                    OnPropertyChanged("Category");
                 }
             }
         }
@@ -96,9 +69,9 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -106,17 +79,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public Icon Icon
         {
-            get
-            {
-                return this._Icon;
-            }
+            get => _Icon;
 
             set
             {
-                if (this._Icon != value)
+                if (_Icon != value)
                 {
-                    this._Icon = value;
-                    this.OnPropertyChanged("Icon");
+                    _Icon = value;
+                    OnPropertyChanged("Icon");
                 }
             }
         }
@@ -125,17 +95,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public double Id
         {
-            get
-            {
-                return this._Id;
-            }
+            get => _Id;
 
             set
             {
-                if (this._Id != value)
+                if (_Id != value)
                 {
-                    this._Id = value;
-                    this.OnPropertyChanged("Id");
+                    _Id = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
@@ -144,17 +111,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Name
         {
-            get
-            {
-                return this._Name;
-            }
+            get => _Name;
 
             set
             {
-                if (this._Name != value)
+                if (_Name != value)
                 {
-                    this._Name = value;
-                    this.OnPropertyChanged("Name");
+                    _Name = value;
+                    OnPropertyChanged("Name");
                 }
             }
         }
@@ -166,9 +130,9 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -176,17 +140,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public double Id
         {
-            get
-            {
-                return this._Id;
-            }
+            get => _Id;
 
             set
             {
-                if (this._Id != value)
+                if (_Id != value)
                 {
-                    this._Id = value;
-                    this.OnPropertyChanged("Id");
+                    _Id = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
@@ -195,17 +156,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Name
         {
-            get
-            {
-                return this._Name;
-            }
+            get => _Name;
 
             set
             {
-                if (this._Name != value)
+                if (_Name != value)
                 {
-                    this._Name = value;
-                    this.OnPropertyChanged("Name");
+                    _Name = value;
+                    OnPropertyChanged("Name");
                 }
             }
         }
@@ -214,17 +172,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Path
         {
-            get
-            {
-                return this._Path;
-            }
+            get => _Path;
 
             set
             {
-                if (this._Path != value)
+                if (_Path != value)
                 {
-                    this._Path = value;
-                    this.OnPropertyChanged("Path");
+                    _Path = value;
+                    OnPropertyChanged("Path");
                 }
             }
         }
@@ -240,9 +195,9 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -250,17 +205,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public Icon1 Icon
         {
-            get
-            {
-                return this._Icon;
-            }
+            get => _Icon;
 
             set
             {
-                if (this._Icon != value)
+                if (_Icon != value)
                 {
-                    this._Icon = value;
-                    this.OnPropertyChanged("Icon");
+                    _Icon = value;
+                    OnPropertyChanged("Icon");
                 }
             }
         }
@@ -269,17 +221,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public double Id
         {
-            get
-            {
-                return this._Id;
-            }
+            get => _Id;
 
             set
             {
-                if (this._Id != value)
+                if (_Id != value)
                 {
-                    this._Id = value;
-                    this.OnPropertyChanged("Id");
+                    _Id = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
@@ -288,17 +237,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Name
         {
-            get
-            {
-                return this._Name;
-            }
+            get => _Name;
 
             set
             {
-                if (this._Name != value)
+                if (_Name != value)
                 {
-                    this._Name = value;
-                    this.OnPropertyChanged("Name");
+                    _Name = value;
+                    OnPropertyChanged("Name");
                 }
             }
         }
@@ -310,9 +256,9 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -320,17 +266,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public double Id
         {
-            get
-            {
-                return this._Id;
-            }
+            get => _Id;
 
             set
             {
-                if (this._Id != value)
+                if (_Id != value)
                 {
-                    this._Id = value;
-                    this.OnPropertyChanged("Id");
+                    _Id = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
@@ -339,17 +282,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Name
         {
-            get
-            {
-                return this._Name;
-            }
+            get => _Name;
 
             set
             {
-                if (this._Name != value)
+                if (_Name != value)
                 {
-                    this._Name = value;
-                    this.OnPropertyChanged("Name");
+                    _Name = value;
+                    OnPropertyChanged("Name");
                 }
             }
         }
@@ -358,17 +298,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Path
         {
-            get
-            {
-                return this._Path;
-            }
+            get => _Path;
 
             set
             {
-                if (this._Path != value)
+                if (_Path != value)
                 {
-                    this._Path = value;
-                    this.OnPropertyChanged("Path");
+                    _Path = value;
+                    OnPropertyChanged("Path");
                 }
             }
         }
@@ -384,9 +321,9 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -394,17 +331,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public double Id
         {
-            get
-            {
-                return this._Id;
-            }
+            get => _Id;
 
             set
             {
-                if (this._Id != value)
+                if (_Id != value)
                 {
-                    this._Id = value;
-                    this.OnPropertyChanged("Id");
+                    _Id = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
@@ -413,17 +347,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Name
         {
-            get
-            {
-                return this._Name;
-            }
+            get => _Name;
 
             set
             {
-                if (this._Name != value)
+                if (_Name != value)
                 {
-                    this._Name = value;
-                    this.OnPropertyChanged("Name");
+                    _Name = value;
+                    OnPropertyChanged("Name");
                 }
             }
         }
@@ -435,37 +366,26 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
-        private Wallets1 _Wallets = new Wallets1();
-
-        public Wallets1 Wallets
-        {
-            get
-            {
-                return this._Wallets;
-            }
-        }
+        public Wallets1 Wallets { get; } = new Wallets1();
 
         private double _Id = 0;
 
         public double Id
         {
-            get
-            {
-                return this._Id;
-            }
+            get => _Id;
 
             set
             {
-                if (this._Id != value)
+                if (_Id != value)
                 {
-                    this._Id = value;
-                    this.OnPropertyChanged("Id");
+                    _Id = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
@@ -474,17 +394,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Name
         {
-            get
-            {
-                return this._Name;
-            }
+            get => _Name;
 
             set
             {
-                if (this._Name != value)
+                if (_Name != value)
                 {
-                    this._Name = value;
-                    this.OnPropertyChanged("Name");
+                    _Name = value;
+                    OnPropertyChanged("Name");
                 }
             }
         }
@@ -493,17 +410,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string ImageUri
         {
-            get
-            {
-                return this._ImageUri;
-            }
+            get => _ImageUri;
 
             set
             {
-                if (this._ImageUri != value)
+                if (_ImageUri != value)
                 {
-                    this._ImageUri = value;
-                    this.OnPropertyChanged("ImageUri");
+                    _ImageUri = value;
+                    OnPropertyChanged("ImageUri");
                 }
             }
         }
@@ -512,30 +426,19 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public Image Image
         {
-            get
-            {
-                return this._Image;
-            }
+            get => _Image;
 
             set
             {
-                if (this._Image != value)
+                if (_Image != value)
                 {
-                    this._Image = value;
-                    this.OnPropertyChanged("Image");
+                    _Image = value;
+                    OnPropertyChanged("Image");
                 }
             }
         }
 
-        private Rules _Rules = new Rules();
-
-        public Rules Rules
-        {
-            get
-            {
-                return this._Rules;
-            }
-        }
+        public Rules Rules { get; } = new Rules();
     }
 
     public class Wallets1 : System.Collections.ObjectModel.ObservableCollection<WalletsItem1>
@@ -548,9 +451,9 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -558,17 +461,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public double Id
         {
-            get
-            {
-                return this._Id;
-            }
+            get => _Id;
 
             set
             {
-                if (this._Id != value)
+                if (_Id != value)
                 {
-                    this._Id = value;
-                    this.OnPropertyChanged("Id");
+                    _Id = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
@@ -577,17 +477,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Name
         {
-            get
-            {
-                return this._Name;
-            }
+            get => _Name;
 
             set
             {
-                if (this._Name != value)
+                if (_Name != value)
                 {
-                    this._Name = value;
-                    this.OnPropertyChanged("Name");
+                    _Name = value;
+                    OnPropertyChanged("Name");
                 }
             }
         }
@@ -596,17 +493,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string ImageUri
         {
-            get
-            {
-                return this._ImageUri;
-            }
+            get => _ImageUri;
 
             set
             {
-                if (this._ImageUri != value)
+                if (_ImageUri != value)
                 {
-                    this._ImageUri = value;
-                    this.OnPropertyChanged("ImageUri");
+                    _ImageUri = value;
+                    OnPropertyChanged("ImageUri");
                 }
             }
         }
@@ -618,9 +512,9 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -628,17 +522,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Path
         {
-            get
-            {
-                return this._Path;
-            }
+            get => _Path;
 
             set
             {
-                if (this._Path != value)
+                if (_Path != value)
                 {
-                    this._Path = value;
-                    this.OnPropertyChanged("Path");
+                    _Path = value;
+                    OnPropertyChanged("Path");
                 }
             }
         }
@@ -650,9 +541,9 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         protected virtual void OnPropertyChanged(string propertyName)
         {
-            if (this.PropertyChanged != null)
+            if (PropertyChanged != null)
             {
-                this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+                PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
             }
         }
 
@@ -660,17 +551,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public double Id
         {
-            get
-            {
-                return this._Id;
-            }
+            get => _Id;
 
             set
             {
-                if (this._Id != value)
+                if (_Id != value)
                 {
-                    this._Id = value;
-                    this.OnPropertyChanged("Id");
+                    _Id = value;
+                    OnPropertyChanged("Id");
                 }
             }
         }
@@ -679,17 +567,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Name
         {
-            get
-            {
-                return this._Name;
-            }
+            get => _Name;
 
             set
             {
-                if (this._Name != value)
+                if (_Name != value)
                 {
-                    this._Name = value;
-                    this.OnPropertyChanged("Name");
+                    _Name = value;
+                    OnPropertyChanged("Name");
                 }
             }
         }
@@ -698,17 +583,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Description
         {
-            get
-            {
-                return this._Description;
-            }
+            get => _Description;
 
             set
             {
-                if (this._Description != value)
+                if (_Description != value)
                 {
-                    this._Description = value;
-                    this.OnPropertyChanged("Description");
+                    _Description = value;
+                    OnPropertyChanged("Description");
                 }
             }
         }
@@ -717,17 +599,14 @@ namespace Blend.SampleData.WalletsSampleDataSource
 
         public string Pattern
         {
-            get
-            {
-                return this._Pattern;
-            }
+            get => _Pattern;
 
             set
             {
-                if (this._Pattern != value)
+                if (_Pattern != value)
                 {
-                    this._Pattern = value;
-                    this.OnPropertyChanged("Pattern");
+                    _Pattern = value;
+                    OnPropertyChanged("Pattern");
                 }
             }
         }

@@ -19,15 +19,15 @@ namespace VirtualWallet.Pages
     /// </summary>
     public sealed partial class RulePage : Page
     {
-        private RulePageViewModel viewModel;
-        private ResourceLoader resources;
+        private readonly RulePageViewModel viewModel;
+        private readonly ResourceLoader resources;
 
         public RulePage()
         {
             resources = ResourceLoader.GetForCurrentView();
-            this.InitializeComponent();
+            InitializeComponent();
             viewModel = new RulePageViewModel(new RuleService());
-            this.DataContext = viewModel;
+            DataContext = viewModel;
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)

@@ -10,7 +10,7 @@ namespace VirtualWallet.Behaviors
     public class HideablePivotItemBehavior : Behavior<PivotItem>
     {
         public static readonly DependencyProperty VisibleProperty = DependencyProperty.Register(
-            "Visible",
+            nameof(Visible),
             typeof(bool),
             typeof(HideablePivotItemBehavior),
             new PropertyMetadata(true, VisiblePropertyChanged));

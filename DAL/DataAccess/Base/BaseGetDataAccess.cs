@@ -12,11 +12,8 @@ namespace DAL.DataAccess
     {
         public async Task<IList<T1>> GetAsync(T2 filter)
         {
-            if (filter == null)
-                filter = new T2();
-
             var connection = ConnectionHelper.GetDbAsyncConnection();
-            return await ApplyFilters(connection.Table<T1>(), filter).ToListAsync();
+            return await ApplyFilters(connection.Table<T1>(), filter ?? new T2()).ToListAsync();
         }
 
         public async Task<IList<T1>> GetAllAsync()

@@ -8,26 +8,26 @@ namespace VirtualWallet.ViewModels
 {
     class RulePageViewModel : ViewModelBase
     {
-        private IRuleService ruleService;
+        private readonly IRuleService ruleService;
 
         private Rule rule;
-        private Boolean modified;
-        private Boolean persisted;
-        private Boolean patternMatch;
-        private Boolean patternValid;
-        private String testText;
+        private bool modified;
+        private bool persisted;
+        private bool patternMatch;
+        private bool patternValid;
+        private string testText;
 
         public RulePageViewModel(IRuleService ruleService)
         {
             this.ruleService = ruleService;
             Rule = new Rule();
-            this.modified = false;
-            this.patternValid = true;
+            modified = false;
+            patternValid = true;
         }
 
         public Rule Rule
         {
-            get { return rule; }
+            get => rule;
             set
             {
                 if (rule == value)
@@ -38,12 +38,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public Boolean Modified
+        public bool Modified
         {
-            get
-            {
-                return modified;
-            }
+            get => modified;
             set
             {
                 if (modified == value)
@@ -54,12 +51,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public Boolean Persisted
+        public bool Persisted
         {
-            get
-            {
-                return persisted;
-            }
+            get => persisted;
             set
             {
                 if (persisted == value)
@@ -70,12 +64,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public String Name
+        public string Name
         {
-            get
-            { 
-                return Rule == null ? string.Empty : Rule.Name;
-            }
+            get => Rule == null ? string.Empty : Rule.Name;
             set
             {
                 if (Rule == null || Rule.Name == value)
@@ -87,12 +78,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public String Pattern
+        public string Pattern
         {
-            get
-            {
-                return Rule == null ? string.Empty : Rule.Pattern;
-            }
+            get => Rule == null ? string.Empty : Rule.Pattern;
             set
             {
                 if (Rule == null || Rule.Pattern == value)
@@ -107,10 +95,7 @@ namespace VirtualWallet.ViewModels
 
         public PatternType PatternType
         {
-            get
-            {
-                return Rule == null ? PatternType.Contains : Rule.PatternType;
-            }
+            get => Rule == null ? PatternType.Contains : Rule.PatternType;
             set
             {
                 if (Rule == null || Rule.PatternType == value)
@@ -123,12 +108,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public Boolean PatternMatch
+        public bool PatternMatch
         {
-            get
-            {
-                return patternMatch;
-            }
+            get => patternMatch;
             set
             {
                 if (patternMatch == value)
@@ -139,12 +121,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public Boolean PatternValid
+        public bool PatternValid
         {
-            get
-            {
-                return patternValid;
-            }
+            get => patternValid;
             set
             {
                 if (patternValid == value)
@@ -155,12 +134,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public String TestText
+        public string TestText
         {
-            get
-            {
-                return testText;
-            }
+            get => testText;
             set
             {
                 if (testText == value)
@@ -180,11 +156,14 @@ namespace VirtualWallet.ViewModels
 
             if (rule == null)
             {
-                rule = new Rule();
-                rule.CategoryId = CategoryId;
-                rule.PatternType = PatternType.Contains;
+                rule = new Rule
+                {
+                    CategoryId = CategoryId,
+                    PatternType = PatternType.Contains
+                };
                 Persisted = false;
-            } else
+            }
+            else
             {
                 Persisted = true;
             }

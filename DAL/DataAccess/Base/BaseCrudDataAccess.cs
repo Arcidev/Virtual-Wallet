@@ -34,7 +34,6 @@ namespace DAL.DataAccess
             //  await connection.InsertOrIgnoreAllAsync(entities);
             await connection.InsertAllAsync(entities);
         }
-
         public async Task InsertOrReplaceAsync(T1 entity)
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
@@ -44,8 +43,11 @@ namespace DAL.DataAccess
         public async Task InsertOrReplaceAsync(params T1[] entities)
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
-            //await connection.InsertOrReplaceAllAsync(entities);
-            await connection.InsertAllAsync(entities);
+            await connection.RunInTransactionAsync(tran =>
+            {
+                foreach (var entity in entities)
+                    tran.InsertOrReplace(entity);
+            });
         }
 
         public async Task UpdateAsync(params T1[] entities)

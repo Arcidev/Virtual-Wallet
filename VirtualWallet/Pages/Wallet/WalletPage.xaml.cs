@@ -16,27 +16,29 @@ namespace VirtualWallet.Pages
 {
     public sealed partial class WalletPage : Page
     {
-        private WalletPageViewModel viewModel;
+        private readonly WalletPageViewModel viewModel;
         private double screenWidth;
-        private ResourceLoader resources;
+        private readonly ResourceLoader resources;
 
         public WalletPage()
         {
             resources = ResourceLoader.GetForCurrentView();
-            this.InitializeComponent();
-            viewModel = new WalletPageViewModel(new BankAccountInfoService(), new TransactionService(), new CategoryService(), new WalletCategoryService(), new WalletBankService(), new CurrencyService(), ResourceLoader.GetForCurrentView());
-            viewModel.BeforeSync = () =>
+            InitializeComponent();
+            viewModel = new WalletPageViewModel(new BankAccountInfoService(), new TransactionService(), new CategoryService(), new WalletCategoryService(), new WalletBankService(), new CurrencyService(), ResourceLoader.GetForCurrentView())
             {
-                IconRotation.Begin();
-                TransactionsAccordion.UnselectAll();
+                BeforeSync = () =>
+                {
+                    IconRotation.Begin();
+                    TransactionsAccordion.UnselectAll();
+                },
+                AfterSync = () =>
+                {
+                    IconRotation.Stop();
+                    RecalculateLineGraphInterval();
+                    SetStyles();
+                }
             };
-            viewModel.AfterSync = () =>
-            {
-                IconRotation.Stop();
-                RecalculateLineGraphInterval();
-                SetStyles();
-            };
-            this.DataContext = viewModel;
+            DataContext = viewModel;
 
             TimeRangeComboboxCat.ItemsSource = Enum.GetValues(typeof(TimeRange)).Cast<TimeRange>();
             TimeRangeComboboxTrans.ItemsSource = Enum.GetValues(typeof(TimeRange)).Cast<TimeRange>();

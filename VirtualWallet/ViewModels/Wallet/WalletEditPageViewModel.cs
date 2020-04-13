@@ -15,11 +15,10 @@ namespace VirtualWallet.ViewModels
 {
     class WalletEditPageViewModel : ViewModelBase
     {
-        private ICategoryService categoryService;
-        private IWalletService walletService;
-        private IWalletCategoryService walletCategoryService;
-        private IWalletBankService walletBankService;
-        private ICurrencyService currencyService;
+        private readonly IWalletService walletService;
+        private readonly IWalletCategoryService walletCategoryService;
+        private readonly IWalletBankService walletBankService;
+        private readonly ICurrencyService currencyService;
 
         private Wallet wallet;
         private Currency selectedCurrency;
@@ -27,35 +26,34 @@ namespace VirtualWallet.ViewModels
         private ObservableCollection<Category> categories;
         private ObservableCollection<Bank> banks;
         private ObservableCollection<Currency> currencies;
-        private Boolean modified;
-        private Boolean persisted;
+        private bool modified;
+        private bool persisted;
 
         public ICommand DeleteWalletCommand { get; private set; }
 
-        public WalletEditPageViewModel(ICategoryService categoryService, IWalletService walletService, IWalletCategoryService walletCategoryService, IWalletBankService walletBankService, ICurrencyService currencyService)
+        public WalletEditPageViewModel(IWalletService walletService, IWalletCategoryService walletCategoryService, IWalletBankService walletBankService, ICurrencyService currencyService)
         {
-            this.categoryService = categoryService;
             this.walletService = walletService;
             this.walletCategoryService = walletCategoryService;
             this.walletBankService = walletBankService;
             this.currencyService = currencyService;
-            this.modified = false;
+            modified = false;
 
             DeleteWalletCommand = new CommandHandler(DeleteWallet);
 
-            this.Wallet = new Wallet();       
+            Wallet = new Wallet();       
         }
 
         public Wallet Wallet
         {
-            get { return wallet; }
+            get => wallet;
             set
             {
                 if (wallet == value)
                     return;
 
                 wallet = value;
-                
+
                 NotifyPropertyChanged();
                 NotifyPropertyChanged(nameof(Name));
                 NotifyPropertyChanged(nameof(Image));
@@ -64,12 +62,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public Boolean Modified
+        public bool Modified
         {
-            get
-            {
-                return modified;
-            }
+            get => modified;
             set
             {
                 if (modified == value)
@@ -80,12 +75,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public Boolean Persisted
+        public bool Persisted
         {
-            get
-            {
-                return persisted;
-            }
+            get => persisted;
             set
             {
                 if (persisted == value)
@@ -96,12 +88,9 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public String Name
+        public string Name
         {
-            get
-            { 
-                return Wallet == null ? string.Empty : Wallet.Name;
-            }
+            get => Wallet == null ? string.Empty : Wallet.Name;
             set
             {
                 if (Wallet == null || Wallet.Name == value)
@@ -115,10 +104,7 @@ namespace VirtualWallet.ViewModels
 
         public Image Image
         {
-            get
-            {
-                return Wallet?.Image;
-            }
+            get => Wallet?.Image;
             set
             {
                 if (Wallet == null || value == null || value.Equals(Wallet.Image))
@@ -132,10 +118,7 @@ namespace VirtualWallet.ViewModels
 
         public TimeRange TimeRange
         {
-            get
-            {
-                return Wallet == null ? TimeRange.Month : Wallet.TimeRange;
-            }
+            get => Wallet == null ? TimeRange.Month : Wallet.TimeRange;
             set
             {
                 if (Wallet == null || Wallet.TimeRange == value)
@@ -149,7 +132,7 @@ namespace VirtualWallet.ViewModels
 
         public Currency SelectedCurrency
         {
-            get { return selectedCurrency; }
+            get => selectedCurrency;
             set
             {
                 if (selectedCurrency == value || Wallet == null)
@@ -164,7 +147,7 @@ namespace VirtualWallet.ViewModels
 
         public ObservableCollection<Currency> Currencies
         {
-            get { return currencies; }
+            get => currencies;
             set
             {
                 if (currencies == value)
@@ -177,7 +160,7 @@ namespace VirtualWallet.ViewModels
 
         public ObservableCollection<Category> Categories
         {
-            get { return categories; }
+            get => categories;
             set
             {
                 if (categories == value)
@@ -191,7 +174,7 @@ namespace VirtualWallet.ViewModels
 
         public ObservableCollection<Bank> Banks
         {
-            get { return banks; }
+            get => banks;
             set
             {
                 if (banks == value)

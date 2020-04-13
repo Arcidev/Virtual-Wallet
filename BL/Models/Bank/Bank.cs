@@ -14,7 +14,7 @@ namespace BL.Models
             { BankId.Fio, typeof(Fio) }
         };
 
-        protected PasswordVault PasswordVault { get { return new PasswordVault(); } }
+        protected PasswordVault PasswordVault => new PasswordVault();
 
         public int Id { get; set; }
 
@@ -24,13 +24,13 @@ namespace BL.Models
 
         public Image Image { get; set; }
 
-        public Uri ImageUri { get { return Image != null ? new Uri(Image.Path) : null; } }
+        public Uri ImageUri => Image != null ? new Uri(Image.Path) : null;
 
         public BankAccountInfo BankAccountInfo { get; set; }
 
         public IList<Transaction> StoredTransactions { get; set; }
 
-        public bool CanSyncExecute { get { return NextPossibleSyncTime <= DateTime.Now; } }
+        public bool CanSyncExecute => NextPossibleSyncTime <= DateTime.Now;
 
         public abstract bool HasCredentials { get; }
 

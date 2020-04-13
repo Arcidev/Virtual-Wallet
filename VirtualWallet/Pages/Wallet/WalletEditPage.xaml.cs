@@ -15,16 +15,16 @@ namespace VirtualWallet.Pages
 {
     public sealed partial class WalletEditPage : Page
     {
-        private WalletEditPageViewModel viewModel;
+        private readonly WalletEditPageViewModel viewModel;
         private PagePayload pagePayload;
-        private ResourceLoader resources;
+        private readonly ResourceLoader resources;
 
         public WalletEditPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             resources = ResourceLoader.GetForCurrentView();
-            viewModel = new WalletEditPageViewModel(new CategoryService(), new WalletService(), new WalletCategoryService(), new WalletBankService(), new CurrencyService());
-            this.DataContext = viewModel;
+            viewModel = new WalletEditPageViewModel(new WalletService(), new WalletCategoryService(), new WalletBankService(), new CurrencyService());
+            DataContext = viewModel;
             TimeRangeCombobox.ItemsSource = Enum.GetValues(typeof(TimeRange)).Cast<TimeRange>();
         }
 

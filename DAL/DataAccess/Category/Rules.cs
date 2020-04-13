@@ -8,7 +8,6 @@ namespace DAL.DataAccess
 {
     public class Rules : BaseModifiableCrudDataAccess<Rule, RuleFilter, RuleModifier>, IRules
     {
-        private static readonly IImages images = new Images();
         private static readonly ICategories categories = new Categories();
 
         protected async override Task ApplyModifiersAsync(Rule rule, RuleModifier modifier)

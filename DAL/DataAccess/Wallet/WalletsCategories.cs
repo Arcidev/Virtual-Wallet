@@ -17,13 +17,9 @@ namespace DAL.DataAccess
                 walletCategory.Wallet = await wallets.GetAsync(walletCategory.WalletId, new WalletModifier() { IncludeImage = true });
 
             if (modifier.IncludeCategory)
-            {
                 walletCategory.Category = await categories.GetAsync(walletCategory.CategoryId, new CategoryModifier() { IncludeImage = true });
-            }
             else if (modifier.IncludeWholeCategory || modifier.IncludeAll)
-            {
                 walletCategory.Category = await categories.GetAsync(walletCategory.CategoryId, new CategoryModifier() { IncludeImage = true, IncludeRules = true });
-            }
         }
 
         protected override AsyncTableQuery<WalletCategory> ApplyFilters(AsyncTableQuery<WalletCategory> query, WalletCategoryFilter filter)

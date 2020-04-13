@@ -8,7 +8,7 @@ namespace VirtualWallet.ViewModels
 {
     public class ImagesPageViewModel : ViewModelBase
     {
-        private IImageService imageService;
+        private readonly IImageService imageService;
         private Image selectedImage;
         private Image originalImage;
         private IList<Image> images;
@@ -20,7 +20,7 @@ namespace VirtualWallet.ViewModels
 
         public Image OriginalImage
         {
-            get { return originalImage; }
+            get => originalImage;
             set
             {
                 if (originalImage == value)
@@ -33,7 +33,7 @@ namespace VirtualWallet.ViewModels
 
         public Image SelectedImage
         {
-            get { return selectedImage; }
+            get => selectedImage;
             set
             {
                 if (selectedImage == value)
@@ -46,7 +46,7 @@ namespace VirtualWallet.ViewModels
 
         public IList<Image> Images
         {
-            get { return images; }
+            get => images;
             set
             {
                 if (images == value)

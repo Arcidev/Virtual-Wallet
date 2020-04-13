@@ -9,17 +9,12 @@ namespace BL.Models
 
         public override bool Equals(object obj)
         {
-            // If parameter is null return false.
-            if (obj == null)
-                return false;
-
             // If parameter cannot be cast to Image return false.
-            Image i = obj as Image;
-            if (i == null)
+            if (!(obj is Image i))
                 return false;
 
             // Return true if the fields match:
-            return (this.Id == i.Id) && (this.Path.Equals(i.Path));
+            return (Id == i.Id) && (Path.Equals(i.Path));
         }
 
         public override int GetHashCode()

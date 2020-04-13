@@ -16,7 +16,7 @@ namespace VirtualWallet.Converters
         }
 
         public static readonly DependencyProperty AlternateBrushesProperty =
-            DependencyProperty.Register("AlternateBrushes", typeof(List<SolidColorBrush>),
+            DependencyProperty.Register(nameof(AlternateBrushes), typeof(List<SolidColorBrush>),
             typeof(AlternateConverter), new PropertyMetadata(new List<SolidColorBrush>()));
 
         public object Convert(object value, Type targetType, object parameter, string language)

@@ -12,15 +12,15 @@ namespace VirtualWallet.Pages
 {
     public sealed partial class BankCredentialsPage : Page
     {
-        private BankCredentialsPageViewModel viewModel;
-        private ResourceLoader resources;
+        private readonly BankCredentialsPageViewModel viewModel;
+        private readonly ResourceLoader resources;
 
         public BankCredentialsPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
             viewModel = new BankCredentialsPageViewModel();
             resources = ResourceLoader.GetForCurrentView();
-            this.DataContext = viewModel;
+            DataContext = viewModel;
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -43,7 +43,7 @@ namespace VirtualWallet.Pages
 
             viewModel.SetCredentials();
             if (Frame.Navigate(typeof(BankPage), viewModel.Bank))
-                this.Frame.BackStack.RemoveAt(this.Frame.BackStack.Count - 1);
+                Frame.BackStack.RemoveAt(Frame.BackStack.Count - 1);
         }
 
         private void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
