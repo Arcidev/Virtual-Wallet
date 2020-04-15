@@ -17,9 +17,9 @@ namespace DAL.Data
         public Image Image { get; set; }
 
         [Ignore]
-        public IList<Wallet> Wallets { get; set; }
+        public List<Wallet> Wallets { get; set; }
 
         [Ignore]
-        public IList<Rule> Rules { get; set; }
+        public List<Rule> Rules { get; set; }
     }
 }

@@ -28,7 +28,7 @@ namespace BL.Models
 
         public BankAccountInfo BankAccountInfo { get; set; }
 
-        public IList<Transaction> StoredTransactions { get; set; }
+        public List<Transaction> StoredTransactions { get; set; }
 
         public bool CanSyncExecute => NextPossibleSyncTime <= DateTime.Now;
 
@@ -44,9 +44,9 @@ namespace BL.Models
 
         public abstract Task SetLastDownloadDateAsync(DateTime date);
 
-        public abstract Task<IList<Transaction>> GetNewTransactionsAsync();
+        public abstract Task<List<Transaction>> GetNewTransactionsAsync();
 
-        public abstract Task<IList<Transaction>> GetTransactionsAsync(TransactionFilter filter);
+        public abstract Task<List<Transaction>> GetTransactionsAsync(TransactionFilter filter);
 
         public static Bank Create(int bankId)
         {

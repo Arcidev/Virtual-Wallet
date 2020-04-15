@@ -12,7 +12,7 @@ namespace VirtualWallet.Controls
 {
     public class HamburgerArgumentMenuButton : ToggleButton
     {
-        private static readonly IList<HamburgerArgumentMenuButton> registerdHamburgerArgumentMenuButtons = new List<HamburgerArgumentMenuButton>();
+        private static readonly List<HamburgerArgumentMenuButton> registerdHamburgerArgumentMenuButtons = new List<HamburgerArgumentMenuButton>();
         private HamburgerFrame hamburgerFrame;
 
         /// <summary>

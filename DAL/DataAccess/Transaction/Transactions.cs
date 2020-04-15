@@ -9,7 +9,7 @@ namespace DAL.DataAccess
 {
     public class Transactions : BaseCrudDataAccess<Transaction, TransactionFilter>, ITransactions
     {
-        public async Task<IList<Transaction>> GetByBankIdAsync(int? bankId, TransactionFilter filter = null)
+        public async Task<List<Transaction>> GetByBankIdAsync(int? bankId, TransactionFilter filter = null)
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
             var query = connection.Table<Transaction>().Where(x => x.BankId == bankId);

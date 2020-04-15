@@ -6,6 +6,6 @@ namespace BL.Models
     {
         string Name { get; set; }
 
-        IList<Transaction> StoredTransactions { get; set; }
+        List<Transaction> StoredTransactions { get; set; }
     }
 }

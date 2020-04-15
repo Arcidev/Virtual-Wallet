@@ -19,7 +19,7 @@ namespace DAL.DataAccess
         /// </summary>
         /// <param name="modifier">Specifies which referenced entities should be included</param>
         /// <returns>List of all entities with referenced entities based on modifier</returns>
-        Task<IList<T1>> GetAllAsync(T3 modifier = null);
+        Task<List<T1>> GetAllAsync(T3 modifier = null);
 
         /// <summary>
         /// Gets filtered entities with referenced entities
@@ -27,7 +27,7 @@ namespace DAL.DataAccess
         /// <param name="filter">Filter to apply</param>
         /// <param name="modifier">Specifies which referenced entities should be included</param>
         /// <returns>List  of filtered entities with referenced entities based on modifier</returns>
-        Task<IList<T1>> GetAsync(T2 filter = null, T3 modifier = null);
+        Task<List<T1>> GetAsync(T2 filter = null, T3 modifier = null);
 
         /// <summary>
         /// Gets entity by id with referenced entities

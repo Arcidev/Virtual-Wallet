@@ -36,7 +36,7 @@ namespace BL.Models
             }
         }
 
-        public override async Task<IList<Transaction>> GetNewTransactionsAsync()
+        public override async Task<List<Transaction>> GetNewTransactionsAsync()
         {
             if (string.IsNullOrWhiteSpace(Token))
                 throw new InvalidOperationException("Fio bank token has not been set");
@@ -48,7 +48,7 @@ namespace BL.Models
             return GetTransactions(statement);
         }
 
-        public override async Task<IList<Transaction>> GetTransactionsAsync(Filter filter)
+        public override async Task<List<Transaction>> GetTransactionsAsync(Filter filter)
         {
             if (string.IsNullOrWhiteSpace(Token))
                 throw new InvalidOperationException("Fio bank token has not been set");
@@ -99,7 +99,7 @@ namespace BL.Models
             return PasswordVault.RetrieveAll().FirstOrDefault(x => x.Resource == fioResource && x.UserName == fioUser);
         }
 
-        private IList<Transaction> GetTransactions(FioSdkCsharp.Models.AccountStatement accountStatement)
+        private List<Transaction> GetTransactions(FioSdkCsharp.Models.AccountStatement accountStatement)
         {
             BankAccountInfo = accountStatement.Info.Adapt<BankAccountInfo>();
             BankAccountInfo.Id = Id;

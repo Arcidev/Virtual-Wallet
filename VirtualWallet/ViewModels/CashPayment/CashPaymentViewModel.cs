@@ -19,8 +19,8 @@ namespace VirtualWallet.ViewModels
         string paymentDescription;
         Currency paymentCurrency;
         TimeRange timeRange;
-        private IList<Currency> currencies;
-        private IList<Transaction> transactions;
+        private List<Currency> currencies;
+        private List<Transaction> transactions;
 
         public CashPaymentViewModel(ITransactionService transactionService, ICurrencyService currencyService)
         {
@@ -31,7 +31,7 @@ namespace VirtualWallet.ViewModels
             PaymentDate = DateTime.Now;
         }
 
-        public IList<Currency> Currencies
+        public List<Currency> Currencies
         {
             get => currencies;
             set
@@ -44,7 +44,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public IList<Transaction> Transactions
+        public List<Transaction> Transactions
         {
             get => transactions;
             set

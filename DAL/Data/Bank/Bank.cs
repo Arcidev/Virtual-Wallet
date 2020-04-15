@@ -20,6 +20,6 @@ namespace DAL.Data
         public BankAccountInfo BankAccountInfo { get; set; }
 
         [Ignore]
-        public IList<Transaction> StoredTransactions { get; set; }
+        public List<Transaction> StoredTransactions { get; set; }
     }
 }

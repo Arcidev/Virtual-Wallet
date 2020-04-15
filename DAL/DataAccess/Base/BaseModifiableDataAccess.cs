@@ -8,7 +8,7 @@ namespace DAL.DataAccess
 {
     public abstract class BaseModifiableGetDataAccess<T1, T2, T3> : BaseGetDataAccess<T1, T2>, IModifiableGet<T1, T2, T3> where T1 : class, IDao, new() where T2 : BaseFilter, new() where T3 : BaseModifier
     {
-        public async Task<IList<T1>> GetAllAsync(T3 modifier)
+        public async Task<List<T1>> GetAllAsync(T3 modifier)
         {
             var entities = await GetAllAsync();
             if (modifier != null)
@@ -17,7 +17,7 @@ namespace DAL.DataAccess
             return entities;
         }
 
-        public async Task<IList<T1>> GetAsync(T2 filter, T3 modifier)
+        public async Task<List<T1>> GetAsync(T2 filter, T3 modifier)
         {
             var entities = await GetAsync(filter);
             if (modifier != null)
@@ -37,7 +37,7 @@ namespace DAL.DataAccess
 
         protected abstract Task ApplyModifiersAsync(T1 entity, T3 modifier);
 
-        protected async Task ApplyModifiersAsync(IList<T1> entities, T3 modifier)
+        protected async Task ApplyModifiersAsync(List<T1> entities, T3 modifier)
         {
             foreach (var entity in entities)
                 await ApplyModifiersAsync(entity, modifier);
@@ -46,7 +46,7 @@ namespace DAL.DataAccess
 
     public abstract class BaseModifiableCrudDataAccess<T1, T2, T3> : BaseCrudDataAccess<T1, T2>, IModifiableCrud<T1, T2, T3> where T1 : class, IDao, new() where T2 : BaseFilter, new() where T3 : BaseModifier
     {
-        public async Task<IList<T1>> GetAllAsync(T3 modifier)
+        public async Task<List<T1>> GetAllAsync(T3 modifier)
         {
             var entities = await GetAllAsync();
             if (modifier != null)
@@ -55,7 +55,7 @@ namespace DAL.DataAccess
             return entities;
         }
 
-        public async Task<IList<T1>> GetAsync(T2 filter, T3 modifier)
+        public async Task<List<T1>> GetAsync(T2 filter, T3 modifier)
         {
             var entities = await GetAsync(filter);
             if (modifier != null)
@@ -75,7 +75,7 @@ namespace DAL.DataAccess
 
         protected abstract Task ApplyModifiersAsync(T1 entity, T3 modifier);
 
-        protected async Task ApplyModifiersAsync(IList<T1> entities, T3 modifier)
+        protected async Task ApplyModifiersAsync(List<T1> entities, T3 modifier)
         {
             foreach (var entity in entities)
                 await ApplyModifiersAsync(entity, modifier);

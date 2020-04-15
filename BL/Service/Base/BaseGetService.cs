@@ -15,14 +15,14 @@ namespace BL.Service
             return (await _instance.GetAsync(id)).Adapt<T1>();
         }
 
-        public async Task<IList<T1>> GetAsync(T4 filter = null)
+        public async Task<List<T1>> GetAsync(T4 filter = null)
         {
-            return (await _instance.GetAsync(filter)).Adapt<IList<T1>>();
+            return (await _instance.GetAsync(filter)).Adapt<List<T1>>();
         }
 
-        public async Task<IList<T1>> GetAllAsync()
+        public async Task<List<T1>> GetAllAsync()
         {
-            return (await _instance.GetAllAsync()).Adapt<IList<T1>>();
+            return (await _instance.GetAllAsync()).Adapt<List<T1>>();
         }
     }
 }

@@ -23,10 +23,10 @@ namespace VirtualWallet.ViewModels
         private readonly ICategoryService categoryService;
         private readonly ResourceLoader resources;
         private Bank bank;
-        private IList<Tuple<string, double>> expenses;
-        private IList<Tuple<string, double>> incomes;
-        private IList<Tuple<DateTime, double>> balances;
-        private IList<TransactionCategoryList> transactionCategories;
+        private List<Tuple<string, double>> expenses;
+        private List<Tuple<string, double>> incomes;
+        private List<Tuple<DateTime, double>> balances;
+        private List<TransactionCategoryList> transactionCategories;
         private BankAccountInfo bankAccountInfo;
         private CommandHandler syncCommand;
         private Timer syncExecuteTimer;
@@ -34,7 +34,7 @@ namespace VirtualWallet.ViewModels
         private readonly string categoryOther;
         private string linearAxisInfo;
 
-        public IList<SolidColorBrush> Brushes { get; }
+        public List<SolidColorBrush> Brushes { get; }
 
         public Action BeforeSync { get; set; }
 
@@ -74,7 +74,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public IList<TransactionCategoryList> TransactionCategories
+        public List<TransactionCategoryList> TransactionCategories
         {
             get => transactionCategories;
             private set
@@ -105,7 +105,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public IList<Tuple<string, double>> Expenses
+        public List<Tuple<string, double>> Expenses
         {
             get => expenses;
             private set
@@ -119,7 +119,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public IList<Tuple<string, double>> Incomes
+        public List<Tuple<string, double>> Incomes
         {
             get => incomes;
             private set
@@ -133,7 +133,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public IList<Tuple<DateTime, double>> Balances
+        public List<Tuple<DateTime, double>> Balances
         {
             get => balances;
             private set

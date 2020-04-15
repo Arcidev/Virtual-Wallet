@@ -10,13 +10,13 @@ namespace DAL.DataAccess
 {
     public abstract class BaseGetDataAccess<T1, T2> : IGet<T1, T2> where T1 : class, IDao, new() where T2 : BaseFilter, new()
     {
-        public async Task<IList<T1>> GetAsync(T2 filter)
+        public async Task<List<T1>> GetAsync(T2 filter)
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
             return await ApplyFilters(connection.Table<T1>(), filter ?? new T2()).ToListAsync();
         }
 
-        public async Task<IList<T1>> GetAllAsync()
+        public async Task<List<T1>> GetAllAsync()
         {
             var connection = ConnectionHelper.GetDbAsyncConnection();
             return await connection.Table<T1>().ToListAsync();

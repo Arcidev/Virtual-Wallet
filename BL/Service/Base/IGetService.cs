@@ -16,14 +16,14 @@ namespace BL.Service
         /// Gets all stored entities
         /// </summary>
         /// <returns>List of all entities</returns>
-        Task<IList<T1>> GetAllAsync();
+        Task<List<T1>> GetAllAsync();
 
         /// <summary>
         /// Gets filtered entities
         /// </summary>
         /// <param name="filter">Filter to apply</param>
         /// <returns>List of filtered entities</returns>
-        Task<IList<T1>> GetAsync(T2 filter = null);
+        Task<List<T1>> GetAsync(T2 filter = null);
 
         /// <summary>
         /// Gets entity by id

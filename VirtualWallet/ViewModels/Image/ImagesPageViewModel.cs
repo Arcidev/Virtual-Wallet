@@ -11,7 +11,7 @@ namespace VirtualWallet.ViewModels
         private readonly IImageService imageService;
         private Image selectedImage;
         private Image originalImage;
-        private IList<Image> images;
+        private List<Image> images;
 
         public ImagesPageViewModel(IImageService imageService)
         {
@@ -44,7 +44,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public IList<Image> Images
+        public List<Image> Images
         {
             get => images;
             set

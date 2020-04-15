@@ -9,9 +9,9 @@ namespace BL.Service
 {
     public class TransactionService : BaseCrudService<Transaction, DAL.Data.Transaction, Transactions, TransactionFilter>, ITransactionService
     {
-        public async Task<IList<Transaction>> GetByBankIdAsync(int? bankId, TransactionFilter filter = null)
+        public async Task<List<Transaction>> GetByBankIdAsync(int? bankId, TransactionFilter filter = null)
         {
-            return (await _instance.GetByBankIdAsync(bankId, filter)).Adapt<IList<Transaction>>();
+            return (await _instance.GetByBankIdAsync(bankId, filter)).Adapt<List<Transaction>>();
         }
     }
 }

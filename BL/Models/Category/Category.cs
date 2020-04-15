@@ -15,9 +15,9 @@ namespace BL.Models
 
         public Uri ImageUri => Image != null ? new Uri(Image.Path) : null;
 
-        public IList<Rule> Rules { get; set; }
+        public IEnumerable<Rule> Rules { get; set; }
 
-        public IList<Wallet> Wallets { get; set; }
+        public IEnumerable<Wallet> Wallets { get; set; }
 
         public PagePayload PagePayload => new PagePayload() { Dto = this };
     }

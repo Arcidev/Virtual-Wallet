@@ -18,8 +18,8 @@ namespace VirtualWallet.ViewModels
         private readonly ICurrencyService currencyService;
         private string selectedLanguageCode;
         private readonly ResourceLoader resources;
-        private IList<LanguageInfo> availableLanguages;
-        private IList<Currency> currencies;
+        private List<LanguageInfo> availableLanguages;
+        private List<Currency> currencies;
         private Currency selectedCurrency;
 
         public ICommand RemoveAllDataCommand { get; private set; }
@@ -30,7 +30,7 @@ namespace VirtualWallet.ViewModels
 
         public ICommand RetrieveDatabaseFromRoamingFolderCommand { get; private set; }
 
-        public IList<LanguageInfo> AvailableLanguages
+        public List<LanguageInfo> AvailableLanguages
         {
             get => availableLanguages;
             private set
@@ -58,7 +58,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public IList<Currency> Currencies
+        public List<Currency> Currencies
         {
             get => currencies;
             set

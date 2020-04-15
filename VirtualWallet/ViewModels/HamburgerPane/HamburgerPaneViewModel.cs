@@ -11,11 +11,11 @@ namespace VirtualWallet.ViewModels
     {
         private readonly IBankService bankService;
         private readonly IWalletService walletService;
-        private IList<Bank> banks;
-        private IList<Wallet> wallets;
+        private List<Bank> banks;
+        private List<Wallet> wallets;
         private readonly ResourceLoader resources;
 
-        public IList<Bank> Banks
+        public List<Bank> Banks
         {
             get => banks;
             set
@@ -28,7 +28,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public IList<Wallet> Wallets
+        public List<Wallet> Wallets
         {
             get => wallets;
             set
