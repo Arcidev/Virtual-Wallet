@@ -51,7 +51,7 @@ namespace VirtualWallet.Pages
             base.OnNavigatedTo(e);
         }
 
-        private async void AcceptAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private async void AcceptAppBarButton_Click(object sender, RoutedEventArgs e)
         {
             await viewModel.SaveRelationAsync();
 
@@ -59,13 +59,13 @@ namespace VirtualWallet.Pages
                 Frame.GoBack();
         }
 
-        private void CancelAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void CancelAppBarButton_Click(object sender, RoutedEventArgs e)
         {
             if (Frame.CanGoBack)
                 Frame.GoBack();
         }
 
-        private void AddAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void AddAppBarButton_Click(object sender, RoutedEventArgs e)
         {
             var pagePayload = new PagePayload() { Dto = new Category() { Name = resources.GetString("Category_CategoryDefaultName") } };
             Frame.Navigate(typeof(CategoryPage), pagePayload);
@@ -74,7 +74,7 @@ namespace VirtualWallet.Pages
         private void GridViewCategories_ItemClick(object sender, ItemClickEventArgs e)
         {
             var category = (Category)e.ClickedItem; ;
-            var categoryPageDto = new BL.Models.PagePayload() { Dto = category };
+            var categoryPageDto = new PagePayload() { Dto = category };
             Frame.Navigate(typeof(CategoryPage), categoryPageDto);
         }
     }

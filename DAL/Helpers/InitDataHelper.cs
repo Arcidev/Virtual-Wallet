@@ -173,7 +173,7 @@ namespace DAL.Helpers
 
             if (await connection.Table<Currency>().FirstOrDefaultAsync() == null)
             {
-                await connection.InsertAllAsync(new object[]
+                await connection.InsertAllAsync(new []
                 {
                     new Currency() { Code = "EUR", ExchangeRate = 1, IsDefaultCurrency = false },
                     new Currency() { Code = "CZK", ExchangeRate = 27, IsDefaultCurrency = true },

@@ -82,8 +82,8 @@ namespace VirtualWallet.Pages
         {
             if (viewModel.Balances?.Count > 0)
             {
-                var firstDay = viewModel.Balances?.Last<Tuple<DateTime, double>>();
-                var lastDay = viewModel.Balances?.First<Tuple<DateTime, double>>();
+                var firstDay = viewModel.Balances?.Last();
+                var lastDay = viewModel.Balances?.First();
 
                 int daysBetween = 10;
                 if (firstDay != null && lastDay != null)

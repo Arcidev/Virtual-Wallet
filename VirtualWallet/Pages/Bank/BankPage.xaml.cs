@@ -54,12 +54,12 @@ namespace VirtualWallet.Pages
             base.OnNavigatingFrom(e);
         }
 
-        private void EditAppBarButton_Click(object sender, Windows.UI.Xaml.RoutedEventArgs e)
+        private void EditAppBarButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.Navigate(typeof(BankCredentialsPage), viewModel.Bank);
         }
 
-        private void Page_SizeChanged(object sender, Windows.UI.Xaml.SizeChangedEventArgs e)
+        private void Page_SizeChanged(object sender, SizeChangedEventArgs e)
         {
             if (screenWidth == e.NewSize.Width)
                 return;
@@ -78,8 +78,8 @@ namespace VirtualWallet.Pages
         {
             if (viewModel.Balances?.Count > 0)
             {
-                var firstDay = viewModel.Balances?.Last<Tuple<DateTime, double>>();
-                var lastDay = viewModel.Balances?.First<Tuple<DateTime, double>>();
+                var firstDay = viewModel.Balances?.Last();
+                var lastDay = viewModel.Balances?.First();
 
                 int daysBetween = 10;
                 if (firstDay != null && lastDay != null)

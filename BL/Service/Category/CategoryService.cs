@@ -11,7 +11,7 @@ namespace BL.Service
 {
     public class CategoryService : BaseModifiableCrudService<Category, DAL.Data.Category, Categories, CategoryFilter, CategoryModifier>, ICategoryService
     {
-        public async Task<List<TransactionCategoryList>> GroupTransactions(IEnumerable<Transaction> transactions, string defaultCategoryName)
+        public async Task<IEnumerable<TransactionCategoryList>> GroupTransactions(IEnumerable<Transaction> transactions, string defaultCategoryName)
         {
             var modifier = new CategoryModifier() { IncludeRules = true };
             var categories = await GetAllAsync(modifier);
@@ -19,19 +19,18 @@ namespace BL.Service
             return GroupTransactions(categories, transactions, defaultCategoryName);
         }
 
-        public List<TransactionCategoryList> GroupTransactionsForWallet(IEnumerable<Category> categories, IEnumerable<Transaction> transactions, string defaultCategoryName)
+        public IEnumerable<TransactionCategoryList> GroupTransactionsForWallet(IEnumerable<Category> categories, IEnumerable<Transaction> transactions, string defaultCategoryName)
         {
             return GroupTransactions(categories, transactions, defaultCategoryName);
         }
 
-        private List<TransactionCategoryList> GroupTransactions(IEnumerable<Category> categories, IEnumerable<Transaction> transactions, string defaultCategoryName)
+        private IEnumerable<TransactionCategoryList> GroupTransactions(IEnumerable<Category> categories, IEnumerable<Transaction> transactions, string defaultCategoryName)
         {
             var output = new List<TransactionCategoryList>();
             if (transactions == null || !transactions.Any())
                 return output;
 
-            var innerTransactions = transactions.Select(x => new TransactionMetadata { Description = x.Description, Amount = x.Amount, Date = x.Date, Currency = x.Currency }).ToList();
-
+            var innerTransactions = transactions.Select(x => new TransactionMetadata { Description = x.Description, Amount = x.Amount, Date = x.Date, Currency = x.Currency });
             if (categories != null)
             {
                 foreach (var category in categories)

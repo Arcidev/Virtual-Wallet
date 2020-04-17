@@ -35,7 +35,7 @@ namespace VirtualWallet.ViewModels
         private List<Tuple<string, double>> expenses;
         private List<Tuple<string, double>> incomes;
         private List<Tuple<DateTime, double>> balances;
-        private List<TransactionCategoryList> transactionCategories;
+        private IEnumerable<TransactionCategoryList> transactionCategories;
         private List<Transaction> cashPayments;
         private CommandHandler syncCommand;
         private Timer syncExecuteTimer;
@@ -89,7 +89,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public List<TransactionCategoryList> TransactionCategories
+        public IEnumerable<TransactionCategoryList> TransactionCategories
         {
             get => transactionCategories;
             private set
@@ -362,7 +362,7 @@ namespace VirtualWallet.ViewModels
                 if (bank != null)
                 {
                     bank.BankAccountInfo = await bankAccountInfoService.GetAsync(bank.Id);
-                    var filter = new Shared.Filters.TransactionFilter() { DateSince = TimeRange.ToDateSince() };
+                    var filter = new TransactionFilter() { DateSince = TimeRange.ToDateSince() };
                     bank.StoredTransactions = await transactionService.GetByBankIdAsync(bank.Id, filter);
                 }
             }

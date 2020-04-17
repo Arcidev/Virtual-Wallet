@@ -26,7 +26,7 @@ namespace VirtualWallet.ViewModels
         private List<Tuple<string, double>> expenses;
         private List<Tuple<string, double>> incomes;
         private List<Tuple<DateTime, double>> balances;
-        private List<TransactionCategoryList> transactionCategories;
+        private IEnumerable<TransactionCategoryList> transactionCategories;
         private BankAccountInfo bankAccountInfo;
         private CommandHandler syncCommand;
         private Timer syncExecuteTimer;
@@ -74,7 +74,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public List<TransactionCategoryList> TransactionCategories
+        public IEnumerable<TransactionCategoryList> TransactionCategories
         {
             get => transactionCategories;
             private set

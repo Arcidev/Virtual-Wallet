@@ -9,7 +9,7 @@ namespace BL.Service
 {
     public interface ICategoryService : IModifiableCrudService<Category, CategoryFilter, CategoryModifier>
     {
-        Task<List<TransactionCategoryList>> GroupTransactions(IEnumerable<Transaction> transactions, string defaultCategoryName);
-        List<TransactionCategoryList> GroupTransactionsForWallet(IEnumerable<Category> categories, IEnumerable<Transaction> transactions, string defaultCategoryName);
+        Task<IEnumerable<TransactionCategoryList>> GroupTransactions(IEnumerable<Transaction> transactions, string defaultCategoryName);
+        IEnumerable<TransactionCategoryList> GroupTransactionsForWallet(IEnumerable<Category> categories, IEnumerable<Transaction> transactions, string defaultCategoryName);
     }
 }
