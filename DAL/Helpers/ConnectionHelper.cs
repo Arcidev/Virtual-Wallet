@@ -6,6 +6,9 @@ namespace DAL.Helpers
 {
     internal static class ConnectionHelper
     {
+        private static readonly object locker = new object();
+        private static SQLiteAsyncConnection connection;
+
         public static readonly string DbPath = ApplicationData.Current.LocalFolder.Path;
 
         public const string DbFileName = "VirtualWalletDB.sqlite";
@@ -18,7 +21,16 @@ namespace DAL.Helpers
         /// <returns>Db connection</returns>
         public static SQLiteAsyncConnection GetDbAsyncConnection()
         {
-            return new SQLiteAsyncConnection(DbFilePath, false);
+            if (connection != null)
+                return connection;
+
+            lock (locker)
+            {
+                if (connection == null)
+                    connection = new SQLiteAsyncConnection(DbFilePath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.FullMutex);
+
+                return connection;
+            }
         }
     }
 }

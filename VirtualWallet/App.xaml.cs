@@ -48,6 +48,9 @@ namespace VirtualWallet
             // just ensure that the window is active
             if (!(Window.Current.Content is Frame rootFrame))
             {
+                MapperInstaller.ConfigureMapper();
+                await _database.InitAsync();
+
                 // Create a Frame to act as the navigation context and navigate to the first page
                 rootFrame = new HamburgerFrame()
                 {
@@ -66,9 +69,6 @@ namespace VirtualWallet
 
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
-
-                MapperInstaller.ConfigureMapper();
-                await _database.InitAsync();
 
                 // Register a handler for BackRequested events and set the
                 // visibility of the Back button
