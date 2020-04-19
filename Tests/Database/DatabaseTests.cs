@@ -15,7 +15,6 @@ namespace Tests.Database
     {
         private static readonly IDatabase database = new DAL.Config.Database();
         private static readonly ICategories categories = new Categories();
-        private static readonly IImages images = new Images();
         private static readonly IWallets wallets = new Wallets();
         private static readonly IWalletsCategories walletsCategories = new WalletsCategories();
 
@@ -30,8 +29,8 @@ namespace Tests.Database
         {
             await categories.DeleteAllAsync();
 
-            Category cat1 = new Category() { Name = "Category 1" };
-            Category cat2 = new Category() { Name = "Category 2" };
+            var cat1 = new Category() { Name = "Category 1" };
+            var cat2 = new Category() { Name = "Category 2" };
 
             await categories.InsertAsync(cat1, cat2);
             var cats = await categories.GetAllAsync();
@@ -70,7 +69,7 @@ namespace Tests.Database
         {
             await categories.DeleteAllAsync();
 
-            Category cat1 = new Category() { Name = "Category 1", ImageId = (int)ImageId.Fio };
+            var cat1 = new Category() { Name = "Category 1", ImageId = (int)ImageId.Fio };
             await categories.InsertAsync(cat1);
 
             var modifier = new CategoryModifier() { IncludeImage = true };
@@ -90,11 +89,11 @@ namespace Tests.Database
             await wallets.DeleteAllAsync();
             await walletsCategories.DeleteAllAsync();
 
-            Category cat1 = new Category() { Name = "category test 1" };
-            Category cat2 = new Category() { Name = "category test 2" };
+            var cat1 = new Category() { Name = "category test 1" };
+            var cat2 = new Category() { Name = "category test 2" };
 
-            Wallet wallet1 = new Wallet() { Name = "wallet test 1" };
-            Wallet wallet2 = new Wallet() { Name = "wallet test 2" };
+            var wallet1 = new Wallet() { Name = "wallet test 1" };
+            var wallet2 = new Wallet() { Name = "wallet test 2" };
 
             await categories.InsertAsync(cat1, cat2);
             await wallets.InsertAsync(wallet1, wallet2);

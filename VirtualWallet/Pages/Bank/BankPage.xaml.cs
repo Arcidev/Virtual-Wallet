@@ -104,7 +104,7 @@ namespace VirtualWallet.Pages
             if (string.IsNullOrWhiteSpace(viewModel.BankAccountInfo?.Currency))
                 return;
 
-            Style datapointStyle = new Style(typeof(DataPoint));
+            var datapointStyle = new Style(typeof(DataPoint));
             datapointStyle.Setters.Add(new Setter(DataPoint.DependentValueStringFormatProperty, CurrencyFormatter.GetFormatter(viewModel.BankAccountInfo.Currency)));
             TransactionsLineSeries.DataPointStyle = datapointStyle;
         }

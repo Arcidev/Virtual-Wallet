@@ -27,7 +27,7 @@ namespace DAL.Helpers
             lock (locker)
             {
                 if (connection == null)
-                    connection = new SQLiteAsyncConnection(DbFilePath, SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite | SQLiteOpenFlags.FullMutex);
+                    connection = new SQLiteAsyncConnection(DbFilePath);
 
                 return connection;
             }

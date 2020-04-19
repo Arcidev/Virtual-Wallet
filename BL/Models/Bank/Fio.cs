@@ -53,7 +53,7 @@ namespace BL.Models
             if (string.IsNullOrWhiteSpace(Token))
                 throw new InvalidOperationException("Fio bank token has not been set");
 
-            ApiExplorer explorer = new ApiExplorer(Token);
+            var explorer = new ApiExplorer(Token);
             var statement = await explorer.PeriodsAsync(FioFilter.LastDays(filter.Days));
             nextPossibleSyncTime = DateTime.Now.AddSeconds(syncTimeOutinSec);
 

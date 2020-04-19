@@ -37,7 +37,7 @@ namespace DAL.DataAccess
 
         protected abstract Task ApplyModifiersAsync(T1 entity, T3 modifier);
 
-        protected async Task ApplyModifiersAsync(List<T1> entities, T3 modifier)
+        protected async Task ApplyModifiersAsync(IEnumerable<T1> entities, T3 modifier)
         {
             foreach (var entity in entities)
                 await ApplyModifiersAsync(entity, modifier);
@@ -75,7 +75,7 @@ namespace DAL.DataAccess
 
         protected abstract Task ApplyModifiersAsync(T1 entity, T3 modifier);
 
-        protected async Task ApplyModifiersAsync(List<T1> entities, T3 modifier)
+        protected async Task ApplyModifiersAsync(IEnumerable<T1> entities, T3 modifier)
         {
             foreach (var entity in entities)
                 await ApplyModifiersAsync(entity, modifier);

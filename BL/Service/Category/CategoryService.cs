@@ -30,7 +30,7 @@ namespace BL.Service
             if (transactions == null || !transactions.Any())
                 return output;
 
-            var innerTransactions = transactions.Select(x => new TransactionMetadata { Description = x.Description, Amount = x.Amount, Date = x.Date, Currency = x.Currency });
+            var innerTransactions = transactions.Select(x => new TransactionMetadata { Description = x.Description, Amount = x.Amount, Date = x.Date, Currency = x.Currency }).ToList();
             if (categories != null)
             {
                 foreach (var category in categories)

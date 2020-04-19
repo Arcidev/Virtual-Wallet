@@ -425,10 +425,10 @@ namespace VirtualWallet.ViewModels
             if (syncExecuteTimer != null)
                 syncExecuteTimer.Dispose();
 
-            bool allCanSync = true;
-            DateTime lastPossibleSyncTime = DateTime.Now.Date;
+            var allCanSync = true;
+            var lastPossibleSyncTime = DateTime.Now.Date;
 
-            foreach (Bank bank in Banks)
+            foreach (var bank in Banks)
             {
                 if (!(bank?.CanSyncExecute ?? true))
                 {
@@ -511,7 +511,7 @@ namespace VirtualWallet.ViewModels
             var openingDate = DateTime.Now;
             var lastSync = DateTime.Now;
 
-            foreach (Bank bank in Banks)
+            foreach (var bank in Banks)
             {
                 closingBalance += bank.BankAccountInfo.ClosingBalance;
                 openingBalance += bank.BankAccountInfo.OpeningBalance;
@@ -529,7 +529,7 @@ namespace VirtualWallet.ViewModels
                 }
             }
             
-            foreach(Transaction t in cashPayments)
+            foreach(var t in cashPayments)
             {
                 cashPaymentBalance += decimal.ToDouble(t.Amount);
             }

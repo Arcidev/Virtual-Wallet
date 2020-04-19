@@ -37,8 +37,8 @@ namespace Tests.Service
         {
             await _categories.DeleteAllAsync();
 
-            Category cat1 = new Category() { Name = "Category 1" };
-            Category cat2 = new Category() { Name = "Category 2" };
+            var cat1 = new Category() { Name = "Category 1" };
+            var cat2 = new Category() { Name = "Category 2" };
 
             await _categories.InsertAsync(true, cat1, cat2);
             var cats = await _categories.GetAllAsync();
@@ -74,7 +74,7 @@ namespace Tests.Service
         {
             await _categories.DeleteAllAsync();
 
-            Category cat = new Category() { Name = "Category 1", ImageId = (int)ImageId.Fio };
+            var cat = new Category() { Name = "Category 1", ImageId = (int)ImageId.Fio };
             await _categories.InsertAsync(false, cat);
 
             var modifier = new CategoryModifier() { IncludeImage = true };
