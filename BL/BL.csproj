@@ -183,10 +183,10 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="FioSdk">
-      <Version>2.1.1</Version>
+      <Version>3.0.0-preview1</Version>
     </PackageReference>
     <PackageReference Include="Mapster">
-      <Version>5.3.0</Version>
+      <Version>5.3.2</Version>
     </PackageReference>
     <PackageReference Include="Microsoft.NETCore.UniversalWindowsPlatform">
       <Version>6.2.10</Version>
