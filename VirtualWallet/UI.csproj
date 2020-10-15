@@ -103,6 +103,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviors\HideablePivotItemBehavior.cs" />
+    <Compile Include="Controls\AsyncCommandHandler.cs" />
     <Compile Include="Controls\HamburgerArgumentMenuButton.cs" />
     <Compile Include="Converters\AlternateConverter.cs" />
     <Compile Include="Converters\DateTimeToDateTimeOffsetConverter.cs" />
@@ -127,7 +128,6 @@
     <Compile Include="Pages\Category\CategoryPage.xaml.cs">
       <DependentUpon>CategoryPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\CommandHandler.cs" />
     <Compile Include="Pages\Image\ImagesPage.xaml.cs">
       <DependentUpon>ImagesPage.xaml</DependentUpon>
     </Compile>

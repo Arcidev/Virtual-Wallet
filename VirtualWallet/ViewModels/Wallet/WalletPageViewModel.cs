@@ -37,7 +37,7 @@ namespace VirtualWallet.ViewModels
         private List<Tuple<DateTime, double>> balances;
         private IEnumerable<TransactionCategoryList> transactionCategories;
         private List<Transaction> cashPayments;
-        private CommandHandler syncCommand;
+        private AsyncCommandHandler syncCommand;
         private Timer syncExecuteTimer;
         private bool syncButtonForceDisabled;
         private readonly string categoryOther;
@@ -76,7 +76,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public CommandHandler SyncCommand
+        public AsyncCommandHandler SyncCommand
         {
             get => syncCommand;
             private set
@@ -236,7 +236,7 @@ namespace VirtualWallet.ViewModels
                 banks = value;
                 NotifyPropertyChanged();
 
-                SyncCommand = new CommandHandler(SyncExecute, () => !syncButtonForceDisabled);
+                SyncCommand = new AsyncCommandHandler(SyncExecute, () => !syncButtonForceDisabled);
                 SetSyncExecuteTimer();
             }
         }
@@ -390,7 +390,7 @@ namespace VirtualWallet.ViewModels
             syncExecuteTimer?.Dispose();
         }
 
-        private async void SyncExecute()
+        private async Task SyncExecute()
         {
             BeforeSync?.Invoke();
 
@@ -473,10 +473,10 @@ namespace VirtualWallet.ViewModels
             if (cashPayments != null)
                 mergedTrans.AddRange(cashPayments);
 
-            var trans = mergedTrans.GroupBy(x => x.Date).Select(x => Tuple.Create(x.Key, x.Sum(y => y.Amount))).OrderByDescending(x => x.Item1).Select(x =>
+            var trans = mergedTrans.GroupBy(x => x.Date).Select(x => (date: x.Key, amount: x.Sum(y => y.Amount))).OrderByDescending(x => x.date).Select(x =>
             {
-                amount -= (double)x.Item2;
-                return Tuple.Create(x.Item1, amount);
+                amount -= (double)x.amount;
+                return Tuple.Create(x.date, amount);
             }).ToList();
 
             if (trans.FirstOrDefault()?.Item1.Date == DateTime.Now.Date)
@@ -505,9 +505,9 @@ namespace VirtualWallet.ViewModels
 
         private void ComputeWalletInfo()
         {
-            var cashPaymentBalance = 0.0;
-            var closingBalance = 0.0;
-            var openingBalance = 0.0;
+            var cashPaymentBalance = 0d;
+            var closingBalance = 0d;
+            var openingBalance = 0d;
             var openingDate = DateTime.Now;
             var lastSync = DateTime.Now;
 

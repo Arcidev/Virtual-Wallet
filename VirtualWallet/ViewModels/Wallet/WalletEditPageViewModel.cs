@@ -39,7 +39,7 @@ namespace VirtualWallet.ViewModels
             this.currencyService = currencyService;
             modified = false;
 
-            DeleteWalletCommand = new CommandHandler(DeleteWallet);
+            DeleteWalletCommand = new AsyncCommandHandler(DeleteWallet);
 
             Wallet = new Wallet();       
         }
@@ -288,7 +288,7 @@ namespace VirtualWallet.ViewModels
             await LoadWalletAsync();
         }
 
-        public async void DeleteWallet()
+        public async Task DeleteWallet()
         {
             await DeleteWalletCategoryAsync(Wallet.Id);
             await walletService.DeleteAsync(Wallet.Id);

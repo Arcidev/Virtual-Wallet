@@ -28,7 +28,7 @@ namespace VirtualWallet.ViewModels
         private List<Tuple<DateTime, double>> balances;
         private IEnumerable<TransactionCategoryList> transactionCategories;
         private BankAccountInfo bankAccountInfo;
-        private CommandHandler syncCommand;
+        private AsyncCommandHandler syncCommand;
         private Timer syncExecuteTimer;
         private bool syncButtonForceDisabled;
         private readonly string categoryOther;
@@ -61,7 +61,7 @@ namespace VirtualWallet.ViewModels
             }
         }
 
-        public CommandHandler SyncCommand
+        public AsyncCommandHandler SyncCommand
         {
             get => syncCommand;
             private set
@@ -100,7 +100,7 @@ namespace VirtualWallet.ViewModels
                 NotifyPropertyChanged();
 
                 BankAccountInfo = Bank?.BankAccountInfo ?? new BankAccountInfo();
-                SyncCommand = new CommandHandler(SyncExecute, () => !syncButtonForceDisabled && (Bank?.CanSyncExecute ?? false));
+                SyncCommand = new AsyncCommandHandler(SyncExecute, () => !syncButtonForceDisabled && (Bank?.CanSyncExecute ?? false));
                 SetSyncExecuteTimer();
             }
         }
@@ -189,7 +189,7 @@ namespace VirtualWallet.ViewModels
             syncExecuteTimer?.Dispose();
         }
 
-        private async void SyncExecute()
+        private async Task SyncExecute()
         {
             BeforeSync?.Invoke();
 
@@ -270,10 +270,10 @@ namespace VirtualWallet.ViewModels
             }
 
             var amount = BankAccountInfo.ClosingBalance;
-            var trans = Bank.StoredTransactions.GroupBy(x => x.Date).Select(x => Tuple.Create(x.Key, x.Sum(y => y.Amount))).OrderByDescending(x => x.Item1).Select(x =>
+            var trans = Bank.StoredTransactions.GroupBy(x => x.Date).Select(x => (date: x.Key, amount: x.Sum(y => y.Amount))).OrderByDescending(x => x.date).Select(x =>
             {
-                amount -= (double)x.Item2;
-                return Tuple.Create(x.Item1, amount);
+                amount -= (double)x.amount;
+                return Tuple.Create(x.date, amount);
             }).ToList();
 
             if (trans.FirstOrDefault()?.Item1.Date == DateTime.Now.Date)

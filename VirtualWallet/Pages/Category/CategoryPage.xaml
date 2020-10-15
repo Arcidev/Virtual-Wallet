@@ -84,7 +84,6 @@
                           IsSwipeEnabled="False" 
                           SelectionMode="None"
                           IsItemClickEnabled="False"
-                          ItemClick="GridViewWallets_ItemClick"
                           RelativePanel.Below="WalletsTitle"
                           HorizontalAlignment="Left" 
                           Width="{Binding ElementName=MainRelativePanel, Path=ActualWidth}">

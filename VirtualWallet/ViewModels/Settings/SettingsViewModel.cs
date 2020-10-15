@@ -109,10 +109,10 @@ namespace VirtualWallet.ViewModels
             this.bankService = bankService;
             this.currencyService = currencyService;
             this.resources = resources;
-            RemoveAllDataCommand = new CommandHandler(RemoveAllDataExecute);
-            RemoveAllCredentialsCommand = new CommandHandler(RemoveAllCredentialsExecute);
-            CopyDatabaseToRoamingFolderCommand = new CommandHandler(CopyDatabaseToRoamingFolderExecute);
-            RetrieveDatabaseFromRoamingFolderCommand = new CommandHandler(RetrieveDatabaseFromRoamingFolderExecute);
+            RemoveAllDataCommand = new AsyncCommandHandler(RemoveAllDataExecute);
+            RemoveAllCredentialsCommand = new AsyncCommandHandler(RemoveAllCredentialsExecute);
+            CopyDatabaseToRoamingFolderCommand = new AsyncCommandHandler(CopyDatabaseToRoamingFolderExecute);
+            RetrieveDatabaseFromRoamingFolderCommand = new AsyncCommandHandler(RetrieveDatabaseFromRoamingFolderExecute);
         }
 
         public void ReloadTexts()
@@ -139,24 +139,24 @@ namespace VirtualWallet.ViewModels
             SelectedLanguageCode = ApplicationLanguages.PrimaryLanguageOverride;
         }
 
-        private async void RemoveAllDataExecute()
+        private async Task RemoveAllDataExecute()
         {
             await databaseService.RemoveAllDataAsync();
-            RemoveAllCredentialsExecute();
+            await RemoveAllCredentialsExecute();
         }
 
-        private async void RemoveAllCredentialsExecute()
+        private async Task RemoveAllCredentialsExecute()
         {
             foreach (var bank in await bankService.GetAllAsync())
                 bank.RemoveCredentials();
         }
 
-        private async void CopyDatabaseToRoamingFolderExecute()
+        private async Task CopyDatabaseToRoamingFolderExecute()
         {
             await databaseService.CopyToRoamingFolderAsync();
         }
 
-        private async void RetrieveDatabaseFromRoamingFolderExecute()
+        private async Task RetrieveDatabaseFromRoamingFolderExecute()
         {
             await databaseService.RetrieveFromRoamingFolderAsync();
         }

@@ -33,7 +33,7 @@ namespace VirtualWallet.ViewModels
             this.ruleService = ruleService;
             modified = false;
 
-            DeleCategoryCommand = new CommandHandler(DeleteCategory);
+            DeleCategoryCommand = new AsyncCommandHandler(DeleteCategory);
 
             Category = new Category();       
         }
@@ -203,21 +203,21 @@ namespace VirtualWallet.ViewModels
             await LoadCategoryAsync();
         }
 
-        public void DeleteCategory()
-        {
-            foreach (Rule rule in Rules)
-            {
-                ruleService.DeleteAsync(rule.Id);
-            }
-
-            categoryService.DeleteAsync(Category.Id);
-            Category = null;
-        }
-
         public async Task DetachRuleAsync(Rule rule)
         {
             Rules.Remove(Rules.First(x => x.Id == rule.Id));
             await ruleService.DeleteAsync(rule.Id);
+        }
+
+        private async Task DeleteCategory()
+        {
+            foreach (Rule rule in Rules)
+            {
+                await ruleService.DeleteAsync(rule.Id);
+            }
+
+            await categoryService.DeleteAsync(Category.Id);
+            Category = null;
         }
     }
 }

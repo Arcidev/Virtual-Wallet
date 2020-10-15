@@ -58,16 +58,6 @@ namespace VirtualWallet.Pages
             await dialog.ShowAsync();
         }
 
-        private void GridViewCategories_ItemClick(object sender, ItemClickEventArgs e)
-        {
-
-        }
-
-        private void GridViewWallets_ItemClick(object sender, ItemClickEventArgs e)
-        {
-
-        }
-
         private void ListViewRules_ItemClick(object sender, ItemClickEventArgs e)
         {
             var rule = (Rule)e.ClickedItem;
